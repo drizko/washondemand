@@ -1,6 +1,7 @@
 var path = require('path');
 var fs = require('fs');
 var jwt  = require('jwt-simple');
+var config = require('../config.js');
 
 module.exports = {
 
