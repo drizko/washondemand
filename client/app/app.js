@@ -6,7 +6,8 @@ angular.module('WashOnDemand', [
 	'wod.provSU',
 	'wod.customer',
 	'wod.provider',
-	'wod.home'
+	'wod.home',
+	'wod.authFactory'
 ])
 
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {

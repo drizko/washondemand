@@ -1,4 +1,13 @@
+<!-- provSUCtrl as psu -->
 <div>
   <p>Provider Sign Up</p>
+  <form ng-submit='psu.signup()'>
+    <input type='text' placeholder="company name" ng-model='psu.provider.companyName'>
+    <input type='text' placeholder="email" ng-model='psu.provider.email'>
+    <input type='text' placeholder="phone" ng-model='psu.provider.phone'>
+    <input type="password" placeholder="password" ng-model='psu.provider.password'>
+    <input type="password" placeholder="confirm password" ng-model='psu.provider.confirmPassword'>
+    <button>Sign Up</button>
+  </form>
   <p>Already have an account?  <a href="#/providerSignin">Sign in here!</a></p>
 </div>
