@@ -4,11 +4,11 @@ var jwt = require('jwt-simple');
 
 module.exports = {
   signin: function (req, res, next) {
-    var username = req.body.username,
-        password = req.body.password;
+    var email = req.body.email;
+    var password = req.body.password;
 
     var findUser = Q.nbind(Customer.findOne, Customer);
-    findUser({username: username})
+    findUser({email: email})
       .then(function (customer) {
         if (!customer) {
           next(new Error('Customer does not exist'));
@@ -30,15 +30,15 @@ module.exports = {
   },
 
   signup: function (req, res, next) {
-    var username  = req.body.username,
-        password  = req.body.password,
-        create,
-        newUser;
+    var email = req.body.email;
+    var password = req.body.password;
+    var create;
+    var newUser;
 
     var findOne = Q.nbind(Customer.findOne, Customer);
 
     // check to see if customer already exists
-    findOne({username: username})
+    findOne({email: email})
       .then(function(customer) {
         if (customer) {
           next(new Error('Customer already exist!'));
@@ -46,7 +46,7 @@ module.exports = {
           // make a new customer if not one
           create = Q.nbind(Customer.create, Customer);
           newUser = {
-            username: username,
+            email: email,
             password: password
           };
           return create(newUser);
@@ -69,7 +69,7 @@ module.exports = {
     } else {
       var customer = jwt.decode(token, 'secret');
       var findUser = Q.nbind(Customer.findOne, Customer);
-      findUser({username: customer.username})
+      findUser({email: customer.email})
         .then(function (foundUser) {
           if (foundUser) {
             res.status(200).send();
