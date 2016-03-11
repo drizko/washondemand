@@ -10,7 +10,7 @@ var providerSchema = new Schema({
   company_name: String,
   approved: Boolean,
   geolocation: {lat: Number, lng: Number},
-  inProgress: Boolean
+  available: Boolean
 });
 
 var Provider = mongoose.model('Provider', providerSchema);
