@@ -6,8 +6,8 @@ var customerSchema = new Schema({
   lastname: String,
   email: {type: String, unique: true, required: true},
   password: {type: String, required: true},
-  phone_number: {type: number, required: true},
-  geolocation: [Number, Number]
+  phone_number: {type: Number, required: true},
+  geolocation: {lat: Number, lng: Number}
 });
 
 var Customer = mongoose.model('Customer', customerSchema);
