@@ -20,25 +20,25 @@ angular.module('WashOnDemand', [
 		.state('customerSignin', {
       url: '/customerSignin',
       templateUrl: 'app/auth/customerAuth/signin.html',
-      controller: 'custSICtrl',
+      controller: 'custSICtrl as csi',
       authenticate: false
     })
 		.state('customerSignup', {
       url: '/customerSignup',
       templateUrl: 'app/auth/customerAuth/signup.html',
-      controller: 'custSUCtrl',
+      controller: 'custSUCtrl as csu',
       authenticate: false
     })
 		.state('providerSignin', {
       url: '/providerSignin',
       templateUrl: 'app/auth/providerAuth/signin.html',
-      controller: 'provSICtrl',
+      controller: 'provSICtrl as psi',
       authenticate: false
     })
     .state('providerSignup', {
       url: '/providerSignup',
       templateUrl: 'app/auth/providerAuth/signup.html',
-      controller: 'provSUCtrl',
+      controller: 'provSUCtrl as psu',
       authenticate: false
     })
     .state('customerView', {
