@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.schema;
+var Schema = mongoose.Schema;
 
 var requestSchema = new Schema({
   user_location: {lat: Number, lng: Number},
@@ -8,6 +8,9 @@ var requestSchema = new Schema({
   number_of_vehicles: Number,
   vehicle_type: String,
   request_filled: Boolean,
+  job_accepted: String,
+  job_started: String,
+  job_ended: String,
   cost: Number
 });
 

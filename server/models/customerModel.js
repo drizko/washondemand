@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.schema;
+var Schema = mongoose.Schema;
 var Q = require('q');
 var SALT_FACTOR = 10;
 
