@@ -1,16 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html ng-app='WashOnDemand'>
   <head>
     <meta charset="utf-8">
     <title>
+      Wash On Demand
     </title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="styles/styles.css"/>
+
+  </head>
+  <body>
+    <p>Index</p>
+    <a href="#/customerSignin">customer signin</a>
+    <a href="#/customerSignup">customer signup</a>
+    <a href="#/providerSignin">provider signin</a>
+    <a href="#/providerSignup">provider signup</a>
+    <a href="#/customerProfile">customer profile</a>
+    <a href="#/providerProfile">provider profile</a>
+
+    <div ui-view></div>
+
+
     <!-- Libraries -->
     <script type="text/javascript" src="/node_modules/angular/angular.min.js"></script>
     <script type="text/javascript" src="/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
 
 
     <!-- App Code -->
-    <script src="./app/app.js"></script>
     <script src="./app/services/services.js"></script>
     <script src="./app/auth/customerAuth/signin.js"></script>
     <script src="./app/auth/customerAuth/signup.js"></script>
@@ -19,14 +36,7 @@
     <script src="./app/auth/authFactory.js"></script>
     <script src="./app/customer/customer.js"></script>
     <script src="./app/provider/provider.js"></script>
+    <script src="./app/app.js"></script>
 
-
-
-  </head>
-  <body>
-    Hello World
-    <script type="text/javascript">
-
-    </script>
   </body>
 </html>
