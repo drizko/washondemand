@@ -6,10 +6,10 @@ var helpers = require('../utils/helpers.js');
 
 module.exports = function(app, express) {
   // Define Routes by using the template below:
-  // var nameRouter = express.Router();
+  var customerRouter = express.Router();
+  var providerRouter = express.Router();
+  var requestRouter = express.Router();
 
-  // Define router middleware using the template below:
-  // app.use('/api/name', nameRouter);
 
   app.use(morgan('dev'));
   app.use(bodyParser.urlencoded({extended: true}));
@@ -17,6 +17,13 @@ module.exports = function(app, express) {
   app.use(express.static('./client'));
   app.use("/node_modules", express.static('./node_modules'));
 
+  // Define router middleware using the template below:
+  app.use('/api/customers', customerRouter);
+  app.use('/api/provider', providerRouter);
+  app.use('/api/request', requestRouter);
+
   // inject our routers into their respective route files
-  // require('./nameRoute.js')(nameRouter);
+  require('./customerRoutes.js')(customerRouter);
+  require('./providerRoutes.js')(providerRouter);
+  require('./requestRoutes.js')(requestRouter);
 };
