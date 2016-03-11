@@ -5,16 +5,23 @@ angular.module('WashOnDemand', [
 	'wod.provSI',
 	'wod.provSU',
 	'wod.customer',
-	'wod.provider'
+	'wod.provider',
+	'wod.home'
 ])
 
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
+		.state('home', {
+			url: '/',
+			templateUrl: 'app/home/home.html',
+			controller: 'homeCtrl',
+			authenticate: false
+		})
 		.state('customerSignin', {
       url: '/customerSignin',
       templateUrl: 'app/auth/customerAuth/signin.html',
-      controller: 'custSICtrl'
-      //authenticate: false
+      controller: 'custSICtrl',
+      authenticate: false
     })
 		.state('customerSignup', {
       url: '/customerSignup',
@@ -46,4 +53,6 @@ angular.module('WashOnDemand', [
       controller: 'provider',
       authenticate: false // for now
     });
+
+  $urlRouterProvider.otherwise('/');
 });
