@@ -1,6 +1,7 @@
 var Customer = require('../models/customerModel.js');
 var Q = require('q');
 var jwt = require('jwt-simple');
+var _ = require('lodash');
 
 module.exports = {
   signin: function (req, res, next) {
@@ -89,3 +90,52 @@ module.exports = {
     }
   }
 };
+
+
+var washers = [
+  {
+    name: "Kyle",
+    working: true,
+    location: {lat: 34.1194159, lng: -118.49426410000201}
+  },
+  {
+    name: "Danny",
+    working: false,
+    location: {lat: 34.1495159, lng: -118.39426410000301}
+  },
+  {
+    name: "Bobby",
+    working: true,
+    location: {lat: 34.0596159, lng: -118.49426410000401}
+  },
+  {
+    name: "Kaz",
+    working: true,
+    location: {lat: 34.0897159, lng: -118.49926410000501}
+  },
+  {
+    name: "Rando",
+    working: true,
+    location: {lat: 34.5497159, lng: -118.59926410000501}
+  }
+];
+
+function getWashers(req, res){
+  var userLocation = {lat: 34.0192159, lng: -118.49426410000201};
+
+  var result = _.filter(washers, function(item){
+    return item.working && distance(userLocation, item.location) < 5
+  });
+
+  return result;
+}
+
+function distance(userLocation, washerLocation) {
+  var p = 0.017453292519943295;    // Math.PI / 180
+  var c = Math.cos;
+  var a = 0.5 - c((washerLocation.lat - userLocation.lat) * p)/2 +
+  c(userLocation.lat * p) * c(washerLocation.lat * p) *
+  (1 - c((washerLocation.lng - userLocation.lng) * p))/2;
+  // returns distance in miles
+  return Math.round(12742 * Math.asin(Math.sqrt(a))/1.60932*10)/10;
+}
