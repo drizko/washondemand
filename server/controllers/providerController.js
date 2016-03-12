@@ -1,0 +1,85 @@
+var Provider = require('../models/providerModel.js');
+var Q = require('q');
+var jwt = require('jwt-simple');
+
+module.exports = {
+  signin: function (req, res, next) {
+    var email = req.body.email;
+    var password = req.body.password;
+
+    var findUser = Q.nbind(Provider.findOne, Provider);
+    findUser({email: email})
+      .then(function (provider) {
+        if (!provider) {
+          next(new Error('Provider does not exist'));
+        } else {
+          return Provider.comparePasswords(password)
+            .then(function(foundUser) {
+              if (foundUser) {
+                var token = jwt.encode(provider, 'secret');
+                res.json({token: token});
+              } else {
+                return next(new Error('No provider'));
+              }
+            });
+        }
+      })
+      .fail(function (error) {
+        next(error);
+      });
+  },
+
+  signup: function (req, res, next) {
+    var email  = req.body.email;
+    var password  = req.body.password;
+    var create;
+    var newUser;
+
+    var findOne = Q.nbind(Provider.findOne, Provider);
+
+    // check to see if provider already exists
+    findOne({email: email})
+      .then(function(provider) {
+        if (provider) {
+          next(new Error('Provider already exist!'));
+        } else {
+          // make a new provider if not one
+          create = Q.nbind(Provider.create, Provider);
+          newUser = {
+            email: email,
+            password: password
+          };
+          return create(newUser);
+        }
+      })
+      .then(function (provider) {
+        // create token to send back for auth
+        var token = jwt.encode(provider, 'secret');
+        res.json({token: token});
+      })
+      .fail(function (error) {
+        next(error);
+      });
+  },
+
+  checkAuth: function (req, res, next) {
+    var token = req.headers['x-access-token'];
+    if (!token) {
+      next(new Error('No token'));
+    } else {
+      var provider = jwt.decode(token, 'secret');
+      var findUser = Q.nbind(Provider.findOne, Provider);
+      findUser({email: provider.email})
+        .then(function (foundUser) {
+          if (foundUser) {
+            res.status(200).send();
+          } else {
+            res.status(401).send();
+          }
+        })
+        .fail(function (error) {
+          next(error);
+        });
+    }
+  }
+};

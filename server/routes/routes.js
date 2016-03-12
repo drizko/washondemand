@@ -18,7 +18,7 @@ module.exports = function(app, express) {
   app.use("/node_modules", express.static('./node_modules'));
 
   // Define router middleware using the template below:
-  app.use('/api/customers', customerRouter);
+  app.use('/api/customer', customerRouter);
   app.use('/api/provider', providerRouter);
   app.use('/api/request', requestRouter);
 
