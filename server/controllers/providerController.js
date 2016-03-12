@@ -32,6 +32,8 @@ module.exports = {
   signup: function (req, res, next) {
     var email  = req.body.email;
     var password  = req.body.password;
+    var companyName = req.body.companyName;
+    var phone = req.body.phone;
     var create;
     var newUser;
 
@@ -47,7 +49,9 @@ module.exports = {
           create = Q.nbind(Provider.create, Provider);
           newUser = {
             email: email,
-            password: password
+            password: password,
+            company_name: companyName,
+            phone_number: phone
           };
           return create(newUser);
         }

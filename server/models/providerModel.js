@@ -6,7 +6,7 @@ var providerSchema = new Schema({
   lastname: String,
   email: {type: String, unique: true, required: true},
   password: {type: String, required: true},
-  phone_nmuber: {type: Number, required: true},
+  phone_number: {type: Number, required: true},
   company_name: String,
   approved: Boolean,
   geolocation: {lat: Number, lng: Number},
