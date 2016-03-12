@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var config = require('./config.js')
+var config = require('../config.js')
 
 var providerSchema = new Schema({
   firstname: String,

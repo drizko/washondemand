@@ -125,14 +125,15 @@ var washers = [
 
 function getWashers(req, res){
   var userLocation = {lat: 34.0192159, lng: -118.49426410000201};
-
-  console.log(config.tokenSecret);
+  
   var result = _.filter(washers, function(item){
     return item.working && distance(userLocation, item.location) < 5
   });
 
   return result;
 }
+
+getWashers()
 
 function requestWash(req, res){
   var token = req.headers['x-access-token'];
