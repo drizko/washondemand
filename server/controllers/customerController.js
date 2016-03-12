@@ -34,7 +34,7 @@ module.exports = {
     var password = req.body.password;
     var firstName = req.body.firstName;
     var lastName = req.body.lastName;
-    var phone = rew.body.phone;
+    var phone = req.body.phone;
     var create;
     var newUser;
 
