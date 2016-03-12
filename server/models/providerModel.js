@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var config = require('./config.js')
 
 var providerSchema = new Schema({
   firstname: String,
@@ -35,7 +36,7 @@ providerSchema.pre('save', function (next) {
   }
 
   // generate a salt
-  bcrypt.genSalt(SALT_FACTOR, function(err, salt) {
+  bcrypt.genSalt(config.SALT_FACTOR, function(err, salt) {
     if (err) {
       return next(err);
     }
