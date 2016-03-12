@@ -14,10 +14,10 @@ angular.module('WashOnDemand', [
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
 		.state('home', {
-			url: '/',
-			templateUrl: 'app/home/home.html',
+      url: '/',
+      templateUrl: 'app/home/home.html',
 			controller: 'homeCtrl',
-			authenticate: false
+  		authenticate: false
 		})
 		.state('customerSignin', {
       url: '/customerSignin',
@@ -47,14 +47,41 @@ angular.module('WashOnDemand', [
       url: '/customerProfile',
       templateUrl: 'app/customer/customer.html',
       controller: 'customer',
-      authenticate: false // for now
+      authenticate: true // for now
     })
     .state('providerView', {
       url: '/providerProfile',
       templateUrl: 'app/provider/provider.html',
       controller: 'provider',
-      authenticate: false // for now
+      authenticate: true // for now
     });
 
   $urlRouterProvider.otherwise('/');
+  $httpProvider.interceptors.push('AttachTokens');
+})
+
+.factory('AttachTokens', function($window) {
+
+  var attach = {
+    request: function(object) {
+      var jwt = $window.localStorage.getItem('com.wod');
+      if (jwt) {
+        object.headers['x-access-token'] = jwt;
+      }
+      object.headers['Allow-Control-Allow-Origin'] = '*';
+      return object;
+    }
+  };
+  return attach;
+})
+
+.run(function($rootScope, $state, authFactory) {
+
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+    if (toState.authenticate && !authFactory.isAuth()) {
+      // User isn’t authenticated
+      $state.transitionTo('home');
+      event.preventDefault();
+    }
+  });
 });
