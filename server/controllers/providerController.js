@@ -1,6 +1,7 @@
 var Provider = require('../models/providerModel.js');
 var Q = require('q');
 var jwt = require('jwt-simple');
+var config = require('../config.js')
 
 module.exports = {
   signin: function (req, res, next) {
@@ -16,7 +17,7 @@ module.exports = {
           return Provider.comparePasswords(password)
             .then(function(foundUser) {
               if (foundUser) {
-                var token = jwt.encode(provider, 'secret');
+                var token = jwt.encode(provider, config.tokenSecret);
                 res.json({token: token});
               } else {
                 return next(new Error('No provider'));
@@ -58,7 +59,7 @@ module.exports = {
       })
       .then(function (provider) {
         // create token to send back for auth
-        var token = jwt.encode(provider, 'secret');
+        var token = jwt.encode(provider, config.tokenSecret);
         res.json({token: token});
       })
       .fail(function (error) {
@@ -71,7 +72,7 @@ module.exports = {
     if (!token) {
       next(new Error('No token'));
     } else {
-      var provider = jwt.decode(token, 'secret');
+      var provider = jwt.decode(token, config.tokenSecret);
       var findUser = Q.nbind(Provider.findOne, Provider);
       findUser({email: provider.email})
         .then(function (foundUser) {

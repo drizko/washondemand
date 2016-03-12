@@ -21,6 +21,7 @@ module.exports = {
   decode: function(req, res, next) {
     var token = req.headers['x-access-token'];
     var user;
+    console.log(config.tokenSecret);
 
     if (!token) {
       return res.status(403).send(); // send forbidden if a token is not provided
@@ -28,7 +29,7 @@ module.exports = {
     try {
       // decode token and attach user to the request
       // for use inside our controllers
-      user = jwt.decode(token, 'secret');
+      user = jwt.decode(token, config.tokenSecret);
       req.user = user;
       next(user);
     } catch (error) {
