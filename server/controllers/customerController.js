@@ -1,7 +1,10 @@
 var Customer = require('../models/customerModel.js');
+var Request = require('../models/requestModel.js');
 var Q = require('q');
+var helpers = require('../utils/helpers')
 var jwt = require('jwt-simple');
 var _ = require('lodash');
+var config = require('../config.js');
 
 module.exports = {
   signin: function (req, res, next) {
@@ -17,7 +20,7 @@ module.exports = {
           return Customer.comparePasswords(password)
             .then(function(foundUser) {
               if (foundUser) {
-                var token = jwt.encode(customer, 'secret');
+                var token = jwt.encode(customer, config.tokenSecret);
                 res.json({token: token});
               } else {
                 return next(new Error('No customer'));
@@ -61,7 +64,7 @@ module.exports = {
       })
       .then(function (customer) {
         // create token to send back for auth
-        var token = jwt.encode(customer, 'secret');
+        var token = jwt.encode(customer, config.tokenSecret);
         res.json({token: token});
       })
       .fail(function (error) {
@@ -74,7 +77,7 @@ module.exports = {
     if (!token) {
       next(new Error('No token'));
     } else {
-      var customer = jwt.decode(token, 'secret');
+      var customer = jwt.decode(token, config.tokenSecret);
       var findUser = Q.nbind(Customer.findOne, Customer);
       findUser({email: customer.email})
         .then(function (foundUser) {
@@ -123,9 +126,18 @@ var washers = [
 function getWashers(req, res){
   var userLocation = {lat: 34.0192159, lng: -118.49426410000201};
 
+  console.log(config.tokenSecret);
   var result = _.filter(washers, function(item){
     return item.working && distance(userLocation, item.location) < 5
   });
+
+  return result;
+}
+
+function requestWash(req, res){
+  var token = req.headers['x-access-token'];
+
+  var user = jwt.decode(token, config.tokenSecret);
 
   return result;
 }
