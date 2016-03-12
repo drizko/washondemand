@@ -1,13 +1,14 @@
 angular.module('WashOnDemand', [
 	'ui.router',
-	'wod.custSI',
-	'wod.custSU',
-	'wod.provSI',
-	'wod.provSU',
+	// 'wod.custSI',
+	// 'wod.custSU',
+	// 'wod.provSI',
+	// 'wod.provSU',
+	'wod.authMaster',
 	'wod.customer',
 	'wod.provider',
 	'wod.home',
-	'wod.authFactory'
+	//'wod.authFactory'
 ])
 
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
