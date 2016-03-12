@@ -9,6 +9,8 @@ angular.module('WashOnDemand', [
 	'wod.provider',
 	'wod.home',
 	//'wod.authFactory'
+	'wod.nav',
+	'ngMap'
 ])
 
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
@@ -18,6 +20,12 @@ angular.module('WashOnDemand', [
       templateUrl: 'app/home/home.html',
 			controller: 'homeCtrl',
   		authenticate: false
+		})
+		.state('nav', {
+			url:'/customernav',
+			templateUrl: 'app/nav/nav.html',
+			controller: 'navCtrl',
+			authenticate: false
 		})
 		.state('customerSignin', {
       url: '/customerSignin',
