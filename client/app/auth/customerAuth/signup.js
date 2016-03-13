@@ -16,12 +16,12 @@ function custSUCtrl(authFactory, $window, $location) {
     //call factory
     authFactory.custSignup(vm.customer)
     .then(function(token) {
+      authFactory.clearForm(vm.customer);
       $window.localStorage.setItem('com.wod', token);
       $location.path('/customerProfile');
     })
     .catch(function(error) {
       console.error(error);
     });
-    authFactory.clearForm(vm.customer);
   };
 }

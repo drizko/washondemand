@@ -27,14 +27,12 @@ function authFactory($http, $window, $location) {
   }
 
   function custSignin(cust) {
-    console.log(cust)
     return $http({
       method: 'POST',
       url: 'api/customer/signin',
       data: cust
     })
     .then(function(results) {
-      console.log("made it back to factory")
       results.data.token;
     });
   }

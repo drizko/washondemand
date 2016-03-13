@@ -15,12 +15,12 @@ function provSUCtrl(authFactory, $window, $location) {
     //call factory
     authFactory.provSignup(vm.provider)
     .then(function(token) {
+      authFactory.clearForm(vm.provider);
       $window.localStorage.setItem('com.wod', token);
       $location.path('/providerProfile');
     })
     .catch(function(error) {
       console.error(error);
     });
-    authFactory.clearForm(vm.provider);
   };
 }
