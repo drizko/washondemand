@@ -4,7 +4,7 @@ var jwt = require('jwt-simple');
 var config = require('../config.js');
 var bcrypt = require('bcrypt-nodejs');
 
-var methods = {
+var authMethods = {
 
   comparePasswords: function (attemptedPassword, savedPassword) {
     var defer = Q.defer();
@@ -28,7 +28,7 @@ var methods = {
         if (!provider) {
           next(new Error('Provider does not exist'));
         } else {
-          methods.comparePasswords(password, provider.password)
+          authMethods.comparePasswords(password, provider.password)
             .then(function(foundUser) {
               if (foundUser) {
                 var token = jwt.encode(provider, config.tokenSecret);
@@ -103,5 +103,5 @@ var methods = {
   }
 };
 
-module.exports = methods;
+module.exports = authMethods;
 

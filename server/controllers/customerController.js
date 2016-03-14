@@ -8,7 +8,7 @@ var config = require('../config.js');
 var bcrypt = require('bcrypt-nodejs');
 
 
-var methods = {
+var authMethods = {
 
   comparePasswords: function (attemptedPassword, savedPassword) {
     var defer = Q.defer();
@@ -32,7 +32,7 @@ var methods = {
         if (!customer) {
           next(new Error('Customer does not exist'));
         } else {
-          methods.comparePasswords(password, customer.password)
+          authMethods.comparePasswords(password, customer.password)
             .then(function(foundUser) {
               if (foundUser) {
                 var token = jwt.encode(customer, config.tokenSecret);
@@ -165,4 +165,4 @@ function distance(userLocation, washerLocation) {
 }
 
 
-module.exports = methods;
+module.exports = authMethods;
