@@ -5,7 +5,7 @@ angular.module('wod.routes', [])
 		.state('home', {
 			url: '/',
 			templateUrl: 'app/home/home.template.html',
-			controller: 'homeCtrl',
+			controller: 'homeCtrl as home',
 			authenticate: false
 		})
 		.state('customernav', {

@@ -1,6 +1,6 @@
 angular.module('wod.authFactory', []).factory('authFactory', authFactory);
 
-function authFactory($http, $window, $location) {
+function authFactory($http, $window, $state) {
 
   var LOCALURL = 'http://localhost:8000/';
 
@@ -26,7 +26,7 @@ function authFactory($http, $window, $location) {
 
   function signout() {
     $window.localStorage.removeItem('com.wod');
-    $location.path('/');
+    $state.go('home');
   }
 
   function custSignin(cust) {
