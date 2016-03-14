@@ -1,13 +1,27 @@
 <ion-view title="Customer View">
-  <ion-content overflow-scroll="true" class="customr-view">
+  <ion-content overflow-scroll="true" class="customer-view">
     <div class="map-view" data-tap-disabled="true">
-      <ng-map center="[34.019454, -118.491191]" zoom="13" style="height:550px;">
+      <ng-map center="[34.019454, -118.491191]" zoom="12" style="height:550px;">
         <marker position="[34.019454, -118.491191]"></marker>
-        <marker position="34.0337023, -118.4552549" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
+        <marker position="[34.0337023, -118.4552549]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
       </ng-map>
       <div ng-click="sendRequest()" class="button">
         Button
       </div>
+    </div>
+    <div class="request" style="width:100%;">
+      <div class="button-bar wash-type" style="margin:5px;">
+        <button class="button button-wash" style="border:1px solid gray;" ng-click="selectWash(basic)">Basic</button>
+        <button class="button button-wash" style="border:1px solid gray;"ng-click="selectWash(deluxe)">Deluxe</button>
+        <button class="button button-wash" style="border:1px solid gray;"ng-click="selectWash(premium)">Premium</button>
+        <button class="button button-wash" style="border:1px solid gray;"ng-click="selectWash(kaz)">The Kaz</button>
+      </div>
+      <div class="button-bar vehicle-type" style="">
+        <button class="button button-vehicle" ng-click="selectVehicle(car);">Car</button>
+        <button class="button button-vehicle" ng-click="selectVehicle(suv);">Suv/Van</button>
+        <button class="button button-vehicle" ng-click="selectVehicle(motorcycle);">Motorcycle</button>
+      </div>
+
     </div>
   </ion-content>
 </ion-view>
