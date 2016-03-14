@@ -1,4 +1,4 @@
-var Customer = require('../models/customerModel.js');
+var Customer = require('../models/customerModel');
 var Request = require('../models/requestModel.js');
 var Q = require('q');
 var helpers = require('../utils/helpers')
@@ -7,10 +7,11 @@ var _ = require('lodash');
 var config = require('../config.js');
 var bcrypt = require('bcrypt-nodejs');
 
+
 var methods = {
-  comparePasswords: function (attemptedPassword) {
+
+  comparePasswords: function (attemptedPassword, savedPassword) {
     var defer = Q.defer();
-    var savedPassword = this.password;
     bcrypt.compare(attemptedPassword, savedPassword, function (err, match) {
       if (err) {
         defer.reject(err);
@@ -20,6 +21,7 @@ var methods = {
     });
     return defer.promise;
   },
+
   signin: function (req, res, next) {
     var email = req.body.email;
     var password = req.body.password;
@@ -30,7 +32,7 @@ var methods = {
         if (!customer) {
           next(new Error('Customer does not exist'));
         } else {
-          return methods.comparePasswords(password)
+          methods.comparePasswords(password, customer.password)
             .then(function(foundUser) {
               if (foundUser) {
                 var token = jwt.encode(customer, config.tokenSecret);
@@ -46,43 +48,39 @@ var methods = {
       });
   },
 
-  signup: function (req, res, next) {
-    var email = req.body.email;
-    var password = req.body.password;
-    var firstName = req.body.firstName;
-    var lastName = req.body.lastName;
-    var phone = req.body.phone;
-    var create;
-    var newUser;
+signup: function (req, res, next) {
+    var newUser = {
+      email: req.body.email,
+      password: req.body.password,
+      firstname: req.body.firstName,
+      lastname: req.body.lastName,
+      phone_number: req.body.phone
+    };
 
     var findOne = Q.nbind(Customer.findOne, Customer);
 
     // check to see if customer already exists
-    findOne({email: email})
+    findOne({email: newUser.email})
       .then(function(customer) {
         if (customer) {
           next(new Error('Customer already exist!'));
         } else {
           // make a new customer if not one
-          create = Q.nbind(Customer.create, Customer);
-          newUser = {
-            email: email,
-            password: password,
-            firstname: firstName,
-            lastname: lastName,
-            phone_number: phone
-          };
-          return create(newUser);
+          var create = Q.nbind(Customer.create, Customer);
+          create(newUser)
+            .then(function (customer) {
+              // create token to send back for auth
+              var token = jwt.encode(customer, config.tokenSecret);
+              res.json({token: token});
+            })
+            .fail(function (error) {
+              next(error);
+            });
         }
       })
-      .then(function (customer) {
-        // create token to send back for auth
-        var token = jwt.encode(customer, config.tokenSecret);
-        res.json({token: token});
-      })
-      .fail(function (error) {
+      .fail(function(error){
         next(error);
-      });
+      })
   },
 
   checkAuth: function (req, res, next) {
@@ -166,4 +164,5 @@ function distance(userLocation, washerLocation) {
   return Math.round(12742 * Math.asin(Math.sqrt(a))/1.60932*10)/10;
 }
 
-module.exports = methods
+
+module.exports = methods;

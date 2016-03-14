@@ -1,9 +1,23 @@
 var Provider = require('../models/providerModel.js');
 var Q = require('q');
 var jwt = require('jwt-simple');
-var config = require('../config.js')
+var config = require('../config.js');
+var bcrypt = require('bcrypt-nodejs');
 
-module.exports = {
+var methods = {
+
+  comparePasswords: function (attemptedPassword, savedPassword) {
+    var defer = Q.defer();
+    bcrypt.compare(attemptedPassword, savedPassword, function (err, match) {
+      if (err) {
+        defer.reject(err);
+      } else {
+        defer.resolve(match);
+      }
+    });
+    return defer.promise;
+  },
+
   signin: function (req, res, next) {
     var email = req.body.email;
     var password = req.body.password;
@@ -14,7 +28,7 @@ module.exports = {
         if (!provider) {
           next(new Error('Provider does not exist'));
         } else {
-          return Provider.comparePasswords(password)
+          methods.comparePasswords(password, provider.password)
             .then(function(foundUser) {
               if (foundUser) {
                 var token = jwt.encode(provider, config.tokenSecret);
@@ -88,3 +102,6 @@ module.exports = {
     }
   }
 };
+
+module.exports = methods;
+

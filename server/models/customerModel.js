@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Q = require('q');
 var config = require('../config.js');
-var bcrypt = require('bcrypt-nodejs')
+var bcrypt = require('bcrypt-nodejs');
 
 var customerSchema = new Schema({
   firstname: String,
