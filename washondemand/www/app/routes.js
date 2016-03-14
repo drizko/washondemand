@@ -8,12 +8,46 @@ angular.module('wod.routes', [])
 			controller: 'homeCtrl',
 			authenticate: false
 		})
-		.state('nav', {
-			url:'/customernav',
-			templateUrl: 'app/nav/nav.template.html',
+		.state('customernav', {
+			url:'/nav1',
+			templateUrl: 'app/nav/customernav.template.html',
 			controller: 'navCtrl',
-			authenticate: false
+      abstract: true,
 		})
+    .state('providernav', {
+			url:'/nav2',
+			templateUrl: 'app/nav/providernav.template.html',
+			controller: 'navCtrl',
+      abstract: true,
+		})
+    .state('customernav.customer', {
+      url: '/customerProfile',
+      // authenticate: false, // for now
+      views: {
+        'nav-view': {
+          templateUrl: 'app/customerView/customer.template.html',
+          controller: 'customer'
+        }
+      },
+      // resolve: {
+      //   // controller will not be loaded until $waitForAuth resolves
+      //   // Auth refers to our $firebaseAuth wrapper in the example above
+      //   "currentAuth": ["Auth", function(Auth) {
+      //     // $waitForAuth returns a promise so the resolve waits for it to complete
+      //     return Auth.auth.$requireAuth();
+      //   }]
+      // }
+    })
+    .state('providernav.providerView', {
+      url: '/providerProfile',
+      // authenticate: false // for now
+      views: {
+        'nav-view': {
+          templateUrl: 'app/providerView/provider.template.html',
+          controller: 'provider'
+        }
+      }
+    })
 		.state('customerSignin', {
       url: '/customerSignin',
       templateUrl: 'app/auth/customerAuth/signin.html',
@@ -37,19 +71,8 @@ angular.module('wod.routes', [])
       templateUrl: 'app/auth/providerAuth/signup.html',
       controller: 'provSUCtrl as psu',
       authenticate: false
-    })
-    .state('customerView', {
-      url: '/customerProfile',
-      templateUrl: 'app/customerView/customer.template.html',
-      controller: 'customer',
-      authenticate: false // for now
-    })
-    .state('providerView', {
-      url: '/providerProfile',
-      templateUrl: 'app/providerView/provider.template.html',
-      controller: 'provider',
-      authenticate: false // for now
     });
+
 
   $urlRouterProvider.otherwise('/');
   $httpProvider.interceptors.push('AttachTokens');

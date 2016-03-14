@@ -1,0 +1,12 @@
+.bar, .bar-stable {
+  border: none;
+  background-color: #fff;
+}
+
+ng-map {
+  height: 100% !important;
+}
+
+.map-view {
+  height: 50%;
+}
