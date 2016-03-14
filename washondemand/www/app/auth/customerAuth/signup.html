@@ -1,3 +1,14 @@
+<!-- custSUCtrl as csu -->
 <div>
-  cust signup
+  <p>Customer Sign Up</p>
+  <form ng-submit='csu.signup()'>
+    <input type='text' placeholder="first name" ng-model='csu.customer.firstName'>
+    <input type='text' placeholder="last name" ng-model='csu.customer.lastName'>
+    <input type='text' placeholder="email" ng-model='csu.customer.email'>
+    <input type='text' placeholder="phone" ng-model='csu.customer.phone'>
+    <input type="password" placeholder="password" ng-model='csu.customer.password'>
+    <input type="password" placeholder="confirm password" ng-model='csu.customer.confirmPassword'>
+    <button>Sign Up</button>
+  </form>
+  <p>Already have an account?  <a href="#/customerSignin">Sign in here!</a></p>
 </div>

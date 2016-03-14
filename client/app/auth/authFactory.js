@@ -33,7 +33,7 @@ function authFactory($http, $window, $location) {
       data: cust
     })
     .then(function(results) {
-      results.data.token;
+      return results.data.token;
     });
   }
 
@@ -44,7 +44,7 @@ function authFactory($http, $window, $location) {
       data: cust
     })
     .then(function(results) {
-      results.data.token;
+      return results.data.token;
     });
   }
 
@@ -55,7 +55,7 @@ function authFactory($http, $window, $location) {
       data: prov
     })
     .then(function(results) {
-      results.data.token;
+      return results.data.token;
     });
   }
 
@@ -66,7 +66,7 @@ function authFactory($http, $window, $location) {
       data: prov
     })
     .then(function(results) {
-      results.data.token;
+      return results.data.token;
     });
   }
 }

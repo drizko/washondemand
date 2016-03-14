@@ -25,6 +25,7 @@
     "fs": "0.0.2",
     "jwt-simple": "^0.4.1",
     "lodash": "^4.6.1",
+    "method-override": "^2.3.5",
     "mongoose": "^4.4.6",
     "morgan": "^1.7.0",
     "ngmap": "^1.17.0",
