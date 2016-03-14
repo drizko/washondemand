@@ -7,7 +7,7 @@ var requestSchema = new Schema({
   user_phone: Number,
   number_of_vehicles: Number,
   vehicle_type: String,
-  request_filled: Boolean,
+  request_filled: String,
   job_accepted: String,
   job_started: String,
   job_ended: String,
