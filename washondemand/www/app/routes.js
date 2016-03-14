@@ -26,7 +26,7 @@ angular.module('wod.routes', [])
       views: {
         'nav-view': {
           templateUrl: 'app/customerView/customer.template.html',
-          controller: 'customer'
+          controller: 'customerCtrl'
         }
       },
       // resolve: {
@@ -44,7 +44,7 @@ angular.module('wod.routes', [])
       views: {
         'nav-view': {
           templateUrl: 'app/providerView/provider.template.html',
-          controller: 'provider'
+          controller: 'providerCtrl'
         }
       }
     })

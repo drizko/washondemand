@@ -6,6 +6,7 @@ var requestSchema = new Schema({
   user_email: {type: String, unique: true, required: true},
   user_phone: Number,
   number_of_vehicles: Number,
+  wash_type: String,
   vehicle_type: String,
   request_filled: String,
   job_accepted: String,
