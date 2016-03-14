@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Q = require('q');
 var config = require('../config.js');
+var bcrypt = require('bcrypt-nodejs')
 
 var customerSchema = new Schema({
   firstname: String,
@@ -12,19 +13,6 @@ var customerSchema = new Schema({
   phone_number: {type: Number, required: true},
   geolocation: {lat: Number, lng: Number}
 });
-
-customerSchema.methods.comparePasswords = function (attemptedPassword) {
-  var defer = Q.defer();
-  var savedPassword = this.password;
-  bcrypt.compare(attemptedPassword, savedPassword, function (err, match) {
-    if (err) {
-      defer.reject(err);
-    } else {
-      defer.resolve(match);
-    }
-  });
-  return defer.promise;
-};
 
 customerSchema.pre('save', function (next) {
   var user = this;

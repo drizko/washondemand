@@ -5,8 +5,21 @@ var helpers = require('../utils/helpers')
 var jwt = require('jwt-simple');
 var _ = require('lodash');
 var config = require('../config.js');
+var bcrypt = require('bcrypt-nodejs');
 
-module.exports = {
+var methods = {
+  comparePasswords: function (attemptedPassword) {
+    var defer = Q.defer();
+    var savedPassword = this.password;
+    bcrypt.compare(attemptedPassword, savedPassword, function (err, match) {
+      if (err) {
+        defer.reject(err);
+      } else {
+        defer.resolve(match);
+      }
+    });
+    return defer.promise;
+  },
   signin: function (req, res, next) {
     var email = req.body.email;
     var password = req.body.password;
@@ -17,7 +30,7 @@ module.exports = {
         if (!customer) {
           next(new Error('Customer does not exist'));
         } else {
-          return Customer.comparePasswords(password)
+          return methods.comparePasswords(password)
             .then(function(foundUser) {
               if (foundUser) {
                 var token = jwt.encode(customer, config.tokenSecret);
@@ -125,7 +138,7 @@ var washers = [
 
 function getWashers(req, res){
   var userLocation = {lat: 34.0192159, lng: -118.49426410000201};
-  
+
   var result = _.filter(washers, function(item){
     return item.working && distance(userLocation, item.location) < 5
   });
@@ -152,3 +165,5 @@ function distance(userLocation, washerLocation) {
   // returns distance in miles
   return Math.round(12742 * Math.asin(Math.sqrt(a))/1.60932*10)/10;
 }
+
+module.exports = methods
