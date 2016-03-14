@@ -21,10 +21,11 @@ var methods = {
           res.sendStatus(401);
         } else {
           var washRequest = {
-            user_email: user.email,
-            user_location: user.location,
             user_phone: user.phone_number,
-            vehicle_type: req.body.vehicle_type,
+            user_location: user.location,
+            user_email: user.email,
+            vehicle_type: req.body.vehicleType,
+            wash_type: req.body.washType,
             request_filled: '',
             job_accepted: '',
             job_started: '',
