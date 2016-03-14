@@ -1,8 +1,15 @@
-angular.module('wod.customer', []).controller('customer', customer);
+angular.module('wod.customerCtrl', [])
+.controller('customerCtrl', customerCtrl);
 
-function customer($scope, NgMap) {
+function customerCtrl($scope, NgMap, customerFactory) {
   var vm = this;
 
+  vm.request = {
+    vehicleType: 'SUV',
+    washType: 'Basic'
+  };
 
-
+  $scope.sendRequest = function(){
+    customerFactory.sendRequest(vm.request)
+  }
 }
