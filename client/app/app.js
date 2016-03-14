@@ -55,7 +55,7 @@ angular.module('WashOnDemand', [
       url: '/customerProfile',
       templateUrl: 'app/customer/customer.html',
       controller: 'customer',
-      authenticate: true // for now
+      authenticate: false // for now
     })
     .state('providerView', {
       url: '/providerProfile',
