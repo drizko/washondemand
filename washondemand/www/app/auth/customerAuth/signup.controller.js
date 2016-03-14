@@ -1,6 +1,6 @@
 angular.module('wod.custSU', []).controller('custSUCtrl', custSUCtrl);
 
-function custSUCtrl(authFactory, $window, $location) {
+function custSUCtrl(authFactory, $window, $state) {
   var vm = this;
   vm.customer = {
     firstName: '',
@@ -18,7 +18,7 @@ function custSUCtrl(authFactory, $window, $location) {
     .then(function(token) {
       authFactory.clearForm(vm.customer);
       $window.localStorage.setItem('com.wod', token);
-      $location.path('/customerProfile');
+      $state.go('customernav.customer');
     })
     .catch(function(error) {
       console.error(error);

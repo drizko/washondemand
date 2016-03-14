@@ -1,6 +1,6 @@
 angular.module('wod.custSI', []).controller('custSICtrl', custSICtrl);
 
-function custSICtrl(authFactory, $window, $location) {
+function custSICtrl(authFactory, $window, $state) {
   var vm = this;
   vm.customer = {
     email: '',
@@ -14,7 +14,7 @@ function custSICtrl(authFactory, $window, $location) {
     .then(function(token) {
       authFactory.clearForm(vm.customer);
       $window.localStorage.setItem('com.wod', token);
-      $location.path('/customerProfile');
+      $state.go('customernav.customer');
     })
     .catch(function(error) {
       console.error(error);
