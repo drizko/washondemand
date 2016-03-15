@@ -1,5 +1,5 @@
-angular.module('wod.provider', []).controller('provider', provider);
+angular.module('wod.providerCtrl', []).controller('providerCtrl', providerCtrl);
 
-function provider() {
+function providerCtrl() {
   //
 }

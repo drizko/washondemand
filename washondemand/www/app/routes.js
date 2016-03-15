@@ -44,7 +44,7 @@ angular.module('wod.routes', [])
       views: {
         'nav-view': {
           templateUrl: 'app/providerView/provider.template.html',
-          controller: 'providerCtrl'
+          controller: 'providerCtrl as providerCtrl'
         }
       }
     })
