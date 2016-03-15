@@ -11,7 +11,7 @@ var providerSchema = new Schema({
   phone_number: {type: Number, required: true},
   company_name: String,
   approved: Boolean,
-  geolocation: {lat: Number, lng: Number},
+  geolocation: {"lat": Number, "lng": Number},
   available: Boolean
 });
 

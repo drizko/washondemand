@@ -1,10 +1,12 @@
 var Provider = require('../models/providerModel.js');
+var Request = require('../models/requestModel.js');
 var Q = require('q');
 var jwt = require('jwt-simple');
 var config = require('../config.js');
 var bcrypt = require('bcrypt-nodejs');
 
-var authMethods = {
+
+module.exports = {
 
   comparePasswords: function (attemptedPassword, savedPassword) {
     var defer = Q.defer();
@@ -28,7 +30,7 @@ var authMethods = {
         if (!provider) {
           next(new Error('Provider does not exist'));
         } else {
-          authMethods.comparePasswords(password, provider.password)
+          module.exports.comparePasswords(password, provider.password)
             .then(function(foundUser) {
               if (foundUser) {
                 var token = jwt.encode(provider, config.tokenSecret);
@@ -100,8 +102,52 @@ var authMethods = {
           next(error);
         });
     }
+  },
+
+//********************-REQUEST HANDLER-*******************
+
+  getRequests: function(req, res, next) {
+
+    var providerLocation = req.body.provider_location;
+
+    Request.where("job_started").ne("").then(function(requests) {
+      var result = _.filter(requests, function(request) {
+        console.log("++request: ", request)
+        return module.exports.distance(providerLocation, request.user_location) < 5;
+      })
+      res.json({result: result});
+    })
+    // .fail(function(error) {
+    //   next(error);
+    // })
+  },
+
+  acceptRequest: function(req, res, next) {
+
+    var userEmail = req.body.user_email;
+
+    var findOne = Q.nbind(Request.findOne, Request);
+    findOne({user_email: userEmail}).then(function(request) {
+      if(request) {
+        console.log("REQUEST: ", request);
+        request.job_started = true;
+        console.log("REQUEST: ", request);
+        res.status(200).send();
+      }
+    })
+    .fail(function(error) {
+      next(error);
+    })
+  },
+
+  distance: function(userLocation, washerLocation) {
+    var p = 0.017453292519943295;    // Math.PI / 180
+    var c = Math.cos;
+    var a = 0.5 - c((washerLocation.lat - userLocation.lat) * p)/2 +
+    c(userLocation.lat * p) * c(washerLocation.lat * p) *
+    (1 - c((washerLocation.lng - userLocation.lng) * p))/2;
+    // returns distance in miles
+    return Math.round(12742 * Math.asin(Math.sqrt(a))/1.60932*10)/10;
   }
 };
-
-module.exports = authMethods;
 

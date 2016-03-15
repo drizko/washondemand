@@ -11,7 +11,7 @@ var customerSchema = new Schema({
   password: {type: String, required: true},
   salt: String,
   phone_number: {type: Number, required: true},
-  geolocation: {lat: Number, lng: Number}
+  geolocation: {"lat": Number, "lng": Number}
 });
 
 customerSchema.pre('save', function (next) {
