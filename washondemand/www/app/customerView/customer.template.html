@@ -1,13 +1,51 @@
-<ion-view title="Customer View">
-  <ion-content overflow-scroll="true" class="customr-view">
+<ion-view title="Customer View" ng-controller="customerCtrl">
+  <ion-content overflow-scroll="true" class="customer-view">
     <div class="map-view" data-tap-disabled="true">
-      <ng-map center="[34.019454, -118.491191]" zoom="13" style="height:550px;">
+      <ng-map center="[34.019454, -118.491191]" zoom="12" style="height:550px;">
         <marker position="[34.019454, -118.491191]"></marker>
-        <marker position="34.0337023, -118.4552549" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
+        <marker position="[34.0337023, -118.4552549]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
       </ng-map>
-      <div ng-click="sendRequest()" class="button">
-        Button
-      </div>
+
     </div>
+    <form class="request" style="width:100%;" hide-mobile>
+      <div style="padding: 10px 5px 5px 5px;">
+        <span>Select Wash Type:</span>
+      </div>
+      <div class="wash-type">
+        <ul class="cust-button-list">
+          <li class="cust-button"><button class="button button-wash" style="border:1px solid gray;width:100%;" ng-click="customerCtrl.selectWash('basic')">Basic</button></li>
+          <li class="cust-button"><button class="button button-wash" style="border:1px solid gray;width:100%;" ng-click="customerCtrl.selectWash('deluxe')">Deluxe</button></li>
+          <li class="cust-button"><button class="button button-wash" style="border:1px solid gray;width:100%;" ng-click="customerCtrl.selectWash('premium')">Premium</button></li>
+          <!-- <li class="cust-button"><button class="button button-wash" style="border:1px solid gray;width:100%;" ng-click="customerCtrl.selectWash('kaz')">The Kaz</button></li> -->
+        </ul>
+      </div>
+      <div style="padding: 10px 5px 5px 5px;">
+        <span>Select Vehicle Type:</span>
+      </div>
+      <div class="vehicle-type">
+        <ul class="cust-button-list">
+          <li class="cust-button"><input name="vehicle-select" checked="checked" class="cust-radio" type="radio" ng-click="customerCtrl.selectVehicle('car');">Car</input></li>
+          <li class="cust-button"><input name="vehicle-select" class="cust-radio" type="radio" ng-click="customerCtrl.selectVehicle('suv');">Suv/Van</input></li>
+          <li class="cust-button"><input name="vehicle-select" class="cust-radio" type="radio" ng-click="customerCtrl.selectVehicle('motorcycle');">Motorcycle</input></li>
+        </ul>
+
+      </div>
+      <div class="wash-detail" ng-if="customerCtrl.washInfo.price > 0">
+        <div class="row">
+          <div class="col">Price: {{customerCtrl.washInfo.price}}</div>
+        </div>
+        <div class="row">
+          <div class="col">
+            What's incuded:<br>
+            <ul>
+              <li ng-repeat="details in customerCtrl.washInfo.info">{{details.info}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="request-button">
+        <button class="button" ng-click="sendRequest()">Request A Wash</button>
+      </div>
+    </form>
   </ion-content>
 </ion-view>
