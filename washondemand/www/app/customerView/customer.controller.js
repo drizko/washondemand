@@ -6,8 +6,8 @@ function customerCtrl($scope, NgMap, customerFactory, $state, $location, $rootSc
   // $rootScope.$state = $state;
   // $rootScope.$location = $location;
   vm.request = {
-    vehicleType: 'SUV',
-    washType: 'Basic'
+    vehicleType: 'car',
+    washType: 'basic'
   };
 
   vm.sendRequest = function() {

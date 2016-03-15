@@ -62,3 +62,13 @@ ng-map {
 .cust-button input {
   margin: 0px 10px 10px 10px;
 }
+
+.request-button {
+  text-align: center;
+}
+
+.request-button button {
+  background: blue;
+  color: white;
+  margin: 15px 0 30px;
+}

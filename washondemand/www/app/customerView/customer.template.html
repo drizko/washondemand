@@ -7,7 +7,7 @@
       </ng-map>
 
     </div>
-    <div class="request" style="width:100%;" hide-mobile>
+    <form class="request" style="width:100%;" hide-mobile>
       <div style="padding: 10px 5px 5px 5px;">
         <span>Select Wash Type:</span>
       </div>
@@ -24,7 +24,7 @@
       </div>
       <div class="vehicle-type">
         <ul class="cust-button-list">
-          <li class="cust-button"><input name="vehicle-select" class="cust-radio" type="radio" ng-click="customerCtrl.selectVehicle('car');">Car</input></li>
+          <li class="cust-button"><input name="vehicle-select" checked="checked" class="cust-radio" type="radio" ng-click="customerCtrl.selectVehicle('car');">Car</input></li>
           <li class="cust-button"><input name="vehicle-select" class="cust-radio" type="radio" ng-click="customerCtrl.selectVehicle('suv');">Suv/Van</input></li>
           <li class="cust-button"><input name="vehicle-select" class="cust-radio" type="radio" ng-click="customerCtrl.selectVehicle('motorcycle');">Motorcycle</input></li>
         </ul>
@@ -40,13 +40,12 @@
             <ul>
               <li ng-repeat="details in customerCtrl.washInfo.info">{{details.info}}</li>
             </ul>
-            <!-- {{customerCtrl.washInfo.info}} -->
           </div>
         </div>
       </div>
-      <div>
-        <button ng-click="sendRequest()">Button</button>
+      <div class="request-button">
+        <button class="button" ng-click="sendRequest()">Request A Wash</button>
       </div>
-    </div>
+    </form>
   </ion-content>
 </ion-view>
