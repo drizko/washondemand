@@ -1,7 +1,7 @@
 angular.module('wod.services', [])
 .factory('locFactory', locFactory);
 
-function locFactory($window) {
+function locFactory($window, $q) {
   return {
     getLoc: getLoc
   };
