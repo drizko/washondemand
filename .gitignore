@@ -5,3 +5,8 @@ server/config.js
 deploy.sh
 .DS_Store
 washondemand/www/lib
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

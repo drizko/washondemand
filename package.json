@@ -2,8 +2,9 @@
   "name": "washondemand",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -30,6 +31,7 @@
     "morgan": "^1.7.0",
     "ngmap": "^1.17.0",
     "path": "^0.12.7",
-    "q": "^1.4.1"
+    "q": "^1.4.1",
+    "serve-favicon": "^2.3.0"
   }
 }

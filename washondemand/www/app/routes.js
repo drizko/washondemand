@@ -26,7 +26,7 @@ angular.module('wod.routes', [])
       views: {
         'nav-view': {
           templateUrl: 'app/customerView/customer.template.html',
-          controller: 'customerCtrl'
+          controller: 'customerCtrl as customerCtrl'
         }
       },
       // resolve: {
