@@ -1,13 +1,26 @@
 <!-- provSUCtrl as psu -->
-<div>
-  <p>Provider Sign Up</p>
-  <form ng-submit='psu.signup()'>
-    <input type='text' placeholder="company name" ng-model='psu.provider.companyName'>
-    <input type='text' placeholder="email" ng-model='psu.provider.email'>
-    <input type='text' placeholder="phone" ng-model='psu.provider.phone'>
-    <input type="password" placeholder="password" ng-model='psu.provider.password'>
-    <input type="password" placeholder="confirm password" ng-model='psu.provider.confirmPassword'>
-    <button>Sign Up</button>
-  </form>
-  <p>Already have an account?  <a href="#/providerSignin">Sign in here!</a></p>
-</div>
+<ion-view>
+  <ion-content>
+    <p>Provider Sign Up</p>
+    <form class="list list-inset" ng-submit='psu.signup()'>
+      <label class="item item-input">
+        <input type='text' placeholder="company name" ng-model='psu.provider.companyName'>
+      </label>
+      <label class="item item-input">
+        <input type='email' placeholder="email" ng-model='psu.provider.email'>
+      </label>
+      <label class="item item-input">
+        <input type='tel' placeholder="phone" ng-model='psu.provider.phone'>
+      </label>
+      <label class="item item-input">
+        <input type="password" placeholder="password" ng-model='psu.provider.password'>
+      </label>
+      <label class="item item-input">
+        <input type="password" placeholder="confirm password" ng-model='psu.provider.confirmPassword'>
+      </label>
+      <p ng-show='psu.provider.error'>{{psu.provider.error}}</p>
+      <button class="button button-full button-positive">Sign Up</button>
+    </form>
+    <p>Already have an account?  <a href="#/providerSignin">Sign in here!</a></p>
+  </ion-content>
+</ion-view>

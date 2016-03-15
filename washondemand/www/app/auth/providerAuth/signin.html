@@ -1,10 +1,17 @@
 <!-- provSICtrl as psi -->
-<div>
-  <p>Provider Sign In</p>
-  <form ng-submit='psi.signin()'>
-    <input type='text' placeholder="email" ng-model='psi.provider.email'>
-    <input type="password" placeholder="password" ng-model='psi.provider.password'>
-    <button>Sign In</button>
-  </form>
-  <p>Need an account?  <a href="#/providerSignup">Create one here!</a></p>
-</div>
+<ion-view>
+  <ion-content>
+    <p>Provider Sign In</p>
+    <form class="list list-inset" ng-submit='psi.signin()'>
+      <label class="item item-input">
+        <input type='email' placeholder="email" ng-model='psi.provider.email'>
+      </label>
+      <label class="item item-input">
+        <input type="password" placeholder="password" ng-model='psi.provider.password'>
+      </label>
+      <p ng-show='psi.provider.error'>{{psi.provider.error}}</p>
+      <button class="button button-full button-positive">Sign In</button>
+    </form>
+    <p>Need an account?  <a href="#/providerSignup">Create one here!</a></p>
+  </ion-content>
+</ion-view>

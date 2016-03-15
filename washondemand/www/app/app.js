@@ -2,6 +2,7 @@ angular.module('WashOnDemand', [
   'ionic',
 	'ui.router',
   'wod.routes',
+  'wod.services',
   'wod.authMaster',
 	'wod.customerCtrl',
   'wod.customerFactory',

@@ -8,20 +8,13 @@ function custSUCtrl(authFactory, $window, $state) {
     email: '',
     phone: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    error: ''
   };
 
   vm.signup = function() {
     console.log(vm.customer);
     //call factory
-    authFactory.custSignup(vm.customer)
-    .then(function(token) {
-      authFactory.clearForm(vm.customer);
-      $window.localStorage.setItem('com.wod', token);
-      $state.go('customernav.customer');
-    })
-    .catch(function(error) {
-      console.error(error);
-    });
+    authFactory.handleAuth(vm.customer, 'customer', 'signup');
   };
 }

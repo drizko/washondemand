@@ -1,18 +1,81 @@
+//stylize
+//form validation (phone convenience)
+//geolocation
+
 angular.module('wod.authFactory', []).factory('authFactory', authFactory);
 
-function authFactory($http, $window, $state) {
+function authFactory($http, $window, $state, locFactory) {
 
   var LOCALURL = 'http://localhost:8000/';
+  var emailRegex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
 
   return {
-    clearForm: clearForm,
-    custSignin: custSignin,
-    custSignup: custSignup,
-    provSignin: provSignin,
-    provSignup: provSignup,
+    handleAuth: handleAuth,
     isAuth: isAuth,
     signout: signout
   };
+
+  function handleAuth(accountInfo, userType, method) {
+
+    if (!checkFormFilled(accountInfo)) {
+      return;
+    }
+
+    if (method === 'signup' && !validateSignupInput(accountInfo)) {
+      return;
+    }
+
+    authApiCall(accountInfo, userType + '/' + method)
+    .then(function(token) {
+      //clear input forms
+      clearForm(accountInfo);
+      //set jwt
+      $window.localStorage.setItem('com.wod', token);
+      //redirect to user page
+      $state.go(userType + 'nav.' + userType);
+    })
+    .catch(function(error) {
+      if (method === 'signup') {
+        accountInfo.error = 'user already exists';
+      }
+      else if (method === 'signin') {
+        accountInfo.error = 'incorrect email/password';
+      }
+      else {
+        accountInfo.error = 'some other error';
+        console.error(error);
+      }
+    });
+  }
+
+  function checkFormFilled(formData) {
+    for (var k in formData) {
+      if (!formData[k] && k !== 'error') {
+        formData.error = 'please fill all forms';
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function validateSignupInput(signupInfo) {
+    //check matching passwords
+    if (emailRegex.exec(signupInfo.email) === null) {
+      signupInfo.error = 'invalid email';
+      return false;
+    }
+    if (signupInfo.phone.length !== 10 || isNaN(signupInfo.phone)) {
+      signupInfo.error = 'invalid phone number';
+      return false;
+    }
+    if (!comparePasswords(signupInfo)) {
+      signupInfo.error = 'passwords don\'t match';
+      return false;
+    }
+    //check email
+    //check phone
+    return true;
+  }
 
   function clearForm(formData) {
     for (var k in formData) {
@@ -29,44 +92,21 @@ function authFactory($http, $window, $state) {
     $state.go('home');
   }
 
-  function custSignin(cust) {
-    return $http({
-      method: 'POST',
-      url: LOCALURL + 'api/customer/signin',
-      data: cust
-    })
-    .then(function(results) {
-      return results.data.token;
-    });
+  function comparePasswords(signupInfo) {
+    if (signupInfo.confirmPassword !== undefined) {
+      if (signupInfo.password === signupInfo.confirmPassword) {
+        return true;
+      }
+    }
+    return false;
   }
 
-  function custSignup(cust) {
-    return $http({
-      method: 'POST',
-      url: LOCALURL + 'api/customer/signup',
-      data: cust
-    })
-    .then(function(results) {
-      return results.data.token;
-    });
-  }
+  function authApiCall(accountInfo, url) {
 
-  function provSignin(prov) {
     return $http({
       method: 'POST',
-      url: LOCALURL + 'api/provider/signin',
-      data: prov
-    })
-    .then(function(results) {
-      return results.data.token;
-    });
-  }
-
-  function provSignup(prov) {
-    return $http({
-      method: 'POST',
-      url: LOCALURL + 'api/provider/signup',
-      data: prov
+      url: LOCALURL + 'api/' + url,
+      data: accountInfo
     })
     .then(function(results) {
       return results.data.token;

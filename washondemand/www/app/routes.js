@@ -38,7 +38,7 @@ angular.module('wod.routes', [])
       //   }]
       // }
     })
-    .state('providernav.providerView', {
+    .state('providernav.provider', {
       url: '/providerProfile',
       // authenticate: false // for now
       views: {
