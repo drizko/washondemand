@@ -5,7 +5,7 @@ angular.module('wod.routes', [])
 		.state('home', {
 			url: '/',
 			templateUrl: 'app/home/home.template.html',
-			controller: 'homeCtrl',
+			controller: 'homeCtrl as home',
 			authenticate: false
 		})
 		.state('customernav', {
@@ -38,13 +38,13 @@ angular.module('wod.routes', [])
       //   }]
       // }
     })
-    .state('providernav.providerView', {
+    .state('providernav.provider', {
       url: '/providerProfile',
       // authenticate: false // for now
       views: {
         'nav-view': {
           templateUrl: 'app/providerView/provider.template.html',
-          controller: 'providerCtrl'
+          controller: 'providerCtrl as providerCtrl'
         }
       }
     })

@@ -1,6 +1,6 @@
 angular.module('wod.custSU', []).controller('custSUCtrl', custSUCtrl);
 
-function custSUCtrl(authFactory, $window, $location) {
+function custSUCtrl(authFactory, $window, $state) {
   var vm = this;
   vm.customer = {
     firstName: '',
@@ -8,20 +8,13 @@ function custSUCtrl(authFactory, $window, $location) {
     email: '',
     phone: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    error: ''
   };
 
   vm.signup = function() {
     console.log(vm.customer);
     //call factory
-    authFactory.custSignup(vm.customer)
-    .then(function(token) {
-      authFactory.clearForm(vm.customer);
-      $window.localStorage.setItem('com.wod', token);
-      $location.path('/customerProfile');
-    })
-    .catch(function(error) {
-      console.error(error);
-    });
+    authFactory.handleAuth(vm.customer, 'customer', 'signup');
   };
 }
