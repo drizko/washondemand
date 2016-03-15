@@ -3,7 +3,7 @@ angular.module('wod.routes', [])
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
 		.state('home', {
-			url: '/',
+      url: '/',
 			templateUrl: 'app/home/home.template.html',
 			controller: 'homeCtrl as home',
 			authenticate: false

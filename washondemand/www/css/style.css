@@ -10,3 +10,55 @@ ng-map {
 .map-view {
   height: 50%;
 }
+
+.button {
+  min-height: 30px;
+  line-height: 30px;
+}
+
+.button:hover {
+  background-color:gray;
+  color: #fff;
+}
+
+.wash-detail {
+  min-height: 215px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  margin: 5px;
+  padding: 10px;
+}
+
+.wash2-detail {
+  height: 333px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  margin: 5px;
+  padding: 10px;
+}
+
+.wash3-detail {
+  height: 430px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  margin: 5px;
+  padding: 10px;
+}
+
+.cust-button-list {
+  width: 100%;
+  display: box;
+  display: -moz-box;
+  display: -webkit-box;
+}
+
+.cust-button {
+  -moz-box-flex: 1;
+  -webkit-box-flex: 1;
+  box-flex: 1;
+  margin: 5px;
+}
+
+.cust-button input {
+  margin: 0px 10px 10px 10px;
+}
