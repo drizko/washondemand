@@ -1,5 +1,6 @@
 var Customer = require('../models/customerModel');
 var Request = require('../models/requestModel.js');
+var Provider = require('../models/providerModel.js');
 var Q = require('q');
 var helpers = require('../utils/helpers')
 var jwt = require('jwt-simple');
@@ -8,7 +9,7 @@ var config = require('../config.js');
 var bcrypt = require('bcrypt-nodejs');
 
 
-var methods = {
+module.exports = {
 
   comparePasswords: function (attemptedPassword, savedPassword) {
     var defer = Q.defer();
@@ -32,7 +33,7 @@ var methods = {
         if (!customer) {
           next(new Error('Customer does not exist'));
         } else {
-          methods.comparePasswords(password, customer.password)
+          module.exports.comparePasswords(password, customer.password)
             .then(function(foundUser) {
               if (foundUser) {
                 var token = jwt.encode(customer, config.tokenSecret);
@@ -48,7 +49,7 @@ var methods = {
       });
   },
 
-signup: function (req, res, next) {
+  signup: function (req, res, next) {
     var newUser = {
       email: req.body.email,
       password: req.body.password,
@@ -102,67 +103,46 @@ signup: function (req, res, next) {
           next(error);
         });
     }
+  },
+
+//**********************-WASHER METHODS-*********************
+
+  getWashers: function(req, res, next){
+
+    var customerLocation = req.body.user_location;
+
+    Provider.where("available").equals(true).then(function(washers) {
+      var result = _.filter(washers, function(washer) {
+        return module.exports.distance(customerLocation, washer.geolocation) < 5;
+      });
+      res.json({result: result});
+    })
+  },
+
+  requestWash: function(req, res, next){
+
+    var newRequest = {
+      user_location: req.body.user_location,
+      user_email: req.body.user_email,
+      job_started: false
+    }
+    var create = Q.nbind(Request.create, Request);
+    create(newRequest).then(function(){
+      res.status(200).send();
+    })
+    .fail(function(error) {
+      next(error);
+    })
+  },
+
+  distance: function(userLocation, washerLocation) {
+    var p = 0.017453292519943295;    // Math.PI / 180
+    var c = Math.cos;
+    var a = 0.5 - c((washerLocation.lat - userLocation.lat) * p)/2 +
+    c(userLocation.lat * p) * c(washerLocation.lat * p) *
+    (1 - c((washerLocation.lng - userLocation.lng) * p))/2;
+    // returns distance in miles
+    return Math.round(12742 * Math.asin(Math.sqrt(a))/1.60932*10)/10;
   }
 };
 
-
-var washers = [
-  {
-    name: "Kyle",
-    working: true,
-    location: {lat: 34.1194159, lng: -118.49426410000201}
-  },
-  {
-    name: "Danny",
-    working: false,
-    location: {lat: 34.1495159, lng: -118.39426410000301}
-  },
-  {
-    name: "Bobby",
-    working: true,
-    location: {lat: 34.0596159, lng: -118.49426410000401}
-  },
-  {
-    name: "Kaz",
-    working: true,
-    location: {lat: 34.0897159, lng: -118.49926410000501}
-  },
-  {
-    name: "Rando",
-    working: true,
-    location: {lat: 34.5497159, lng: -118.59926410000501}
-  }
-];
-
-function getWashers(req, res){
-  var userLocation = {lat: 34.0192159, lng: -118.49426410000201};
-
-  var result = _.filter(washers, function(item){
-    return item.working && distance(userLocation, item.location) < 5
-  });
-
-  return result;
-}
-
-getWashers()
-
-function requestWash(req, res){
-  var token = req.headers['x-access-token'];
-
-  var user = jwt.decode(token, config.tokenSecret);
-
-  return result;
-}
-
-function distance(userLocation, washerLocation) {
-  var p = 0.017453292519943295;    // Math.PI / 180
-  var c = Math.cos;
-  var a = 0.5 - c((washerLocation.lat - userLocation.lat) * p)/2 +
-  c(userLocation.lat * p) * c(washerLocation.lat * p) *
-  (1 - c((washerLocation.lng - userLocation.lng) * p))/2;
-  // returns distance in miles
-  return Math.round(12742 * Math.asin(Math.sqrt(a))/1.60932*10)/10;
-}
-
-
-module.exports = methods;
