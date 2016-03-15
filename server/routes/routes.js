@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var app = require('../server.js');
 var helpers = require('../utils/helpers.js');
 var methodOverride  = require('method-override');
+var favicon = require('serve-favicon');
 
 var allowCrossDomain = function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -27,6 +28,7 @@ module.exports = function(app, express) {
   app.use(bodyParser.json());
   app.use(express.static('./client'));
   app.use('/node_modules', express.static('./node_modules'));
+  app.use(favicon('./client/images/favicon.ico'));
 
   // Define router middleware using the template below:
   app.use('/api/customer', customerRouter);
