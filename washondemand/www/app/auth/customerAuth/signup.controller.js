@@ -1,6 +1,6 @@
 angular.module('wod.custSU', []).controller('custSUCtrl', custSUCtrl);
 
-function custSUCtrl(authFactory, $window, $state) {
+function custSUCtrl(authFactory, locFactory, $window, $state) {
   var vm = this;
   vm.customer = {
     firstName: '',
@@ -16,5 +16,6 @@ function custSUCtrl(authFactory, $window, $state) {
     console.log(vm.customer);
     //call factory
     authFactory.handleAuth(vm.customer, 'customer', 'signup');
+    locFactory.getLoc('customer').then(locFactory.sendLocToServer);
   };
 }

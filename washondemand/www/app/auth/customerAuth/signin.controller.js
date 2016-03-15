@@ -1,6 +1,6 @@
 angular.module('wod.custSI', []).controller('custSICtrl', custSICtrl);
 
-function custSICtrl(authFactory, $window, $state) {
+function custSICtrl(authFactory, locFactory, $window, $state) {
   var vm = this;
   vm.customer = {
     email: '',
@@ -12,5 +12,6 @@ function custSICtrl(authFactory, $window, $state) {
     console.log(vm.customer);
     //call factory
     authFactory.handleAuth(vm.customer, 'customer', 'signin');
+    locFactory.getLoc('customer').then(locFactory.sendLocToServer);
   };
 }
