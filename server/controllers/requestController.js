@@ -23,6 +23,7 @@ var methods = {
           var washRequest = {
             user_phone: user.phone_number,
             user_location: user.location,
+            user_firstname: user.firstname,
             user_email: user.email,
             vehicle_type: req.body.vehicleType,
             wash_type: req.body.washType,
