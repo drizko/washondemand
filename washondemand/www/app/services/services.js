@@ -32,6 +32,7 @@ function locFactory($window, $q, $http) {
         locData.email = email;
         locData.lat = position.coords.latitude;
         locData.lng = position.coords.longitude;
+        console.log('location found!')
         deferred.resolve(position);
       }, function(err) {
         deferred.reject(err);
@@ -49,9 +50,7 @@ function locFactory($window, $q, $http) {
       data: locData
     })
     .then(function(results) {
-      console.log('made it back to loc factory');
-      console.log(locData)
-      //return results.data;
+      //console.log(locData);
     });
   }
 
@@ -63,6 +62,5 @@ function locFactory($window, $q, $http) {
       lat: undefined,
       lng: undefined
     };
-    console.log(locData);
   }
 }
