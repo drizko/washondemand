@@ -1,6 +1,12 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var config = require('./config.js');
+
+if(process.env.SALT_FACTOR === undefined){
+  var config = require('./config.js');
+} else {
+  var config = process.env
+}
+
 mongoose.connect(config.mongoUrl);
 
 var app = express();

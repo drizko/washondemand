@@ -5,8 +5,13 @@ var Q = require('q');
 var helpers = require('../utils/helpers')
 var jwt = require('jwt-simple');
 var _ = require('lodash');
-var config = require('../config.js');
 var bcrypt = require('bcrypt-nodejs');
+
+if(process.env.SALT_FACTOR === undefined){
+  var config = require('../config.js');
+} else {
+  var config = process.env
+}
 
 
 module.exports = {
