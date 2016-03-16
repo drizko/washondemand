@@ -4,7 +4,7 @@ module.exports = function(app) {
 
 	app.post('/signin', providerController.signin);
 	app.post('/signup', providerController.signup);
-	app.post('/providerProfile/getRequests', providerController.getRequests);
-	app.post('/providerProfile/acceptRequest', providerController.acceptRequest);
+	app.post('/get-requests', providerController.getRequests);
+	app.post('/accept-request', providerController.acceptRequest);
 	// app.get('/', providerController.checkAuth);
 };
