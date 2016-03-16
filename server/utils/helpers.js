@@ -1,7 +1,12 @@
 var path = require('path');
 var fs = require('fs');
 var jwt  = require('jwt-simple');
-var config = require('../config.js');
+
+if(process.env.SALT_FACTOR === undefined){
+  var config = require('../config.js');
+} else {
+  var config = process.env
+}
 
 module.exports = {
 

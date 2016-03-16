@@ -1,7 +1,12 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var config = require('../config.js');
 var bcrypt = require('bcrypt-nodejs');
+
+if(process.env.SALT_FACTOR === undefined){
+  var config = require('../config.js');
+} else {
+  var config = process.env
+}
 
 var providerSchema = new Schema({
   firstname: String,
