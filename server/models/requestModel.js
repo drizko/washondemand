@@ -13,7 +13,8 @@ var requestSchema = new Schema({
   job_accepted: String,
   job_started: String,
   job_ended: String,
-  cost: Number
+  cost: Number,
+  distance: Number
 });
 
 var Request = mongoose.model('Request', requestSchema);
