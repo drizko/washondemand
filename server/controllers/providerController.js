@@ -1,10 +1,12 @@
-var Provider = require('../models/providerModel.js');
+var Customer = require('../models/customerModel');
 var Request = require('../models/requestModel.js');
+var Provider = require('../models/providerModel.js');
 var Q = require('q');
+var helpers = require('../utils/helpers')
 var jwt = require('jwt-simple');
+var _ = require('lodash');
 var config = require('../config.js');
 var bcrypt = require('bcrypt-nodejs');
-
 
 module.exports = {
 
@@ -110,11 +112,12 @@ module.exports = {
 
     var providerLocation = req.body.provider_location;
 
-    Request.where("job_started").ne("").then(function(requests) {
+    Request.where("job_started").equals('').then(function(requests) {
+      console.log("REQUESTS: ", requests);
       var result = _.filter(requests, function(request) {
-        console.log("++request: ", request)
+        console.log("++request: ", request);
         return module.exports.distance(providerLocation, request.user_location) < 5;
-      })
+      });
       res.json({result: result});
     })
     // .fail(function(error) {
