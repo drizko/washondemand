@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var requestSchema = new Schema({
   user_location: {lat: Number, lng: Number},
+  user_firstname: String,
   user_email: {type: String, unique: true, required: true},
   user_phone: Number,
   number_of_vehicles: Number,

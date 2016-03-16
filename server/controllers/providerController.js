@@ -150,4 +150,3 @@ module.exports = {
     return Math.round(12742 * Math.asin(Math.sqrt(a))/1.60932*10)/10;
   }
 };
-
