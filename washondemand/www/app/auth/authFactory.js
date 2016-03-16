@@ -30,7 +30,7 @@ function authFactory($http, $window, $state, locFactory) {
     authApiCall(accountInfo, userType + '/' + method)
     .then(function(token) {
       //clear input forms
-      //clearForm(accountInfo);
+      clearForm(accountInfo);
       //set jwt
       $window.localStorage.setItem('com.wod', token);
       //redirect to user page
@@ -90,6 +90,7 @@ function authFactory($http, $window, $state, locFactory) {
   }
 
   function signout() {
+    locFactory.resetLocData();
     $window.localStorage.removeItem('com.wod');
     $state.go('home');
   }
