@@ -16,7 +16,8 @@ function locFactory($window, $q, $http) {
   return {
     locData: locData,
     getLoc: getLoc,
-    sendLocToServer: sendLocToServer
+    sendLocToServer: sendLocToServer,
+    resetLocData: resetLocData
   };
 
   function getLoc(userType, email) {
@@ -42,8 +43,6 @@ function locFactory($window, $q, $http) {
 
   function sendLocToServer() {
 
-    console.log(locData);
-
     return $http({
       method: 'POST',
       url: LOCALURL + 'api/' + locData.userType + '/updateLocation',
@@ -51,7 +50,19 @@ function locFactory($window, $q, $http) {
     })
     .then(function(results) {
       console.log('made it back to loc factory');
+      console.log(locData)
       //return results.data;
     });
+  }
+
+  function resetLocData() {
+    locData = {
+      found: false,
+      userType: '',
+      email: '',
+      lat: undefined,
+      lng: undefined
+    };
+    console.log(locData);
   }
 }
