@@ -8,6 +8,7 @@ function locFactory($window, $q, $http) {
   var locData = {
     found: false,
     userType: '',
+    email: '',
     lat: undefined,
     lng: undefined
   };
@@ -18,7 +19,7 @@ function locFactory($window, $q, $http) {
     sendLocToServer: sendLocToServer
   };
 
-  function getLoc(userType) {
+  function getLoc(userType, email) {
     var deferred = $q.defer();
     if (!$window.navigator.geolocation) {
       deferred.reject('Geolocation not supported.');
@@ -27,6 +28,7 @@ function locFactory($window, $q, $http) {
       $window.navigator.geolocation.getCurrentPosition(function(position) {
         locData.found = true;
         locData.userType = userType;
+        locData.email = email;
         locData.lat = position.coords.latitude;
         locData.lng = position.coords.longitude;
         deferred.resolve(position);
@@ -44,7 +46,7 @@ function locFactory($window, $q, $http) {
 
     return $http({
       method: 'POST',
-      url: LOCALURL + 'api/loc/' + locData.userType,
+      url: LOCALURL + 'api/' + locData.userType + '/updateLocation',
       data: locData
     })
     .then(function(results) {

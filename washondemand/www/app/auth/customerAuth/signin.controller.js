@@ -11,7 +11,8 @@ function custSICtrl(authFactory, locFactory, $window, $state) {
   vm.signin = function() {
     console.log(vm.customer);
     //call factory
+    var emailCopy = vm.customer.email;
     authFactory.handleAuth(vm.customer, 'customer', 'signin');
-    locFactory.getLoc('customer').then(locFactory.sendLocToServer);
+    locFactory.getLoc('customer', emailCopy).then(locFactory.sendLocToServer);
   };
 }

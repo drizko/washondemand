@@ -11,7 +11,8 @@ function provSICtrl(authFactory, locFactory, $window, $state) {
   vm.signin = function() {
     console.log(vm.provider);
     //call factory
+    var emailCopy = vm.provider.email;
     authFactory.handleAuth(vm.provider, 'provider', 'signin');
-    locFactory.getLoc('provider').then(locFactory.sendLocToServer);
+    locFactory.getLoc('provider', emailCopy).then(locFactory.sendLocToServer);
   };
 }
