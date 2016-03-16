@@ -8,8 +8,10 @@ function authFactory($http, $window, $state, locFactory) {
 
   var LOCALURL = 'http://localhost:8000/';
   var emailRegex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+  var currentUserEmail = '';
 
   return {
+    currentUserEmail: currentUserEmail,
     handleAuth: handleAuth,
     isAuth: isAuth,
     signout: signout
@@ -25,31 +27,26 @@ function authFactory($http, $window, $state, locFactory) {
       return;
     }
 
-    locFactory.getLoc().then(function(loc) {
-      accountInfo.lat = loc.coords.latitude;
-      accountInfo.lng = loc.coords.longitude;
-
-      authApiCall(accountInfo, userType + '/' + method)
-      .then(function(token) {
-        //clear input forms
-        clearForm(accountInfo);
-        //set jwt
-        $window.localStorage.setItem('com.wod', token);
-        //redirect to user page
-        $state.go(userType + 'nav.' + userType);
-      })
-      .catch(function(error) {
-        if (method === 'signup') {
-          accountInfo.error = 'user already exists';
-        }
-        else if (method === 'signin') {
-          accountInfo.error = 'incorrect email/password';
-        }
-        else {
-          accountInfo.error = 'some other error';
-          console.error(error);
-        }
-      });
+    authApiCall(accountInfo, userType + '/' + method)
+    .then(function(token) {
+      //clear input forms
+      //clearForm(accountInfo);
+      //set jwt
+      $window.localStorage.setItem('com.wod', token);
+      //redirect to user page
+      $state.go(userType + 'nav.' + userType);
+    })
+    .catch(function(error) {
+      if (method === 'signup') {
+        accountInfo.error = 'user already exists';
+      }
+      else if (method === 'signin') {
+        accountInfo.error = 'incorrect email/password';
+      }
+      else {
+        accountInfo.error = 'some other error';
+        console.error(error);
+      }
     });
   }
 

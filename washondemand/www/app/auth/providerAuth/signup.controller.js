@@ -1,6 +1,6 @@
 angular.module('wod.provSU', []).controller('provSUCtrl', provSUCtrl);
 
-function provSUCtrl(authFactory, $window, $state) {
+function provSUCtrl(authFactory, locFactory, $window, $state) {
   var vm = this;
   vm.provider = {
     companyName: '',
@@ -14,6 +14,8 @@ function provSUCtrl(authFactory, $window, $state) {
   vm.signup = function() {
     console.log(vm.provider);
     //call factory
+    var emailCopy = vm.provider.email;
     authFactory.handleAuth(vm.provider, 'provider', 'signup');
+    locFactory.getLoc('provider', emailCopy).then(locFactory.sendLocToServer);
   };
 }

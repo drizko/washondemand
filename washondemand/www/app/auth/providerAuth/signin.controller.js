@@ -1,6 +1,6 @@
 angular.module('wod.provSI', []).controller('provSICtrl', provSICtrl);
 
-function provSICtrl(authFactory, $window, $state) {
+function provSICtrl(authFactory, locFactory, $window, $state) {
   var vm = this;
   vm.provider = {
     email: '',
@@ -11,6 +11,8 @@ function provSICtrl(authFactory, $window, $state) {
   vm.signin = function() {
     console.log(vm.provider);
     //call factory
+    var emailCopy = vm.provider.email;
     authFactory.handleAuth(vm.provider, 'provider', 'signin');
+    locFactory.getLoc('provider', emailCopy).then(locFactory.sendLocToServer);
   };
 }

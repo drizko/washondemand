@@ -105,6 +105,38 @@ module.exports = {
     }
   },
 
+//**********************-LOCATION METHOD-********************
+  updateLocation: function(req, res, next) {
+    var userType = req.body.userType;
+    var lat = req.body.lat;
+    var lng = req.body.lng;
+    var email = req.body.email;
+
+    var query = {
+      email: email,
+    };
+
+    var update = {
+      'geolocation': {
+        lat: lat,
+        lng: lng
+      }
+    };
+
+    // Upsert updates instead of adding a new entry
+    var options = {
+      upsert: true,
+      new: true
+    };
+
+    Customer.findOneAndUpdate(query, update, options, function(err, doc) {
+      if (err) {
+        throw err;
+      }
+      res.json(doc);
+    });
+
+  },
 //**********************-WASHER METHODS-*********************
 
   getWashers: function(req, res, next){
@@ -145,4 +177,3 @@ module.exports = {
     return Math.round(12742 * Math.asin(Math.sqrt(a))/1.60932*10)/10;
   }
 };
-
