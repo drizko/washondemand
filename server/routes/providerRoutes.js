@@ -6,5 +6,6 @@ module.exports = function(app) {
 	app.post('/signup', providerController.signup);
 	app.post('/get-requests', providerController.getRequests);
 	app.post('/accept-request', providerController.acceptRequest);
+	app.post('/updateLocation', providerController.updateLocation);
 	// app.get('/', providerController.checkAuth);
 };

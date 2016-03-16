@@ -111,14 +111,6 @@ module.exports = {
     var lat = req.body.lat;
     var lng = req.body.lng;
     var email = req.body.email;
-    var table = null;
-
-    if(userType === 'customer') {
-      table = Customer;
-    }
-    if(userType === 'provider') {
-      table = Provider;
-    }
 
     var query = {
       email: email,
@@ -137,7 +129,7 @@ module.exports = {
       new: true
     };
 
-    table.findOneAndUpdate(query, update, options, function(err, doc) {
+    Customer.findOneAndUpdate(query, update, options, function(err, doc) {
       if (err) {
         throw err;
       }
