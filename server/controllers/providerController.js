@@ -113,16 +113,11 @@ module.exports = {
     var providerLocation = req.body.provider_location;
 
     Request.where("job_started").equals('').then(function(requests) {
-      console.log("REQUESTS: ", requests);
       var result = _.filter(requests, function(request) {
-        console.log("++request: ", request);
         return module.exports.distance(providerLocation, request.user_location) < 5;
       });
       res.json({result: result});
     })
-    // .fail(function(error) {
-    //   next(error);
-    // })
   },
 
   acceptRequest: function(req, res, next) {
