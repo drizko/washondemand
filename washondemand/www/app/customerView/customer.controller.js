@@ -28,7 +28,5 @@ function customerCtrl($scope, NgMap, customerFactory, $state, $location, $rootSc
     if (wash === 'premium') {
       vm.washInfo = customerFactory.data.premium;
     }
-    console.log(vm.washInfo);
-    // $state.go('customernav.customer.' + wash);
   };
 }

@@ -7,6 +7,7 @@ angular.module('WashOnDemand', [
 	'wod.customerCtrl',
   'wod.customerFactory',
 	'wod.providerCtrl',
+  'wod.providerFactory',
 	'wod.home',
 	'wod.nav',
 	'ngMap',
