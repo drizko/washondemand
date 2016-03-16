@@ -11,13 +11,13 @@ angular.module('wod.routes', [])
 		.state('customernav', {
 			url:'/nav1',
 			templateUrl: 'app/nav/customernav.template.html',
-			controller: 'navCtrl',
+			controller: 'navCtrl as navCtrl',
       abstract: true,
 		})
     .state('providernav', {
 			url:'/nav2',
 			templateUrl: 'app/nav/providernav.template.html',
-			controller: 'navCtrl',
+			controller: 'navCtrl as navCtrl',
       abstract: true,
 		})
     .state('customernav.customer', {

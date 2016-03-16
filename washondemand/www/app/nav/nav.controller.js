@@ -1,15 +1,10 @@
-angular.module('wod.nav', []).controller('navCtrl', nav);
+angular.module('wod.nav', []).controller('navCtrl', navCtrl);
 
-function nav($scope, $ionicHistory) {
+function navCtrl($scope, $ionicHistory, $state, authFactory) {
   var vm = this;
 
-  $scope.$root.GoBack = function() {
-    // if($ionicHistory.backTitle() === "Favorites List"){
-      $ionicHistory.goBack();
-    // } else {
-    //   Data.getRecentUpdate(function(data) {
-    //     $ionicHistory.goBack();
-    //   });
-    // }
+  vm.logout = function() {
+    authFactory.signout();
+    $state.go('providerSignin');
   };
 };

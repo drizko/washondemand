@@ -1,21 +1,22 @@
 <ion-view title="Provider View">
   <ion-content overflow-scroll="true" class="provider-view">
     <div class="map-view" data-tap-disabled="true">
-      <ng-map center="[34.019454, -118.491191]" zoom="12" style="height:550px;">
+      <ng-map center="[{{providerCtrl.locData.lat}}, {{providerCtrl.locData.lng}}]" zoom="12" style="height:550px;">
         <marker position="[34.019454, -118.491191]"></marker>
-        <marker position="[34.0337023, -118.4552549]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
+
+        <marker ng-repeat="position in providerCtrl.request" position="[34.0337023, -118.4552549]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
       </ng-map>
     </div>
-    <ion-list>
+    <ion-list ng-if="providerCtrl.locData.found" ng-init="providerCtrl.getRequests()">
       <ion-item class="item item-divider">
         Carwash Requested
       </ion-item>
-      <ion-item class="item request-list">
+      <ion-item class="item request-list" ng-repeat="request in providerCtrl.requests">
         <div style="float:left;">
-          Wash Type: Basic<br>
-          Car Type: Car<br>
-          Price: $25<br>
-          Distance: 3.1 miles<br>
+          Wash Type: {{request.wash_type}}<br>
+          Car Type: {{request.vehicle_type}}<br>
+          Price: ${{request.price}}<br>
+          Distance: {{request.distance}} miles<br>
         </div>
         <div style="float:right;margin-right:35px;margin-top:29px;">
           <button ng-click="providerCtrl.acceptWash()">Accept Wash</button>

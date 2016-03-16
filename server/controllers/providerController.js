@@ -80,17 +80,17 @@ module.exports = {
           return create(newUser);
         }
       })
-      .then(function (provider) {
+      .then(function(provider) {
         // create token to send back for auth
         var token = jwt.encode(provider, config.tokenSecret);
         res.json({token: token});
       })
-      .fail(function (error) {
+      .fail(function(error) {
         next(error);
       });
   },
 
-  checkAuth: function (req, res, next) {
+  checkAuth: function(req, res, next) {
     var token = req.headers['x-access-token'];
     if (!token) {
       next(new Error('No token'));
@@ -98,14 +98,14 @@ module.exports = {
       var provider = jwt.decode(token, config.tokenSecret);
       var findUser = Q.nbind(Provider.findOne, Provider);
       findUser({email: provider.email})
-        .then(function (foundUser) {
+        .then(function(foundUser) {
           if (foundUser) {
             res.status(200).send();
           } else {
             res.status(401).send();
           }
         })
-        .fail(function (error) {
+        .fail(function(error) {
           next(error);
         });
     }
@@ -144,18 +144,23 @@ module.exports = {
 
   },
 
-//********************-REQUEST HANDLER-*******************
+  //********************-REQUEST HANDLER-*******************
 
   getRequests: function(req, res, next) {
-
+    var results = [];
     var providerLocation = req.body.provider_location;
-
-    Request.where("job_started").equals('').then(function(requests) {
-      var result = _.filter(requests, function(request) {
-        return module.exports.distance(providerLocation, request.user_location) < 5;
+    console.log('inside getRequests');
+    Request.where('job_started').equals('').then(function(requests) {
+      console.log('inside Request.where');
+      _.each(requests, function(request) {
+        // request.distance = module.exports.distance(providerLocation, request.user_location);
+        request.distance = 3.1;
+        //if(request.distance < 5) {
+          results.push(request);
+        // }
       });
-      res.json({result: result});
-    })
+      res.json({results: results});
+    });
   },
 
   acceptRequest: function(req, res, next) {
@@ -165,9 +170,9 @@ module.exports = {
     var findOne = Q.nbind(Request.findOne, Request);
     findOne({user_email: userEmail}).then(function(request) {
       if(request) {
-        console.log("REQUEST: ", request);
+        console.log('REQUEST: ', request);
         request.job_started = true;
-        console.log("REQUEST: ", request);
+        console.log('REQUEST: ', request);
         res.status(200).send();
       }
     })
