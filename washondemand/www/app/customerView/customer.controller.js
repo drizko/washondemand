@@ -11,6 +11,7 @@ function customerCtrl($scope, NgMap, customerFactory, $state, $location, $rootSc
   };
 
   vm.sendRequest = function() {
+    console.log("+++INSIDE SENDREQUEST");
     customerFactory.sendRequest(vm.request);
   };
   vm.selectVehicle = function(vehicle) {

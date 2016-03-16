@@ -157,7 +157,7 @@ module.exports = {
   },
 
   requestWash: function(req, res, next){
-
+    console.log("+++INSIDE REQWASH:", req.body.user_location);
     var newRequest = {
       user_location: req.body.user_location,
       user_email: req.body.user_email,
