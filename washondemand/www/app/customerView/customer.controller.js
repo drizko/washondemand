@@ -11,7 +11,7 @@ function customerCtrl($scope, NgMap, customerFactory, $state, $location, $rootSc
   };
 
   vm.sendRequest = function() {
-    console.log("+++INSIDE SENDREQUEST");
+    vm.request.price = vm.washInfo.price;
     customerFactory.sendRequest(vm.request);
   };
   vm.selectVehicle = function(vehicle) {
@@ -30,4 +30,5 @@ function customerCtrl($scope, NgMap, customerFactory, $state, $location, $rootSc
       vm.washInfo = customerFactory.data.premium;
     }
   };
+  vm.selectWash('basic');
 }
