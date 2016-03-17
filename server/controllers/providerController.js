@@ -75,7 +75,8 @@ module.exports = {
             email: email,
             password: password,
             company_name: companyName,
-            phone_number: phone
+            phone_number: phone,
+            available: true
           };
           return create(newUser);
         }
