@@ -21,15 +21,15 @@ function customerFactory($http, $window, $location, locFactory) {
     });
   };
 
-  function getProviders(userLoc) {
-    console.log('Getting available providers!!!!');
+  function getProviders() {
+    console.log('factory start');
     return $http({
       method: 'POST',
       url: LOCALURL + 'api/provider/get-providers',
-      data: userLoc
+      data: locFactory.locData
     })
     .then(function(results) {
-      console.log(results);
+      console.log('factory end');
       return results.data;
     });
   };

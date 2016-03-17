@@ -3,7 +3,7 @@
     <div class="map-view" data-tap-disabled="true">
       <ng-map center="[{{customerCtrl.locData.lat}}, {{customerCtrl.locData.lng}}]" zoom="12" style="height:550px;">
         <marker position="[{{customerCtrl.locData.lat}}, {{customerCtrl.locData.lng}}]"></marker>
-        <marker ng-repeat="position in customerCtrl.washers" position="[{{position.geolocation.lat}}, {{position.geolocation.lng}}]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
+        <marker ng-repeat="washer in customerCtrl.washers" position="[{{washer.geolocation.lat}}, {{washer.geolocation.lng}}]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
       </ng-map>
 
     </div>

@@ -13,12 +13,14 @@ function customerCtrl($scope, NgMap, customerFactory, locFactory) {
 
   vm.locData = locFactory.locData;
 
-  customerFactory.getProviders(locFactory.locData)
+  var getProviders = function() {
+
+    customerFactory.getProviders()
     .then(function(data) {
-      console.log('inside controller getRequest');
-      console.log(data.results);
       vm.washers = data.results;
+      console.log(vm.washers);
     });
+  };
 
   vm.sendRequest = function() {
     customerFactory.sendRequest(vm.request);
@@ -45,6 +47,7 @@ function customerCtrl($scope, NgMap, customerFactory, locFactory) {
   var init = function() {
     vm.selectWash('basic');
     vm.selectVehicle('car');
+    getProviders();
   };
   init();
 }
