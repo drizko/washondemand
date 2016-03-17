@@ -145,13 +145,27 @@ module.exports = {
 //**********************-WASHER METHODS-*********************
 
   getWashers: function(req, res, next){
-    var customerLocation = req.body.user_location;
+    var token = req.headers['x-access-token'];
+    var user = jwt.decode(token, config.tokenSecret);
+    var findLocation = Q.nbind(Customer.findOne, Customer);
+    // var customerLocation = req.body.user_location;
 
-    Provider.where("available").equals(true).then(function(washers) {
-      var result = _.filter(washers, function(washer) {
-        return module.exports.distance(customerLocation, washer.geolocation) < 5;
-      });
-      res.json({result: result});
+    // get customer's location from data base
+    findLocation({email: user.email}).then(function(cust) {
+      if(!cust) {
+        res.status(401).send();
+      }
+      var customerLocation = cust.geolocation;
+      // find all providers within 5 miles of customer
+      Provider.where("available").equals(true).then(function(washers) {
+        var result = _.filter(washers, function(washer) {
+          return module.exports.distance(customerLocation, washer.geolocation) < 5;
+        });
+        res.json({result: result});
+      })
+      .fail(function(error) {
+        next(error);
+      })
     })
   },
 
