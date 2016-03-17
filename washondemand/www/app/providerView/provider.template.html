@@ -2,9 +2,9 @@
   <ion-content overflow-scroll="true" class="provider-view">
     <div class="map-view" data-tap-disabled="true">
       <ng-map center="[{{providerCtrl.locData.lat}}, {{providerCtrl.locData.lng}}]" zoom="12" style="height:550px;">
-        <marker position="[34.019454, -118.491191]"></marker>
+        <marker position="[{{providerCtrl.locData.lat}}, {{providerCtrl.locData.lng}}]"></marker>
 
-        <marker ng-repeat="position in providerCtrl.request" position="[34.0337023, -118.4552549]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
+        <marker ng-repeat="position in providerCtrl.requests" position="[{{position.user_location.lat}}, {{position.user_location.lng}}]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
       </ng-map>
     </div>
     <ion-list ng-if="providerCtrl.locData.found" ng-init="providerCtrl.getRequests()">
@@ -15,7 +15,7 @@
         <div style="float:left;">
           Wash Type: {{request.wash_type}}<br>
           Car Type: {{request.vehicle_type}}<br>
-          Price: ${{request.price}}<br>
+          Price: ${{request.cost}}<br>
           Distance: {{request.distance}} miles<br>
         </div>
         <div style="float:right;margin-right:35px;margin-top:29px;">
