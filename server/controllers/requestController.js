@@ -36,7 +36,8 @@ module.exports = {
       job_accepted: "",
       job_started: "",
       job_ended: "",
-      cost: req.body.requestInfo.washInfo.price
+      cost: req.body.requestInfo.washInfo.price,
+      distance: ""
     }
     // send a new wash request
     findRequest({user_email: user.email}).then(function(request) {
@@ -54,16 +55,18 @@ module.exports = {
 
   getRequests: function(req, res, next) {
     var results = [];
-    var providerLocation = req.body.provider_location;
+    var providerLocation = {
+      lat: req.body.lat,
+      lng: req.body.lng
+    };
 
     Request.where('job_accepted').equals('')
       .then(function(requests) {
         _.each(requests, function(request) {
-          // request.distance = helpers.distance(providerLocation, request.user_location);
-          request.distance = 3.1;
-          //if(request.distance < 5) {
+          request.distance = helpers.distance(providerLocation, request.user_location);
+          if(request.distance < 5) {
             results.push(request);
-          // }
+          }
         });
         res.json({results: results});
       });
