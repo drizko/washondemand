@@ -7,14 +7,15 @@ function providerCtrl($scope, providerFactory, locFactory) {
 
   vm.getRequests = function() {
     providerFactory.getRequest(locFactory.locData)
-    .then(function(data) {
-      console.log('inside controller getRequest');
-      console.log(data.results)
-      vm.requests = data.results;
-    });
+      .then(function(data) {
+        console.log('inside controller getRequest');
+        console.log(data.results)
+        vm.requests = data.results;
+      });
   };
 
-  vm.acceptWash = function() {
-    providerFactory.acceptRequest(vm.request);
+  vm.acceptWash = function(request) {
+    console.log(request);
+    providerFactory.acceptRequest(request);
   };
 };

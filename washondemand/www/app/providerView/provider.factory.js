@@ -22,7 +22,7 @@ function providerFactory($http, $window, $location) {
     return $http({
       method: 'POST',
       // url: 'http://washondemand.us-west-2.elasticbeanstalk.com/api/request/accept-requests',
-      url: 'http://localhost:8000/api/request/accept-requests',
+      url: 'http://localhost:8000/api/request/accept-request',
       data: request
     });
   };
