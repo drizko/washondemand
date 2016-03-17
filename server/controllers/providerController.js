@@ -149,36 +149,32 @@ module.exports = {
   getRequests: function(req, res, next) {
     var results = [];
     var providerLocation = req.body.provider_location;
-    console.log('inside getRequests');
-    Request.where('job_started').equals('').then(function(requests) {
-      console.log('inside Request.where');
-      _.each(requests, function(request) {
-        // request.distance = module.exports.distance(providerLocation, request.user_location);
-        request.distance = 3.1;
-        //if(request.distance < 5) {
-          results.push(request);
-        // }
+
+    Request.where('job_accepted').equals('')
+      .then(function(requests) {
+        _.each(requests, function(request) {
+          // request.distance = module.exports.distance(providerLocation, request.user_location);
+          request.distance = 3.1;
+          //if(request.distance < 5) {
+            results.push(request);
+          // }
+        });
+        res.json({results: results});
       });
-      res.json({results: results});
-    });
   },
 
   acceptRequest: function(req, res, next) {
+    var requestId = req.body._id;
+    var currDate = Date.now();
 
-    var userEmail = req.body.user_email;
+    Request
+      .where({_id: requestId})
+      .update({job_accepted: currDate})
+      .then(function(item){
+        console.log(item);
+        res.status(201).send();
+      });
 
-    var findOne = Q.nbind(Request.findOne, Request);
-    findOne({user_email: userEmail}).then(function(request) {
-      if(request) {
-        console.log('REQUEST: ', request);
-        request.job_started = true;
-        console.log('REQUEST: ', request);
-        res.status(200).send();
-      }
-    })
-    .fail(function(error) {
-      next(error);
-    })
   },
 
   distance: function(userLocation, washerLocation) {
