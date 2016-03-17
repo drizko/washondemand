@@ -1,18 +1,25 @@
 angular.module('wod.customerCtrl', [])
 .controller('customerCtrl', customerCtrl);
 
-function customerCtrl($scope, NgMap, customerFactory, $state, $location, $rootScope) {
+function customerCtrl($scope, NgMap, customerFactory, locFactory) {
+
   var vm = this;
-  // $rootScope.$state = $state;
-  // $rootScope.$location = $location;
+
   vm.request = {
-    vehicleType: 'car',
-    washType: 'basic'
+    vehicleType: '',
+    washType: '',
+    washInfo: {}
   };
-  // var user = {
-    
-  // }
-  // customerFactory.getProviders()
+
+  vm.locData = locFactory.locData;
+
+  customerFactory.getProviders(locFactory.locData)
+    .then(function(data) {
+      console.log('inside controller getRequest');
+      console.log(data.results);
+      vm.washers = data.results;
+    });
+
   vm.sendRequest = function() {
     customerFactory.sendRequest(vm.request);
   };
@@ -21,16 +28,23 @@ function customerCtrl($scope, NgMap, customerFactory, $state, $location, $rootSc
   };
   vm.selectWash = function(wash) {
     vm.request.washType = wash;
-    console.log(vm.request.washType);
     if (wash === 'basic') {
       vm.washInfo = customerFactory.data.basic;
+      vm.request.washInfo = vm.washInfo;
     }
     if (wash === 'deluxe') {
       vm.washInfo = customerFactory.data.deluxe;
+      vm.request.washInfo = vm.washInfo;
     }
     if (wash === 'premium') {
       vm.washInfo = customerFactory.data.premium;
+      vm.request.washInfo = vm.washInfo;
     }
   };
-  vm.selectWash('basic');
+
+  var init = function() {
+    vm.selectWash('basic');
+    vm.selectVehicle('car');
+  };
+  init();
 }
