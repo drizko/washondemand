@@ -3,11 +3,14 @@ angular.module('wod.customerFactory', [])
 
 function customerFactory($http, $window, $location) {
 
+  var LOCALURL = 'http://localhost:8000/';
+  var AWSURL = 'http://washondemand.us-west-2.elasticbeanstalk.com/';
+
   function sendRequest(details) {
     console.log('From customerFactory!!!!!!!!!!!!!');
     return $http({
       method: 'POST',
-      url: 'http://localhost:8000/api/customer/request-wash',
+      url: LOCALURL + 'api/request/create-request',
       data: details
     })
     .then(function(results) {
@@ -19,7 +22,7 @@ function customerFactory($http, $window, $location) {
     console.log('Getting available providers!!!!');
     return $http({
       method: 'POST',
-      url: 'http://washondemand.us-west-2.elasticbeanstalk.com/api/request/get-providers',
+      url: LOCALURL + 'api/request/get-providers',
       data: userLoc
     })
     .then(function(results) {

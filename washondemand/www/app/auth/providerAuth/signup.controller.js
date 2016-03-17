@@ -12,7 +12,6 @@ function provSUCtrl(authFactory, locFactory, $window, $state) {
   };
 
   vm.signup = function() {
-    console.log(vm.provider);
     //call factory
     var emailCopy = vm.provider.email;
     authFactory.handleAuth(vm.provider, 'provider', 'signup');

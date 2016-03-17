@@ -5,6 +5,6 @@ function navCtrl($scope, $ionicHistory, $state, authFactory) {
 
   vm.logout = function() {
     authFactory.signout();
-    $state.go('providerSignin');
+    $state.go('home');
   };
 };

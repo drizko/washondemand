@@ -13,7 +13,6 @@ function custSUCtrl(authFactory, locFactory, $window, $state) {
   };
 
   vm.signup = function() {
-    console.log(vm.customer);
     //call factory
     var emailCopy = vm.customer.email;
     authFactory.handleAuth(vm.customer, 'customer', 'signup');
