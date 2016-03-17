@@ -55,12 +55,11 @@ function locFactory($window, $q, $http) {
   }
 
   function resetLocData() {
-    locData = {
-      found: false,
-      userType: '',
-      email: '',
-      lat: undefined,
-      lng: undefined
-    };
+
+    locData.found = false;
+    locData.userType = '';
+    locData.email = '';
+    locData.lat = undefined;
+    locData.lng = undefined;
   }
 }

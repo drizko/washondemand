@@ -23,6 +23,7 @@ angular.module('wod.routes', [])
     .state('customernav.customer', {
       url: '/customerProfile',
       // authenticate: false, // for now
+      cache: false,
       views: {
         'nav-view': {
           templateUrl: 'app/customerView/customer.template.html',
@@ -41,6 +42,7 @@ angular.module('wod.routes', [])
     .state('providernav.provider', {
       url: '/providerProfile',
       // authenticate: false // for now
+      cache: false,
       views: {
         'nav-view': {
           templateUrl: 'app/providerView/provider.template.html',

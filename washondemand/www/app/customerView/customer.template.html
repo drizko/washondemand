@@ -1,7 +1,7 @@
-<ion-view title="Customer View" ng-controller="customerCtrl">
+<ion-view title="Customer View">
   <ion-content overflow-scroll="true" class="customer-view">
     <div class="map-view" data-tap-disabled="true">
-      <ng-map center="[34.019454, -118.491191]" zoom="12" style="height:550px;">
+      <ng-map center="[{{customerCtrl.locData.lat}}, {{customerCtrl.locData.lng}}]" zoom="12" style="height:550px;">
         <marker position="[34.019454, -118.491191]"></marker>
         <marker position="[34.0337023, -118.4552549]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
       </ng-map>
