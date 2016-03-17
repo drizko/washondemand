@@ -1,5 +1,6 @@
 var Customer = require('../models/customerModel.js');
 var Request = require('../models/requestModel.js');
+var Provider = require('../models/providerModel.js');
 var Q = require('q');
 var helpers = require('../utils/helpers')
 var jwt = require('jwt-simple');
@@ -73,15 +74,21 @@ module.exports = {
   },
 
   acceptRequest: function(req, res, next) {
+    var token = req.headers['x-access-token'];
+    var provider = jwt.decode(token, config.tokenSecret);
     var requestId = req.body._id;
     var currDate = Date.now();
 
     Request
       .where({_id: requestId})
       .update({job_accepted: currDate})
-      .then(function(item){
-        console.log(item);
-        res.status(201).send();
+      .then(function(){
+        Provider
+          .where({_id: provider._id})
+          .update({available: false})
+          .then(function(){
+            res.status(201).send();
+          })
       });
   }
 };
