@@ -148,6 +148,7 @@ module.exports = {
     var token = req.headers['x-access-token'];
     var user = jwt.decode(token, config.tokenSecret);
     var findLocation = Q.nbind(Customer.findOne, Customer);
+    var results = [];
     // var customerLocation = req.body.user_location;
 
     // get customer's location from data base
@@ -158,10 +159,13 @@ module.exports = {
       var customerLocation = cust.geolocation;
       // find all providers within 5 miles of customer
       Provider.where("available").equals(true).then(function(washers) {
-        var result = _.filter(washers, function(washer) {
-          return module.exports.distance(customerLocation, washer.geolocation) < 5;
+        console.log(washers);
+        _.each(washers, function(washer) {
+          washer.distance = module.exports.distance(customerLocation, washer.geolocation);
+          results.push(washer);
+          // console.log(results);
         });
-        res.json({result: result});
+        res.json({results: results});
       })
       .fail(function(error) {
         next(error);

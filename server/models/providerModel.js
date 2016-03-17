@@ -17,7 +17,8 @@ var providerSchema = new Schema({
   company_name: String,
   approved: Boolean,
   geolocation: {"lat": Number, "lng": Number},
-  available: Boolean
+  available: Boolean,
+  distance: Number
 });
 
 providerSchema.pre('save', function (next) {
