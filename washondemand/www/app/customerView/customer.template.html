@@ -3,11 +3,14 @@
     <div class="map-view" data-tap-disabled="true">
       <ng-map center="[{{customerCtrl.locData.lat}}, {{customerCtrl.locData.lng}}]" zoom="12" style="height:550px;">
         <marker position="[{{customerCtrl.locData.lat}}, {{customerCtrl.locData.lng}}]"></marker>
+        <!-- change below to a ng-repeat of providers -->
         <marker position="[34.0337023, -118.4552549]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
       </ng-map>
 
     </div>
+
     <p ng-show="!customerCtrl.locData.found">grabbing your location.  please wait</p>
+
     <form class="request" style="width:100%;" ng-show="customerCtrl.locData.found">
       <div style="padding: 10px 5px 5px 5px;">
         <span>Select Wash Type:</span>

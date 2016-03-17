@@ -4,8 +4,9 @@ angular.module('wod.customerCtrl', [])
 function customerCtrl($scope, NgMap, customerFactory, locFactory) {
   var vm = this;
   vm.request = {
-    vehicleType: 'car',
-    washType: 'basic'
+    vehicleType: '',
+    washType: '',
+    washInfo: {}
   };
   vm.locData = locFactory.locData;
 
@@ -18,16 +19,23 @@ function customerCtrl($scope, NgMap, customerFactory, locFactory) {
   };
   vm.selectWash = function(wash) {
     vm.request.washType = wash;
-    console.log(vm.request.washType);
     if (wash === 'basic') {
       vm.washInfo = customerFactory.data.basic;
+      vm.request.washInfo = vm.washInfo;
     }
     if (wash === 'deluxe') {
       vm.washInfo = customerFactory.data.deluxe;
+      vm.request.washInfo = vm.washInfo;
     }
     if (wash === 'premium') {
       vm.washInfo = customerFactory.data.premium;
+      vm.request.washInfo = vm.washInfo;
     }
   };
-  vm.selectWash('basic');
+
+  var init = function() {
+    vm.selectWash('basic');
+    vm.selectVehicle('car');
+  };
+  init();
 }
