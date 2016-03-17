@@ -21,7 +21,6 @@ function customerCtrl($scope, NgMap, customerFactory, locFactory) {
     });
 
   vm.sendRequest = function() {
-    vm.request.price = vm.washInfo.price;
     customerFactory.sendRequest(vm.request);
   };
   vm.selectVehicle = function(vehicle) {

@@ -1,7 +1,7 @@
 angular.module('wod.customerFactory', [])
 .factory('customerFactory', customerFactory);
 
-function customerFactory($http, $window, $location) {
+function customerFactory($http, $window, $location, locFactory) {
 
   var LOCALURL = 'http://localhost:8000/';
   var AWSURL = 'http://washondemand.us-west-2.elasticbeanstalk.com/';
@@ -11,7 +11,10 @@ function customerFactory($http, $window, $location) {
     return $http({
       method: 'POST',
       url: LOCALURL + 'api/request/create-request',
-      data: details
+      data: {
+        requestInfo: details,
+        locData: locFactory.locData
+      }
     })
     .then(function(results) {
       return results.data;
@@ -22,7 +25,7 @@ function customerFactory($http, $window, $location) {
     console.log('Getting available providers!!!!');
     return $http({
       method: 'POST',
-      url: LOCALURL + 'api/customer/get-washers',
+      url: LOCALURL + 'api/provider/get-providers',
       data: userLoc
     })
     .then(function(results) {
