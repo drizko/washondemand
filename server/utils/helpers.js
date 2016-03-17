@@ -40,5 +40,15 @@ module.exports = {
     } catch (error) {
       return next(error);
     }
+  },
+
+  distance: function(userLocation, washerLocation) {
+    var p = 0.017453292519943295;    // Math.PI / 180
+    var c = Math.cos;
+    var a = 0.5 - c((washerLocation.lat - userLocation.lat) * p)/2 +
+    c(userLocation.lat * p) * c(washerLocation.lat * p) *
+    (1 - c((washerLocation.lng - userLocation.lng) * p))/2;
+    // returns distance in miles
+    return Math.round(12742 * Math.asin(Math.sqrt(a))/1.60932*10)/10;
   }
 };

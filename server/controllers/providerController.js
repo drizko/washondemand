@@ -146,44 +146,34 @@ module.exports = {
 
   //********************-REQUEST HANDLER-*******************
 
-  getRequests: function(req, res, next) {
+  sendProviders: function(req, res, next){
+    var token = req.headers['x-access-token'];
+    var user = jwt.decode(token, config.tokenSecret);
+    var findLocation = Q.nbind(Customer.findOne, Customer);
     var results = [];
-    var providerLocation = req.body.provider_location;
+    // var customerLocation = req.body.user_location;
 
-    Request.where('job_accepted').equals('')
-      .then(function(requests) {
-        _.each(requests, function(request) {
-          // request.distance = module.exports.distance(providerLocation, request.user_location);
-          request.distance = 3.1;
-          //if(request.distance < 5) {
-            results.push(request);
-          // }
+    // get customer's location from data base
+    findLocation({email: user.email}).then(function(cust) {
+      if(!cust) {
+        res.status(401).send();
+      }
+      var customerLocation = cust.geolocation;
+      // find all providers within 5 miles of customer
+      Provider.where("available").equals(true).then(function(washers) {
+        console.log(washers);
+        _.each(washers, function(washer) {
+          washer.distance = helpers.distance(customerLocation, washer.geolocation);
+          if(washer.distance < 5) {
+            results.push(washer);
+          }
+          // console.log(results);
         });
         res.json({results: results});
-      });
-  },
-
-  acceptRequest: function(req, res, next) {
-    var requestId = req.body._id;
-    var currDate = Date.now();
-
-    Request
-      .where({_id: requestId})
-      .update({job_accepted: currDate})
-      .then(function(item){
-        console.log(item);
-        res.status(201).send();
-      });
-
-  },
-
-  distance: function(userLocation, washerLocation) {
-    var p = 0.017453292519943295;    // Math.PI / 180
-    var c = Math.cos;
-    var a = 0.5 - c((washerLocation.lat - userLocation.lat) * p)/2 +
-    c(userLocation.lat * p) * c(washerLocation.lat * p) *
-    (1 - c((washerLocation.lng - userLocation.lng) * p))/2;
-    // returns distance in miles
-    return Math.round(12742 * Math.asin(Math.sqrt(a))/1.60932*10)/10;
+      })
+      .fail(function(error) {
+        next(error);
+      })
+    })
   }
 };

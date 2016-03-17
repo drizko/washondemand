@@ -12,42 +12,73 @@ if(process.env.SALT_FACTOR === undefined){
   var config = process.env
 }
 
-var methods = {
-  makeRequest: function(req, res, next){
+module.exports = {
+
+  createRequest: function(req, res, next){
     var token = req.headers['x-access-token'];
     var user = jwt.decode(token, config.tokenSecret);
-
+    // var findLocation = Q.nbind(Customer.findOne, Customer);
     var findRequest = Q.nbind(Request.findOne, Request);
     var create = Q.nbind(Request.create, Request);
+    console.log("PRICE:", req.body.price);
 
-    findRequest({user_email: user.email})
-      .then(function(request){
-        if(request){
-          res.sendStatus(401);
-        } else {
-          var washRequest = {
-            user_phone: user.phone_number,
-            user_location: user.location,
-            user_firstname: user.firstname,
-            user_email: user.email,
-            vehicle_type: req.body.vehicleType,
-            wash_type: req.body.washType,
-            request_filled: '',
-            job_accepted: '',
-            job_started: '',
-            job_ended: '',
-            cost: req.body.cost
-          };
-          create(washRequest)
-            .then(function(){
-              res.sendStatus(201);
-            })
-        }
+    var newRequest = {
+      user_location : {
+        lat: req.body.locData.lat,
+        lng: req.body.locData.lng
+      },
+      user_firstname: user.firstname,
+      user_email: user.email,
+      user_phone: user.phone_number,
+      wash_type: req.body.requestInfo.washType,
+      vehicle_type: req.body.requestInfo.vehicleType,
+      request_filled: "",
+      job_accepted: "",
+      job_started: "",
+      job_ended: "",
+      cost: req.body.requestInfo.washInfo.price
+    }
+    // send a new wash request
+    findRequest({user_email: user.email}).then(function(request) {
+      if(request) {
+        res.status(401).send();
+      }
+      create(newRequest).then(function(){
+        res.status(200).send();
       })
-      .fail(function(err){
-        next(err);
-      })
+    })
+    .fail(function(error) {
+      next(error);
+    })
+  },
+
+  getRequests: function(req, res, next) {
+    var results = [];
+    var providerLocation = req.body.provider_location;
+
+    Request.where('job_accepted').equals('')
+      .then(function(requests) {
+        _.each(requests, function(request) {
+          // request.distance = helpers.distance(providerLocation, request.user_location);
+          request.distance = 3.1;
+          //if(request.distance < 5) {
+            results.push(request);
+          // }
+        });
+        res.json({results: results});
+      });
+  },
+
+  acceptRequest: function(req, res, next) {
+    var requestId = req.body._id;
+    var currDate = Date.now();
+
+    Request
+      .where({_id: requestId})
+      .update({job_accepted: currDate})
+      .then(function(item){
+        console.log(item);
+        res.status(201).send();
+      });
   }
 };
-
-module.exports = methods
