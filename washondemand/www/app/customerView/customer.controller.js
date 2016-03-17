@@ -2,13 +2,23 @@ angular.module('wod.customerCtrl', [])
 .controller('customerCtrl', customerCtrl);
 
 function customerCtrl($scope, NgMap, customerFactory, locFactory) {
+
   var vm = this;
+
   vm.request = {
     vehicleType: '',
     washType: '',
     washInfo: {}
   };
+
   vm.locData = locFactory.locData;
+
+  customerFactory.getProviders(locFactory.locData)
+    .then(function(data) {
+      console.log('inside controller getRequest');
+      console.log(data.results);
+      vm.washers = data.results;
+    });
 
   vm.sendRequest = function() {
     vm.request.price = vm.washInfo.price;

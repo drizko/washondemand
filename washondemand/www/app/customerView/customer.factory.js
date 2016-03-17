@@ -22,10 +22,11 @@ function customerFactory($http, $window, $location) {
     console.log('Getting available providers!!!!');
     return $http({
       method: 'POST',
-      url: LOCALURL + 'api/request/get-providers',
+      url: LOCALURL + 'api/customer/get-washers',
       data: userLoc
     })
     .then(function(results) {
+      console.log(results);
       return results.data;
     });
   };
@@ -85,6 +86,7 @@ function customerFactory($http, $window, $location) {
 
   return {
     sendRequest: sendRequest,
+    getProviders: getProviders,
     data: data
   };
 }

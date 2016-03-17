@@ -3,8 +3,7 @@
     <div class="map-view" data-tap-disabled="true">
       <ng-map center="[{{customerCtrl.locData.lat}}, {{customerCtrl.locData.lng}}]" zoom="12" style="height:550px;">
         <marker position="[{{customerCtrl.locData.lat}}, {{customerCtrl.locData.lng}}]"></marker>
-        <!-- change below to a ng-repeat of providers -->
-        <marker position="[34.0337023, -118.4552549]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
+        <marker ng-repeat="position in customerCtrl.washers" position="[{{position.geolocation.lat}}, {{position.geolocation.lng}}]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
       </ng-map>
 
     </div>
@@ -36,7 +35,7 @@
       </div>
       <div class="wash-detail" ng-if="customerCtrl.washInfo.price > 0">
         <div class="row">
-          <div class="col">Price: {{customerCtrl.washInfo.price}}</div>
+          <div class="col">Price: ${{customerCtrl.washInfo.price}}</div>
         </div>
         <div class="row">
           <div class="col">
