@@ -6,6 +6,6 @@ module.exports = function(app) {
 	app.post('/signup', customerController.signup);
 	app.post('/get-washers', customerController.getWashers);
 	app.post('/request-wash', customerController.requestWash);
-	app.post('/updateLocation', customerController.updateLocation);
+	app.post('/update-location', customerController.updateLocation);
 	// app.get('/', customerController.checkAuth);
 };

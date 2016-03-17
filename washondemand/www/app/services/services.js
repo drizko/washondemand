@@ -46,7 +46,7 @@ function locFactory($window, $q, $http) {
 
     return $http({
       method: 'POST',
-      url: LOCALURL + 'api/' + locData.userType + '/updateLocation',
+      url: LOCALURL + 'api/' + locData.userType + '/update-location',
       data: locData
     })
     .then(function(results) {
