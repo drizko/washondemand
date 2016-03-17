@@ -130,7 +130,7 @@ module.exports = {
 
     // Upsert updates instead of adding a new entry
     var options = {
-      upsert: true,
+      upsert: false,
       new: true
     };
 
@@ -145,30 +145,68 @@ module.exports = {
 //**********************-WASHER METHODS-*********************
 
   getWashers: function(req, res, next){
+    var token = req.headers['x-access-token'];
+    var user = jwt.decode(token, config.tokenSecret);
+    var findLocation = Q.nbind(Customer.findOne, Customer);
+    // var customerLocation = req.body.user_location;
 
-    var customerLocation = req.body.user_location;
-
-    Provider.where("available").equals(true).then(function(washers) {
-      var result = _.filter(washers, function(washer) {
-        return module.exports.distance(customerLocation, washer.geolocation) < 5;
-      });
-      res.json({result: result});
+    // get customer's location from data base
+    findLocation({email: user.email}).then(function(cust) {
+      if(!cust) {
+        res.status(401).send();
+      }
+      var customerLocation = cust.geolocation;
+      // find all providers within 5 miles of customer
+      Provider.where("available").equals(true).then(function(washers) {
+        var result = _.filter(washers, function(washer) {
+          return module.exports.distance(customerLocation, washer.geolocation) < 5;
+        });
+        res.json({result: result});
+      })
+      .fail(function(error) {
+        next(error);
+      })
     })
   },
 
   requestWash: function(req, res, next){
+    var token = req.headers['x-access-token'];
+    var user = jwt.decode(token, config.tokenSecret);
+    var findLocation = Q.nbind(Customer.findOne, Customer);
+    var findRequest = Q.nbind(Request.findOne, Request);
+    var create = Q.nbind(Request.create, Request);
 
     var newRequest = {
-      user_location: req.body.user_location,
-      user_email: req.body.user_email,
-      job_started: false
+      user_location : user.userLocation,
+      user_firstname: user.firstname,
+      user_email: user.email,
+      user_phone: user.phone_number,
+      wash_type: req.body.washType,
+      vehicle_type: req.body.vehicleType,
+      request_filled: "",
+      job_accepted: "",
+      job_started: "",
+      job_ended: "",
+      cost: req.body.price
     }
-    var create = Q.nbind(Request.create, Request);
-    create(newRequest).then(function(){
-      res.status(200).send();
-    })
-    .fail(function(error) {
-      next(error);
+    // get customer's location from data base
+    findLocation({email: user.email}).then(function(cust) {
+      if(!cust){
+        res.status(401).send();
+      }
+      newRequest.user_location = cust.geolocation;
+      // send a new wash request
+      findRequest({user_email: user.email}).then(function(request) {
+        if(request) {
+          res.status(401).send();
+        }
+        create(newRequest).then(function(){
+          res.status(200).send();
+        })
+      })
+      .fail(function(error) {
+        next(error);
+      })
     })
   },
 

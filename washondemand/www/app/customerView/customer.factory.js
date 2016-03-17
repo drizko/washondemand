@@ -7,7 +7,7 @@ function customerFactory($http, $window, $location) {
     console.log('From customerFactory!!!!!!!!!!!!!');
     return $http({
       method: 'POST',
-      url: 'http://washondemand.us-west-2.elasticbeanstalk.com/api/request/create-request',
+      url: 'http://localhost:8000/api/customer/request-wash',
       data: details
     })
     .then(function(results) {

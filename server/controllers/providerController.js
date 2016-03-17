@@ -131,7 +131,7 @@ module.exports = {
 
     // Upsert updates instead of adding a new entry
     var options = {
-      upsert: true,
+      upsert: false,
       new: true
     };
 
