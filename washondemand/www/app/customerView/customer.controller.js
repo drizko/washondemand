@@ -3,6 +3,8 @@ angular.module('wod.customerCtrl', [])
 
 function customerCtrl($scope, NgMap, customerFactory, locFactory) {
 
+  console.log('test');
+
   var vm = this;
 
   vm.request = {
