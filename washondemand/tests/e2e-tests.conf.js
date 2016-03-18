@@ -1,3 +1,11 @@
+/*
+  install:
+    npm install -g protractor
+    webdriver-manager update
+  running the tests:
+    protractor filepath/e2e-tests.conf.js
+*/
+
 exports.config = {
   capabilities: {
     'browserName': 'chrome',
