@@ -21,7 +21,7 @@ module.exports = {
     // var findLocation = Q.nbind(Customer.findOne, Customer);
     var findRequest = Q.nbind(Request.findOne, Request);
     var create = Q.nbind(Request.create, Request);
-    console.log("PRICE:", req.body.price);
+    console.log("PRICE:", req.body.requestInfo.washInfo.price);
 
     var newRequest = {
       user_location : {
@@ -38,7 +38,7 @@ module.exports = {
       job_started: "",
       job_ended: "",
       cost: req.body.requestInfo.washInfo.price,
-      distance: ""
+      distance: "",
     }
     // send a new wash request
     findRequest({user_email: user.email}).then(function(request) {
@@ -78,11 +78,15 @@ module.exports = {
     var provider = jwt.decode(token, config.tokenSecret);
     var requestId = req.body._id;
     var currDate = Date.now();
-
+    console.log(provider);
     Request
       .where({_id: requestId})
-      .update({job_accepted: currDate})
-      .then(function(){
+      .update({
+        job_accepted: currDate,
+        provider: provider.company_name,
+        provider_email: provider.email
+      })
+      .then(function(request){
         Provider
           .where({_id: provider._id})
           .update({available: false})
