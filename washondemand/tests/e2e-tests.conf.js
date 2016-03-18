@@ -2,7 +2,11 @@
   install:
     npm install -g protractor
     webdriver-manager update
+    brew update
+    brew cask install java
   running the tests:
+    make sure node server is running
+    make sure ionic server is running
     protractor filepath/e2e-tests.conf.js
 */
 
