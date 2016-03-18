@@ -14,7 +14,9 @@ var requestSchema = new Schema({
   job_started: String,
   job_ended: String,
   cost: Number,
-  distance: Number
+  distance: Number,
+  provider: String,
+  provider_email: String
 });
 
 var Request = mongoose.model('Request', requestSchema);
