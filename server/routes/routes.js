@@ -22,6 +22,7 @@ module.exports = function(app, express) {
   var customerRouter = express.Router();
   var providerRouter = express.Router();
   var requestRouter = express.Router();
+  var historyRouter = express.Router();
 
   //
 
