@@ -5,23 +5,25 @@ var app = require('../server.js');
 var helpers = require('../utils/helpers.js');
 var methodOverride  = require('method-override');
 var favicon = require('serve-favicon');
-
-var allowCrossDomain = function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type,Allow-Control-Allow-Origin,x-access-token');
-  next();
-};
+var cors = require('cors');
 
 module.exports = function(app, express) {
+  corsOptions = {
+    "origin": 'http://localhost:8100',
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    "credentials": true
+  }
+
+  app.use(cors(corsOptions));
+  app.use(methodOverride());
+
   // Define Routes by using the template below:
   var customerRouter = express.Router();
   var providerRouter = express.Router();
   var requestRouter = express.Router();
 
   //
-  app.use(methodOverride());
-  app.use(allowCrossDomain);
 
   app.use(morgan('dev'));
   app.use(bodyParser.urlencoded({extended: true}));
