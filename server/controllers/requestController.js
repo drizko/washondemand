@@ -111,8 +111,39 @@ module.exports = {
       });
   },
 
+  jobStarted: function(req, res, next){
+    var token = req.headers['x-access-token'];
+    var provider = jwt.decode(token, config.tokenSecret);
+    var jobId = req.body._id;
+    var currDate = Date.now();
+
+    Request
+      .where({_id: jobId})
+      .update({job_started: currDate})
+      .then(function(){
+        res.status(200).send();
+      })
+    .fail(function(error){
+      next(error);
+    })
+  }
+
   jobDone: function(req, res, next) {
-    
+    var token = req.headers['x-access-token'];
+    var provider = jwt.decode(token, config.tokenSecret);
+    var jobId = req.body._id;
+    var currDate = Date.now();
+
+    Request
+      .where({_id: jobId})
+      .update({job_ended: currDate})
+      .then(function() {
+        historyController.moveToHistory(jobId);
+        res.status(200).send();
+      })
+    .fail(function(error){
+      next(error);
+    })
   }
 };
 

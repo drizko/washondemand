@@ -4,8 +4,7 @@ var Schema = mongoose.Schema;
 var historySchema = new Schema ({
 	user_location: {"lat": Number, "lng": Number},
 	user_firstname: String,
-	user_email: String,
-	provider_email: String,
+	user_email: {type: String, unique: true, required: true},
 	user_phone: Number,
 	number_of_vehicles: Number,
 	wash_type: String,
@@ -15,7 +14,9 @@ var historySchema = new Schema ({
 	job_started: String,
 	job_ended: String,
 	cost: Number,
-	distance: Number
+	distance: Number,
+	provider: String,
+	provider_email: String
 });
 
 var History = mongoose.model("History", historySchema);
