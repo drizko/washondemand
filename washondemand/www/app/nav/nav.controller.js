@@ -1,7 +1,14 @@
 angular.module('wod.nav', []).controller('navCtrl', navCtrl);
 
-function navCtrl($scope, $ionicHistory, $state, authFactory) {
+function navCtrl($scope, $ionicHistory, $state, authFactory, locFactory) {
   var vm = this;
+
+  vm.availability;
+
+  vm.updateAvailability = function() {
+    console.log('inside navCtrl', vm.availability);
+    locFactory.updateAvailability(vm.availability);
+  }
 
   vm.providerLogout = function() {
     authFactory.signout();
