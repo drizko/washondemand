@@ -6,4 +6,5 @@ module.exports = function(app) {
   app.post('/create-request', requestController.createRequest);
   app.post('/get-requests', requestController.getRequests);
   app.post('/accept-request', requestController.acceptRequest);
+  app.post('/get-current', requestController.getCurrent);
 };

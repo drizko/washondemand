@@ -50,6 +50,16 @@ angular.module('wod.routes', [])
         }
       }
     })
+    .state('customernav.customerWashes', {
+      url: '/customerWashes',
+      cache: false,
+      views: {
+        'nav-view': {
+          templateUrl: 'app/washHistory/washHistory.template.html',
+          controller: 'washHistCtrl as washHistCtrl'
+        }
+      }
+    })
 		.state('customerSignin', {
       url: '/customerSignin',
       templateUrl: 'app/auth/customerAuth/signin.html',
