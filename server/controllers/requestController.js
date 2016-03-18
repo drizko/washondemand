@@ -90,5 +90,18 @@ module.exports = {
             res.status(201).send();
           })
       });
+  },
+
+  getCurrent: function(req, res, next) {
+    console.log(req.body);
+    var email = req.body.email;
+
+    Request
+      .where({user_email: email})
+      .then(function(request) {
+        if(request.job_accepted !== '') {
+          res.json({results: request});
+        }
+      });
   }
 };
