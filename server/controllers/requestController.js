@@ -1,6 +1,7 @@
 var Customer = require('../models/customerModel.js');
 var Request = require('../models/requestModel.js');
 var Provider = require('../models/providerModel.js');
+var History = require('./historyController.js');
 var Q = require('q');
 var helpers = require('../utils/helpers')
 var jwt = require('jwt-simple');
@@ -79,6 +80,7 @@ module.exports = {
     var requestId = req.body._id;
     var currDate = Date.now();
     console.log(provider);
+
     Request
       .where({_id: requestId})
       .update({
@@ -107,5 +109,13 @@ module.exports = {
           res.json({results: request});
         }
       });
+  },
+
+  jobDone: function(req, res, next) {
+    
   }
 };
+
+
+
+
