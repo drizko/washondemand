@@ -17,7 +17,8 @@ function locFactory($window, $q, $http) {
     locData: locData,
     getLoc: getLoc,
     sendLocToServer: sendLocToServer,
-    resetLocData: resetLocData
+    resetLocData: resetLocData,
+    updateAvailability: updateAvailability
   };
 
   function getLoc(userType, email) {
@@ -51,6 +52,21 @@ function locFactory($window, $q, $http) {
     })
     .then(function(results) {
       //console.log(locData);
+    });
+  }
+
+  function updateAvailability(availability) {
+    var data = {
+      availability: availability,
+      locData: locData
+    };
+
+    return $http({
+      method: 'POST',
+      url: LOCALURL + 'api/provider/update-availability',
+      data: data
+    }).then(function(results) {
+
     });
   }
 

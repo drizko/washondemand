@@ -112,7 +112,28 @@ module.exports = {
     }
   },
 
-//**********************-LOCATION METHOD-********************
+  //********************-AVAILABILITY METHOD-******************
+  updateAvailability: function(req, res, next) {
+    console.log(req.body);
+    var options = {
+      upsert: false,
+      new: true
+    };
+
+    Provider.findOneAndUpdate({email: req.body.locData.email},
+      {$set: {available: req.body.availability}},
+      {upsert: false}, function(err, doc) {
+        if (err) {
+          throw err;
+        }
+        res.json(doc);
+      }
+    );
+    // var availability = req.body.availability;
+
+  },
+
+  //**********************-LOCATION METHOD-********************
   updateLocation: function(req, res, next) {
     var userType = req.body.userType;
     var lat = req.body.lat;
