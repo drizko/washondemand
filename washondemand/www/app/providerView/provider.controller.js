@@ -1,21 +1,31 @@
 angular.module('wod.providerCtrl', []).controller('providerCtrl', providerCtrl);
 
-function providerCtrl($scope, providerFactory, locFactory) {
+function providerCtrl($scope, socket, providerFactory, locFactory) {
   var vm = this;
   vm.request = {data: []};
   vm.locData = locFactory.locData;
 
+  socket.on('refreshList', function(data) {
+    for(var i = 0; i < vm.requests.length; i++){
+      if(vm.requests[i]._id === data._id){
+        vm.requests[i].accepted = true;
+      }
+    }
+  });
+
   vm.getRequests = function() {
     providerFactory.getRequest(locFactory.locData)
       .then(function(data) {
-        console.log('inside controller getRequest');
-        console.log(data.results)
+        data.results.forEach(function(item){
+          item.accepted = false;
+        })
         vm.requests = data.results;
       });
   };
 
   vm.acceptWash = function(request) {
-    console.log(request);
+    request.accepted = true;
+    socket.emit('accepted', request);
     providerFactory.acceptRequest(request);
   };
 };
