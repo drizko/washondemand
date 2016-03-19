@@ -116,7 +116,8 @@ module.exports = {
     var provider = jwt.decode(token, config.tokenSecret);
     var jobId = req.body._id;
     var currDate = Date.now();
-
+    console.log("+++INSIDE JOBSTARTED PROV: ", provider);
+    console.log("+++INSIDE JOBSTARTED BODY: ", req.body);
     Request
       .where({_id: jobId})
       .update({job_started: currDate})
@@ -126,24 +127,26 @@ module.exports = {
     .fail(function(error){
       next(error);
     })
-  }
+  },
 
   jobDone: function(req, res, next) {
-    var token = req.headers['x-access-token'];
-    var provider = jwt.decode(token, config.tokenSecret);
+    // var token = req.headers['x-access-token'];
+    // var provider = jwt.decode(token, config.tokenSecret);
     var jobId = req.body._id;
     var currDate = Date.now();
-
+    // console.log("+++INSIDE JOBDONE PROV: ", provider);
+    console.log("+++INSIDE JOBDONE BODY: ", req.body);
+    console.log("+++INSIDE JOBDONE JOBID: ", jobId);
     Request
       .where({_id: jobId})
       .update({job_ended: currDate})
       .then(function() {
-        historyController.moveToHistory(jobId);
         res.status(200).send();
       })
-    .fail(function(error){
-      next(error);
-    })
+      History.moveToHistory(jobId);
+    // .fail(function(error){
+    //   next(error);
+    // })
   }
 };
 
