@@ -1,7 +1,9 @@
 <!-- provSICtrl as psi -->
 <ion-view>
-  <ion-content>
-    <p>Provider Sign In</p>
+  <div class="bar bar-header bar-stable">
+    <h1 class="title">Provider Sign In</h1>
+  </div>
+  <ion-content class="has-header">
     <form class="list list-inset" ng-submit='psi.signin()'>
       <label class="item item-input">
         <input type='email' placeholder="email" ng-model='psi.provider.email'>

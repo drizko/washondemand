@@ -1,7 +1,9 @@
 <!-- provSUCtrl as psu -->
 <ion-view>
-  <ion-content>
-    <p>Provider Sign Up</p>
+  <div class="bar bar-header bar-stable">
+    <h1 class="title">Provider Sign Up</h1>
+  </div>
+  <ion-content class="has-header">
     <form class="list list-inset" ng-submit='psu.signup()'>
       <label class="item item-input">
         <input type='text' placeholder="company name" ng-model='psu.provider.companyName'>
