@@ -1,6 +1,7 @@
 <!-- provSUCtrl as psu -->
 <ion-view>
   <div class="bar bar-header bar-stable">
+    <a ui-sref="home" class="button button-outline button-dark button-icon">Back</a>
     <h1 class="title">Provider Sign Up</h1>
   </div>
   <ion-content class="has-header">
@@ -21,7 +22,7 @@
         <input type="password" placeholder="confirm password" ng-model='psu.provider.confirmPassword'>
       </label>
       <p ng-show='psu.provider.error'>{{psu.provider.error}}</p>
-      <button class="button button-full button-positive">Sign Up</button>
+      <button class="button button-full button-calm">Sign Up</button>
     </form>
     <p>Already have an account?  <a href="#/providerSignin">Sign in here!</a></p>
   </ion-content>

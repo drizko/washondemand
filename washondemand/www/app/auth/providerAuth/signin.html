@@ -1,6 +1,7 @@
 <!-- provSICtrl as psi -->
 <ion-view>
   <div class="bar bar-header bar-stable">
+    <a ui-sref="home" class="button button-outline button-dark button-icon">Back</a>
     <h1 class="title">Provider Sign In</h1>
   </div>
   <ion-content class="has-header">
@@ -12,7 +13,7 @@
         <input type="password" placeholder="password" ng-model='psi.provider.password'>
       </label>
       <p ng-show='psi.provider.error'>{{psi.provider.error}}</p>
-      <button class="button button-full button-positive">Sign In</button>
+      <button class="button button-full button-calm">Sign In</button>
     </form>
     <p>Need an account?  <a href="#/providerSignup">Create one here!</a></p>
   </ion-content>

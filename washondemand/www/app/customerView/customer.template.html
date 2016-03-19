@@ -10,7 +10,7 @@
     <p ng-show="!customerCtrl.locData.found">grabbing your location.  please wait</p>
 
     <form class="request" ng-show="customerCtrl.locData.found">
-      <div class="vehicle-types">
+      <div class="btn-margin">
         <span>Select Vehicle Type:</span>
         <div class="button-bar">
           <button class="button button-outline button-positive" ng-click="customerCtrl.selectVehicle('car');" ng-class="{'active': customerCtrl.request.vehicleType === 'car'}">Car</button>
@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div class="wash-types">
+      <div class="btn-margin">
         <span>Select Wash Type:</span>
         <div class="button-bar">
             <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('basic')" ng-class="{'active': customerCtrl.request.washType === 'basic'}">Basic</button>
@@ -41,7 +41,7 @@
           </div>
         </div>
       </div>
-      <div class="request-button">
+      <div class="btn-margin">
         <button class="button button-block button-positive button-outline" ng-if="customerCtrl.showRequestButton()" ng-click="customerCtrl.sendRequest()">Request A Wash</button>
         <button class="button button-block button-stable button-outline disabled" ng-if="!customerCtrl.showRequestButton()">Select a vehicle and wash type</button>
       </div>

@@ -1,10 +1,30 @@
 <ion-view title="Home">
-  <ion-content overflow-scroll="true" class="home-view">
-    <p>HOME</p>
-    <a href="#/customerSignin">customer signin</a>
-    <a href="#/customerSignup">customer signup</a>
-    <a href="#/providerSignin">provider signin</a>
-    <a href="#/providerSignup">provider signup</a>
-    <a ng-click="home.logoutTest()">LOGOUT TEST</a>
+  <div class="bar bar-header bar-stable">
+    <h1 class="title">Home</h1>
+  </div>
+  <ion-content overflow-scroll="true" class="home-view has-header">
+
+    <br>
+
+    <div class="btn-margin">
+      <div class="button-bar">
+        <button ui-sref="customerSignin" class="button button-positive">customer signin</button>
+        <button ui-sref="customerSignup" class="button button-positive button-outline">customer signup</button>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="btn-margin">
+      <div class="button-bar">
+        <button ui-sref="providerSignin" class="button button-calm">provider signin</button>
+        <button ui-sref="providerSignup" class="button button-calm button-outline">provider signup</button>
+      </div>
+    </div>
+
+    <br>
+
+    <button ng-click="home.logoutTest()">LOGOUT TEST</button>
+
   </ion-content>
 </ion-view>

@@ -11,17 +11,7 @@ ng-map {
   height: 40%;
 }
 
-.vehicle-types {
-  margin-left: 5px;
-  margin-right: 5px;
-}
-
-.wash-types {
-  margin-left: 5px;
-  margin-right: 5px;
-}
-
-.request-button {
+.btn-margin {
   margin-left: 5px;
   margin-right: 5px;
 }
