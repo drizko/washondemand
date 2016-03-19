@@ -22,6 +22,7 @@ module.exports = function(app, express) {
   var customerRouter = express.Router();
   var providerRouter = express.Router();
   var requestRouter = express.Router();
+  var historyRouter = express.Router();
 
   //
 
@@ -36,9 +37,11 @@ module.exports = function(app, express) {
   app.use('/api/customer', customerRouter);
   app.use('/api/provider', providerRouter);
   app.use('/api/request', requestRouter);
+  app.use('/api/history', historyRouter);
 
   // inject our routers into their respective route files
   require('./customerRoutes.js')(customerRouter);
   require('./providerRoutes.js')(providerRouter);
   require('./requestRoutes.js')(requestRouter);
+  require('./historyRoutes.js')(historyRouter);
 };

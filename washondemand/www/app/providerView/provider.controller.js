@@ -28,4 +28,13 @@ function providerCtrl($scope, socket, providerFactory, locFactory) {
     socket.emit('accepted', request);
     providerFactory.acceptRequest(request);
   };
+
+  vm.jobStarted = function(request) {
+    console.log("+++INSIDE JOBSTARTED CTRL: ", request)
+  }
+
+  vm.jobDone = function(request) {
+    console.log("+++INSIDE JOBDONE CTRL: ", request);
+    providerFactory.jobFinished(request);
+  }
 };

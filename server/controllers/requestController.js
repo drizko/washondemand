@@ -1,6 +1,7 @@
 var Customer = require('../models/customerModel.js');
 var Request = require('../models/requestModel.js');
 var Provider = require('../models/providerModel.js');
+var History = require('./historyController.js');
 var Q = require('q');
 var helpers = require('../utils/helpers')
 var jwt = require('jwt-simple');
@@ -79,6 +80,7 @@ module.exports = {
     var requestId = req.body._id;
     var currDate = Date.now();
     console.log(provider);
+
     Request
       .where({_id: requestId})
       .update({
@@ -107,5 +109,47 @@ module.exports = {
           res.json({results: request});
         }
       });
+  },
+
+  jobStarted: function(req, res, next){
+    var token = req.headers['x-access-token'];
+    var provider = jwt.decode(token, config.tokenSecret);
+    var jobId = req.body._id;
+    var currDate = Date.now();
+    console.log("+++INSIDE JOBSTARTED PROV: ", provider);
+    console.log("+++INSIDE JOBSTARTED BODY: ", req.body);
+    Request
+      .where({_id: jobId})
+      .update({job_started: currDate})
+      .then(function(){
+        res.status(200).send();
+      })
+    .fail(function(error){
+      next(error);
+    })
+  },
+
+  jobDone: function(req, res, next) {
+    var token = req.headers['x-access-token'];
+    var provider = jwt.decode(token, config.tokenSecret);
+    var jobId = req.body._id;
+    var currDate = Date.now();
+    console.log("+++INSIDE JOBDONE PROV: ", provider);
+    console.log("+++INSIDE JOBDONE BODY: ", req.body);
+    console.log("+++INSIDE JOBDONE JOBID: ", jobId);
+    Request
+      .where({_id: jobId})
+      .update({job_ended: currDate})
+      .then(function() {
+        res.status(200).send();
+      })
+      History.moveToHistory(jobId);
+    // .fail(function(error){
+    //   next(error);
+    // })
   }
 };
+
+
+
+
