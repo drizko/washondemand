@@ -13,7 +13,8 @@ angular.module('WashOnDemand', [
 	'wod.home',
 	'wod.nav',
 	'ngMap',
-  'ion-sticky'
+  'ion-sticky',
+  'angular-jwt'
 ])
 
 .run(function($ionicPlatform) {
