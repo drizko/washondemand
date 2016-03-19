@@ -22,14 +22,12 @@ function customerFactory($http, $window, $location, locFactory) {
   };
 
   function getProviders() {
-    console.log('factory start');
     return $http({
       method: 'POST',
       url: LOCALURL + 'api/provider/get-providers',
       data: locFactory.locData
     })
     .then(function(results) {
-      console.log('factory end');
       return results.data;
     });
   };

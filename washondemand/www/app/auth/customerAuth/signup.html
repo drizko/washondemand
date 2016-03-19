@@ -1,7 +1,10 @@
 <!-- custSUCtrl as csu -->
 <ion-view>
-  <ion-content>
-    <p>Customer Sign Up</p>
+  <div class="bar bar-header bar-stable">
+    <a ui-sref="home" class="button button-outline button-dark button-icon">Back</a>
+    <h1 class="title">Customer Sign Up</h1>
+  </div>
+  <ion-content class="has-header">
     <form class="list list-inset" ng-submit='csu.signup()'>
       <label class="item item-input">
         <input type='text' placeholder="first name" ng-model='csu.customer.firstName'>

@@ -11,14 +11,9 @@ ng-map {
   height: 40%;
 }
 
-.button {
-  min-height: 30px;
-  line-height: 30px;
-}
-
-.button:hover {
-  background-color:gray;
-  color: #fff;
+.btn-margin {
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .wash-detail {
@@ -43,34 +38,6 @@ ng-map {
   border-radius: 4px;
   margin: 5px;
   padding: 10px;
-}
-
-.cust-button-list {
-  width: 100%;
-  display: box;
-  display: -moz-box;
-  display: -webkit-box;
-}
-
-.cust-button {
-  -moz-box-flex: 1;
-  -webkit-box-flex: 1;
-  box-flex: 1;
-  margin: 5px;
-}
-
-.cust-button input {
-  margin: 0px 10px 10px 10px;
-}
-
-.request-button {
-  text-align: center;
-}
-
-.request-button button {
-  background: blue;
-  color: white;
-  margin: 15px 0 30px;
 }
 
 .gmnoprint {

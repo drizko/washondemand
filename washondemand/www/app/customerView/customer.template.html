@@ -5,49 +5,45 @@
         <marker position="[{{customerCtrl.locData.lat}}, {{customerCtrl.locData.lng}}]"></marker>
         <marker ng-repeat="washer in customerCtrl.washers" position="[{{washer.geolocation.lat}}, {{washer.geolocation.lng}}]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
       </ng-map>
-
     </div>
 
     <p ng-show="!customerCtrl.locData.found">grabbing your location.  please wait</p>
 
-    <form class="request" style="width:100%;" ng-show="customerCtrl.locData.found">
-      <div style="padding: 10px 5px 5px 5px;">
-        <span>Select Wash Type:</span>
-      </div>
-      <div class="wash-type">
-        <ul class="cust-button-list">
-          <li class="cust-button"><button class="button button-wash" style="border:1px solid gray;width:100%;" ng-click="customerCtrl.selectWash('basic')">Basic</button></li>
-          <li class="cust-button"><button class="button button-wash" style="border:1px solid gray;width:100%;" ng-click="customerCtrl.selectWash('deluxe')">Deluxe</button></li>
-          <li class="cust-button"><button class="button button-wash" style="border:1px solid gray;width:100%;" ng-click="customerCtrl.selectWash('premium')">Premium</button></li>
-          <!-- <li class="cust-button"><button class="button button-wash" style="border:1px solid gray;width:100%;" ng-click="customerCtrl.selectWash('kaz')">The Kaz</button></li> -->
-        </ul>
-      </div>
-      <div style="padding: 10px 5px 5px 5px;">
+    <form class="request" ng-show="customerCtrl.locData.found">
+      <div class="btn-margin">
         <span>Select Vehicle Type:</span>
+        <div class="button-bar">
+          <button class="button button-outline button-positive" ng-click="customerCtrl.selectVehicle('car');" ng-class="{'active': customerCtrl.request.vehicleType === 'car'}">Car</button>
+          <button class="button button-outline button-positive" ng-click="customerCtrl.selectVehicle('suv');" ng-class="{'active': customerCtrl.request.vehicleType === 'suv'}">Suv/Van</button>
+          <button class="button button-outline button-positive" ng-click="customerCtrl.selectVehicle('motorcycle');"ng-class="{'active': customerCtrl.request.vehicleType === 'motorcycle'}">Motorcycle</button>
+        </div>
       </div>
-      <div class="vehicle-type">
-        <ul class="cust-button-list">
-          <li class="cust-button"><input name="vehicle-select" checked="checked" class="cust-radio" type="radio" ng-click="customerCtrl.selectVehicle('car');">Car</input></li>
-          <li class="cust-button"><input name="vehicle-select" class="cust-radio" type="radio" ng-click="customerCtrl.selectVehicle('suv');">Suv/Van</input></li>
-          <li class="cust-button"><input name="vehicle-select" class="cust-radio" type="radio" ng-click="customerCtrl.selectVehicle('motorcycle');">Motorcycle</input></li>
-        </ul>
 
+      <div class="btn-margin">
+        <span>Select Wash Type:</span>
+        <div class="button-bar">
+            <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('basic')" ng-class="{'active': customerCtrl.request.washType === 'basic'}">Basic</button>
+            <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('deluxe')" ng-class="{'active': customerCtrl.request.washType === 'deluxe'}">Deluxe</button>
+            <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('premium')" ng-class="{'active': customerCtrl.request.washType === 'premium'}">Premium</button>
+        </div>
       </div>
+
       <div class="wash-detail" ng-if="customerCtrl.washInfo.price > 0">
         <div class="row">
           <div class="col">Price: ${{customerCtrl.washInfo.price}}</div>
         </div>
         <div class="row">
           <div class="col">
-            What's incuded:<br>
+            What's included:<br>
             <ul>
               <li ng-repeat="details in customerCtrl.washInfo.info">{{details.info}}</li>
             </ul>
           </div>
         </div>
       </div>
-      <div class="request-button">
-        <button class="button" ng-click="customerCtrl.sendRequest()">Request A Wash</button>
+      <div class="btn-margin">
+        <button class="button button-block button-positive button-outline" ng-if="customerCtrl.showRequestButton()" ng-click="customerCtrl.sendRequest()">Request A Wash</button>
+        <button class="button button-block button-stable button-outline disabled" ng-if="!customerCtrl.showRequestButton()">Select a vehicle and wash type</button>
       </div>
     </form>
   </ion-content>

@@ -18,16 +18,17 @@ function customerCtrl($scope, NgMap, customerFactory, locFactory) {
     customerFactory.getProviders()
     .then(function(data) {
       vm.washers = data.results;
-      console.log(vm.washers);
     });
   };
 
   vm.sendRequest = function() {
     customerFactory.sendRequest(vm.request);
   };
+
   vm.selectVehicle = function(vehicle) {
     vm.request.vehicleType = vehicle;
   };
+
   vm.selectWash = function(wash) {
     vm.request.washType = wash;
     if (wash === 'basic') {
@@ -44,9 +45,11 @@ function customerCtrl($scope, NgMap, customerFactory, locFactory) {
     }
   };
 
+  vm.showRequestButton = function() {
+    return vm.request.vehicleType && vm.request.washType;
+  };
+
   var init = function() {
-    vm.selectWash('basic');
-    vm.selectVehicle('car');
     getProviders();
   };
   init();
