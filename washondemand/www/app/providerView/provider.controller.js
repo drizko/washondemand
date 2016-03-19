@@ -4,6 +4,7 @@ function providerCtrl($scope, socket, providerFactory, $window, locFactory, jwtD
   var vm = this;
   vm.request = {data: []};
   vm.locData = locFactory.locData;
+  vm.requests = [];
 
   //Begin the service
   //hard coded 'target'
