@@ -16,5 +16,9 @@ module.exports = {
 				})
 			})
 		})
+	},
+
+	showHistory: function (req, res, next) {
+		
 	}	
 }
