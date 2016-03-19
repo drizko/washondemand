@@ -3,7 +3,6 @@
     <div class="map-view" data-tap-disabled="true">
       <ng-map center="[{{providerCtrl.locData.lat}}, {{providerCtrl.locData.lng}}]" zoom="12" style="height:550px;">
         <marker position="[{{providerCtrl.locData.lat}}, {{providerCtrl.locData.lng}}]"></marker>
-
         <marker ng-repeat="position in providerCtrl.requests" position="[{{position.user_location.lat}}, {{position.user_location.lng}}]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
       </ng-map>
     </div>
@@ -21,6 +20,7 @@
         <div style="float:right;margin-right:35px;margin-top:29px;">
           <button ng-disabled="request.accepted" ng-click="providerCtrl.acceptWash(request)">Accept Wash</button>
         </div>
+        <button ng-click="providerCtrl.moveMarkers(request)">Move Markers</button>
       </ion-item>
     </ion-list>
   </ion-content>
