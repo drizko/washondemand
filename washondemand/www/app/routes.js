@@ -55,7 +55,17 @@ angular.module('wod.routes', [])
       cache: false,
       views: {
         'nav-view': {
-          templateUrl: 'app/washHistory/washHistory.template.html',
+          templateUrl: 'app/washHistory/custWashHistory.template.html',
+          controller: 'washHistCtrl as washHistCtrl'
+        }
+      }
+    })
+    .state('providernav.providerWashes', {
+      url: '/providerWashes',
+      cache: false,
+      views: {
+        'nav-view': {
+          templateUrl: 'app/washHistory/provWashHistory.template.html',
           controller: 'washHistCtrl as washHistCtrl'
         }
       }
