@@ -130,11 +130,11 @@ module.exports = {
   },
 
   jobDone: function(req, res, next) {
-    // var token = req.headers['x-access-token'];
-    // var provider = jwt.decode(token, config.tokenSecret);
+    var token = req.headers['x-access-token'];
+    var provider = jwt.decode(token, config.tokenSecret);
     var jobId = req.body._id;
     var currDate = Date.now();
-    // console.log("+++INSIDE JOBDONE PROV: ", provider);
+    console.log("+++INSIDE JOBDONE PROV: ", provider);
     console.log("+++INSIDE JOBDONE BODY: ", req.body);
     console.log("+++INSIDE JOBDONE JOBID: ", jobId);
     Request
