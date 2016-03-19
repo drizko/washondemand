@@ -31,18 +31,8 @@ function customerCtrl($scope, NgMap, customerFactory, locFactory) {
 
   vm.selectWash = function(wash) {
     vm.request.washType = wash;
-    if (wash === 'basic') {
-      vm.washInfo = customerFactory.data.basic;
-      vm.request.washInfo = vm.washInfo;
-    }
-    if (wash === 'deluxe') {
-      vm.washInfo = customerFactory.data.deluxe;
-      vm.request.washInfo = vm.washInfo;
-    }
-    if (wash === 'premium') {
-      vm.washInfo = customerFactory.data.premium;
-      vm.request.washInfo = vm.washInfo;
-    }
+    vm.washInfo = customerFactory.data[wash];
+    vm.request.washInfo = vm.washInfo;
   };
 
   vm.showRequestButton = function() {

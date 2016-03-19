@@ -17,23 +17,7 @@ ng-map {
 }
 
 .wash-detail {
-  min-height: 215px;
-  border: 1px solid gray;
-  border-radius: 4px;
-  margin: 5px;
-  padding: 10px;
-}
-
-.wash2-detail {
-  height: 333px;
-  border: 1px solid gray;
-  border-radius: 4px;
-  margin: 5px;
-  padding: 10px;
-}
-
-.wash3-detail {
-  height: 430px;
+  /*min-height: 215px;*/
   border: 1px solid gray;
   border-radius: 4px;
   margin: 5px;
