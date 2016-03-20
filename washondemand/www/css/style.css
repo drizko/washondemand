@@ -27,3 +27,7 @@ ng-map {
 .gmnoprint {
   display:none;
 }
+
+.inactiveOption {
+  color: grey;
+}
