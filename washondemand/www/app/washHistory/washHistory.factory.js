@@ -7,7 +7,8 @@ function washHistFactory($http) {
 
   return {
     getCurrentWash: getCurrentWash,
-    getCustHistory: getCustHistory
+    getCustHistory: getCustHistory,
+    getProvHistory: getProvHistory
   };
 
   function getCurrentWash(data) {
@@ -19,6 +20,14 @@ function washHistFactory($http) {
       return results.data.results;
     });
   };
+
+  function getProvHistory(data) {
+    return $http({
+      method: 'POST',
+      url: LOCALURL + 'api/history/get-prov-history',
+      data: data
+    })
+  }
 
   function getCustHistory(data) {
 

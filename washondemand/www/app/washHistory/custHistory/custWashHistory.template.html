@@ -2,11 +2,11 @@
   <ion-content overflow-scroll="true" class="customer-history">
     <ion-list>
       <ion-item class="item item-divider">Current Requested Wash</ion-item>
-      <ion-item ng-if="washHistCtrl.current">
-        Job Accepted: {{washHistCtrl.current.job_accepted}}<br>
-        Wash Type: {{washHistCtrl.current.wash_type}}<br>
-        Vehicle Type: {{washHistCtrl.current.vehicle_type}}<br>
-        Cost: ${{washHistCtrl.current.cost}}
+      <ion-item ng-if="custWashHistCtrl.current">
+        Job Accepted: {{custWashHistCtrl.current.job_accepted}}<br>
+        Wash Type: {{custWashHistCtrl.current.wash_type}}<br>
+        Vehicle Type: {{custWashHistCtrl.current.vehicle_type}}<br>
+        Cost: ${{custWashHistCtrl.current.cost}}
       </ion-item>
       <!-- <ion-item class="item item-divider">Past Washes</ion-item> -->
     </ion-list>

@@ -1,6 +1,6 @@
-angular.module('wod.washHistCtrl', []).controller('washHistCtrl', washHistCtrl);
+angular.module('wod.custWashHistCtrl', []).controller('custWashHistCtrl', custWashHistCtrl);
 
-function washHistCtrl(washHistFactory, locFactory) {
+function custWashHistCtrl(washHistFactory, locFactory) {
   var vm = this;
 
   washHistFactory.getCurrentWash(locFactory.locData)

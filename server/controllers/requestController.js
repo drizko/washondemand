@@ -3,20 +3,20 @@ var Request = require('../models/requestModel.js');
 var Provider = require('../models/providerModel.js');
 var History = require('./historyController.js');
 var Q = require('q');
-var helpers = require('../utils/helpers')
+var helpers = require('../utils/helpers');
 var jwt = require('jwt-simple');
 var _ = require('lodash');
 var bcrypt = require('bcrypt-nodejs');
 
-if(process.env.SALT_FACTOR === undefined){
+if (process.env.SALT_FACTOR === undefined) {
   var config = require('../config.js');
 } else {
-  var config = process.env
+  var config = process.env;
 }
 
 module.exports = {
 
-  createRequest: function(req, res, next){
+  createRequest: function(req, res, next) {
     var token = req.headers['x-access-token'];
     var user = jwt.decode(token, config.tokenSecret);
     // var findLocation = Q.nbind(Customer.findOne, Customer);
@@ -27,6 +27,8 @@ module.exports = {
       upsert: false
     };
 
+    console.log('PRICE:', req.body.requestInfo.washInfo.price);
+
     var newRequest = {
       user_location : {
         lat: req.body.locData.lat,
@@ -36,17 +38,17 @@ module.exports = {
       user_email: user.email,
       user_phone: user.phone_number,
       wash_type: req.body.requestInfo.washType,
-      vehicle_type: req.body.requestInfo.vehicleType.name,
-      request_filled: "",
-      job_accepted: "",
-      job_started: "",
-      job_ended: "",
-      cost: req.body.requestInfo.price,
-      distance: "",
+      vehicle_type: req.body.requestInfo.vehicleType,
+      request_filled: '',
+      job_accepted: '',
+      job_started: '',
+      job_ended: '',
+      cost: req.body.requestInfo.washInfo.price,
+      distance: '',
     }
     // send a new wash request
     findRequest({user_email: user.email}).then(function(request) {
-      if(request) {
+      if (request) {
         res.status(401).send();
       }
       create(newRequest).then(function(){
@@ -57,7 +59,7 @@ module.exports = {
     })
     .fail(function(error) {
       next(error);
-    })
+    });
   },
 
   getRequests: function(req, res, next) {
@@ -71,7 +73,7 @@ module.exports = {
       .then(function(requests) {
         _.each(requests, function(request) {
           request.distance = helpers.distance(providerLocation, request.user_location);
-          if(request.distance < 5) {
+          if (request.distance < 5) {
             results.push(request);
           }
         });
@@ -84,7 +86,6 @@ module.exports = {
     var provider = jwt.decode(token, config.tokenSecret);
     var requestId = req.body._id;
     var currDate = Date.now();
-    console.log(provider);
 
     Request
       .where({_id: requestId})
@@ -94,17 +95,18 @@ module.exports = {
         provider_email: provider.email
       })
       .then(function(request){
+        console.log(request);
+        res.json({results: request});
         Provider
           .where({_id: provider._id})
           .update({available: false})
-          .then(function(){
+          .then(function() {
             res.status(201).send();
-          })
+          });
       });
   },
 
   getCurrent: function(req, res, next) {
-    console.log(req.body);
     var email = req.body.email;
 
     Request
@@ -116,22 +118,22 @@ module.exports = {
       });
   },
 
-  jobStarted: function(req, res, next){
+  jobStarted: function(req, res, next) {
     var token = req.headers['x-access-token'];
     var provider = jwt.decode(token, config.tokenSecret);
     var jobId = req.body._id;
     var currDate = Date.now();
-    console.log("+++INSIDE JOBSTARTED PROV: ", provider);
-    console.log("+++INSIDE JOBSTARTED BODY: ", req.body);
+    console.log('+++INSIDE JOBSTARTED PROV: ', provider);
+    console.log('+++INSIDE JOBSTARTED BODY: ', req.body);
     Request
       .where({_id: jobId})
       .update({job_started: currDate})
-      .then(function(){
+      .then(function() {
         res.status(200).send();
       })
-    .fail(function(error){
+    .fail(function(error) {
       next(error);
-    })
+    });
   },
 
   jobDone: function(req, res, next) {
@@ -139,16 +141,16 @@ module.exports = {
     var provider = jwt.decode(token, config.tokenSecret);
     var jobId = req.body._id;
     var currDate = Date.now();
-    console.log("+++INSIDE JOBDONE PROV: ", provider);
-    console.log("+++INSIDE JOBDONE BODY: ", req.body);
-    console.log("+++INSIDE JOBDONE JOBID: ", jobId);
+    console.log('+++INSIDE JOBDONE PROV: ', provider);
+    console.log('+++INSIDE JOBDONE BODY: ', req.body);
+    console.log('+++INSIDE JOBDONE JOBID: ', jobId);
     Request
       .where({_id: jobId})
       .update({job_ended: currDate})
       .then(function() {
         res.status(200).send();
-      })
-      History.moveToHistory(jobId);
+      });
+    History.moveToHistory(jobId);
     // .fail(function(error){
     //   next(error);
     // })

@@ -9,17 +9,17 @@ angular.module('wod.routes', [])
 			authenticate: false
 		})
 		.state('customernav', {
-			url:'/nav1',
+			url: '/nav1',
 			templateUrl: 'app/nav/customernav.template.html',
 			controller: 'navCtrl as navCtrl',
-      abstract: true,
+      abstract: true
 		})
     .state('providernav', {
-			url:'/nav2',
-			templateUrl: 'app/nav/providernav.template.html',
-			controller: 'navCtrl as navCtrl',
+      url: '/nav2',
+      templateUrl: 'app/nav/providernav.template.html',
+      controller: 'navCtrl as navCtrl',
       abstract: true,
-		})
+    })
     .state('customernav.customer', {
       url: '/customerProfile',
       // authenticate: false, // for now
@@ -55,8 +55,31 @@ angular.module('wod.routes', [])
       cache: false,
       views: {
         'nav-view': {
-          templateUrl: 'app/washHistory/washHistory.template.html',
-          controller: 'washHistCtrl as washHistCtrl'
+          templateUrl: 'app/washHistory/custHistory/custWashHistory.template.html',
+          controller: 'custWashHistCtrl as custWashHistCtrl'
+        }
+      }
+    })
+    .state('providernav.providerWashes', {
+      url: '/providerWashes',
+      cache: false,
+      views: {
+        'nav-view': {
+          templateUrl: 'app/washHistory/provHistory/provWashHistory.template.html',
+          controller: 'provWashHistCtrl as provWashHistCtrl'
+        }
+      }
+    })
+    .state('providernav.providerWashView', {
+      url: '/wash-info',
+      params: {
+        request: null
+      },
+      cache: false,
+      views: {
+        'nav-view': {
+          templateUrl: 'app/providerWashView/providerWashView.template.html',
+          controller: 'provWashInfoCtrl as provWashInfoCtrl'
         }
       }
     })
@@ -84,7 +107,6 @@ angular.module('wod.routes', [])
       controller: 'provSUCtrl as psu',
       authenticate: false
     });
-
 
   $urlRouterProvider.otherwise('/');
   $httpProvider.interceptors.push('AttachTokens');

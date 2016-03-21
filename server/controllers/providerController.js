@@ -2,22 +2,22 @@ var Customer = require('../models/customerModel');
 var Request = require('../models/requestModel.js');
 var Provider = require('../models/providerModel.js');
 var Q = require('q');
-var helpers = require('../utils/helpers')
+var helpers = require('../utils/helpers');
 var jwt = require('jwt-simple');
 var _ = require('lodash');
 var bcrypt = require('bcrypt-nodejs');
 
-if(process.env.SALT_FACTOR === undefined){
+if (process.env.SALT_FACTOR === undefined) {
   var config = require('../config.js');
 } else {
-  var config = process.env
+  var config = process.env;
 }
 
 module.exports = {
 
-  comparePasswords: function (attemptedPassword, savedPassword) {
+  comparePasswords: function(attemptedPassword, savedPassword) {
     var defer = Q.defer();
-    bcrypt.compare(attemptedPassword, savedPassword, function (err, match) {
+    bcrypt.compare(attemptedPassword, savedPassword, function(err, match) {
       if (err) {
         defer.reject(err);
       } else {
@@ -27,13 +27,13 @@ module.exports = {
     return defer.promise;
   },
 
-  signin: function (req, res, next) {
+  signin: function(req, res, next) {
     var email = req.body.email;
     var password = req.body.password;
 
     var findUser = Q.nbind(Provider.findOne, Provider);
     findUser({email: email})
-      .then(function (provider) {
+      .then(function(provider) {
         if (!provider) {
           next(new Error('Provider does not exist'));
         } else {
@@ -48,12 +48,12 @@ module.exports = {
             });
         }
       })
-      .fail(function (error) {
+      .fail(function(error) {
         next(error);
       });
   },
 
-  signup: function (req, res, next) {
+  signup: function(req, res, next) {
     var email  = req.body.email;
     var password  = req.body.password;
     var companyName = req.body.companyName;
@@ -168,7 +168,7 @@ module.exports = {
 
   //********************-REQUEST HANDLER-*******************
 
-  sendProviders: function(req, res, next){
+  sendProviders: function(req, res, next) {
     var token = req.headers['x-access-token'];
     var user = jwt.decode(token, config.tokenSecret);
     var findLocation = Q.nbind(Customer.findOne, Customer);
@@ -177,15 +177,16 @@ module.exports = {
 
     // get customer's location from data base
     findLocation({email: user.email}).then(function(cust) {
-      if(!cust) {
+      if (!cust) {
         res.status(401).send();
       }
       var customerLocation = cust.geolocation;
       // find all providers within 5 miles of customer
+
       Provider.where("available").equals(true).then(function(washers) {
         _.each(washers, function(washer) {
           washer.distance = helpers.distance(customerLocation, washer.geolocation);
-          if(washer.distance < 5) {
+          if (washer.distance < 5) {
             results.push(washer);
           }
           // console.log(results);
@@ -194,7 +195,7 @@ module.exports = {
       })
       .fail(function(error) {
         next(error);
-      })
-    })
+      });
+    });
   }
 };
