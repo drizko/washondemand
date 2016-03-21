@@ -43,7 +43,7 @@ function providerCtrl($scope, socket, providerFactory, $window, locFactory, jwtD
     request.accepted = true;
     socket.emit('accepted', request);
     providerFactory.acceptRequest(request);
-    
+
     GeoAlert.begin(request.user_location.lat, request.user_location.lng, function() {
       console.log('TARGET');
       GeoAlert.end();
@@ -54,10 +54,7 @@ function providerCtrl($scope, socket, providerFactory, $window, locFactory, jwtD
         ['Cancel','View']
       );
     });
-<<<<<<< c6e7e4c3103c974e5f611a52562a1846c9f1313c
-=======
   };
-
 
   vm.acceptWash = function(request) {
     request.accepted = true;
@@ -67,7 +64,7 @@ function providerCtrl($scope, socket, providerFactory, $window, locFactory, jwtD
         request.job_accepted= new Date();
         $state.go('providernav.providerWashView', {request: request});
       });
->>>>>>> [feature]implements provider wash info view
+
   };
 
   vm.jobStarted = function(request) {
