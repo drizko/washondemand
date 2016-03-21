@@ -26,8 +26,8 @@ module.exports = {
     var options = {
       upsert: false
     };
-
-    console.log('PRICE:', req.body.requestInfo.washInfo.price);
+    console.log(req.body)
+    console.log('Inside node createRequest');
 
     var newRequest = {
       user_location : {
@@ -38,24 +38,30 @@ module.exports = {
       user_email: user.email,
       user_phone: user.phone_number,
       wash_type: req.body.requestInfo.washType,
-      vehicle_type: req.body.requestInfo.vehicleType,
+      vehicle_type: req.body.requestInfo.vehicleType.name,
       request_filled: '',
       job_accepted: '',
       job_started: '',
       job_ended: '',
-      cost: req.body.requestInfo.washInfo.price,
+      cost: req.body.requestInfo.price,
       distance: '',
-    }
+      wash_info: req.body.requestInfo.washInfo
+    };
     // send a new wash request
+
     findRequest({user_email: user.email}).then(function(request) {
       if (request) {
         res.status(401).send();
       }
-      create(newRequest).then(function(){
-        Customer.findOneAndUpdate({email: user.email}, {'locked': true}, options, function(){
-          res.status(201).send();
-        })
-      })
+      console.log('right above create(newRequest)');
+      create(newRequest);
+      console.log('right below create(newRequest)');
+      // .then(
+      //   function(){
+      //   Customer.findOneAndUpdate({email: user.email}, {'locked': true}, options, function() {
+      //     res.status(201).send();
+      //   });
+      // })
     })
     .fail(function(error) {
       next(error);

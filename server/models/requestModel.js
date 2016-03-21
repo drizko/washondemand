@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var requestSchema = new Schema({
-  user_location: {"lat": Number, "lng": Number},
+  user_location: {'lat': Number, 'lng': Number},
   user_firstname: String,
   user_email: {type: String, unique: true, required: true},
   user_phone: Number,
@@ -16,7 +16,8 @@ var requestSchema = new Schema({
   cost: Number,
   distance: Number,
   provider: String,
-  provider_email: String
+  provider_email: String,
+  wash_info: Schema.Types.Mixed
 });
 
 var Request = mongoose.model('Request', requestSchema);
