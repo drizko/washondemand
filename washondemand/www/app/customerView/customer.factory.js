@@ -45,9 +45,6 @@ function customerFactory($http, $window, $location, locFactory) {
     premium: {name: 'premium', options: [
       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
     ]},
-    custom: {name: 'custom', options: [
-      18, 19, 20
-    ]}
   };
 
   function restoreOptions() {

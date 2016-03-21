@@ -6,11 +6,13 @@ function customerCtrl($scope, NgMap, customerFactory, locFactory) {
   var vm = this;
 
   vm.request = {
-    vehicleType: {name: 'Please Pick', price: 0},
+    vehicleType: {name: 'Please Pick a Vehicle Type', price: 0},
     washType: '',
     price: 0,
     washInfo: customerFactory.washOptions
   };
+
+  vm.btnMsg = 'Select a vehicle and wash type';
 
   vm.locData = locFactory.locData;
 
@@ -60,11 +62,17 @@ function customerCtrl($scope, NgMap, customerFactory, locFactory) {
   };
 
   vm.showRequestButton = function() {
-    return vm.request.vehicleType.price > 0 && vm.request.washType;
+    if (vm.request.vehicleType.price > 0 && vm.request.washType) {
+      if (vm.getPrice() < 25) {
+        vm.btnMsg = 'Minimum Wash price is 25$';
+        return false;
+      }
+      return true;
+    }
   };
 
   vm.showInfo = function() {
-    return vm.getPrice() > 0 || vm.request.washType === 'custom';
+    return vm.request.vehicleType.price > 0 && vm.request.washType;
   };
 
   var init = function() {

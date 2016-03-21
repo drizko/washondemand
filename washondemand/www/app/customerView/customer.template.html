@@ -31,7 +31,7 @@
 
       <div class="wash-detail" ng-if="customerCtrl.showInfo()">
         <div class="row">
-          <div class="col">Total Price: {{customerCtrl.getPrice()}}$</div>
+          <div class="col">Total Price: {{customerCtrl.getPrice()}}$ <span ng-show="customerCtrl.request.washType ==='custom'">(Minimum 25$)</span></div>
         </div>
         <div class="row">
           <div class="col">
@@ -44,15 +44,15 @@
           <div class="col">
             What's included:
             <br>
-            <ul>
-              <li ng-repeat="detail in customerCtrl.request.washInfo" ng-class="{'inactiveOption': !detail.active}" ng-click="customerCtrl.toggleOption(detail)">{{detail.info}}: {{detail.price}}$</li>
-            </ul>
+            <ion-list>
+              <ion-checkbox ng-repeat="detail in customerCtrl.request.washInfo" ng-checked="detail.active" ng-class="{'inactiveOption': !detail.active}" ng-click="customerCtrl.toggleOption(detail)">{{detail.info}}: {{detail.price}}$</ion-checkbox>
+            </ion-list>
           </div>
         </div>
       </div>
       <div class="btn-margin">
         <button class="button button-block button-positive" ng-if="customerCtrl.showRequestButton()" ng-click="customerCtrl.sendRequest()">Request A Wash</button>
-        <button class="button button-block button-stable disabled" ng-if="!customerCtrl.showRequestButton()">Select a vehicle and wash type</button>
+        <button class="button button-block button-stable disabled" ng-if="!customerCtrl.showRequestButton()">{{customerCtrl.btnMsg}}</button>
       </div>
     </form>
   </ion-content>
