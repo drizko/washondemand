@@ -60,7 +60,8 @@ module.exports = {
       password: req.body.password,
       firstname: req.body.firstName,
       lastname: req.body.lastName,
-      phone_number: req.body.phone
+      phone_number: req.body.phone,
+      locked: false
     };
 
     var findOne = Q.nbind(Customer.findOne, Customer);
