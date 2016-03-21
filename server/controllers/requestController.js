@@ -53,15 +53,12 @@ module.exports = {
       if (request) {
         res.status(401).send();
       }
-      console.log('right above create(newRequest)');
-      create(newRequest);
-      console.log('right below create(newRequest)');
-      // .then(
-      //   function(){
-      //   Customer.findOneAndUpdate({email: user.email}, {'locked': true}, options, function() {
-      //     res.status(201).send();
-      //   });
-      // })
+      create(newRequest)
+      .then(function() {
+        Customer.findOneAndUpdate({email: user.email}, {'locked': true}, options, function() {
+          res.status(201).send();
+        });
+      })
     })
     .fail(function(error) {
       next(error);
