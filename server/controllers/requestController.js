@@ -22,7 +22,6 @@ module.exports = {
     // var findLocation = Q.nbind(Customer.findOne, Customer);
     var findRequest = Q.nbind(Request.findOne, Request);
     var create = Q.nbind(Request.create, Request);
-    console.log("PRICE:", req.body.requestInfo.washInfo.price);
 
     var options = {
       upsert: false
@@ -37,12 +36,12 @@ module.exports = {
       user_email: user.email,
       user_phone: user.phone_number,
       wash_type: req.body.requestInfo.washType,
-      vehicle_type: req.body.requestInfo.vehicleType,
+      vehicle_type: req.body.requestInfo.vehicleType.name,
       request_filled: "",
       job_accepted: "",
       job_started: "",
       job_ended: "",
-      cost: req.body.requestInfo.washInfo.price,
+      cost: req.body.requestInfo.price,
       distance: "",
     }
     // send a new wash request
