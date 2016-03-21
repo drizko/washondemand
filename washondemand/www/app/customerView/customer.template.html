@@ -13,9 +13,9 @@
       <div class="btn-margin">
         <span>Select Vehicle Type:</span>
         <div class="button-bar">
-          <button class="button button-outline button-positive" ng-click="customerCtrl.selectVehicle('car');" ng-class="{'active': customerCtrl.request.vehicleType === 'car'}">Car</button>
-          <button class="button button-outline button-positive" ng-click="customerCtrl.selectVehicle('suv');" ng-class="{'active': customerCtrl.request.vehicleType === 'suv'}">Suv/Van</button>
-          <button class="button button-outline button-positive" ng-click="customerCtrl.selectVehicle('motorcycle');"ng-class="{'active': customerCtrl.request.vehicleType === 'motorcycle'}">Motorcycle</button>
+          <button class="button button-outline button-positive" ng-click="customerCtrl.selectVehicle('car');" ng-class="{'active': customerCtrl.request.vehicleType.name === 'car'}">Car</button>
+          <button class="button button-outline button-positive" ng-click="customerCtrl.selectVehicle('suv');" ng-class="{'active': customerCtrl.request.vehicleType.name === 'suv'}">Suv/Van</button>
+          <button class="button button-outline button-positive" ng-click="customerCtrl.selectVehicle('motorcycle');"ng-class="{'active': customerCtrl.request.vehicleType.name === 'motorcycle'}">Motorcycle</button>
         </div>
       </div>
 
@@ -25,25 +25,34 @@
             <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('basic')" ng-class="{'active': customerCtrl.request.washType === 'basic'}">Basic</button>
             <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('deluxe')" ng-class="{'active': customerCtrl.request.washType === 'deluxe'}">Deluxe</button>
             <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('premium')" ng-class="{'active': customerCtrl.request.washType === 'premium'}">Premium</button>
+            <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('custom')" ng-class="{'active': customerCtrl.request.washType === 'custom'}">Custom</button>
         </div>
       </div>
 
-      <div class="wash-detail" ng-if="customerCtrl.washInfo.price > 0">
+      <div class="wash-detail" ng-if="customerCtrl.showInfo()">
         <div class="row">
-          <div class="col">Price: ${{customerCtrl.washInfo.price}}</div>
+          <div class="col">Total Price: {{customerCtrl.getPrice()}}$ <span ng-show="customerCtrl.request.washType ==='custom'">(Minimum 25$)</span></div>
         </div>
         <div class="row">
           <div class="col">
-            What's included:<br>
-            <ul>
-              <li ng-repeat="details in customerCtrl.washInfo.info">{{details.info}}</li>
-            </ul>
+            Vehicle:
+            <br>
+            {{customerCtrl.request.vehicleType.name}}: {{customerCtrl.request.vehicleType.price}}$
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            What's included:
+            <br>
+            <ion-list>
+              <ion-checkbox ng-repeat="detail in customerCtrl.request.washInfo" ng-checked="detail.active" ng-class="{'inactiveOption': !detail.active}" ng-click="customerCtrl.toggleOption(detail)">{{detail.info}}: {{detail.price}}$</ion-checkbox>
+            </ion-list>
           </div>
         </div>
       </div>
       <div class="btn-margin">
-        <button class="button button-block button-positive button-outline" ng-if="customerCtrl.showRequestButton()" ng-click="customerCtrl.sendRequest()">Request A Wash</button>
-        <button class="button button-block button-stable button-outline disabled" ng-if="!customerCtrl.showRequestButton()">Select a vehicle and wash type</button>
+        <button class="button button-block button-positive" ng-if="customerCtrl.showRequestButton()" ng-click="customerCtrl.sendRequest()">Request A Wash</button>
+        <button class="button button-block button-stable disabled" ng-if="!customerCtrl.showRequestButton()">{{customerCtrl.btnMsg}}</button>
       </div>
     </form>
   </ion-content>

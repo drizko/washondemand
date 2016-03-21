@@ -183,7 +183,6 @@ module.exports = {
       var customerLocation = cust.geolocation;
       // find all providers within 5 miles of customer
       Provider.where("available").equals(true).then(function(washers) {
-        console.log(washers);
         _.each(washers, function(washer) {
           washer.distance = helpers.distance(customerLocation, washer.geolocation);
           if(washer.distance < 5) {
