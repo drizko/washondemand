@@ -9,7 +9,7 @@
 
     <p ng-show="!customerCtrl.locData.found">grabbing your location.  please wait</p>
 
-    <form class="request" ng-show="!customerCtrl.locData.found">
+    <form class="request" ng-show="customerCtrl.locData.found">
       <div class="btn-margin">
         <span>Select Vehicle Type:</span>
         <div class="button-bar">
