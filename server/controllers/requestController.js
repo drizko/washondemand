@@ -24,6 +24,10 @@ module.exports = {
     var create = Q.nbind(Request.create, Request);
     console.log("PRICE:", req.body.requestInfo.washInfo.price);
 
+    var options = {
+      upsert: false
+    };
+
     var newRequest = {
       user_location : {
         lat: req.body.locData.lat,
@@ -47,7 +51,9 @@ module.exports = {
         res.status(401).send();
       }
       create(newRequest).then(function(){
-        res.status(200).send();
+        Customer.findOneAndUpdate({email: user.email}, {'locked': true}, options, function(){
+          res.status(201).send();
+        })
       })
     })
     .fail(function(error) {
@@ -149,7 +155,3 @@ module.exports = {
     // })
   }
 };
-
-
-
-

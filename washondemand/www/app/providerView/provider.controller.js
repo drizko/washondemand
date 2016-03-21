@@ -35,8 +35,14 @@ function providerCtrl($scope, socket, providerFactory, $window, locFactory, jwtD
     request.user_location.lat += 0.01;
     request.user_location.lng += 0.01;
     console.log(request);
+  }
 
-    console.log("moveMarkers", user);
+
+  vm.acceptWash = function(request) {
+    request.accepted = true;
+    socket.emit('accepted', request);
+    providerFactory.acceptRequest(request);
+    
     GeoAlert.begin(request.user_location.lat, request.user_location.lng, function() {
       console.log('TARGET');
       GeoAlert.end();
@@ -47,13 +53,6 @@ function providerCtrl($scope, socket, providerFactory, $window, locFactory, jwtD
         ['Cancel','View']
       );
     });
-  }
-
-
-  vm.acceptWash = function(request) {
-    request.accepted = true;
-    socket.emit('accepted', request);
-    providerFactory.acceptRequest(request);
   };
 
   vm.jobStarted = function(request) {
