@@ -1,0 +1,14 @@
+<ion-view title="Provider Wash Info">
+  <ion-content overflow-scroll="true" class="provider-wash-info">
+    <ion-list>
+      <ion-item class="item item-divider">Current Wash</ion-item>
+      <ion-item>
+        Job Accepted: {{provWashInfoCtrl.request.job_accepted}}<br>
+        Wash Type: {{provWashInfoCtrl.request.wash_type}}<br>
+        Vehicle Type: {{provWashInfoCtrl.request.vehicle_type}}<br>
+        Cost: ${{provWashInfoCtrl.request.cost}}
+      </ion-item>
+      <!-- <ion-item class="item item-divider">Past Washes</ion-item> -->
+    </ion-list>
+  </ion-content>
+</ion-view>

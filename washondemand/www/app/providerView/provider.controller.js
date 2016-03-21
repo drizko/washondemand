@@ -1,9 +1,10 @@
 angular.module('wod.providerCtrl', []).controller('providerCtrl', providerCtrl);
 
-function providerCtrl($scope, socket, providerFactory, $window, locFactory, jwtDecoder, GeoAlert) {
+function providerCtrl($scope, socket, providerFactory, $window, locFactory, jwtDecoder, GeoAlert, $state) {
   var vm = this;
   vm.request = {data: []};
   vm.locData = locFactory.locData;
+  console.log(locFactory.locData)
   vm.requests = [];
 
   //Begin the service
@@ -23,9 +24,9 @@ function providerCtrl($scope, socket, providerFactory, $window, locFactory, jwtD
   vm.getRequests = function() {
     providerFactory.getRequest(locFactory.locData)
       .then(function(data) {
-        data.results.forEach(function(item){
+        data.results.forEach(function(item) {
           item.accepted = false;
-        })
+        });
         vm.requests = data.results;
       });
   };
@@ -53,14 +54,28 @@ function providerCtrl($scope, socket, providerFactory, $window, locFactory, jwtD
         ['Cancel','View']
       );
     });
+<<<<<<< c6e7e4c3103c974e5f611a52562a1846c9f1313c
+=======
+  };
+
+
+  vm.acceptWash = function(request) {
+    request.accepted = true;
+    socket.emit('accepted', request);
+    providerFactory.acceptRequest(request)
+      .then(function() {
+        request.job_accepted= new Date();
+        $state.go('providernav.providerWashView', {request: request});
+      });
+>>>>>>> [feature]implements provider wash info view
   };
 
   vm.jobStarted = function(request) {
-    console.log("+++INSIDE JOBSTARTED CTRL: ", request)
-  }
+    console.log('+++INSIDE JOBSTARTED CTRL: ', request);
+  };
 
   vm.jobDone = function(request) {
-    console.log("+++INSIDE JOBDONE CTRL: ", request);
+    console.log('+++INSIDE JOBDONE CTRL: ', request);
     providerFactory.jobFinished(request);
-  }
+  };
 };
