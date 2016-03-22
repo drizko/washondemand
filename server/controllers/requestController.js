@@ -22,12 +22,9 @@ module.exports = {
     // var findLocation = Q.nbind(Customer.findOne, Customer);
     var findRequest = Q.nbind(Request.findOne, Request);
     var create = Q.nbind(Request.create, Request);
-
     var options = {
       upsert: false
     };
-    console.log(req.body)
-    console.log('Inside node createRequest');
 
     var newRequest = {
       user_location : {
@@ -81,7 +78,10 @@ module.exports = {
           }
         });
         res.json({results: results});
-      });
+      })
+      .catch(function(err) {
+        console.error(err);
+      })
   },
 
   acceptRequest: function(req, res, next) {
@@ -106,7 +106,10 @@ module.exports = {
           .then(function() {
             res.status(201).send();
           });
-      });
+      })
+      .catch(function(err) {
+        console.error(err);
+      })
   },
 
   getCurrent: function(req, res, next) {
@@ -118,7 +121,10 @@ module.exports = {
         if(request.job_accepted !== '') {
           res.json({results: request});
         }
-      });
+      })
+    .catch(function(err) {
+      console.error(err);
+    })
   },
 
   jobStarted: function(req, res, next) {
@@ -126,17 +132,16 @@ module.exports = {
     var provider = jwt.decode(token, config.tokenSecret);
     var jobId = req.body._id;
     var currDate = Date.now();
-    console.log('+++INSIDE JOBSTARTED PROV: ', provider);
-    console.log('+++INSIDE JOBSTARTED BODY: ', req.body);
+
     Request
       .where({_id: jobId})
       .update({job_started: currDate})
       .then(function() {
         res.status(200).send();
       })
-    .fail(function(error) {
-      next(error);
-    });
+      .catch(function(err) {
+        console.error(err);
+      });
   },
 
   jobDone: function(req, res, next) {
@@ -144,18 +149,16 @@ module.exports = {
     var provider = jwt.decode(token, config.tokenSecret);
     var jobId = req.body._id;
     var currDate = Date.now();
-    console.log('+++INSIDE JOBDONE PROV: ', provider);
-    console.log('+++INSIDE JOBDONE BODY: ', req.body);
-    console.log('+++INSIDE JOBDONE JOBID: ', jobId);
+
     Request
       .where({_id: jobId})
       .update({job_ended: currDate})
       .then(function() {
+        History.moveToHistory(jobId);
         res.status(200).send();
-      });
-    History.moveToHistory(jobId);
-    // .fail(function(error){
-    //   next(error);
-    // })
+      })
+    .catch(function(err){
+      console.error(err);
+    })
   }
 };

@@ -49,6 +49,7 @@ function providerFactory($http, $window, $location) {
   return {
     getRequest: getRequest,
     acceptRequest: acceptRequest,
+    jobBegan: jobBegan,
     jobFinished:jobFinished
   };
 }
