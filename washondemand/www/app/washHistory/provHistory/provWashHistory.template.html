@@ -1,18 +1,24 @@
 <ion-view title="Provider Wash History">
   <ion-content overflow-scroll="true" class="provider-history">
     <ion-list>
+      <ion-item>
+        <div class="row">
+          Total washes: {{provWashHistCtrl.total}}<br>
+          Total earnings: ${{provWashHistCtrl.sum}}
+        </div>
+      </ion-item>
       <ion-item ng-repeat="wash in provWashHistCtrl.history">
         <p>
           <span>
             {{provWashHistCtrl.formatTime(wash.job_ended)}}
           </span>
           <span class="float-right">
-            
+
           </span>
         </p>
         <p>
           <span>
-            Price: {{wash.cost}}$
+            Price: ${{wash.cost}}
           </span>
           <span class="float-right">
             Your Rating: {{wash.custRating}}

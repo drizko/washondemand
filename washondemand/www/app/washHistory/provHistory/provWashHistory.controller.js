@@ -4,6 +4,8 @@ function provWashHistCtrl(washHistFactory) {
   var vm = this;
 
   vm.history = [];
+  vm.total = 0;
+  vm.sum = 0;
 
   vm.toggleExpand = function(wash) {
     wash.expanded = !wash.expanded;
@@ -21,6 +23,10 @@ function provWashHistCtrl(washHistFactory) {
         return b.job_ended - a.job_ended;
       });
       vm.history = history;
+      vm.total = history.length;
+      history.forEach(function(item) {
+        vm.sum += item.cost;
+      });
     });
   };
   init();
