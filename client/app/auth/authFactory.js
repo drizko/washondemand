@@ -29,7 +29,7 @@ function authFactory($http, $window, $location) {
   function custSignin(cust) {
     return $http({
       method: 'POST',
-      url: 'api/customer/signin',
+      url: '/api/customer/signin',
       data: cust
     })
     .then(function(results) {
@@ -40,7 +40,7 @@ function authFactory($http, $window, $location) {
   function custSignup(cust) {
     return $http({
       method: 'POST',
-      url: 'api/customer/signup',
+      url: '/api/customer/signup',
       data: cust
     })
     .then(function(results) {
@@ -51,7 +51,7 @@ function authFactory($http, $window, $location) {
   function provSignin(prov) {
     return $http({
       method: 'POST',
-      url: 'api/provider/signin',
+      url: '/api/provider/signin',
       data: prov
     })
     .then(function(results) {
@@ -62,7 +62,7 @@ function authFactory($http, $window, $location) {
   function provSignup(prov) {
     return $http({
       method: 'POST',
-      url: 'api/provider/signup',
+      url: '/api/provider/signup',
       data: prov
     })
     .then(function(results) {

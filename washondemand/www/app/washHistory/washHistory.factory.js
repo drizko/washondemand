@@ -3,8 +3,6 @@ angular.module('wod.washHistFactory', [])
 
 function washHistFactory($http) {
 
-  var LOCALURL = 'http://localhost:8000/';
-
   return {
     getHistory: getHistory
   };
@@ -12,7 +10,7 @@ function washHistFactory($http) {
   function getHistory() {
     return $http({
       method: 'POST',
-      url: LOCALURL + 'api/history/show-history'
+      url: masterURL + '/api/history/show-history'
     })
     .then(function(results) {
       return results.data;

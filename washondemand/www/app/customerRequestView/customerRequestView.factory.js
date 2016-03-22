@@ -7,22 +7,17 @@ function customerViewFactory($http) {
     request: {}
   }
 
-  var LOCALURL = 'http://localhost:8000/';
-  var AWSURL = 'http://washondemand.us-west-2.elasticbeanstalk.com/';
-
   function cancelRequest() {
     return $http({
       method: 'POST',
-      // url: 'http://washondemand.us-west-2.elasticbeanstalk.com/api/request/cancel-request',
-      url: 'http://localhost:8000/api/request/cancel-request'
+      url: masterURL + '/api/request/cancel-request'
     })
   };
 
   function getRequest() {
     return $http({
       method: 'POST',
-      // url: 'http://washondemand.us-west-2.elasticbeanstalk.com/api/request/cancel-request',
-      url: 'http://localhost:8000/api/request/get-current'
+      url: masterURL + '/api/request/get-current'
     })
     .then(function(results){
       return results.data
