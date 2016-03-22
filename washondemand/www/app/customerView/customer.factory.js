@@ -3,9 +3,6 @@ angular.module('wod.customerFactory', [])
 
 function customerFactory($http, $window, $location, locFactory) {
 
-  var LOCALURL = 'http://localhost:8000/';
-  var AWSURL = 'http://washondemand.us-west-2.elasticbeanstalk.com/';
-
   var vehicleOptions = {
     car: {name: 'car', price: 1},
     suv: {name: 'suv', price: 2},
@@ -57,7 +54,7 @@ function customerFactory($http, $window, $location, locFactory) {
     console.log('From customerFactory!!!!!!!!!!!!!');
     return $http({
       method: 'POST',
-      url: LOCALURL + 'api/request/create-request',
+      url: masterURL + '/api/request/create-request',
       data: {
         requestInfo: details,
         locData: locFactory.locData
@@ -71,7 +68,7 @@ function customerFactory($http, $window, $location, locFactory) {
   function getProviders() {
     return $http({
       method: 'POST',
-      url: LOCALURL + 'api/provider/get-providers',
+      url: masterURL + '/api/provider/get-providers',
       data: locFactory.locData
     })
     .then(function(results) {

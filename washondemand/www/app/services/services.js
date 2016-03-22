@@ -75,7 +75,7 @@ function GeoAlert(locFactory, jwtDecoder, $window) {
 };
 
 function socket($rootScope) {
-  var socket = io.connect('http://localhost:8000');
+  var socket = io.connect('masterURL');
 
   return {
     on: function(eventName, callback) {
@@ -100,8 +100,6 @@ function socket($rootScope) {
 };
 
 function locFactory($window, $q, $http) {
-
-  var LOCALURL = 'http://localhost:8000/';
 
   var locData = {
     found: false,
@@ -146,7 +144,7 @@ function locFactory($window, $q, $http) {
 
     return $http({
       method: 'POST',
-      url: LOCALURL + 'api/' + locData.userType + '/update-location',
+      url: masterURL + '/api/' + locData.userType + '/update-location',
       data: locData || custData
     })
     .then(function(results) {
@@ -163,7 +161,7 @@ function locFactory($window, $q, $http) {
 
     return $http({
       method: 'POST',
-      url: LOCALURL + 'api/provider/update-availability',
+      url: masterURL + '/api/provider/update-availability',
       data: data
     }).then(function(results) {
 

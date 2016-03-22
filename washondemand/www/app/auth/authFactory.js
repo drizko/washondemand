@@ -6,7 +6,6 @@ angular.module('wod.authFactory', []).factory('authFactory', authFactory);
 
 function authFactory($http, $window, $state, locFactory) {
 
-  var LOCALURL = 'http://localhost:8000/';
   var emailRegex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
   var currentUserEmail = '';
 
@@ -108,7 +107,7 @@ function authFactory($http, $window, $state, locFactory) {
 
     return $http({
       method: 'POST',
-      url: LOCALURL + 'api/' + url,
+      url: masterURL + '/api/' + url,
       data: accountInfo
     })
     .then(function(results) {

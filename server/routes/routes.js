@@ -29,7 +29,7 @@ module.exports = function(app, express) {
   app.use(morgan('dev'));
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
-  app.use(express.static('./washondemand/www'));
+  app.use(express.static('./client'));
   app.use('/node_modules', express.static('./node_modules'));
   app.use(favicon('./client/images/favicon.ico'));
 
