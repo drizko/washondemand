@@ -28,12 +28,6 @@ function providerFactory($http, $window, $location) {
 
   return {
     getRequest: getRequest,
-<<<<<<< 3cb7f82fa3783c56f4cd53c76b2ce9d26ddda374
-    acceptRequest: acceptRequest,
-    jobBegan: jobBegan,
-    jobFinished:jobFinished
-=======
     acceptRequest: acceptRequest
->>>>>>> [refactor]pulls current wash info from db
   };
-}
+};
