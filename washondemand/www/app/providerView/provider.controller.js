@@ -38,11 +38,14 @@ function providerCtrl($scope, socket, providerFactory, $window, locFactory, jwtD
     console.log(request);
   }
 
-
   vm.acceptWash = function(request) {
     request.accepted = true;
     socket.emit('accepted', request);
-    providerFactory.acceptRequest(request);
+    providerFactory.acceptRequest(request)
+      .then(function() {
+        request.job_accepted= new Date();
+        $state.go('providernav.providerWashView', {request: request});
+      });
 
     GeoAlert.begin(request.user_location.lat, request.user_location.lng, function() {
       console.log('TARGET');
@@ -54,17 +57,6 @@ function providerCtrl($scope, socket, providerFactory, $window, locFactory, jwtD
         ['Cancel','View']
       );
     });
-  };
-
-  vm.acceptWash = function(request) {
-    request.accepted = true;
-    socket.emit('accepted', request);
-    providerFactory.acceptRequest(request)
-      .then(function() {
-        request.job_accepted= new Date();
-        $state.go('providernav.providerWashView', {request: request});
-      });
-
   };
 
   vm.jobStarted = function(request) {

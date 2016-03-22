@@ -1,0 +1,17 @@
+<ion-view title="Requested Wash Info">
+  <ion-content overflow-scroll="true" class="customer-request-view">
+    <ion-list>
+      <ion-item class="item item-divider">Current Wash</ion-item>
+      <ion-item>
+        Job Accepted: {{custReqInfoCtrl.currentRequest.job_accepted}}<br>
+        Wash Type: {{custReqInfoCtrl.currentRequest.wash_type}}<br>
+        Vehicle Type: {{custReqInfoCtrl.currentRequest.vehicle_type}}<br>
+        Cost: ${{custReqInfoCtrl.currentRequest.cost}}
+      </ion-item>
+      <!-- <ion-item class="item item-divider">Past Washes</ion-item> -->
+    </ion-list>
+    <div class="btn-margin">
+      <button class="button button-block button-positive" ng-disabled="custReqInfoCtrl.currentRequest.job_accepted !== ''" ng-click="custReqInfoCtrl.cancelRequest()">Cancel Request</button>
+    </div>
+  </ion-content>
+</ion-view>

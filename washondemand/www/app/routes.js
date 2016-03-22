@@ -60,6 +60,19 @@ angular.module('wod.routes', [])
         }
       }
     })
+    .state('customernav.customerRequestView', {
+      url: '/request-info',
+      params: {
+        request: null
+      },
+      cache: false,
+      views: {
+        'nav-view': {
+          templateUrl: 'app/customerRequestView/customerRequestView.template.html',
+          controller: 'custReqInfoCtrl as custReqInfoCtrl'
+        }
+      }
+    })
     .state('providernav.providerWashes', {
       url: '/providerWashes',
       cache: false,
