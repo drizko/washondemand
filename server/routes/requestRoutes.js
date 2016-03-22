@@ -9,4 +9,5 @@ module.exports = function(app) {
   app.post('/get-current', requestController.getCurrent);
   app.post('/job-started', requestController.jobStarted);
   app.post('/job-done', requestController.jobDone);
+  app.post('/cancel-request', requestController.cancelRequest);
 };

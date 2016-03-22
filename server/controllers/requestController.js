@@ -113,18 +113,17 @@ module.exports = {
   },
 
   getCurrent: function(req, res, next) {
-    var email = req.body.email;
+    var token = req.headers['x-access-token'];
+    var user = jwt.decode(token, config.tokenSecret);
 
-    Request
-      .where({user_email: email})
-      .then(function(request) {
-        if(request.job_accepted !== '') {
-          res.json({results: request});
-        }
+    Request.where({user_email: user.email})
+      .then(function(item){
+        console.log("INSIDE getCurrent: ", item);
+        res.json(item);
       })
-    .catch(function(err) {
-      console.error(err);
-    })
+      .catch(function(err) {
+        console.error(err);
+      })
   },
 
   jobStarted: function(req, res, next) {
@@ -157,8 +156,20 @@ module.exports = {
         History.moveToHistory(jobId);
         res.status(200).send();
       })
-    .catch(function(err){
-      console.error(err);
-    })
+      .catch(function(err){
+        console.error(err);
+      })
+  },
+
+  cancelRequest: function(req, res, next){
+    var token = req.headers['x-access-token'];
+    var user = jwt.decode(token, config.tokenSecret);
+    var reqId = req.body._id;
+
+    Request
+      .remove({user_email: user.email})
+      .then(function(){
+        console.log("Removed request from table...");
+      })
   }
 };
