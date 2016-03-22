@@ -16,7 +16,8 @@ var historySchema = new Schema ({
 	cost: Number,
 	distance: Number,
 	provider: String,
-	provider_email: String
+	provider_email: String,
+	wash_info: Schema.Types.Mixed
 });
 
 var History = mongoose.model("History", historySchema);
