@@ -1,12 +1,11 @@
 angular.module('wod.providerCtrl', []).controller('providerCtrl', providerCtrl);
 
-function providerCtrl($scope, socket, providerFactory, $window, locFactory, jwtDecoder, GeoAlert, $ionicHistory, $state) {
+function providerCtrl($scope, $stateParams, socket, providerFactory, $window, locFactory, jwtDecoder, GeoAlert, $ionicHistory, $state) {
   var vm = this;
   vm.request = {data: []};
   vm.locData = locFactory.locData;
-  console.log(locFactory.locData)
   vm.requests = [];
-
+  vm.accepted = $stateParams.accepted;
   //Begin the service
   //hard coded 'target'
   function onConfirm(idx) {
@@ -30,6 +29,8 @@ function providerCtrl($scope, socket, providerFactory, $window, locFactory, jwtD
         vm.requests = data.results;
       });
   };
+
+  vm.getRequests();
 
   vm.moveMarkers = function(request) {
     var user = jwtDecoder.decoder($window.localStorage['com.wod']);
@@ -62,14 +63,5 @@ function providerCtrl($scope, socket, providerFactory, $window, locFactory, jwtD
         ['Cancel','View']
       );
     });
-  };
-
-  vm.jobStarted = function(request) {
-    console.log('+++INSIDE JOBSTARTED CTRL: ', request);
-  };
-
-  vm.jobDone = function(request) {
-    console.log('+++INSIDE JOBDONE CTRL: ', request);
-    providerFactory.jobFinished(request);
   };
 };

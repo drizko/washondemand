@@ -89,6 +89,7 @@ module.exports = {
     var provider = jwt.decode(token, config.tokenSecret);
     var requestId = req.body._id;
     var currDate = Date.now();
+    var findRequest = Q.nbind(Request.findOne, Request);
 
     Request
       .where({_id: requestId})

@@ -111,12 +111,15 @@ function locFactory($window, $q, $http) {
     lng: undefined
   };
 
+  var availability = false;
+
   return {
     locData: locData,
     getLoc: getLoc,
     sendLocToServer: sendLocToServer,
     resetLocData: resetLocData,
-    updateAvailability: updateAvailability
+    updateAvailability: updateAvailability,
+    availability: availability
   };
 
   function getLoc(userType, email) {
@@ -153,6 +156,7 @@ function locFactory($window, $q, $http) {
   };
 
   function updateAvailability(availability) {
+    availability = availability;
     var data = {
       availability: availability,
       locData: locData

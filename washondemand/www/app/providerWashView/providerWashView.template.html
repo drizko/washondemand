@@ -2,10 +2,10 @@
   <ion-content overflow-scroll="true" class="provider-wash-info">
     <ion-list>
       <ion-item class="item item-divider">Current Wash</ion-item>
-      <ion-item ng-if="!provWashInfoCtrl.request">
+      <ion-item ng-if="!provWashInfoCtrl.request || provWashInfoCtrl.jobComplete">
         There are currently no washes in progress.
       </ion-item>
-      <ion-item ng-if="provWashInfoCtrl.request">
+      <ion-item ng-if="provWashInfoCtrl.request && !provWashInfoCtrl.jobComplete">
         Customer Name: {{provWashInfoCtrl.request.user_firstname}}<br>
         Customer Phone Number: {{provWashInfoCtrl.request.user_phone}}<br>
         Job Accepted: {{provWashInfoCtrl.request.job_accepted}}<br>
@@ -15,7 +15,7 @@
       </ion-item>
       <!-- <ion-item class="item item-divider">Past Washes</ion-item> -->
     </ion-list>
-    <div class="btn-margin">
+    <div class="btn-margin" ng-if="provWashInfoCtrl.request && !provWashInfoCtrl.jobComplete">
       <button ng-if="!provWashInfoCtrl.jobStarted" class="button button-block button-positive" ng-click="provWashInfoCtrl.startWash()">Start Wash</button>
       <button ng-if="provWashInfoCtrl.jobStarted" class="button button-block button-positive" ng-click="provWashInfoCtrl.endWash()">Wash Complete</button>
     </div>

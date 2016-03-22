@@ -42,7 +42,10 @@ angular.module('wod.routes', [])
     .state('providernav.provider', {
       url: '/providerProfile',
       // authenticate: false // for now
-      // cache: false,
+      cache: false,
+      params: {
+        accepted: null
+      },
       views: {
         'nav-view': {
           templateUrl: 'app/providerView/provider.template.html',
@@ -88,7 +91,7 @@ angular.module('wod.routes', [])
       params: {
         request: null
       },
-      // cache: false,
+      cache: false,
       views: {
         'nav-view': {
           templateUrl: 'app/providerWashView/providerWashView.template.html',
