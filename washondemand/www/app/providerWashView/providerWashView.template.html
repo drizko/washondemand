@@ -15,5 +15,9 @@
       </ion-item>
       <!-- <ion-item class="item item-divider">Past Washes</ion-item> -->
     </ion-list>
+    <div class="btn-margin">
+      <button ng-if="!provWashInfoCtrl.jobStarted" class="button button-block button-positive" ng-click="provWashInfoCtrl.startWash()">Start Wash</button>
+      <button ng-if="provWashInfoCtrl.jobStarted" class="button button-block button-positive" ng-click="provWashInfoCtrl.endWash()">Wash Complete</button>
+    </div>
   </ion-content>
 </ion-view>
