@@ -2,7 +2,12 @@
   <ion-content overflow-scroll="true" class="provider-wash-info">
     <ion-list>
       <ion-item class="item item-divider">Current Wash</ion-item>
-      <ion-item>
+      <ion-item ng-if="!provWashInfoCtrl.request">
+        There are currently no washes in progress.
+      </ion-item>
+      <ion-item ng-if="provWashInfoCtrl.request">
+        Customer Name: {{provWashInfoCtrl.request.user_firstname}}<br>
+        Customer Phone Number: {{provWashInfoCtrl.request.user_phone}}<br>
         Job Accepted: {{provWashInfoCtrl.request.job_accepted}}<br>
         Wash Type: {{provWashInfoCtrl.request.wash_type}}<br>
         Vehicle Type: {{provWashInfoCtrl.request.vehicle_type}}<br>

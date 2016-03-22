@@ -1,6 +1,6 @@
 angular.module('wod.providerCtrl', []).controller('providerCtrl', providerCtrl);
 
-function providerCtrl($scope, socket, providerFactory, $window, locFactory, jwtDecoder, GeoAlert, $state) {
+function providerCtrl($scope, socket, providerFactory, $window, locFactory, jwtDecoder, GeoAlert, $ionicHistory, $state) {
   var vm = this;
   vm.request = {data: []};
   vm.locData = locFactory.locData;
@@ -36,14 +36,19 @@ function providerCtrl($scope, socket, providerFactory, $window, locFactory, jwtD
     request.user_location.lat += 0.01;
     request.user_location.lng += 0.01;
     console.log(request);
-  }
+  };
 
   vm.acceptWash = function(request) {
-    request.accepted = true;
+    vm.accepted = true;
     socket.emit('accepted', request);
     providerFactory.acceptRequest(request)
       .then(function() {
-        request.job_accepted= new Date();
+
+        $ionicHistory.nextViewOptions({
+          disableBack: true
+        });
+        request.job_accepted = new Date();
+        providerFactory.currRequest = request;
         $state.go('providernav.providerWashView', {request: request});
       });
 

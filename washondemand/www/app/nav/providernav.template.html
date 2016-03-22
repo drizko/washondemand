@@ -1,7 +1,7 @@
-<ion-side-menus enable-menu-with-back-views="false">
+<ion-side-menus enable-menu-with-back-views="true">
     <ion-side-menu-content>
         <ion-nav-bar class="bar-stable">
-            <ion-nav-back-button ng-click="$root.GoBack()"></ion-nav-back-button>
+            <ion-nav-back-button class="back-button" ng-click="$root.GoBack()"></ion-nav-back-button>
             <ion-nav-buttons side="left">
                 <button class="button button-icon button-clear ion-navicon positive" menu-toggle="left"></button>
             </ion-nav-buttons>
@@ -19,6 +19,7 @@
             <ion-list>
                 <ion-toggle class="item" ng-model="navCtrl.availability" ng-checked="navCtrl.availability" ng-click="navCtrl.updateAvailability()">Available</ion-toggle>
                 <ion-item class="item" ui-sref="providernav.provider" menu-close="">View Requests</ion-item>
+                <ion-item class="item" ui-sref="providernav.providerWashView" menu-close="">Accepted Wash</ion-item>
                 <ion-item class="item" ui-sref="providernav.providerWashes" menu-close="">Your Washes</ion-item>
                 <ion-item class="item" ng-click="navCtrl.providerLogout()" menu-close="">Logout</ion-item>
             </ion-list>
