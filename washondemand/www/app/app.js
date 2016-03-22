@@ -5,6 +5,8 @@ angular.module('WashOnDemand', [
   'wod.services',
   'wod.authMaster',
 	'wod.customerCtrl',
+  'wod.custReqInfoCtrl',
+  'wod.customerViewFactory',
   'wod.customerFactory',
 	'wod.providerCtrl',
   'wod.providerFactory',

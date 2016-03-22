@@ -1,7 +1,7 @@
 angular.module('wod.customerCtrl', [])
 .controller('customerCtrl', customerCtrl);
 
-function customerCtrl($scope, NgMap, customerFactory, locFactory) {
+function customerCtrl($scope, NgMap, customerFactory, $state, locFactory) {
 
   var vm = this;
 
@@ -24,7 +24,10 @@ function customerCtrl($scope, NgMap, customerFactory, locFactory) {
   };
 
   vm.sendRequest = function() {
-    customerFactory.sendRequest(vm.request);
+    customerFactory.sendRequest(vm.request)
+      .then(function(){
+        $state.go('customernav.customerRequestView');
+      });
   };
 
   vm.selectVehicle = function(vehicle) {
