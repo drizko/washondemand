@@ -1,11 +1,39 @@
 angular.module('wod.provWashHistCtrl', []).controller('provWashHistCtrl', provWashHistCtrl);
 
-function provWashHistCtrl(washHistFactory, locFactory, $stateParams) {
+function provWashHistCtrl(washHistFactory) {
   var vm = this;
 
-  washHistFactory.getProvHistory(locFactory.locData)
-    // .then(function(request) {
-    //   vm.current = request[0];
-    //   console.log(vm.current);
-    // });
+  vm.history = [
+    {
+      custName: 'Kasra Jahani',
+      custRating: '0 stars',
+      price: 100,
+      date: '4/2/1882',
+      washType: 'custom',
+      vehicleType: 'car',
+      options: [
+        {
+          info: 'balsamic vinegar',
+          price: 5
+        },
+        {
+          info: 'extra virgin olive oil',
+          price: 5
+        }
+      ]
+    }
+  ];
+
+  vm.toggleExpand = function(wash) {
+    wash.expanded = !wash.expanded;
+  };
+
+  var init = function() {
+    washHistFactory.getHistory()
+    .then(function(history) {
+      console.log(history);
+      // vm.history = history; // uncomment this when linked with back end
+    });
+  };
+  init();
 };
