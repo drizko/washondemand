@@ -18,7 +18,7 @@ angular.module('wod.routes', [])
       url: '/nav2',
       templateUrl: 'app/nav/providernav.template.html',
       controller: 'navCtrl as navCtrl',
-      abstract: true,
+      // abstract: true,
     })
     .state('customernav.customer', {
       url: '/customerProfile',
@@ -43,6 +43,9 @@ angular.module('wod.routes', [])
       url: '/providerProfile',
       // authenticate: false // for now
       cache: false,
+      params: {
+        accepted: null
+      },
       views: {
         'nav-view': {
           templateUrl: 'app/providerView/provider.template.html',

@@ -89,6 +89,7 @@ module.exports = {
     var provider = jwt.decode(token, config.tokenSecret);
     var requestId = req.body._id;
     var currDate = Date.now();
+    var findRequest = Q.nbind(Request.findOne, Request);
 
     Request
       .where({_id: requestId})
@@ -97,7 +98,7 @@ module.exports = {
         provider: provider.company_name,
         provider_email: provider.email
       })
-      .then(function(request){
+      .then(function(request) {
         console.log(request);
         res.json({results: request});
         Provider
@@ -109,7 +110,7 @@ module.exports = {
       })
       .catch(function(err) {
         console.error(err);
-      })
+      });
   },
 
   getCurrent: function(req, res, next) {
@@ -124,6 +125,18 @@ module.exports = {
       .catch(function(err) {
         console.error(err);
       })
+  },
+
+  getAccepted: function(req, res, next) {
+    var token = req.headers['x-access-token'];
+    var provider = jwt.decode(token, config.tokenSecret);
+    var email = req.body.email;
+
+    Request
+      .where({provider_email: provider.email})
+      .then(function(request) {
+        res.json({results: request});
+      });
   },
 
   jobStarted: function(req, res, next) {

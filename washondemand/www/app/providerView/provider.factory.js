@@ -26,30 +26,8 @@ function providerFactory($http, $window, $location) {
     });
   };
 
-  function jobBegan(request) {
-    console.log("+++INSIDE JOBBEGAN FACTORY: ", request);
-    return $http({
-      method: POST,
-      // url: 'http://washondemand.us-west-2.elasticbeanstalk.com/api/request/job-started',
-      url: 'http://localhost:8000/api/request/job-started',
-      data: request
-    })
-  };
-
-  function jobFinished(request) {
-    console.log("+++INSIDE JOBFINISHED FACTORY: ", request);
-    return $http({
-      method: 'POST',
-      // url: 'http://washondemand.us-west-2.elasticbeanstalk.com/api/request/job-done',
-      url: 'http://localhost:8000/api/request/job-done',
-      data: request
-    });
-  };
-
   return {
     getRequest: getRequest,
-    acceptRequest: acceptRequest,
-    jobBegan: jobBegan,
-    jobFinished:jobFinished
+    acceptRequest: acceptRequest
   };
-}
+};
