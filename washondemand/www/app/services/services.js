@@ -133,7 +133,6 @@ function locFactory($window, $q, $http) {
         locData.email = email;
         locData.lat = position.coords.latitude;
         locData.lng = position.coords.longitude;
-        console.log('location found!');
         deferred.resolve(position);
       }, function(err) {
         deferred.reject(err);

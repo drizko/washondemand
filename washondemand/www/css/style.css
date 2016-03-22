@@ -24,6 +24,15 @@ ng-map {
   padding: 10px;
 }
 
+.float-right {
+  float: right;
+}
+
+.history-expand {
+  color: blue;
+  text-decoration: underline;
+}
+
 .gmnoprint {
   display:none;
 }

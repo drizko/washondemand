@@ -1,14 +1,43 @@
-<ion-view title="Customer Wash List">
+<ion-view title="Customer Wash History">
   <ion-content overflow-scroll="true" class="customer-history">
     <ion-list>
-      <ion-item class="item item-divider">Current Requested Wash</ion-item>
-      <ion-item ng-if="custWashHistCtrl.current">
-        Job Accepted: {{custWashHistCtrl.current.job_accepted}}<br>
-        Wash Type: {{custWashHistCtrl.current.wash_type}}<br>
-        Vehicle Type: {{custWashHistCtrl.current.vehicle_type}}<br>
-        Cost: ${{custWashHistCtrl.current.cost}}
+      <ion-item ng-repeat="wash in custWashHistCtrl.history">
+        <p>
+          <span>
+            {{custWashHistCtrl.formatTime(wash.job_ended)}}
+          </span>
+          <span class="float-right">
+            {{wash.provider}}
+          </span>
+        </p>
+        <p>
+          <span>
+            Price: {{wash.cost}}$
+          </span>
+          <span class="float-right">
+            Your Rating: {{wash.provRating}}
+          </span>
+        </p>
+        <p>
+          <span>
+            Vehicle Type: {{wash.vehicle_type}}
+          </span>
+          <span class="float-right">
+            Wash Type: {{wash.wash_type}}
+          </span>
+        </p>
+        <p>
+          <span class="history-expand" ng-click="custWashHistCtrl.toggleExpand(wash)">
+            <span ng-if="!wash.expanded">More</span>
+            <span ng-if="wash.expanded">Less</span>
+          </span>
+        </p>
+        <ul ng-show="wash.expanded">
+          <li ng-repeat="option in wash.wash_info" ng-if="option.active">
+            <p>{{option.info}}</p>
+          </li>
+        </ul>
       </ion-item>
-      <!-- <ion-item class="item item-divider">Past Washes</ion-item> -->
     </ion-list>
   </ion-content>
 </ion-view>
