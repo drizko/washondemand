@@ -3,36 +3,24 @@ angular.module('wod.provWashHistCtrl', []).controller('provWashHistCtrl', provWa
 function provWashHistCtrl(washHistFactory) {
   var vm = this;
 
-  vm.history = [
-    {
-      custName: 'Kasra Jahani',
-      custRating: '0 stars',
-      price: 100,
-      date: '4/2/1882',
-      washType: 'custom',
-      vehicleType: 'car',
-      options: [
-        {
-          info: 'balsamic vinegar',
-          price: 5
-        },
-        {
-          info: 'extra virgin olive oil',
-          price: 5
-        }
-      ]
-    }
-  ];
+  vm.history = [];
 
   vm.toggleExpand = function(wash) {
     wash.expanded = !wash.expanded;
   };
 
+  vm.formatTime = function(time) {
+    var timestamp = moment(time, 'x').format('M/D/YY h:mm a');
+    return timestamp;
+  };
+
   var init = function() {
     washHistFactory.getHistory()
     .then(function(history) {
-      console.log(history);
-      // vm.history = history; // uncomment this when linked with back end
+      history.sort(function(a, b) {
+        return b.job_ended - a.job_ended;
+      });
+      vm.history = history;
     });
   };
   init();

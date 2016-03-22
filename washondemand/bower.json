@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "ngmap": "^1.16.7",
-    "ion-sticky": "^1.0.4"
+    "ion-sticky": "^1.0.4",
+    "moment": "^2.12.0"
   }
 }
