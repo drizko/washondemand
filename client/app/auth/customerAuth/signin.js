@@ -13,7 +13,7 @@ function custSICtrl(authFactory, $window, $location) {
     authFactory.custSignin(vm.customer)
     .then(function(token) {
       authFactory.clearForm(vm.customer);
-      $window.localStorage.setItem('com.wod', token);
+      $window.localStorage['com.wod'] = token;
       $location.path('/customerProfile');
     })
     .catch(function(error) {
