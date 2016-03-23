@@ -24,7 +24,7 @@
       <label class="item item-input">
         <input type="password" placeholder="confirm password" ng-model='csu.customer.confirmPassword'>
       </label>
-      <p ng-show='csu.customer.error'>{{csu.customer.error}}</p>
+      <p ng-if='csu.customer.error'>{{csu.customer.error}}</p>
       <button class="button button-full button-positive">Sign Up</button>
     </form>
     <p>Already have an account?  <a href="#/customerSignin">Sign in here!</a></p>

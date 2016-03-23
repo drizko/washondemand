@@ -7,9 +7,9 @@
       </ng-map>
     </div>
 
-    <p ng-show="!customerCtrl.locData.found">grabbing your location.  please wait</p>
+    <p ng-if="!customerCtrl.locData.found">grabbing your location.  please wait</p>
 
-    <form class="request" ng-show="customerCtrl.locData.found">
+    <form class="request" ng-if="customerCtrl.locData.found">
       <div class="btn-margin">
         <span>Select Vehicle Type:</span>
         <div class="button-bar">
@@ -31,7 +31,7 @@
 
       <div class="wash-detail" ng-if="customerCtrl.showInfo()">
         <div class="row">
-          <div class="col">Total Price: {{customerCtrl.getPrice()}}$ <span ng-show="customerCtrl.request.washType ==='custom'">(Minimum 25$)</span></div>
+          <div class="col">Total Price: {{customerCtrl.getPrice()}}$ <span ng-if="customerCtrl.request.washType ==='custom'">(Minimum 25$)</span></div>
         </div>
         <div class="row">
           <div class="col">

@@ -1,43 +1,44 @@
 <ion-view title="Customer Wash History">
   <ion-content overflow-scroll="true" class="customer-history">
     <ion-list>
-      <ion-item ng-repeat="wash in custWashHistCtrl.history">
+      <ion-item ng-repeat="wash in custWashHistCtrl.history | limitTo:custWashHistCtrl.numEntries">
         <p>
           <span>
-            {{custWashHistCtrl.formatTime(wash.job_ended)}}
+            {{::custWashHistCtrl.formatTime(wash.job_ended)}}
           </span>
           <span class="float-right">
-            {{wash.provider}}
+            {{::wash.provider}}
           </span>
         </p>
         <p>
           <span>
-            Price: {{wash.cost}}$
+            Price: {{::wash.cost}}$
           </span>
           <span class="float-right">
-            Your Rating: {{wash.provRating}}
+            Your Rating: {{::wash.provRating}}
           </span>
         </p>
         <p>
           <span>
-            Vehicle Type: {{wash.vehicle_type}}
+            Vehicle Type: {{::wash.vehicle_type}}
           </span>
           <span class="float-right">
-            Wash Type: {{wash.wash_type}}
+            Wash Type: {{::wash.wash_type}}
           </span>
         </p>
         <p>
-          <span class="history-expand" ng-click="custWashHistCtrl.toggleExpand(wash)">
+          <span class="cust-history-expand" ng-click="custWashHistCtrl.toggleExpand(wash)">
             <span ng-if="!wash.expanded">More</span>
             <span ng-if="wash.expanded">Less</span>
           </span>
         </p>
-        <ul ng-show="wash.expanded">
+        <ul ng-if="wash.expanded">
           <li ng-repeat="option in wash.wash_info" ng-if="option.active">
-            <p>{{option.info}}</p>
+            <p>{{::option.info}}</p>
           </li>
         </ul>
       </ion-item>
     </ion-list>
+    <button class="button button-positive button-small button-full" ng-click="custWashHistCtrl.displayMoreEntries()" ng-if="custWashHistCtrl.numEntries < custWashHistCtrl.history.length"> Show More </button>
   </ion-content>
 </ion-view>

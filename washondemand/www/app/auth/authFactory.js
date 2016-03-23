@@ -1,8 +1,6 @@
-//stylize
-//form validation (phone convenience)
-//geolocation
-
 angular.module('wod.authFactory', []).factory('authFactory', authFactory);
+
+authFactory.$inject = ['$http', '$window', '$state', 'locFactory'];
 
 function authFactory($http, $window, $state, locFactory) {
 

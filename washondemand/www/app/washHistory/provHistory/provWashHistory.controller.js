@@ -3,6 +3,7 @@ angular.module('wod.provWashHistCtrl', []).controller('provWashHistCtrl', provWa
 function provWashHistCtrl(washHistFactory) {
   var vm = this;
 
+  vm.numEntries = 10;
   vm.history = [];
   vm.total = 0;
   vm.sum = 0;
@@ -16,13 +17,17 @@ function provWashHistCtrl(washHistFactory) {
     return timestamp;
   };
 
+  vm.displayMoreEntries = function() {
+    if (vm.numEntries < vm.history.length) {
+      vm.numEntries += 10;
+    }
+  };
+
   var init = function() {
     washHistFactory.getHistory()
     .then(function(history) {
-      history.sort(function(a, b) {
-        return b.job_ended - a.job_ended;
-      });
-      vm.history = history;
+      vm.history = history.reverse();
+
       vm.total = history.length;
       history.forEach(function(item) {
         vm.sum += item.cost;

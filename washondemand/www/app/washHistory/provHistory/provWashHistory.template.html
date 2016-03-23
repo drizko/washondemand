@@ -7,10 +7,11 @@
           Total earnings: ${{provWashHistCtrl.sum}}
         </div>
       </ion-item>
-      <ion-item ng-repeat="wash in provWashHistCtrl.history">
+
+      <ion-item ng-repeat="wash in provWashHistCtrl.history | limitTo:provWashHistCtrl.numEntries">
         <p>
           <span>
-            {{provWashHistCtrl.formatTime(wash.job_ended)}}
+            {{::provWashHistCtrl.formatTime(wash.job_ended)}}
           </span>
           <span class="float-right">
 
@@ -18,32 +19,33 @@
         </p>
         <p>
           <span>
-            Price: ${{wash.cost}}
+            Price: {{::wash.cost}}$
           </span>
           <span class="float-right">
-            Your Rating: {{wash.custRating}}
+            Your Rating: {{::wash.custRating}}
           </span>
         </p>
         <p>
           <span>
-            Vehicle Type: {{wash.vehicle_type}}
+            Vehicle Type: {{::wash.vehicle_type}}
           </span>
           <span class="float-right">
-            Wash Type: {{wash.wash_type}}
+            Wash Type: {{::wash.wash_type}}
           </span>
         </p>
         <p>
-          <span class="history-expand" ng-click="provWashHistCtrl.toggleExpand(wash)">
+          <span class="prov-history-expand" ng-click="provWashHistCtrl.toggleExpand(wash)">
             <span ng-if="!wash.expanded">More</span>
             <span ng-if="wash.expanded">Less</span>
           </span>
         </p>
-        <ul ng-show="wash.expanded">
+        <ul ng-if="wash.expanded">
           <li ng-repeat="option in wash.wash_info" ng-if="option.active">
-            <p>{{option.info}}</p>
+            <p>{{::option.info}}</p>
           </li>
         </ul>
       </ion-item>
     </ion-list>
+    <button class="button button-calm button-small button-full" ng-click="provWashHistCtrl.displayMoreEntries()" ng-if="provWashHistCtrl.numEntries < provWashHistCtrl.history.length"> Show More </button>
   </ion-content>
 </ion-view>
