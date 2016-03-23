@@ -17,5 +17,9 @@
     "karma-jasmine": "^0.3.8",
     "protractor": "^3.2.1",
     "shelljs": "^0.3.0"
-  }
+  },
+  "cordovaPlugins": [],
+  "cordovaPlatforms": [
+    "ios"
+  ]
 }
