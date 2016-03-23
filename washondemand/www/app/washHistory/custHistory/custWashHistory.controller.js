@@ -16,7 +16,9 @@ function custWashHistCtrl(washHistFactory) {
   };
 
   vm.displayMoreEntries = function() {
-    vm.numEntries += 10;
+    if (vm.numEntries < vm.history.length) {
+      vm.numEntries += 10;
+    }
   };
 
   var init = function() {

@@ -39,6 +39,6 @@
         </ul>
       </ion-item>
     </ion-list>
-    <button class="button button-positive button-small button-full" ng-click="custWashHistCtrl.displayMoreEntries()"> Show More </button>
+    <button class="button button-positive button-small button-full" ng-click="custWashHistCtrl.displayMoreEntries()" ng-if="custWashHistCtrl.numEntries < custWashHistCtrl.history.length"> Show More </button>
   </ion-content>
 </ion-view>

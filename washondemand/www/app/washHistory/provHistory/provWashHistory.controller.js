@@ -18,13 +18,16 @@ function provWashHistCtrl(washHistFactory) {
   };
 
   vm.displayMoreEntries = function() {
-    vm.numEntries += 10;
+    if (vm.numEntries < vm.history.length) {
+      vm.numEntries += 10;
+    }
   };
 
   var init = function() {
     washHistFactory.getHistory()
     .then(function(history) {
       vm.history = history.reverse();
+
       vm.total = history.length;
       history.forEach(function(item) {
         vm.sum += item.cost;
