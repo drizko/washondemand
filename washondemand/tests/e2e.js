@@ -70,7 +70,44 @@ describe('Requesting Wash', function() {
     browser.sleep(2000);
   });
 
-  // it('should display a popup for an unsuccessful login', function() {
-  //   // TODO: test unsuccessful login
-  // });
+
+  describe('Creating a new provider account', function() {
+    var companyName = element(by.model('psu.provider.companyName'));
+    var email = element(by.model('psu.provider.email'));
+    var phone = element(by.model('psu.provider.phone'));
+    var password = element(by.model('psu.provider.password'));
+    var confirmPassword = element(by.model('psu.provider.confirmPassword'));
+    var signupButton = element(by.buttonText('Sign Up'));
+    var errormsg = element(by.model('psu.provider.error'));
+
+    beforeEach(function() {
+      browser.get('/#/providerSignup');
+    });
+
+    it('Should deny sign up for wrong input', function() {
+      companyName.sendKeys('test company');
+      email.sendKeys('prov1@test.com');
+      phone.sendKeys('1234567');
+      password.sendKeys('123');
+      confirmPassword.sendKeys('123');
+
+      signupButton.click().then(function() {
+        expect(browser.getLocationAbsUrl()).toMatch('/providerSignup');
+        expect(errormsg).not.toEqual('');
+      });
+
+    });
+
+    it('Should create an account and go to provider profile page', function() {
+      companyName.sendKeys('test company');
+      email.sendKeys('prov24@test.com');
+      phone.sendKeys('1234567890');
+      password.sendKeys('123');
+      confirmPassword.sendKeys('123');
+
+      signupButton.click().then(function(){
+        expect(browser.getLocationAbsUrl()).toMatch('/nav2/providerProfile');
+      })
+    })
+  })
 });
