@@ -13,7 +13,7 @@ function provSICtrl(authFactory, $window, $location) {
     authFactory.provSignin(vm.provider)
     .then(function(token) {
       authFactory.clearForm(vm.provider);
-      $window.localStorage.setItem('com.wod', token);
+      $window.localStorage['com.wod'] = token;
       $location.path('/providerProfile');
     })
     .catch(function(error) {
