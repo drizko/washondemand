@@ -3,6 +3,7 @@ angular.module('wod.custWashHistCtrl', []).controller('custWashHistCtrl', custWa
 function custWashHistCtrl(washHistFactory) {
   var vm = this;
 
+  vm.numEntries = 10;
   vm.history = [];
 
   vm.toggleExpand = function(wash) {
@@ -14,13 +15,14 @@ function custWashHistCtrl(washHistFactory) {
     return timestamp;
   };
 
+  vm.displayMoreEntries = function() {
+    vm.numEntries += 10;
+  };
+
   var init = function() {
     washHistFactory.getHistory()
     .then(function(history) {
-      history.sort(function(a, b) {
-        return b.job_ended - a.job_ended;
-      });
-      vm.history = history;
+      vm.history = history.reverse();
     });
   };
   init();

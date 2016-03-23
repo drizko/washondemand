@@ -28,8 +28,13 @@ ng-map {
   float: right;
 }
 
-.history-expand {
-  color: blue;
+.cust-history-expand {
+  color: #387ef5;
+  text-decoration: underline;
+}
+
+.prov-history-expand {
+  color: #11c1f3;
   text-decoration: underline;
 }
 
