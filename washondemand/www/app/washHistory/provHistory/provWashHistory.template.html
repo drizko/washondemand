@@ -38,7 +38,7 @@
             <span ng-if="wash.expanded">Less</span>
           </span>
         </p>
-        <ul ng-show="wash.expanded">
+        <ul ng-if="wash.expanded">
           <li ng-repeat="option in wash.wash_info" ng-if="option.active">
             <p>{{option.info}}</p>
           </li>

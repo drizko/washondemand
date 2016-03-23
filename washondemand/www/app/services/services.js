@@ -75,7 +75,7 @@ function GeoAlert(locFactory, jwtDecoder, $window) {
 };
 
 function socket($rootScope) {
-  var socket = io.connect('masterURL');
+  var socket = io.connect(masterURL);
 
   return {
     on: function(eventName, callback) {

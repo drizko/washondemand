@@ -21,7 +21,7 @@
       <label class="item item-input">
         <input type="password" placeholder="confirm password" ng-model='psu.provider.confirmPassword'>
       </label>
-      <p ng-show='psu.provider.error'>{{psu.provider.error}}</p>
+      <p ng-if='psu.provider.error'>{{psu.provider.error}}</p>
       <button class="button button-full button-calm">Sign Up</button>
     </form>
     <p>Already have an account?  <a href="#/providerSignin">Sign in here!</a></p>

@@ -12,7 +12,7 @@
       <label class="item item-input">
         <input type="password" placeholder="password" ng-model='psi.provider.password'>
       </label>
-      <p ng-show='psi.provider.error'>{{psi.provider.error}}</p>
+      <p ng-if='psi.provider.error'>{{psi.provider.error}}</p>
       <button class="button button-full button-calm">Sign In</button>
     </form>
     <p>Need an account?  <a href="#/providerSignup">Create one here!</a></p>
