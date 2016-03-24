@@ -167,10 +167,9 @@ module.exports = {
       .update({job_ended: currDate})
       .then(function() {
         console.log("Inside jobDone (here is jobId): ", jobId);
-        History.moveToHistory(jobId);
-      })
-      .then(function(){
-        res.status(200).send();
+        History.moveToHistory(jobId, function() {
+          res.status(200).send();
+        });
       })
       .catch(function(err){
         console.error(err);
