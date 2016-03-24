@@ -19,7 +19,6 @@ angular.module('WashOnDemand', [
 	'wod.nav',
 	'ngMap',
   'ion-sticky',
-  'ngCordova',
   'angular-jwt'
 ])
 
@@ -36,4 +35,4 @@ angular.module('WashOnDemand', [
       StatusBar.styleDefault();
     }
   });
-})
+});

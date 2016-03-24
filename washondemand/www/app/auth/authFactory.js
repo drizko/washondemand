@@ -15,6 +15,7 @@ function authFactory($http, $window, $state, locFactory) {
   };
 
   function handleAuth(accountInfo, userType, method) {
+
     if (!checkFormFilled(accountInfo)) {
       return;
     }
@@ -28,7 +29,7 @@ function authFactory($http, $window, $state, locFactory) {
       //clear input forms
       clearForm(accountInfo);
       //set jwt
-      $window.localStorage['com.wod'] = token;
+      $window.localStorage.setItem('com.wod', token);
       //redirect to user page
       $state.go(userType + 'nav.' + userType);
     })

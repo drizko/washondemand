@@ -16,7 +16,7 @@ function provSUCtrl(authFactory, $window, $location) {
     authFactory.provSignup(vm.provider)
     .then(function(token) {
       authFactory.clearForm(vm.provider);
-      $window.localStorage['com.wod'] = token;
+      $window.localStorage.setItem('com.wod', token);
       $location.path('/providerProfile');
     })
     .catch(function(error) {
