@@ -124,7 +124,7 @@ angular.module('wod.routes', [])
       authenticate: false
     });
 
-  $urlRouterProvider.otherwise('/');
+  // $urlRouterProvider.otherwise('/');
   $httpProvider.interceptors.push('AttachTokens');
 })
 
@@ -143,7 +143,19 @@ angular.module('wod.routes', [])
   return attach;
 })
 
-.run(function($rootScope, $state, authFactory) {
+.run(function($rootScope, $state, authFactory, $window, jwtDecoder) {
+
+  var token = $window.localStorage['com.wod'];
+  if(token !== undefined){
+    var user = jwtDecoder.decoder(token);
+    if(user.company_name === undefined){
+      $state.transitionTo('customernav.customer')
+      event.preventDefault();
+    } else {
+      $state.transitionTo('providernav.provider')
+      event.preventDefault();
+    }
+  }
 
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
     if (toState.authenticate && !authFactory.isAuth()) {
