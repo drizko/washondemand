@@ -1,7 +1,7 @@
 angular.module('wod.customerCtrl', [])
 .controller('customerCtrl', customerCtrl);
 
-function customerCtrl($scope, customerViewFactory, NgMap, $ionicPopup, customerFactory, $state, locFactory, $window, jwtDecoder) {
+function customerCtrl($scope, customerViewFactory, $ionicHistory, NgMap, $ionicPopup, customerFactory, $state, locFactory, $window, jwtDecoder) {
 
   var vm = this;
 
@@ -43,6 +43,9 @@ function customerCtrl($scope, customerViewFactory, NgMap, $ionicPopup, customerF
       .then(function(item){
         if(item[0]){
           console.log(item);
+          $ionicHistory.nextViewOptions({
+            disableBack: true
+          });
           vm.showConfirm();
         } else {
           customerFactory.sendRequest(vm.request)

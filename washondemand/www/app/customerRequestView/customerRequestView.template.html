@@ -5,7 +5,7 @@
         <marker position="[{{custReqInfoCtrl.currentRequest.user_location.lat}}, {{custReqInfoCtrl.currentRequest.user_location.lng}}]"></marker>
         <marker position="[{{custReqInfoCtrl.providerInfo.geolocation.lat}}, {{custReqInfoCtrl.providerInfo.geolocation.lng}}]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
       </ng-map>
-    </div> 
+    </div>
     <ion-list>
       <ion-item class="item item-divider">Current Wash</ion-item>
       <ion-item>
@@ -16,7 +16,7 @@
       </ion-item>
       <ion-item ng-if="custReqInfoCtrl.providerInfo">
         Your Provider: {{custReqInfoCtrl.providerInfo.company_name}}<br>
-        Contact: <a ng-href="tel: {{custReqInfoCtrl.providerInfo.phone_number}}">{{custReqInfoCtrl.providerInfo.phone_number}}</a>
+        Contact: <a class="button icon-left ion-ios7-telephone button-calm button-outline" ng-href="tel: {{custReqInfoCtrl.providerInfo.phone_number}}">{{custReqInfoCtrl.providerInfo.phone_number}}</a>
       </ion-item>       
       <!-- <ion-item class="item item-divider">Past Washes</ion-item> -->
     </ion-list>
