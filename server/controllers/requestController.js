@@ -165,6 +165,7 @@ module.exports = {
     Request
       .where({_id: jobId})
       .update({job_ended: currDate})
+      .find({_id: jobId})
       .then(function(job) {
         console.log("Inside create of History: ", job);
         History.create(job)
