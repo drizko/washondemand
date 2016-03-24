@@ -9,6 +9,9 @@
   "dependencies": {
     "ngmap": "^1.16.7",
     "ion-sticky": "^1.0.4",
-    "moment": "^2.12.0"
+    "moment": "^2.12.0",
+    "socket.io": "^1.4.5",
+    "cordova": "^3.4.0",
+    "angular-jwt": "^0.0.9"
   }
 }
