@@ -39,6 +39,8 @@ function providerCtrl($scope, $stateParams, socket, providerFactory, $window, lo
 
   vm.acceptWash = function(request) {
     vm.accepted = true;
+    var provider = jwtDecoder.decoder($window.localStorage['com.wod']);
+    request.provider = provider;
     socket.emit('accepted', request);
     providerFactory.acceptRequest(request)
       .then(function() {

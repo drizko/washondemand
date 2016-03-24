@@ -8,9 +8,12 @@ function custReqInfoCtrl($stateParams, customerViewFactory, socket, $state) {
       vm.currentRequest = request[0];
     });
 
-  socket.on('refreshList', function(){
+  socket.on('refreshList', function(requestInfo){
     console.log(vm.currentRequest);
-    vm.currentRequest.job_accepted = vm.currentRequest.job_accepted || "Accepted"
+    vm.currentRequest.job_accepted = vm.currentRequest.job_accepted || "Accepted";
+    vm.providerInfo = requestInfo.provider;
+
+    console.log("+++PROVIDER INFO: ", vm.providerInfo);
     console.log(vm.currentRequest);
   });
 
