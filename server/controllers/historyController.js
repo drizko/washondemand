@@ -18,11 +18,11 @@ module.exports = {
 			History.collection.dropIndexes();
 			History.create(job).then(function(data){
         console.log("Inside create of History: ", data);
-				Request.remove({ _id: jobID }).then(function(){
-				})
-				.catch(function(err){
-				  console.error(err);
-				})
+				// Request.remove({ _id: jobID }).then(function(){
+				// })
+				// .catch(function(err){
+				//   console.error(err);
+				// })
 			})
 			.catch(function(error){
 			  console.error(error);
