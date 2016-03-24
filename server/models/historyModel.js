@@ -17,9 +17,13 @@ var historySchema = new Schema ({
 	distance: Number,
 	provider: String,
 	provider_email: String,
-	wash_info: Schema.Types.Mixed
+	wash_info: Schema.Types.Mixed,
+	provider_rating: Number,
+	provider_feedback: String,
+	customer_rating: Number,
+	customer_feedback: String
 });
 
-var History = mongoose.model("History", historySchema);
+var History = mongoose.model('History', historySchema);
 
 module.exports = History;

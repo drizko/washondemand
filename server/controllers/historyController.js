@@ -28,11 +28,11 @@ module.exports = {
 		})
 	},
 
-	showHistory: function (req, res, next) {
-		var token = req.headers['x-access-token'];
-		var user = jwt.decode(token, config.tokenSecret);
-		var email;
-		if(user.company_name) {
+  showHistory: function(req, res, next) {
+    var token = req.headers['x-access-token'];
+    var user = jwt.decode(token, config.tokenSecret);
+    var email;
+    if (user.company_name) {
 			email = user.email;
 			History.find({ provider_email: email }).then(function(provData) {
 				if(!provData){
@@ -55,5 +55,32 @@ module.exports = {
 				console.error(err);
 			})
 		}
-	}	
+	},
+
+  addRatingAndFeedback: function(req, res, next) {
+    var requestId = req.body._id;
+    var rating = req.body.provider_rating;
+    var feedback = req.body.provider_feedback;
+
+    var query = {
+      '_id': requestId
+    };
+
+    var update = {
+      'provider_rating': rating,
+      'provider_feedback': feedback
+    };
+
+    var options = {
+      upsert: false,
+      new: true
+    };
+
+    History.findOneAndUpdate(query, update, options, function(err, requestData) {
+      if (err) {
+        throw err;
+      }
+      res.json(requestData);
+    });
+  }
 }
