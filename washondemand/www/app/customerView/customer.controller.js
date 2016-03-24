@@ -41,7 +41,7 @@ function customerCtrl($scope, customerViewFactory, $ionicHistory, NgMap, $ionicP
   vm.sendRequest = function() {
     customerViewFactory.getRequest()
       .then(function(item){
-        if(item[0]){
+        if(item[0] !== undefined){
           console.log(item);
           $ionicHistory.nextViewOptions({
             disableBack: true
@@ -50,6 +50,9 @@ function customerCtrl($scope, customerViewFactory, $ionicHistory, NgMap, $ionicP
         } else {
           customerFactory.sendRequest(vm.request)
           .then(function(){
+            $ionicHistory.nextViewOptions({
+              disableBack: true
+            });
             $state.go('customernav.customerRequestView');
           });
         }
