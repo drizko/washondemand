@@ -3,7 +3,7 @@ angular.module('wod.routes', [])
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
 		.state('home', {
-      url: '',
+      url: '/',
 			templateUrl: 'app/home/home.template.html',
 			controller: 'homeCtrl as home',
 			authenticate: false
@@ -142,24 +142,14 @@ angular.module('wod.routes', [])
   };
   return attach;
 })
-.run(function($rootScope, $state, authFactory, $window, jwtDecoder) {
-  var token = $window.localStorage['com.wod'];
-  if(token !== undefined){
-    var user = jwtDecoder.decoder(token);
-    if(user.company_name === undefined){
-      $state.transitionTo('customernav.customer')
-      event.preventDefault();
-    } else {
-      $state.transitionTo('providernav.provider')
-      event.preventDefault();
-    }
-  }
+
+.run(function($rootScope, $state, authFactory) {
 
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-    if(toState.authenticate && !authFactory.isAuth()) {
+    if (toState.authenticate && !authFactory.isAuth()) {
       // User isn’t authenticated
       $state.transitionTo('home');
       event.preventDefault();
     }
   });
-})
+});

@@ -19,9 +19,9 @@ io.on('connection', function(socket){
     io.emit('refreshList', request);
   });
 
-  // socket.on('canceled', function(request){
-  //   io.emit('refreshList', request);
-  // })
+  socket.on('canceled', function(request){
+    io.emit('refreshList', request);
+  })
 });
 
 require('./routes/routes.js')(app, express);

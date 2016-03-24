@@ -30,6 +30,8 @@ function providerCtrl($scope, $stateParams, socket, providerFactory, $window, lo
       });
   };
 
+  vm.getRequests();
+
   vm.moveMarkers = function(request) {
     var user = jwtDecoder.decoder($window.localStorage['com.wod']);
     request.user_location.lat += 0.01;
@@ -62,13 +64,4 @@ function providerCtrl($scope, $stateParams, socket, providerFactory, $window, lo
       );
     });
   };
-
-  var init = function() {
-    var token = $window.localStorage['com.wod'];
-    var user = jwtDecoder.decoder(token);
-
-    vm.getRequests();
-    locFactory.getLoc('provider', user.email).then(locFactory.sendLocToServer);
-  };
-  init();
 };
