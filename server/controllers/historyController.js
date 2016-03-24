@@ -15,14 +15,14 @@ module.exports = {
 	moveToHistory: function(jobID) {
     console.log("Inside moveToHistory: ", jobID);
 		Request.find({ _id: jobID }).then(function(job){
-			History.collection.dropIndexes();
+			// History.collection.dropIndexes();
 			History.create(job).then(function(data){
         console.log("Inside create of History: ", data);
-				// Request.remove({ _id: jobID }).then(function(){
-				// })
-				// .catch(function(err){
-				//   console.error(err);
-				// })
+				Request.remove({ _id: jobID }).then(function(){
+				})
+				.catch(function(err){
+				  console.error(err);
+				})
 			})
 			.catch(function(error){
 			  console.error(error);
