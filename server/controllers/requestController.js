@@ -1,7 +1,7 @@
 var Customer = require('../models/customerModel.js');
 var Request = require('../models/requestModel.js');
 var Provider = require('../models/providerModel.js');
-var something = require('../models/historyModel.js');
+var History = require('../models/historyModel.js');
 var Q = require('q');
 var helpers = require('../utils/helpers');
 var jwt = require('jwt-simple');
@@ -165,13 +165,21 @@ module.exports = {
     Request
       .where({_id: jobId})
       .update({job_ended: currDate})
+      .catch(function(err){
+        console.error(err);
+      })
+
+
+    Request
+      .where({_id: jobId})
       .then(function(job) {
-        console.log("Inside create of something: ", job);
-        something.create(job)
+        console.log("Inside create of History: ", job);
+        History.create(job)
       })
       .catch(function(err){
         console.error(err);
-      });
+      })
+      
   },
 
   cancelRequest: function(req, res, next){

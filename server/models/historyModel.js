@@ -24,6 +24,6 @@ var historySchema = new Schema ({
 	customer_feedback: String
 });
 
-var something = mongoose.model('History', historySchema);
+var History = mongoose.model('History', historySchema);
 
-module.exports = something;
+module.exports = History;
