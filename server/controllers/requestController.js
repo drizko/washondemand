@@ -165,10 +165,6 @@ module.exports = {
     Request
       .where({_id: jobId})
       .update({job_ended: currDate})
-      .catch(function(err){
-        console.error(err);
-      })
-
 
     Request
       .where({_id: jobId})
@@ -179,7 +175,7 @@ module.exports = {
       .catch(function(err){
         console.error(err);
       })
-      
+
   },
 
   cancelRequest: function(req, res, next){
