@@ -165,16 +165,21 @@ module.exports = {
     Request
       .where({_id: jobId})
       .update({job_ended: currDate})
+      .then(function(){
+        Request
+          .where({_id: jobId})
+          .then(function(job) {
+            console.log("Inside create of History: ", job);
+            History.create(job)
+          })
+      })
+      .then(function(){
+        res.status(200).send;
+      })
+      .catch(function(error){
+        console.log(error);
+      })
 
-    Request
-      .where({_id: jobId})
-      .then(function(job) {
-        console.log("Inside create of History: ", job);
-        History.create(job)
-      })
-      .catch(function(err){
-        console.error(err);
-      })
 
   },
 
