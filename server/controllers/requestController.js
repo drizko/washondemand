@@ -166,6 +166,7 @@ module.exports = {
       .where({_id: jobId})
       .update({job_ended: currDate})
       .then(function() {
+        console.log("Inside jobDone (here is jobId): ", jobId);
         History.moveToHistory(jobId);
         res.status(200).send();
       })
