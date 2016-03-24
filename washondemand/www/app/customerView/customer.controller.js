@@ -1,7 +1,7 @@
 angular.module('wod.customerCtrl', [])
 .controller('customerCtrl', customerCtrl);
 
-function customerCtrl($scope, NgMap, customerFactory, $state, locFactory) {
+function customerCtrl($scope, NgMap, customerFactory, $state, locFactory, $window, jwtDecoder) {
 
   var vm = this;
 
@@ -79,7 +79,10 @@ function customerCtrl($scope, NgMap, customerFactory, $state, locFactory) {
   };
 
   var init = function() {
+    var token = $window.localStorage['com.wod'];
+    var user = jwtDecoder.decoder(token);
     getProviders();
+    locFactory.getLoc('customer', user.email).then(locFactory.sendLocToServer);
   };
   init();
 }
