@@ -168,6 +168,8 @@ module.exports = {
       .then(function() {
         console.log("Inside jobDone (here is jobId): ", jobId);
         History.moveToHistory(jobId);
+      })
+      .then(function(){
         res.status(200).send();
       })
       .catch(function(err){
