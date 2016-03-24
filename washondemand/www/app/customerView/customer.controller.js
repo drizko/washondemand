@@ -1,7 +1,7 @@
 angular.module('wod.customerCtrl', [])
 .controller('customerCtrl', customerCtrl);
 
-function customerCtrl($scope, NgMap, customerFactory, $state, locFactory, $window, jwtDecoder) {
+function customerCtrl($scope, customerViewFactory, NgMap, $ionicPopup, customerFactory, $state, locFactory, $window, jwtDecoder) {
 
   var vm = this;
 
@@ -16,6 +16,21 @@ function customerCtrl($scope, NgMap, customerFactory, $state, locFactory, $windo
 
   vm.locData = locFactory.locData;
 
+  vm.showConfirm = function() {
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Request Pending',
+      template: 'You already have a request pending\nWould you like to go to that page?'
+    });
+
+    confirmPopup.then(function(res) {
+      if(res) {
+        $state.go("customernav.customerRequestView")
+      } else {
+        console.log("fine...");
+      }
+    });
+  };
+
   var getProviders = function() {
     customerFactory.getProviders()
     .then(function(data) {
@@ -24,10 +39,18 @@ function customerCtrl($scope, NgMap, customerFactory, $state, locFactory, $windo
   };
 
   vm.sendRequest = function() {
-    customerFactory.sendRequest(vm.request)
-      .then(function(){
-        $state.go('customernav.customerRequestView');
-      });
+    customerViewFactory.getRequest()
+      .then(function(item){
+        if(item[0]){
+          console.log(item);
+          vm.showConfirm();
+        } else {
+          customerFactory.sendRequest(vm.request)
+          .then(function(){
+            $state.go('customernav.customerRequestView');
+          });
+        }
+      })
   };
 
   vm.selectVehicle = function(vehicle) {
