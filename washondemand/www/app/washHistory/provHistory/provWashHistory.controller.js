@@ -7,6 +7,7 @@ function provWashHistCtrl(washHistFactory) {
   vm.history = [];
   vm.total = 0;
   vm.sum = 0;
+  vm.ratingAvg = 0;
 
   vm.toggleExpand = function(wash) {
     wash.expanded = !wash.expanded;
@@ -15,6 +16,29 @@ function provWashHistCtrl(washHistFactory) {
   vm.formatTime = function(time) {
     var timestamp = moment(time, 'x').format('M/D/YY h:mm a');
     return timestamp;
+  };
+
+  vm.formatRating = function(rating) {
+    if (rating > 0) {
+      var stars = '';
+      for (i = 1; i <= 5; i++) {
+        if (i <= rating) {
+          stars += '<i class="icon ion-ios-star"></i>';
+        }
+        else {
+          stars += '<i class="icon ion-ios-star-outline"></i>';
+        }
+      }
+      return stars;
+    }
+    return '</span>no rating given</span>';
+  };
+
+  vm.formatFeedback = function(feedback) {
+    if (feedback) {
+      return '"' + feedback + '"';
+    }
+    return 'no comment given';
   };
 
   vm.displayMoreEntries = function() {
@@ -26,12 +50,20 @@ function provWashHistCtrl(washHistFactory) {
   var init = function() {
     washHistFactory.getHistory()
     .then(function(history) {
-      vm.history = history.reverse();
 
       vm.total = history.length;
+
+      var ratingCount = 0;
       history.forEach(function(item) {
         vm.sum += item.cost;
+        if (item.provider_rating > 0) {
+          ratingCount++;
+          vm.ratingAvg += item.provider_rating;
+        }
       });
+      vm.ratingAvg /= ratingCount;
+
+      vm.history = history.reverse();
     });
   };
   init();
