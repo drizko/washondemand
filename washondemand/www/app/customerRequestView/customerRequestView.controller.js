@@ -5,6 +5,7 @@ function custReqInfoCtrl($stateParams, customerViewFactory, socket, $state) {
 
   customerViewFactory.getRequest()
     .then(function(request){
+      console.log(request);
       vm.currentRequest = request[0];
     });
 
