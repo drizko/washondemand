@@ -27,11 +27,8 @@ describe('Clicking on the signin button ', function() {
       expect(browser.getLocationAbsUrl()).toMatch('/nav1/customerProfile');
     });
   });
-
-  // it('should display a popup for an unsuccessful login', function() {
-  //   // TODO: test unsuccessful login
-  // });
 });
+
 describe('Requesting Wash', function() {
 
   var requestWashButton, selectWashType, selectVehicleType,
@@ -56,20 +53,19 @@ describe('Requesting Wash', function() {
     selectWashType = element(by.buttonText('Basic'));
     selectVehicleType = element(by.buttonText('Car'));
 
-    selectWashType.click()
+    selectWashType.click();
 
-    selectVehicleType.click()
+    selectVehicleType.click();
 
     browser.sleep(5000);
 
     requestWashButton.click()
-      .then(function(){
+      .then(function() {
         // Need to fill in more information here.
-      })
+      });
 
     browser.sleep(2000);
   });
-
 
   describe('Creating a new provider account', function() {
     var companyName = element(by.model('psu.provider.companyName'));
@@ -105,9 +101,9 @@ describe('Requesting Wash', function() {
       password.sendKeys('123');
       confirmPassword.sendKeys('123');
 
-      signupButton.click().then(function(){
+      signupButton.click().then(function() {
         expect(browser.getLocationAbsUrl()).toMatch('/nav2/providerProfile');
-      })
-    })
-  })
+      });
+    });
+  });
 });
