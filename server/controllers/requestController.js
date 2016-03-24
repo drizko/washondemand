@@ -1,7 +1,7 @@
 var Customer = require('../models/customerModel.js');
 var Request = require('../models/requestModel.js');
 var Provider = require('../models/providerModel.js');
-var History = require('./historyController.js');
+var History = require('../models/historyModel.js');
 var Q = require('q');
 var helpers = require('../utils/helpers');
 var jwt = require('jwt-simple');
@@ -165,11 +165,9 @@ module.exports = {
     Request
       .where({_id: jobId})
       .update({job_ended: currDate})
-      .then(function() {
-        console.log("Inside jobDone (here is jobId): ", jobId);
-        History.moveToHistory(jobId, function() {
-          res.status(200).send();
-        });
+      .then(function(job) {
+        console.log("Inside create of History: ", job);
+        History.create(job)
       })
       .catch(function(err){
         console.error(err);
