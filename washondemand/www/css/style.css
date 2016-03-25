@@ -16,6 +16,10 @@ ng-map {
   margin-right: 5px;
 }
 
+#premium-btn {
+  text-overflow: clip;
+}
+
 .wash-detail {
   border: 1px solid gray;
   border-radius: 4px;
