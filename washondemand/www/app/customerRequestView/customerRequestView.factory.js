@@ -24,10 +24,22 @@ function customerViewFactory($http) {
     })
   };
 
+  function sendFeedback(data) {
+    return $http({
+      method: 'POST',
+      url: masterURL + '/api/history/add-rating-and-feedback',
+      data: data
+    })
+    .then(function(results){
+      return results.data
+    })
+  };
+
   return {
     cancelRequest: cancelRequest,
     getRequest: getRequest,
-    currentRequest: currentRequest
+    currentRequest: currentRequest,
+    sendFeedback: sendFeedback
   }
 
 };

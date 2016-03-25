@@ -45,3 +45,13 @@ ng-map {
 .inactiveOption {
   color: grey;
 }
+
+.popup-buttons .button {
+  min-width: 20px;
+  min-height: 30px;
+}
+
+.feedback-text {
+  min-height: 100px;
+  resize: none;
+}
