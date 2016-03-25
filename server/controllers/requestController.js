@@ -1,7 +1,7 @@
 var Customer = require('../models/customerModel.js');
 var Request = require('../models/requestModel.js');
 var Provider = require('../models/providerModel.js');
-var something = require('../models/historyModel.js');
+var History = require('../models/historyModel.js');
 var Q = require('q');
 var helpers = require('../utils/helpers');
 var jwt = require('jwt-simple');
@@ -162,6 +162,8 @@ module.exports = {
     var jobId = req.body._id;
     var currDate = Date.now();
 
+    var create = Q.nbind(History.create, History);
+
     Request
       .where({_id: jobId})
       .update({job_ended: currDate})
@@ -170,7 +172,7 @@ module.exports = {
           .where({_id: jobId})
           .then(function(job) {
             console.log("Inside create of History: ", job);
-            something.create(job)
+            create(job)
           })
       })
       .then(function(){
