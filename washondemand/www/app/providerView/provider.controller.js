@@ -20,6 +20,10 @@ function providerCtrl($scope, $stateParams, socket, providerFactory, $window, lo
     }
   });
 
+  socket.on('addList', function(data) {
+    vm.requests.push(data);
+  })
+
   vm.getRequests = function() {
     providerFactory.getRequest(locFactory.locData)
       .then(function(data) {

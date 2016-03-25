@@ -10,7 +10,7 @@
       <ion-item class="item item-divider">
         Carwash Requested
       </ion-item>
-      <ion-item class="item request-list" ng-repeat="request in providerCtrl.requests">
+      <ion-item class="item request-list" ng-if="!request.accepted" ng-repeat="request in providerCtrl.requests">
         <div style="float:left;">
           Wash Type: {{request.wash_type}}<br>
           Car Type: {{request.vehicle_type}}<br>

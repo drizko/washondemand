@@ -1,7 +1,7 @@
 angular.module('wod.customerCtrl', [])
 .controller('customerCtrl', customerCtrl);
 
-function customerCtrl($scope, customerViewFactory, $ionicHistory, NgMap, $ionicPopup, customerFactory, $state, locFactory, $window, jwtDecoder) {
+function customerCtrl($scope, customerViewFactory, $ionicHistory, NgMap, $ionicPopup, customerFactory, $state, locFactory, $window, jwtDecoder, socket) {
 
   var vm = this;
 
@@ -50,6 +50,7 @@ function customerCtrl($scope, customerViewFactory, $ionicHistory, NgMap, $ionicP
         } else {
           customerFactory.sendRequest(vm.request)
           .then(function(){
+            socket.emit('requested',vm.request);
             $ionicHistory.nextViewOptions({
               disableBack: true
             });
