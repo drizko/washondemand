@@ -163,6 +163,22 @@ module.exports = {
     var currDate = Date.now();
     var create = Q.nbind(History.create, History);
 
+    var newHistory = { user_location: { lng: -118.49430729999999, lat: 34.01918880000001 },
+        __v: 0,
+        wash_info: {}
+        distance: null,
+        cost: 87,
+        job_ended: '',
+        job_started: '',
+        job_accepted: '',
+        request_filled: '',
+        vehicle_type: 'suv',
+        wash_type: 'premium',
+        user_phone: 1234567890,
+        user_email: 'cust4@test.com',
+        user_firstname: 'cust4',
+        _id: 56f48b112f898200359771f6 }
+
     Request
       .where({_id: jobId})
       .update({job_ended: currDate})
@@ -170,9 +186,22 @@ module.exports = {
         Request
           .where({provider_email: provider.email})
           .then(function(job) {
-            job[0].wash_info = "";
+            var newHistory = { user_location: {lng: job[0].user_location.lng, lat: job[0].user_location.lat},
+              wash_info: job[0].wash_info,
+              distance: job[0].distance,
+              cost: job[0].cost,
+              job_ended: job[0].job_ended,
+              job_started: job[0].job_started,
+              job_accepted: job[0].job_accepted,
+              request_filled: job[0].request_filled,
+              vehicle_type: job[0].vehicle_type,
+              wash_type: job[0].wash_type,
+              user_phone: job[0].user_phone,
+              user_email: job[0].user_email,
+              user_firstname: job[0].user_firstname,
+            }
             console.log("Inside create of History: ", job);
-            create(job)
+            create(newHistory)
           })
       })
       .then(function(){
