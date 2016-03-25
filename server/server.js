@@ -21,9 +21,14 @@ io.on('connection', function(socket) {
     io.emit('refreshList', request);
   });
 
+  socket.on('requested', function(request) {
+    console.log("Requested from sockets");
+    io.emit('addList', request);
+  });
+
   socket.on('canceled', function(request) {
     console.log("Canceled from sockets");
-    io.emit('refreshList', request);
+    io.emit('removeList', request);
   });
 
   socket.on('startWash', function(){

@@ -10,17 +10,19 @@
       <ion-item class="item item-divider">
         Carwash Requested
       </ion-item>
-      <ion-item class="item request-list" ng-repeat="request in providerCtrl.requests">
-        <div style="float:left;">
-          Wash Type: {{request.wash_type}}<br>
-          Car Type: {{request.vehicle_type}}<br>
-          Price: ${{request.cost}}<br>
-          Distance: {{request.distance}} miles<br>
+      <ion-item class="item request-list" ng-if="!request.display" ng-repeat="request in providerCtrl.requests">
+        <div >
+          <div style="float:left;">
+            Wash Type: {{request.wash_type}}<br>
+            Car Type: {{request.vehicle_type}}<br>
+            Price: ${{request.cost}}<br>
+            Distance: {{request.distance}} miles<br>
+          </div>
+          <div style="float:right;margin-right:35px;margin-top:29px;">
+            <button ng-disabled="request.accepted" ng-disabled="providerCtrl.accepted" ng-click="providerCtrl.acceptWash(request)">Accept Wash</button>
+          </div>
+          <button ng-click="providerCtrl.moveMarkers(request)">Move Markers</button>
         </div>
-        <div style="float:right;margin-right:35px;margin-top:29px;">
-          <button ng-disabled="request.accepted" ng-disabled="providerCtrl.accepted" ng-click="providerCtrl.acceptWash(request)">Accept Wash</button>
-        </div>
-        <button ng-click="providerCtrl.moveMarkers(request)">Move Markers</button>
       </ion-item>
     </ion-list>
   </ion-content>

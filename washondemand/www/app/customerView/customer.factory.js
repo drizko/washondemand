@@ -61,7 +61,7 @@ function customerFactory($http, $window, $location, locFactory) {
       }
     })
     .then(function(results) {
-      return results.data;
+      return results.data.data;
     });
   };
 

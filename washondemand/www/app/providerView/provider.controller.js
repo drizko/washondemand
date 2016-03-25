@@ -12,21 +12,35 @@ function providerCtrl($scope, $stateParams, socket, providerFactory, $window, lo
     console.log('button '+idx+' pressed');
   }
 
-  socket.on('refreshList', function(data) {
+  socket.on('removeList', function(data) {
     for(var i = 0; i < vm.requests.length; i++){
       if(vm.requests[i]._id === data._id){
-        vm.requests[i].accepted = true;
+        vm.requests[i].display = true;
       }
     }
   });
 
+  socket.on('refreshList', function(data) {
+    console.log(data);
+    for(var i = 0; i < vm.requests.length; i++){
+      if(vm.requests[i]._id === data._id){
+        vm.requests[i].display = true;
+      }
+    }
+  })
+
+  socket.on('addList', function(data) {
+    console.log(data);
+    vm.requests.push(data);
+  })
+
   vm.getRequests = function() {
     providerFactory.getRequest(locFactory.locData)
       .then(function(data) {
-        data.results.forEach(function(item) {
+        data.forEach(function(item) {
           item.accepted = false;
         });
-        vm.requests = data.results;
+        vm.requests = data;
       });
   };
 
@@ -41,6 +55,7 @@ function providerCtrl($scope, $stateParams, socket, providerFactory, $window, lo
     vm.accepted = true;
     var provider = jwtDecoder.decoder($window.localStorage['com.wod']);
     request.provider = provider;
+    console.log(request);
     socket.emit('accepted', request);
     providerFactory.acceptRequest(request)
       .then(function() {

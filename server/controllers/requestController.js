@@ -51,10 +51,12 @@ module.exports = {
         res.status(401).send();
       }
       create(newRequest)
-      .then(function() {
+      .then(function(data) {
+        console.log('newRequest');
+        console.log(data);
         Customer.findOneAndUpdate({email: user.email}, {'locked': true}, options, function() {
-          res.status(201).send();
         });
+        res.json({data: data});
       })
     })
     .fail(function(error) {
@@ -74,9 +76,11 @@ module.exports = {
         _.each(requests, function(request) {
           request.distance = helpers.distance(providerLocation, request.user_location);
           if (request.distance < 5) {
+            console.log(request);
             results.push(request);
           }
         });
+        console.log('line 81 request', requests)
         res.json({results: results});
       })
       .catch(function(err) {
