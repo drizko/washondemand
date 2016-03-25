@@ -172,7 +172,7 @@ module.exports = {
           .where({_id: jobId})
           .then(function(job) {
             console.log("Inside create of History: ", job);
-            create(job)
+            create(job[0])
           })
       })
       .then(function(){
