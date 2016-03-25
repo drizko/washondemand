@@ -170,6 +170,7 @@ module.exports = {
         Request
           .where({provider_email: provider.email})
           .then(function(job) {
+            job.wash_info = "";
             console.log("Inside create of History: ", job);
             create(job)
           })
