@@ -8,7 +8,6 @@ function provSICtrl(authFactory, $window, $location) {
   };
 
   vm.signin = function() {
-    console.log(vm.provider);
     //call factory
     authFactory.provSignin(vm.provider)
     .then(function(token) {

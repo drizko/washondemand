@@ -12,7 +12,6 @@ function custSUCtrl(authFactory, $window, $location) {
   };
 
   vm.signup = function() {
-    console.log(vm.customer);
     //call factory
     authFactory.custSignup(vm.customer)
     .then(function(token) {

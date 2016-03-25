@@ -8,7 +8,6 @@ function custSICtrl(authFactory, $window, $location) {
   };
 
   vm.signin = function() {
-    console.log(vm.customer);
     //call factory
     authFactory.custSignin(vm.customer)
     .then(function(token) {
