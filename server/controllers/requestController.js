@@ -161,7 +161,6 @@ module.exports = {
     var provider = jwt.decode(token, config.tokenSecret);
     var jobId = req.body._id;
     var currDate = Date.now();
-
     var create = Q.nbind(History.create, History);
 
     Request
@@ -169,10 +168,10 @@ module.exports = {
       .update({job_ended: currDate})
       .then(function(){
         Request
-          .where({_id: jobId})
+          .where({provider_email: provider.email})
           .then(function(job) {
             console.log("Inside create of History: ", job);
-            create({provider: 'WashOnDemand'})
+            create(job)
           })
       })
       .then(function(){
