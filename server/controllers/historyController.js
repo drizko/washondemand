@@ -12,21 +12,34 @@ if(process.env.SALT_FACTOR === undefined){
 
 module.exports = {
 
-	moveToHistory: function(jobID, next) {
-    console.log("Inside moveToHistory: ", jobID);
-		Request.find({ _id: jobID }).then(function(job){
-			// History.collection.dropIndexes();
-			History.create(job).then(function(data){
-        console.log("Inside create of History: ", data);
-				Request.remove({ _id: jobID }).then(next)
-				.catch(function(err){
-				  console.error(err);
-				})
-			})
-			.catch(function(error){
-			  console.error(error);
-			})
-		})
+  moveToHistory: function(job, next) {
+    var newHistory = {
+      _id: job._id,
+      user_location: {lng: job.user_location.lng, lat: job.user_location.lat},
+      user_firstname: job.user_firstname,
+      user_email: job.user_email,
+      user_phone: job.user_phone,
+      //num vehicles
+      wash_type: job.wash_type,
+      vehicle_type: job.vehicle_type,
+      request_filled: job.request_filled,
+      job_accepted: job.job_accepted,
+      job_started: job.job_started,
+      job_ended: job.job_ended,
+      cost: job.cost,
+      distance: job.distance,
+      provider: job.provider,
+      provider_email: job.provider_email,
+      wash_info: job.wash_info,
+    };
+    History.create(newHistory, function(err, doc) {
+      if(err) {
+        console.log(err);
+      }
+      else {
+        next(doc);
+      }
+    });
 	},
 
   showHistory: function(req, res, next) {

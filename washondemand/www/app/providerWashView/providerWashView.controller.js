@@ -15,10 +15,12 @@ function provWashInfoCtrl($stateParams, socket, providerFactory, providerViewFac
   });
 
   vm.startWash = function() {
-    vm.jobStarted = true;
 
     socket.emit('startWash', vm.request);
-    providerViewFactory.beginJob(vm.request);
+    providerViewFactory.beginJob(vm.request)
+    .then(function() {
+      vm.jobStarted = true;
+    });
   };
 
   vm.endWash = function() {
