@@ -1,7 +1,7 @@
 var Customer = require('../models/customerModel.js');
 var Request = require('../models/requestModel.js');
 var Provider = require('../models/providerModel.js');
-var History = require('./historyController.js');
+var History = require('../models/historyModel.js');
 var Q = require('q');
 var helpers = require('../utils/helpers');
 var jwt = require('jwt-simple');
@@ -161,17 +161,41 @@ module.exports = {
     var provider = jwt.decode(token, config.tokenSecret);
     var jobId = req.body._id;
     var currDate = Date.now();
+    var create = Q.nbind(History.create, History);
 
     Request
       .where({_id: jobId})
       .update({job_ended: currDate})
-      .then(function() {
-        History.moveToHistory(jobId);
-        res.status(200).send();
+      .then(function(){
+        Request
+          .where({provider_email: provider.email})
+          .then(function(job) {
+            var newHistory = { user_location: {lng: job[0].user_location.lng, lat: job[0].user_location.lat},
+              wash_info: job[0].wash_info,
+              distance: job[0].distance,
+              cost: job[0].cost,
+              job_ended: job[0].job_ended,
+              job_started: job[0].job_started,
+              job_accepted: job[0].job_accepted,
+              request_filled: job[0].request_filled,
+              vehicle_type: job[0].vehicle_type,
+              wash_type: job[0].wash_type,
+              user_phone: job[0].user_phone,
+              user_email: job[0].user_email,
+              user_firstname: job[0].user_firstname,
+            }
+            console.log("Inside create of History: ", job);
+            create(newHistory)
+          })
       })
-      .catch(function(err){
-        console.error(err);
+      .then(function(){
+        res.status(200).send;
       })
+      .catch(function(error){
+        console.log(error);
+      })
+
+
   },
 
   cancelRequest: function(req, res, next){

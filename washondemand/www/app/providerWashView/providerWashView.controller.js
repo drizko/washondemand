@@ -20,6 +20,7 @@ function provWashInfoCtrl($stateParams, providerFactory, providerViewFactory, lo
   };
 
   vm.endWash = function() {
+    console.log("This is endWash");
     vm.jobStarted = false;
     vm.jobComplete = true;
     providerViewFactory.endJob(vm.request);

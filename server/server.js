@@ -15,13 +15,17 @@ mongoose.connect(config.mongoUrl);
 
 io.on('connection', function(socket) {
   console.log('Connected from server');
+
   socket.on('accepted', function(request) {
+    console.log("Accepted from sockets");
     io.emit('refreshList', request);
   });
 
   socket.on('canceled', function(request) {
+    console.log("Canceled from sockets");
     io.emit('refreshList', request);
   });
+
 });
 
 require('./routes/routes.js')(app, express);
