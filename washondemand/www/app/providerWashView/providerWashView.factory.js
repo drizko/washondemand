@@ -33,7 +33,9 @@ function providerViewFactory($http, $window, jwtDecoder) {
       // url: 'http://washondemand.us-west-2.elasticbeanstalk.com/api/request/job-started',
       url: masterURL + '/api/request/job-started',
       data: request
-    })
+    }).then(function() {
+      //
+    });
   };
 
   function endJob(request) {

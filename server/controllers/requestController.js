@@ -2,6 +2,7 @@ var Customer = require('../models/customerModel.js');
 var Request = require('../models/requestModel.js');
 var Provider = require('../models/providerModel.js');
 var History = require('../models/historyModel.js');
+var HistoryCtrl = require('./historyController.js');
 var Q = require('q');
 var helpers = require('../utils/helpers');
 var jwt = require('jwt-simple');
@@ -170,61 +171,31 @@ module.exports = {
     Request
       .where({_id: jobId})
       .update({job_ended: currDate})
-      .then(function(){
+      .then(function() {
         Request
           .where({provider_email: provider.email})
           .then(function(job) {
-            var newHistory = {
-              _id: job[0]._id,
-              user_location: {lng: job[0].user_location.lng, lat: job[0].user_location.lat},
-              user_firstname: job[0].user_firstname,
-              user_email: job[0].user_email,
-              user_phone: job[0].user_phone,
-              //num vehicles
-              wash_type: job[0].wash_type,
-              vehicle_type: job[0].vehicle_type,
-              request_filled: job[0].request_filled,
-              job_accepted: job[0].job_accepted,
-              job_started: job[0].job_started,
-              job_ended: job[0].job_ended,
-              cost: job[0].cost,
-              distance: job[0].distance,
-              provider: job[0].provider,
-              provider_email: job[0].provider_email,
-              wash_info: job[0].wash_info,
-            }
-            console.log("Inside create of History: ", new Date());
-            create(newHistory).then(function(newDoc) {
-              console.log('Successfully created supposedly');
+            HistoryCtrl.moveToHistory(job[0], function(newHistory) {
               Request.remove({provider_email: provider.email}, function(err) {
-                if(err) {
-                  console.log('error')
+                if (err) {
+                  console.log('error');
                 }
                 else {
-                  console.log('DELETED FROM REQUEST');
                   res.status(200).send();
                 }
               });
-            })
-            .catch(function(err) {
-              console.log(error);
             });
           })
           .catch(function(error) {
             console.log(error);
-          })
+          });
       })
-      .then(function(){
-        // res.status(200).send;
-      })
-      .catch(function(error){
+      .catch(function(error) {
         console.log(error);
-      })
-
-
+      });
   },
 
-  cancelRequest: function(req, res, next){
+  cancelRequest: function(req, res, next) {
     var token = req.headers['x-access-token'];
     var user = jwt.decode(token, config.tokenSecret);
     var reqId = req.body._id;
