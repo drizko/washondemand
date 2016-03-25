@@ -170,26 +170,48 @@ module.exports = {
         Request
           .where({provider_email: provider.email})
           .then(function(job) {
-            var newHistory = { user_location: {lng: job[0].user_location.lng, lat: job[0].user_location.lat},
-              wash_info: job[0].wash_info,
-              distance: job[0].distance,
-              cost: job[0].cost,
-              job_ended: job[0].job_ended,
-              job_started: job[0].job_started,
-              job_accepted: job[0].job_accepted,
-              request_filled: job[0].request_filled,
-              vehicle_type: job[0].vehicle_type,
-              wash_type: job[0].wash_type,
-              user_phone: job[0].user_phone,
-              user_email: job[0].user_email,
+            var newHistory = {
+              _id: job[0]._id,
+              user_location: {lng: job[0].user_location.lng, lat: job[0].user_location.lat},
               user_firstname: job[0].user_firstname,
+              user_email: job[0].user_email,
+              user_phone: job[0].user_phone,
+              //num vehicles
+              wash_type: job[0].wash_type,
+              vehicle_type: job[0].vehicle_type,
+              request_filled: job[0].request_filled,
+              job_accepted: job[0].job_accepted,
+              job_started: job[0].job_started,
+              job_ended: job[0].job_ended,
+              cost: job[0].cost,
+              distance: job[0].distance,
+              provider: job[0].provider,
+              provider_email: job[0].provider_email,
+              wash_info: job[0].wash_info,
             }
-            console.log("Inside create of History: ", job);
-            create(newHistory)
+            console.log("Inside create of History: ", new Date());
+            create(newHistory).then(function(newDoc) {
+              console.log('Successfully created supposedly');
+              Request.remove({provider_email: provider.email}, function(err) {
+                if(err) {
+                  console.log('error')
+                }
+                else {
+                  console.log('DELETED FROM REQUEST');
+                  res.status(200).send();
+                }
+              });
+            })
+            .catch(function(err) {
+              console.log(error);
+            });
+          })
+          .catch(function(error) {
+            console.log(error);
           })
       })
       .then(function(){
-        res.status(200).send;
+        // res.status(200).send;
       })
       .catch(function(error){
         console.log(error);
