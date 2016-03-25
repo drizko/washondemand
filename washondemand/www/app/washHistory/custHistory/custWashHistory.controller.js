@@ -15,6 +15,22 @@ function custWashHistCtrl(washHistFactory) {
     return timestamp;
   };
 
+  vm.formatRating = function(rating) {
+    if (rating > 0) {
+      var stars = '';
+      for (i = 1; i <= 5; i++) {
+        if (i <= rating) {
+          stars += '<i class="icon ion-ios-star"></i>';
+        }
+        else {
+          stars += '<i class="icon ion-ios-star-outline"></i>';
+        }
+      }
+      return stars;
+    }
+    return '</span>no rating given</span>';
+  };
+
   vm.displayMoreEntries = function() {
     if (vm.numEntries < vm.history.length) {
       vm.numEntries += 10;
