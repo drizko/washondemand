@@ -18,7 +18,7 @@ io.on('connection', function(socket) {
 
   socket.on('accepted', function(request) {
     console.log("Accepted from sockets");
-    io.emit('accepted', request);
+    io.emit('refreshList', request);
   });
 
   socket.on('requested', function(request) {
@@ -28,7 +28,6 @@ io.on('connection', function(socket) {
 
   socket.on('canceled', function(request) {
     console.log("Canceled from sockets");
-    console.log(request);
     io.emit('removeList', request);
   });
 

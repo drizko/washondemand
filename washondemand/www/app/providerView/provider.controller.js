@@ -20,7 +20,7 @@ function providerCtrl($scope, $stateParams, socket, providerFactory, $window, lo
     }
   });
 
-  socket.on('accepted', function(data) {
+  socket.on('refreshList', function(data) {
     console.log(data);
     for(var i = 0; i < vm.requests.length; i++){
       if(vm.requests[i]._id === data._id){
