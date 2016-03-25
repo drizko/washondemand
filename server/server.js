@@ -18,7 +18,7 @@ io.on('connection', function(socket) {
 
   socket.on('accepted', function(request) {
     console.log("Accepted from sockets");
-    io.emit('refreshList', request);
+    io.emit('accepted', request);
   });
 
   socket.on('requested', function(request) {
