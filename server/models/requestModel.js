@@ -17,6 +17,7 @@ var requestSchema = new Schema({
   distance: Number,
   provider: String,
   provider_email: String,
+  provider_phone: Number,
   wash_info: Schema.Types.Mixed
 });
 

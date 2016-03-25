@@ -2,15 +2,23 @@ angular.module('wod.custReqInfoCtrl', []).controller('custReqInfoCtrl', custReqI
 
 function custReqInfoCtrl($stateParams, $scope, $ionicPopup, customerViewFactory, socket, $state) {
   var vm = this;
+  vm.providerInfo;
   $scope.feedback = {
     provider_rating: 0,
     provider_feedback: ''
   }
 
+
   customerViewFactory.getRequest()
     .then(function(request){
       console.log(request);
       vm.currentRequest = request[0];
+      if(vm.currentRequest.provider) {
+        vm.currentRequest.providerInfo = {
+          company_name: vm.currentRequest.provider,
+          phone_number: vm.currentRequest.provider_phone
+        }
+      }
     });
 
   socket.on('refreshList', function(requestInfo){
@@ -24,12 +32,12 @@ function custReqInfoCtrl($stateParams, $scope, $ionicPopup, customerViewFactory,
     }
   });
 
-  socket.on('refreshList', function(request){
-    console.log("refreshList works :)");
-    if(request._id === vm.currentRequest._id){
-      vm.jobStatus = "Accepted"
-    }
-  });
+//       console.log(vm.currentRequest);
+//     vm.currentRequest.job_accepted = vm.currentRequest.job_accepted || "Accepted";
+//     vm.providerInfo = requestInfo.provider;
+//     vm.currentRequest.providerInfo = requestInfo.provider;
+// >>>>>>> [feature] Keeps real time data persistent when customer changes view
+
 
   socket.on('getRating', function(request){
     console.log("request in getRating", request, vm.currentRequest);
@@ -96,5 +104,4 @@ function custReqInfoCtrl($stateParams, $scope, $ionicPopup, customerViewFactory,
     customerViewFactory.cancelRequest();
     $state.go('customernav.customer');
   }
-
 };
