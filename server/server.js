@@ -26,6 +26,15 @@ io.on('connection', function(socket) {
     io.emit('refreshList', request);
   });
 
+  socket.on('startWash', function(){
+    console.log("From start wash on server");
+    io.emit('updateStatus');
+  })
+
+  socket.on('endWash', function(request){
+    console.log("From start wash on server");
+    io.emit('getRating', request);
+  })
 });
 
 require('./routes/routes.js')(app, express);

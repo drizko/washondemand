@@ -71,6 +71,6 @@ function providerCtrl($scope, $stateParams, socket, providerFactory, $window, lo
     vm.getRequests();
     locFactory.getLoc('provider', user.email).then(locFactory.sendLocToServer);
   };
-  
+
   init();
 };
