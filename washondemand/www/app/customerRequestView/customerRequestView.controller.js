@@ -91,6 +91,7 @@ function custReqInfoCtrl($stateParams, $scope, $ionicPopup, customerViewFactory,
   });
 
   vm.cancelRequest = function() {
+    console.log(vm.currentRequest)
     socket.emit('canceled', vm.currentRequest);
     customerViewFactory.cancelRequest();
     $state.go('customernav.customer');

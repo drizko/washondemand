@@ -12,25 +12,33 @@ function providerCtrl($scope, $stateParams, socket, providerFactory, $window, lo
     console.log('button '+idx+' pressed');
   }
 
-  socket.on('refreshList', function(data) {
+  socket.on('removeList', function(data) {
+    console.log(data);
+    console.log(vm.requests[0]);
     for(var i = 0; i < vm.requests.length; i++){
       if(vm.requests[i]._id === data._id){
-        vm.requests[i].accepted = true;
+        // console.log()
+        console.log(vm.requests[i]);
+        console.log(vm.requests[i].display);
+        vm.requests[i].display = true;
+        console.log(vm.requests[i].display);
       }
     }
   });
 
   socket.on('addList', function(data) {
+    console.log(data);
     vm.requests.push(data);
   })
 
   vm.getRequests = function() {
     providerFactory.getRequest(locFactory.locData)
       .then(function(data) {
-        data.results.forEach(function(item) {
+        data.forEach(function(item) {
           item.accepted = false;
         });
-        vm.requests = data.results;
+        vm.requests = data;
+        console.log(vm.requests);
       });
   };
 

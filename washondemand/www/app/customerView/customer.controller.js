@@ -49,8 +49,9 @@ function customerCtrl($scope, customerViewFactory, $ionicHistory, NgMap, $ionicP
           vm.showConfirm();
         } else {
           customerFactory.sendRequest(vm.request)
-          .then(function(){
-            socket.emit('requested',vm.request);
+          .then(function(data){
+            console.log(data);
+            socket.emit('requested',data);
             $ionicHistory.nextViewOptions({
               disableBack: true
             });

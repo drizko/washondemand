@@ -11,8 +11,8 @@ function providerFactory($http, $window, $location) {
       data: providerLoc
     })
     .then(function(results) {
-      console.log(results.data);
-      return results.data;
+      console.log(results.data.results);
+      return results.data.results;
     });
   };
 
