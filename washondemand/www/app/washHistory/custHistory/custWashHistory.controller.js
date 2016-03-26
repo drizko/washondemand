@@ -11,24 +11,11 @@ function custWashHistCtrl(washHistFactory) {
   };
 
   vm.formatTime = function(time) {
-    var timestamp = moment(time, 'x').format('M/D/YY h:mm a');
-    return timestamp;
+    return washHistFactory.formatTime(time);
   };
 
   vm.formatRating = function(rating) {
-    if (rating > 0) {
-      var stars = '';
-      for (i = 1; i <= 5; i++) {
-        if (i <= rating) {
-          stars += '<i class="icon ion-ios-star"></i>';
-        }
-        else {
-          stars += '<i class="icon ion-ios-star-outline"></i>';
-        }
-      }
-      return stars;
-    }
-    return '</span>no rating given</span>';
+    return washHistFactory.formatRating(rating);
   };
 
   vm.displayMoreEntries = function() {
@@ -40,7 +27,7 @@ function custWashHistCtrl(washHistFactory) {
   var init = function() {
     washHistFactory.getHistory()
     .then(function(history) {
-      vm.history = history.reverse();
+      vm.history = history;
     });
   };
   init();
