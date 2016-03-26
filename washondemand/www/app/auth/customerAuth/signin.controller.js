@@ -1,6 +1,8 @@
 angular.module('wod.custSI', []).controller('custSICtrl', custSICtrl);
 
-function custSICtrl(authFactory, locFactory, $window, $state) {
+custSICtrl.$injesct = ['authFactory', 'locFactory'];
+
+function custSICtrl(authFactory, locFactory) {
   var vm = this;
   vm.customer = {
     email: '',

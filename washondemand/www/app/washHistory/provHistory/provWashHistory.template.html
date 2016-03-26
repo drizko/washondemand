@@ -3,9 +3,9 @@
     <ion-list>
       <ion-item>
         <div class="row">
-          Total washes: {{provWashHistCtrl.total}}<br>
-          Total earnings: ${{provWashHistCtrl.sum}}<br>
-          Average Rating: {{provWashHistCtrl.ratingAvg}}
+          Total washes: {{::provWashHistCtrl.total}}<br>
+          Total earnings: ${{::provWashHistCtrl.sum}}<br>
+          Average Rating: {{::provWashHistCtrl.ratingAvg}}
         </div>
       </ion-item>
 
@@ -20,7 +20,7 @@
         </p>
         <p>
           <span>
-            Price: {{::wash.cost}}$
+            Price: ${{::wash.cost}}
           </span>
           <span class="float-right">
             {{::provWashHistCtrl.formatFeedback(wash.provider_feedback)}}

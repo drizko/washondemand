@@ -1,44 +1,30 @@
 angular.module('wod.provWashHistCtrl', []).controller('provWashHistCtrl', provWashHistCtrl);
 
+provWashHistCtrl.$inject = ['washHistFactory'];
+
 function provWashHistCtrl(washHistFactory) {
   var vm = this;
 
   vm.numEntries = 10;
   vm.history = [];
-  vm.total = 0;
-  vm.sum = 0;
-  vm.ratingAvg = 0;
+  vm.total;
+  vm.sum;
+  vm.ratingAvg;
 
   vm.toggleExpand = function(wash) {
     wash.expanded = !wash.expanded;
   };
 
   vm.formatTime = function(time) {
-    var timestamp = moment(time, 'x').format('M/D/YY h:mm a');
-    return timestamp;
+    return washHistFactory.formatTime(time);
   };
 
   vm.formatRating = function(rating) {
-    if (rating > 0) {
-      var stars = '';
-      for (i = 1; i <= 5; i++) {
-        if (i <= rating) {
-          stars += '<i class="icon ion-ios-star"></i>';
-        }
-        else {
-          stars += '<i class="icon ion-ios-star-outline"></i>';
-        }
-      }
-      return stars;
-    }
-    return '</span>no rating given</span>';
+    return washHistFactory.formatRating(rating);
   };
 
   vm.formatFeedback = function(feedback) {
-    if (feedback) {
-      return '"' + feedback + '"';
-    }
-    return 'no comment given';
+    return washHistFactory.formatFeedback(feedback);
   };
 
   vm.displayMoreEntries = function() {
@@ -51,20 +37,14 @@ function provWashHistCtrl(washHistFactory) {
     washHistFactory.getHistory()
     .then(function(history) {
 
+      var stats = washHistFactory.calcStats(history);
+
       vm.total = history.length;
-
-      var ratingCount = 0;
-      history.forEach(function(item) {
-        vm.sum += item.cost;
-        if (item.provider_rating > 0) {
-          ratingCount++;
-          vm.ratingAvg += item.provider_rating;
-        }
-      });
-      vm.ratingAvg /= ratingCount;
-
-      vm.history = history.reverse();
+      vm.sum = stats.sum;
+      vm.ratingAvg = stats.avg;
+      vm.history = history;
     });
   };
   init();
+
 };

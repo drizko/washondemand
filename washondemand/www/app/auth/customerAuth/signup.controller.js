@@ -1,6 +1,8 @@
 angular.module('wod.custSU', []).controller('custSUCtrl', custSUCtrl);
 
-function custSUCtrl(authFactory, locFactory, $window, $state) {
+custSUCtrl.$inject = ['authFactory', 'locFactory'];
+
+function custSUCtrl(authFactory, locFactory) {
   var vm = this;
   vm.customer = {
     firstName: '',
