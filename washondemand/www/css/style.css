@@ -16,8 +16,11 @@ ng-map {
   margin-right: 5px;
 }
 
+#premium-btn {
+  text-overflow: clip;
+}
+
 .wash-detail {
-  /*min-height: 215px;*/
   border: 1px solid gray;
   border-radius: 4px;
   margin: 5px;
@@ -34,7 +37,7 @@ ng-map {
 }
 
 .prov-history-expand {
-  color: #11c1f3;
+  color: #33cd5f;
   text-decoration: underline;
 }
 

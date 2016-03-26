@@ -114,7 +114,6 @@ module.exports = {
 
   //********************-AVAILABILITY METHOD-******************
   updateAvailability: function(req, res, next) {
-    console.log(req.body);
     var options = {
       upsert: false,
       new: true
@@ -189,7 +188,6 @@ module.exports = {
           if (washer.distance < 5) {
             results.push(washer);
           }
-          // console.log(results);
         });
         res.json({results: results});
       })

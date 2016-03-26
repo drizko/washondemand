@@ -11,7 +11,6 @@ function provSUCtrl(authFactory, $window, $location) {
   };
 
   vm.signup = function() {
-    console.log(vm.provider);
     //call factory
     authFactory.provSignup(vm.provider)
     .then(function(token) {

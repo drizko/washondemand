@@ -24,7 +24,7 @@
         <div class="button-bar">
             <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('basic')" ng-class="{'active': customerCtrl.request.washType === 'basic'}">Basic</button>
             <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('deluxe')" ng-class="{'active': customerCtrl.request.washType === 'deluxe'}">Deluxe</button>
-            <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('premium')" ng-class="{'active': customerCtrl.request.washType === 'premium'}">Premium</button>
+            <button id="premium-btn" class="button button-outline button-positive" ng-click="customerCtrl.selectWash('premium')" ng-class="{'active': customerCtrl.request.washType === 'premium'}">Premium</button>
             <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('custom')" ng-class="{'active': customerCtrl.request.washType === 'custom'}">Custom</button>
         </div>
       </div>
