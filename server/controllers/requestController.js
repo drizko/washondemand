@@ -169,31 +169,36 @@ module.exports = {
     var currDate = Date.now();
     var create = Q.nbind(History.create, History);
 
-    Request
-      .where({_id: jobId})
-      .update({job_ended: currDate})
-      .then(function() {
-        Request
-          .where({provider_email: provider.email})
-          .then(function(job) {
-            HistoryCtrl.moveToHistory(job[0], function(newHistory) {
-              Request.remove({provider_email: provider.email}, function(err) {
-                if (err) {
-                  console.log('error');
-                }
-                else {
-                  res.status(200).send();
-                }
-              });
-            });
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
-      })
-      .catch(function(error) {
+    var query = {
+      '_id': jobId
+    };
+
+    var update = {
+      'job_ended': currDate
+    };
+
+    var options = {
+      upsert: false,
+      new: true
+    };
+
+    Request.findOneAndUpdate(query, update, options, function(err, requestInfo) {
+      if (err) {
         console.log(error);
-      });
+      }
+      else {
+        HistoryCtrl.moveToHistory(requestInfo, function(newHistory) {
+          Request.remove({_id: jobId}, function(err) {
+            if (err) {
+              console.log('error');
+            }
+            else {
+              res.status(200).send();
+            }
+          });
+        });
+      }
+    });
   },
 
   cancelRequest: function(req, res, next) {
