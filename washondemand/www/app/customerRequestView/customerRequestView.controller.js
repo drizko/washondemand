@@ -32,7 +32,7 @@ function custReqInfoCtrl($stateParams, $scope, $ionicPopup, customerViewFactory,
   socket.on('getRating', function(request){
     console.log("request in getRating", request, vm.currentRequest);
     if(request._id === vm.currentRequest._id){
-      var showPopup = $ionicPopup.show({
+      $ionicPopup.show({
         title: 'Rate Your Wash!',
         template: '<textarea ng-model=feedback.provider_feedback class="feedback-text" maxlength="100" style="font-family:sans-serif;font-size:1.2em;"></textarea>',
         scope: $scope,
@@ -85,7 +85,6 @@ function custReqInfoCtrl($stateParams, $scope, $ionicPopup, customerViewFactory,
         ]
       });
     }
-
   });
 
   vm.cancelRequest = function() {
