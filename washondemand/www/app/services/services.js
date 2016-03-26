@@ -4,6 +4,8 @@ angular.module('wod.services', [])
 .factory('socket', socket)
 .factory('locFactory', locFactory);
 
+jwtDecoder.$inject = ['jwtHelper'];
+
 function jwtDecoder(jwtHelper) {
   function decoder(token) {
     return jwtHelper.decodeToken(token);
@@ -13,6 +15,8 @@ function jwtDecoder(jwtHelper) {
     decoder: decoder
   };
 };
+
+GeoAlert.$inject = ['locFactory', 'jwtDecoder', '$window'];
 
 function GeoAlert(locFactory, jwtDecoder, $window) {
   console.log('GeoAlert service instantiated');
@@ -74,6 +78,8 @@ function GeoAlert(locFactory, jwtDecoder, $window) {
    };
 };
 
+socket.$inject = ['$rootScope'];
+
 function socket($rootScope) {
   var socket = io.connect(masterURL);
 
@@ -98,6 +104,8 @@ function socket($rootScope) {
     }
   };
 };
+
+locFactory.$inject = ['$window', '$q', '$http'];
 
 function locFactory($window, $q, $http) {
 

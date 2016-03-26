@@ -1,6 +1,8 @@
 angular.module('wod.washHistFactory', [])
   .factory('washHistFactory', washHistFactory);
 
+washHistFactory.$inject = ['$http'];
+
 function washHistFactory($http) {
 
   return {

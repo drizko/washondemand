@@ -1,5 +1,7 @@
 angular.module('wod.custWashHistCtrl', []).controller('custWashHistCtrl', custWashHistCtrl);
 
+custWashHistCtrl.$inject = ['washHistFactory'];
+
 function custWashHistCtrl(washHistFactory) {
   var vm = this;
 

@@ -1,6 +1,8 @@
 angular.module('wod.nav', []).controller('navCtrl', navCtrl);
 
-function navCtrl($scope, $ionicHistory, $state, authFactory, locFactory) {
+navCtrl.$inject = ['$state', 'authFactory', 'locFactory'];
+
+function navCtrl($state, authFactory, locFactory) {
   var vm = this;
 
   vm.availability = false;;
