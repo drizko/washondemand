@@ -35,9 +35,6 @@ angular.module('wod.routes', [])
       url: '/providerProfile',
       // authenticate: false // for now
       cache: false,
-      params: {
-        accepted: null
-      },
       views: {
         'nav-view': {
           templateUrl: 'app/mainViews/providerView/provider.template.html',

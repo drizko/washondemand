@@ -1,10 +1,13 @@
 angular.module('wod.providerCtrl', []).controller('providerCtrl', providerCtrl);
 
-function providerCtrl($stateParams, socket, providerFactory, $ionicHistory, $state, $ionicLoading) {
+function providerCtrl(socket, providerFactory, $ionicHistory, $state, $ionicLoading) {
   var vm = this;
-  vm.request = {data: []};
   vm.requests = [];
-  vm.accepted = $stateParams.accepted;
+  vm.locData = providerFactory.locData;
+
+  $ionicLoading.show({
+    template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+  });
 
   function onConfirm(idx) {
     console.log('button ' + idx + ' pressed');
@@ -30,17 +33,12 @@ function providerCtrl($stateParams, socket, providerFactory, $ionicHistory, $sta
     vm.requests.push(data);
   });
 
-  $ionicLoading.show({
-    template: 'loading'
-  });
-
   providerFactory.getRequest()
     .then(function(data) {
       data.forEach(function(item) {
         item.accepted = false;
       });
       vm.requests = data;
-      console.log(vm.requests)
       $ionicLoading.hide();
     });
 

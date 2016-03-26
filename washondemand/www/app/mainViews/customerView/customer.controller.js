@@ -1,68 +1,32 @@
 angular.module('wod.customerCtrl', [])
 .controller('customerCtrl', customerCtrl);
 
-function customerCtrl($scope, customerViewFactory, $ionicHistory, NgMap, $ionicLoading, $ionicPopup, customerFactory, $state, locFactory, $window, jwtDecoder, socket) {
+function customerCtrl(requests, $ionicHistory, $ionicLoading, customerFactory) {
 
   var vm = this;
-
-  vm.request = {
-    vehicleType: {name: 'Please Pick a Vehicle Type', price: 0},
-    washType: '',
-    price: 0,
-    washInfo: customerFactory.washOptions
-  };
-
+  vm.request = customerFactory.request;
   vm.btnMsg = 'Select a vehicle and wash type';
-
-  vm.locData = locFactory.locData;
+  vm.locData = customerFactory.locData;
 
   $ionicLoading.show({
-    template: 'loading'
+    template: '<p>Loading...</p><ion-spinner></ion-spinner>'
   });
+
   customerFactory.getProviders()
   .then(function(data) {
     vm.washers = data.results;
+    $ionicLoading.hide();
   });
 
   vm.showInfo = function() {
     return vm.request.vehicleType.price > 0 && vm.request.washType;
   };
 
-  vm.showConfirm = function() {
-    var confirmPopup = $ionicPopup.confirm({
-      title: 'Request Pending',
-      template: 'You already have a request pending\nWould you like to go to that page?'
-    });
-
-    confirmPopup.then(function(res) {
-      if(res) {
-        $state.go("customernav.customerRequestView")
-      } else {
-        console.log("fine...");
-      }
-    });
-  };
-
-
   vm.sendRequest = function() {
-    customerViewFactory.getRequest()
-      .then(function(item){
-        if(item[0] !== undefined){
-          $ionicHistory.nextViewOptions({
-            disableBack: true
-          });
-          vm.showConfirm();
-        } else {
-          customerFactory.sendRequest(vm.request)
-          .then(function(data){
-            socket.emit('requested', data);
-            $ionicHistory.nextViewOptions({
-              disableBack: true
-            });
-            $state.go('customernav.customerRequestView');
-          });
-        }
-      })
+    requests.getCustRequests()
+    .then(function(data) {
+      customerFactory.sendRequest(vm.request);
+    });
   };
 
   vm.selectVehicle = function(vehicle) {
@@ -81,8 +45,7 @@ function customerCtrl($scope, customerViewFactory, $ionicHistory, NgMap, $ionicL
   };
 
   vm.getPrice = function() {
-    var price = 0;
-    price += vm.request.vehicleType.price || 0;
+    var price = vm.request.vehicleType.price || 0;
     for (var k in vm.request.washInfo) {
       if (vm.request.washInfo[k].active) {
         price += vm.request.washInfo[k].price;
@@ -108,6 +71,5 @@ function customerCtrl($scope, customerViewFactory, $ionicHistory, NgMap, $ionicL
       return true;
     }
   };
-
 
 }

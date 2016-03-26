@@ -2,9 +2,10 @@ angular.module('wod.mainViewFactory', [])
 .factory('providerFactory', providerFactory)
 .factory('customerFactory', customerFactory);
 
-function customerFactory($http, $window, $location, locFactory, jwtDecoder, locFactory) {
+function customerFactory($http, $window, $location, locFactory, jwtDecoder, locFactory, $state, $ionicPopup, socket, $ionicHistory) {
 
   var user = jwtDecoder.decoder($window.localStorage['com.wod']);
+  var locData = locFactory.locData;
 
   var vehicleOptions = {
     car: {name: 'car', price: 1},
@@ -47,6 +48,13 @@ function customerFactory($http, $window, $location, locFactory, jwtDecoder, locF
     ]},
   };
 
+  var request = {
+    vehicleType: {name: 'Please Pick a Vehicle Type', price: 0},
+    washType: '',
+    price: 0,
+    washInfo: washOptions
+  };
+
   function restoreOptions() {
     for (var k in washOptions) {
       washOptions[k].active = false;
@@ -54,7 +62,6 @@ function customerFactory($http, $window, $location, locFactory, jwtDecoder, locF
   }
 
   function sendRequest(details) {
-    console.log('From customerFactory!!!!!!!!!!!!!');
     return $http({
       method: 'POST',
       url: masterURL + '/api/request/create-request',
@@ -64,7 +71,11 @@ function customerFactory($http, $window, $location, locFactory, jwtDecoder, locF
       }
     })
     .then(function(results) {
-      return results.data.data;
+      socket.emit('requested', results.data.data);
+      $ionicHistory.nextViewOptions({
+        disableBack: true
+      });
+      $state.go('customernav.customerRequestView');
     });
   };
 
@@ -81,30 +92,45 @@ function customerFactory($http, $window, $location, locFactory, jwtDecoder, locF
     });
   };
 
+  function showConfirm() {
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Request Pending',
+      template: 'You already have a request pending\nWould you like to go to that page?'
+    });
+
+    confirmPopup.then(function(res) {
+      if(res) {
+        $state.go("customernav.customerRequestView")
+      }
+    });
+  };
+
   return {
+    showConfirm: showConfirm,
     sendRequest: sendRequest,
     getProviders: getProviders,
     restoreOptions: restoreOptions,
     vehicleOptions: vehicleOptions,
     washOptions: washOptions,
-    washTypeOptions: washTypeOptions
+    washTypeOptions: washTypeOptions,
+    request: request,
+    locData, locData
   };
 };
 
 function providerFactory($http, $window, $location, locFactory, jwtDecoder, socket, GeoAlert) {
 
   var provider = jwtDecoder.decoder($window.localStorage['com.wod']);
+  var locData = locFactory.locData;
 
-  function getRequest(providerLoc) {
+  function getRequest() {
     locFactory.getLoc('provider', provider.email).then(locFactory.sendLocToServer);
-    console.log('From provider!!!!!!!!!!!!!');
     return $http({
       method: 'POST',
       url: masterURL + '/api/request/get-requests',
-      data: locFactory.locData
+      data: locData
     })
     .then(function(results) {
-      console.log(results.data.results);
       return results.data.results;
     });
   };
@@ -134,6 +160,7 @@ function providerFactory($http, $window, $location, locFactory, jwtDecoder, sock
 
   return {
     getRequest: getRequest,
-    acceptRequest: acceptRequest
+    acceptRequest: acceptRequest,
+    locData: locData
   };
 };
