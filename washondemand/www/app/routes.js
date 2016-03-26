@@ -26,7 +26,7 @@ angular.module('wod.routes', [])
       cache: false,
       views: {
         'nav-view': {
-          templateUrl: 'app/customerView/customer.template.html',
+          templateUrl: 'app/mainViews/customerView/customer.template.html',
           controller: 'customerCtrl as customerCtrl'
         }
       },
@@ -48,7 +48,7 @@ angular.module('wod.routes', [])
       },
       views: {
         'nav-view': {
-          templateUrl: 'app/providerView/provider.template.html',
+          templateUrl: 'app/mainViews/providerView/provider.template.html',
           controller: 'providerCtrl as providerCtrl'
         }
       }
@@ -71,7 +71,7 @@ angular.module('wod.routes', [])
       cache: false,
       views: {
         'nav-view': {
-          templateUrl: 'app/customerRequestView/customerRequestView.template.html',
+          templateUrl: 'app/currentWashViews/customerRequestView/customerRequestView.template.html',
           controller: 'custReqInfoCtrl as custReqInfoCtrl'
         }
       }
@@ -94,7 +94,7 @@ angular.module('wod.routes', [])
       cache: false,
       views: {
         'nav-view': {
-          templateUrl: 'app/providerWashView/providerWashView.template.html',
+          templateUrl: 'app/currentWashViews/providerWashView/providerWashView.template.html',
           controller: 'provWashInfoCtrl as provWashInfoCtrl'
         }
       }
