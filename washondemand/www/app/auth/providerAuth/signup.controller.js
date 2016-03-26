@@ -1,6 +1,8 @@
 angular.module('wod.provSU', []).controller('provSUCtrl', provSUCtrl);
 
-function provSUCtrl(authFactory, locFactory, $window, $state) {
+provSUCtrl.$inject = ['authFactory', 'locFactory'];
+
+function provSUCtrl(authFactory, locFactory) {
   var vm = this;
   vm.provider = {
     companyName: '',

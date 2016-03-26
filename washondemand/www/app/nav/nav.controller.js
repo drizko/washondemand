@@ -8,9 +8,8 @@ function navCtrl($state, authFactory, locFactory) {
   vm.availability = false;;
 
   vm.updateAvailability = function() {
-    console.log('inside navCtrl', vm.availability);
     locFactory.updateAvailability(vm.availability);
-  }
+  };
 
   vm.providerLogout = function() {
     authFactory.signout();
@@ -21,5 +20,9 @@ function navCtrl($state, authFactory, locFactory) {
     $state.go('customerSignin');
   };
 
-  vm.updateAvailability();
+  var init = function() {
+    vm.updateAvailability();
+  };
+  init();
+
 };

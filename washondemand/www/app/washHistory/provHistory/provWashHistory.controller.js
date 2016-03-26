@@ -46,4 +46,5 @@ function provWashHistCtrl(washHistFactory) {
     });
   };
   init();
+
 };
