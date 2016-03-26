@@ -7,29 +7,27 @@ function custReqInfoCtrl($stateParams, $scope, $ionicPopup, customerViewFactory,
     provider_feedback: ''
   }
 
+
   customerViewFactory.getRequest()
     .then(function(request){
       console.log(request);
       vm.currentRequest = request[0];
+      if(vm.currentRequest.provider) {
+        vm.currentRequest.providerInfo = {
+          company_name: vm.currentRequest.provider,
+          phone_number: vm.currentRequest.provider_phone
+        }
+      }
     });
 
   socket.on('refreshList', function(requestInfo){
+    console.log("INSIDE REFRESH SOCKET REQINFO: ", requestInfo);
     if(vm.currentRequest._id === requestInfo._id){
-      console.log(vm.currentRequest);
       vm.currentRequest.job_accepted = vm.currentRequest.job_accepted || "Accepted";
-      vm.providerInfo = requestInfo.provider;
-
-      console.log("+++PROVIDER INFO: ", vm.providerInfo);
-      console.log(vm.currentRequest);
+      vm.currentRequest.providerInfo = requestInfo.provider;
     }
   });
 
-  socket.on('refreshList', function(request){
-    console.log("refreshList works :)");
-    if(request._id === vm.currentRequest._id){
-      vm.jobStatus = "Accepted"
-    }
-  });
 
   socket.on('getRating', function(request){
     console.log("request in getRating", request, vm.currentRequest);
@@ -96,5 +94,4 @@ function custReqInfoCtrl($stateParams, $scope, $ionicPopup, customerViewFactory,
     customerViewFactory.cancelRequest();
     $state.go('customernav.customer');
   }
-
 };

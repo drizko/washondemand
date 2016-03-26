@@ -1,9 +1,9 @@
 <ion-view title="Requested Wash Info">
   <ion-content overflow-scroll="true" class="customer-request-view">
-    <div ng-if="custReqInfoCtrl.providerInfo" class="map-view" data-tap-disabled="true">
+    <div ng-if="custReqInfoCtrl.currentRequest.providerInfo" class="map-view" data-tap-disabled="true">
       <ng-map center="[{{custReqInfoCtrl.currentRequest.user_location.lat}}, {{custReqInfoCtrl.currentRequest.user_location.lng}}]" zoom="12" style="height:50%;">
         <marker position="[{{custReqInfoCtrl.currentRequest.user_location.lat}}, {{custReqInfoCtrl.currentRequest.user_location.lng}}]"></marker>
-        <marker position="[{{custReqInfoCtrl.providerInfo.geolocation.lat}}, {{custReqInfoCtrl.providerInfo.geolocation.lng}}]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
+        <marker position="[{{custReqInfoCtrl.currentRequest.providerInfo.geolocation.lat}}, {{custReqInfoCtrl.currentRequest.providerInfo.geolocation.lng}}]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
       </ng-map>
     </div>
     <ion-list>
@@ -14,10 +14,10 @@
         Vehicle Type: {{custReqInfoCtrl.currentRequest.vehicle_type}}<br>
         Cost: ${{custReqInfoCtrl.currentRequest.cost}}<br>
       </ion-item>
-      <ion-item ng-if="custReqInfoCtrl.providerInfo">
-        Your Provider: {{custReqInfoCtrl.providerInfo.company_name}}<br>
-        Contact: <a ng-href="tel: {{custReqInfoCtrl.providerInfo.phone_number}}">{{custReqInfoCtrl.providerInfo.phone_number}}</a>
-      </ion-item>
+      <ion-item ng-if="custReqInfoCtrl.currentRequest.providerInfo">
+        Your Provider: {{custReqInfoCtrl.currentRequest.providerInfo.company_name}}<br>
+        Contact: <a ng-href="tel: {{custReqInfoCtrl.currentRequest.providerInfo.phone_number}}">{{custReqInfoCtrl.currentRequest.providerInfo.phone_number}}</a>
+      </ion-item>       
       <!-- <ion-item class="item item-divider">Past Washes</ion-item> -->
     </ion-list>
     <div class="btn-margin">

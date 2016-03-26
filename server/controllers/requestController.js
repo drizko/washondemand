@@ -101,7 +101,8 @@ module.exports = {
       .update({
         job_accepted: currDate,
         provider: provider.company_name,
-        provider_email: provider.email
+        provider_email: provider.email,
+        provider_phone: provider.phone_number
       })
       .then(function(request) {
         console.log(request);
@@ -204,6 +205,9 @@ module.exports = {
       .remove({user_email: user.email})
       .then(function(){
         console.log("Removed request from table...");
+      })
+      .catch(function(err) {
+        console.error(err);
       })
   }
 };
