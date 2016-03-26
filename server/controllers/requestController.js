@@ -8,6 +8,7 @@ var helpers = require('../utils/helpers');
 var jwt = require('jwt-simple');
 var _ = require('lodash');
 var bcrypt = require('bcrypt-nodejs');
+var https = require('https');
 
 if (process.env.SALT_FACTOR === undefined) {
   var config = require('../config.js');
@@ -27,41 +28,46 @@ module.exports = {
       upsert: false
     };
 
-    var newRequest = {
-      user_location : {
-        lat: req.body.locData.lat,
-        lng: req.body.locData.lng
-      },
-      user_firstname: user.firstname,
-      user_email: user.email,
-      user_phone: user.phone_number,
-      wash_type: req.body.requestInfo.washType,
-      vehicle_type: req.body.requestInfo.vehicleType.name,
-      request_filled: '',
-      job_accepted: '',
-      job_started: '',
-      job_ended: '',
-      cost: req.body.requestInfo.price,
-      distance: '',
-      wash_info: req.body.requestInfo.washInfo
-    };
-    // send a new wash request
+    module.exports.geoDecode(req.body.locData.lat, req.body.locData.lng, function(address){
+      var newRequest = {
+        user_location : {
+          lat: req.body.locData.lat,
+          lng: req.body.locData.lng
+        },
+        user_firstname: user.firstname,
+        user_email: user.email,
+        user_phone: user.phone_number,
+        wash_type: req.body.requestInfo.washType,
+        vehicle_type: req.body.requestInfo.vehicleType.name,
+        request_filled: '',
+        job_accepted: '',
+        job_started: '',
+        job_ended: '',
+        cost: req.body.requestInfo.price,
+        distance: '',
+        address: address.results[0]['formatted_address'],
+        wash_info: req.body.requestInfo.washInfo
+      };
 
-    findRequest({user_email: user.email}).then(function(request) {
-      if (request) {
-        res.status(401).send();
-      }
-      create(newRequest)
-      .then(function(data) {
-        console.log('newRequest');
-        console.log(data);
-        Customer.findOneAndUpdate({email: user.email}, {'locked': true}, options, function() {
-        });
-        res.json({data: data});
+      findRequest({user_email: user.email}).then(function(request) {
+        if (request) {
+          res.status(401).send();
+        }
+        create(newRequest)
+        .then(function(data) {
+          console.log('newRequest');
+          console.log(data);
+          Customer.findOneAndUpdate({email: user.email}, {'locked': true}, options, function() {
+          });
+          res.json({data: data});
+        })
+        .catch(function(err){
+          console.log(err);
+        })
       })
-    })
-    .fail(function(error) {
-      next(error);
+      .fail(function(error) {
+        next(error);
+      });
     });
   },
 
@@ -214,5 +220,21 @@ module.exports = {
       .catch(function(err) {
         console.error(err);
       })
+  },
+
+  geoDecode: function(lat, lng, callback) {
+    var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lng + '&key=' + config.MAPS_API_KEY
+
+    console.log("Geodecode");
+    https.get(url, function(response){
+      var data = '';
+      response.on('data', function(chunk) {
+        data += chunk;
+      });
+
+      response.on('end', function() {
+        callback(JSON.parse(data));
+      })
+    });
   }
-};
+}

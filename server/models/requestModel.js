@@ -15,6 +15,7 @@ var requestSchema = new Schema({
   job_ended: String,
   cost: Number,
   distance: Number,
+  address: String,
   provider: String,
   provider_email: String,
   provider_phone: Number,
