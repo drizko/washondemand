@@ -9,30 +9,29 @@ function providerCtrl($scope, $stateParams, socket, providerFactory, $window, lo
   //Begin the service
   //hard coded 'target'
   function onConfirm(idx) {
-    console.log('button '+idx+' pressed');
+    console.log('button ' + idx + ' pressed');
   }
 
   socket.on('removeList', function(data) {
-    for(var i = 0; i < vm.requests.length; i++){
-      if(vm.requests[i]._id === data._id){
+    for (var i = 0; i < vm.requests.length; i++) {
+      if (vm.requests[i]._id === data._id) {
         vm.requests[i].display = true;
       }
     }
   });
 
   socket.on('refreshList', function(data) {
-    console.log(data);
-    for(var i = 0; i < vm.requests.length; i++){
-      if(vm.requests[i]._id === data._id){
+    for (var i = 0; i < vm.requests.length; i++) {
+      if (vm.requests[i]._id === data._id) {
         vm.requests[i].display = true;
       }
     }
-  })
+  });
 
   socket.on('addList', function(data) {
     console.log(data);
     vm.requests.push(data);
-  })
+  });
 
   vm.getRequests = function() {
     providerFactory.getRequest(locFactory.locData)
@@ -42,13 +41,6 @@ function providerCtrl($scope, $stateParams, socket, providerFactory, $window, lo
         });
         vm.requests = data;
       });
-  };
-
-  vm.moveMarkers = function(request) {
-    var user = jwtDecoder.decoder($window.localStorage['com.wod']);
-    request.user_location.lat += 0.01;
-    request.user_location.lng += 0.01;
-    console.log(request);
   };
 
   vm.acceptWash = function(request) {

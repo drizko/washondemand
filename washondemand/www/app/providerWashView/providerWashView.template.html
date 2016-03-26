@@ -1,19 +1,23 @@
-<ion-view title="Provider Wash Info">
+<ion-view title="Accepted Wash">
   <ion-content overflow-scroll="true" class="provider-wash-info">
     <ion-list>
-      <ion-item class="item item-divider">Current Wash</ion-item>
-      <ion-item ng-if="!provWashInfoCtrl.request || provWashInfoCtrl.jobComplete">
+      <ion-item class="no-wash" ng-if="!provWashInfoCtrl.request || provWashInfoCtrl.jobComplete">
         There are currently no washes in progress.
       </ion-item>
+      <div class="map-view" ng-if="provWashInfoCtrl.request && !provWashInfoCtrl.jobComplete" data-tap-disabled="false">
+        <ng-map center="[{{provWashInfoCtrl.locData.lat}}, {{provWashInfoCtrl.locData.lng}}]" zoom="12" style="height:550px;">
+          <marker position="[{{provWashInfoCtrl.locData.lat}}, {{provWashInfoCtrl.locData.lng}}]"></marker>
+          <marker position="[{{provWashInfoCtrl.request.user_location.lat}}, {{provWashInfoCtrl.request.user_location.lng}}]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
+        </ng-map>
+      </div>
       <ion-item ng-if="provWashInfoCtrl.request && !provWashInfoCtrl.jobComplete">
-        Customer Name: {{provWashInfoCtrl.request.user_firstname}}<br>
-        Customer Phone Number: <a ng-href="tel: {{provWashInfoCtrl.request.user_phone}}">{{provWashInfoCtrl.request.user_phone}}</a><br>
-        Job Accepted: {{provWashInfoCtrl.formatTime(provWashInfoCtrl.request.job_accepted)}}<br>
-        Wash Type: {{provWashInfoCtrl.request.wash_type}}<br>
-        Vehicle Type: {{provWashInfoCtrl.request.vehicle_type}}<br>
-        Cost: ${{provWashInfoCtrl.request.cost}}
+        <span class="label">Customer Name:</span> {{provWashInfoCtrl.request.user_firstname}}<br>
+        <span class="label">Customer Phone Number:</span> <a ng-href="tel: {{provWashInfoCtrl.request.user_phone}}">{{provWashInfoCtrl.request.user_phone}}</a><br>
+        <span class="label">Job Accepted:</span> {{provWashInfoCtrl.request.job_accepted}}<br>
+        <span class="label">Wash Type:</span> {{provWashInfoCtrl.request.wash_type}}<br>
+        <span class="label">Vehicle Type:</span> {{provWashInfoCtrl.request.vehicle_type}}<br>
+        <span class="label">Cost:</span> ${{provWashInfoCtrl.request.cost}}
       </ion-item>
-      <!-- <ion-item class="item item-divider">Past Washes</ion-item> -->
     </ion-list>
     <div class="btn-margin" ng-if="provWashInfoCtrl.request && !provWashInfoCtrl.jobComplete">
       <button ng-if="!provWashInfoCtrl.jobStarted" class="button button-block button-balanced" ng-click="provWashInfoCtrl.startWash()">Start Wash</button>
