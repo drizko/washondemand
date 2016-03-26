@@ -1,12 +1,15 @@
 angular.module('wod.custReqInfoCtrl', []).controller('custReqInfoCtrl', custReqInfoCtrl);
 
-function custReqInfoCtrl($stateParams, $scope, $ionicPopup, customerViewFactory, socket, $state) {
+function custReqInfoCtrl($stateParams, $ionicHistory, $scope, $ionicPopup, customerViewFactory, socket, $state) {
   var vm = this;
   $scope.feedback = {
     provider_rating: 0,
     provider_feedback: ''
   }
 
+  $ionicHistory.nextViewOptions({
+    disableBack: true
+  });
 
   customerViewFactory.getRequest()
     .then(function(request){
@@ -43,6 +46,7 @@ function custReqInfoCtrl($stateParams, $scope, $ionicPopup, customerViewFactory,
                 $scope.feedback._id = vm.currentRequest._id;
                 $scope.feedback.provider_rating = 1;
                 customerViewFactory.sendFeedback($scope.feedback);
+                $state.go('customernav.customer');
               }
             }
           },
@@ -52,6 +56,7 @@ function custReqInfoCtrl($stateParams, $scope, $ionicPopup, customerViewFactory,
                 $scope.feedback._id = vm.currentRequest._id;
                 $scope.feedback.provider_rating = 2;
                 customerViewFactory.sendFeedback($scope.feedback);
+                $state.go('customernav.customer');
               }
             }
           },
@@ -61,6 +66,7 @@ function custReqInfoCtrl($stateParams, $scope, $ionicPopup, customerViewFactory,
                 $scope.feedback._id = vm.currentRequest._id;
                 $scope.feedback.provider_rating = 3;
                 customerViewFactory.sendFeedback($scope.feedback);
+                $state.go('customernav.customer');
               }
             }
           },
@@ -70,6 +76,7 @@ function custReqInfoCtrl($stateParams, $scope, $ionicPopup, customerViewFactory,
                 $scope.feedback._id = vm.currentRequest._id;
                 $scope.feedback.provider_rating = 4;
                 customerViewFactory.sendFeedback($scope.feedback);
+                $state.go('customernav.customer');
               }
             }
           },
@@ -79,6 +86,7 @@ function custReqInfoCtrl($stateParams, $scope, $ionicPopup, customerViewFactory,
                 $scope.feedback._id = vm.currentRequest._id;
                 $scope.feedback.provider_rating = 5;
                 customerViewFactory.sendFeedback($scope.feedback);
+                $state.go('customernav.customer');
               }
             }
           }
