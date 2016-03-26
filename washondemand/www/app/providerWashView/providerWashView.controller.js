@@ -2,16 +2,16 @@ angular.module('wod.provWashInfoCtrl', []).controller('provWashInfoCtrl', provWa
 
 function provWashInfoCtrl($stateParams, socket, providerFactory, providerViewFactory, locFactory, $state, $ionicHistory) {
   var vm = this;
-  vm.request;
   vm.jobStarted = false;
   vm.jobComplete = false;
-  vm.availability = locFactory.availability;
 
   console.log('inside wash info ctrl');
   providerViewFactory.getAccepted(locFactory.locData)
   .then(function(result) {
     vm.request = result;
     console.log(result);
+    vm.locData = locFactory.locData;
+    console.log(vm.locData);
   });
 
   vm.startWash = function() {
@@ -24,7 +24,7 @@ function provWashInfoCtrl($stateParams, socket, providerFactory, providerViewFac
   };
 
   vm.endWash = function() {
-    console.log("This is endWash");
+    console.log('This is endWash');
     vm.jobStarted = false;
     vm.jobComplete = true;
 

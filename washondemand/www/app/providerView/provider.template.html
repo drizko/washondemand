@@ -1,27 +1,34 @@
-<ion-view title="Provider View">
+<ion-view title="Requested Carwashes">
   <ion-content overflow-scroll="true" class="provider-view">
-    <div class="map-view" data-tap-disabled="true">
+    <div class="map-view" ng-if="providerCtrl.requests.length<1" data-tap-disabled="true">
       <ng-map center="[{{providerCtrl.locData.lat}}, {{providerCtrl.locData.lng}}]" zoom="12" style="height:550px;">
         <marker position="[{{providerCtrl.locData.lat}}, {{providerCtrl.locData.lng}}]"></marker>
         <marker ng-repeat="position in providerCtrl.requests" position="[{{position.user_location.lat}}, {{position.user_location.lng}}]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
       </ng-map>
+      <ion-item class="no-wash">
+        There are currently no wash<br>request in your area.
+      </ion-item>
     </div>
     <ion-list ng-if="providerCtrl.locData.found" ng-init="providerCtrl.getRequests()">
-      <ion-item class="item item-divider">
-        Carwash Requested
-      </ion-item>
       <ion-item class="item request-list" ng-if="!request.display" ng-repeat="request in providerCtrl.requests">
-        <div >
-          <div style="float:left;">
+        <div class="req-map-view" data-tap-disabled="false">
+          <ng-map center="[{{providerCtrl.locData.lat}}, {{providerCtrl.locData.lng}}]" zoom="12" style="height:550px;">
+            <marker position="[{{providerCtrl.locData.lat}}, {{providerCtrl.locData.lng}}]"></marker>
+            <marker position="[{{request.user_location.lat}}, {{request.user_location.lng}}]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
+          </ng-map>
+        </div>
+        <div class="row">
+          <div class="col">
             Wash Type: {{request.wash_type}}<br>
-            Car Type: {{request.vehicle_type}}<br>
+            Car Type: {{request.vehicle_type}}
+          </div>
+          <div class="col">
             Price: ${{request.cost}}<br>
-            Distance: {{request.distance}} miles<br>
+            Distance: {{request.distance}} miles
           </div>
-          <div style="float:right;margin-right:35px;margin-top:29px;">
-            <button class ="button button-balanced" ng-disabled="request.accepted" ng-disabled="providerCtrl.accepted" ng-click="providerCtrl.acceptWash(request)">Accept Wash</button>
-          </div>
-          <!-- <button ng-click="providerCtrl.moveMarkers(request)">Move Markers</button> -->
+        </div>
+        <div style="">
+          <button class="button button-block button-positive" ng-disabled="request.accepted" ng-disabled="providerCtrl.accepted" ng-click="providerCtrl.acceptWash(request)">Accept Wash</button>
         </div>
       </ion-item>
     </ion-list>

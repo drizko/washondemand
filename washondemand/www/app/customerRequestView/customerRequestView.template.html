@@ -1,4 +1,4 @@
-<ion-view title="Requested Wash Info">
+<ion-view title="Current Wash Request">
   <ion-content overflow-scroll="true" class="customer-request-view">
     <div ng-if="custReqInfoCtrl.currentRequest.providerInfo" class="map-view" data-tap-disabled="true">
       <ng-map center="[{{custReqInfoCtrl.currentRequest.user_location.lat}}, {{custReqInfoCtrl.currentRequest.user_location.lng}}]" zoom="12" style="height:50%;">
@@ -7,18 +7,16 @@
       </ng-map>
     </div>
     <ion-list>
-      <ion-item class="item item-divider">Current Wash</ion-item>
       <ion-item>
-        Job Status: {{custReqInfoCtrl.jobStatus}}<br>
-        Wash Type: {{custReqInfoCtrl.currentRequest.wash_type}}<br>
-        Vehicle Type: {{custReqInfoCtrl.currentRequest.vehicle_type}}<br>
-        Cost: ${{custReqInfoCtrl.currentRequest.cost}}<br>
+        <span class="label">Job Status:</span> {{custReqInfoCtrl.jobStatus}}<br>
+        <span class="label">Wash Type:</span> {{custReqInfoCtrl.currentRequest.wash_type}}<br>
+        <span class="label">Vehicle Type:</span> {{custReqInfoCtrl.currentRequest.vehicle_type}}<br>
+        <span class="label">Cost:</span> ${{custReqInfoCtrl.currentRequest.cost}}<br>
       </ion-item>
       <ion-item ng-if="custReqInfoCtrl.currentRequest.providerInfo">
-        Your Provider: {{custReqInfoCtrl.currentRequest.providerInfo.company_name}}<br>
-        Contact: <a ng-href="tel: {{custReqInfoCtrl.currentRequest.providerInfo.phone_number}}">{{custReqInfoCtrl.currentRequest.providerInfo.phone_number}}</a>
+        <span class="label">Your Provider:</span>  {{custReqInfoCtrl.currentRequest.providerInfo.company_name}}<br>
+        <span class="label">Contact:</span> <a ng-href="tel: {{custReqInfoCtrl.currentRequest.providerInfo.phone_number}}">{{custReqInfoCtrl.currentRequest.providerInfo.phone_number}}</a>
       </ion-item>       
-      <!-- <ion-item class="item item-divider">Past Washes</ion-item> -->
     </ion-list>
     <div class="btn-margin">
       <button class="button button-block button-positive" ng-disabled="custReqInfoCtrl.currentRequest.job_accepted !== ''" ng-click="custReqInfoCtrl.cancelRequest()">Cancel Request</button>
