@@ -2,7 +2,6 @@ angular.module('wod.custReqInfoCtrl', []).controller('custReqInfoCtrl', custReqI
 
 function custReqInfoCtrl($stateParams, $scope, $ionicPopup, customerViewFactory, socket, $state) {
   var vm = this;
-  vm.providerInfo;
   $scope.feedback = {
     provider_rating: 0,
     provider_feedback: ''
@@ -22,21 +21,12 @@ function custReqInfoCtrl($stateParams, $scope, $ionicPopup, customerViewFactory,
     });
 
   socket.on('refreshList', function(requestInfo){
+    console.log("INSIDE REFRESH SOCKET REQINFO: ", requestInfo);
     if(vm.currentRequest._id === requestInfo._id){
-      console.log(vm.currentRequest);
       vm.currentRequest.job_accepted = vm.currentRequest.job_accepted || "Accepted";
-      vm.providerInfo = requestInfo.provider;
-
-      console.log("+++PROVIDER INFO: ", vm.providerInfo);
-      console.log(vm.currentRequest);
+      vm.currentRequest.providerInfo = requestInfo.provider;
     }
   });
-
-//       console.log(vm.currentRequest);
-//     vm.currentRequest.job_accepted = vm.currentRequest.job_accepted || "Accepted";
-//     vm.providerInfo = requestInfo.provider;
-//     vm.currentRequest.providerInfo = requestInfo.provider;
-// >>>>>>> [feature] Keeps real time data persistent when customer changes view
 
 
   socket.on('getRating', function(request){
