@@ -1,7 +1,7 @@
 angular.module('wod.customerCtrl', [])
 .controller('customerCtrl', customerCtrl);
 
-function customerCtrl($scope, customerViewFactory, $ionicHistory, NgMap, $ionicPopup, customerFactory, $state, locFactory, $window, jwtDecoder, socket) {
+function customerCtrl($scope, customerViewFactory, $ionicHistory, NgMap, $ionicLoading, $ionicPopup, customerFactory, $state, locFactory, $window, jwtDecoder, socket) {
 
   var vm = this;
 
@@ -15,6 +15,18 @@ function customerCtrl($scope, customerViewFactory, $ionicHistory, NgMap, $ionicP
   vm.btnMsg = 'Select a vehicle and wash type';
 
   vm.locData = locFactory.locData;
+
+  $ionicLoading.show({
+    template: 'loading'
+  });
+  customerFactory.getProviders()
+  .then(function(data) {
+    vm.washers = data.results;
+  });
+
+  vm.showInfo = function() {
+    return vm.request.vehicleType.price > 0 && vm.request.washType;
+  };
 
   vm.showConfirm = function() {
     var confirmPopup = $ionicPopup.confirm({
@@ -31,12 +43,6 @@ function customerCtrl($scope, customerViewFactory, $ionicHistory, NgMap, $ionicP
     });
   };
 
-  var getProviders = function() {
-    customerFactory.getProviders()
-    .then(function(data) {
-      vm.washers = data.results;
-    });
-  };
 
   vm.sendRequest = function() {
     customerViewFactory.getRequest()
@@ -103,15 +109,5 @@ function customerCtrl($scope, customerViewFactory, $ionicHistory, NgMap, $ionicP
     }
   };
 
-  vm.showInfo = function() {
-    return vm.request.vehicleType.price > 0 && vm.request.washType;
-  };
 
-  var init = function() {
-    var token = $window.localStorage['com.wod'];
-    var user = jwtDecoder.decoder(token);
-    getProviders();
-    locFactory.getLoc('customer', user.email).then(locFactory.sendLocToServer);
-  };
-  init();
 }
