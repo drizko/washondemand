@@ -7,8 +7,8 @@
       </ion-item>
       <ion-item ng-if="provWashInfoCtrl.request && !provWashInfoCtrl.jobComplete">
         Customer Name: {{provWashInfoCtrl.request.user_firstname}}<br>
-        Customer Phone Number: {{provWashInfoCtrl.request.user_phone}}<br>
-        Job Accepted: {{provWashInfoCtrl.request.job_accepted}}<br>
+        Customer Phone Number: <a ng-href="tel: {{provWashInfoCtrl.request.user_phone}}">{{provWashInfoCtrl.request.user_phone}}</a><br>
+        Job Accepted: {{provWashInfoCtrl.formatTime(provWashInfoCtrl.request.job_accepted)}}<br>
         Wash Type: {{provWashInfoCtrl.request.wash_type}}<br>
         Vehicle Type: {{provWashInfoCtrl.request.vehicle_type}}<br>
         Cost: ${{provWashInfoCtrl.request.cost}}

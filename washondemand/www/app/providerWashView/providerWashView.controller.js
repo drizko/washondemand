@@ -36,4 +36,8 @@ function provWashInfoCtrl($stateParams, socket, providerFactory, providerViewFac
     $state.go('providernav.provider', {accepted: false});
   };
 
+  vm.formatTime = function(time) {
+    var timestamp = moment(time, 'x').format('M/D/YY h:mm a');
+    return timestamp;
+  };
 };
