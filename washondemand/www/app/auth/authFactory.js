@@ -1,8 +1,8 @@
 angular.module('wod.authFactory', []).factory('authFactory', authFactory);
 
-authFactory.$inject = ['$http', '$window', '$state', 'locFactory'];
+authFactory.$inject = ['$http', '$window', '$state', '$cordovaFile', 'locFactory'];
 
-function authFactory($http, $window, $state, locFactory) {
+function authFactory($http, $window, $state, $cordovaFile, locFactory) {
 
   var emailRegex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
   var currentUserEmail = '';
@@ -30,7 +30,9 @@ function authFactory($http, $window, $state, locFactory) {
       clearForm(accountInfo);
       //set jwt
       $window.localStorage.setItem('com.wod', token);
-      //redirect to user page
+      if (ionic.Platform.isIOS()) {
+        $cordovaFile.writeFile(cordova.file.dataDirectory, 'com.wod', token, true)
+      };
       $state.go(userType + 'nav.' + userType);
     })
     .catch(function(error) {
@@ -89,6 +91,13 @@ function authFactory($http, $window, $state, locFactory) {
   function signout() {
     locFactory.resetLocData();
     $window.localStorage.removeItem('com.wod');
+
+    if (ionic.Platform.isIOS()) {
+      $cordovaFile.writeFile(cordova.file.dataDirectory, 'com.wod', '', true)
+      $cordovaFile.writeFile(cordova.file.dataDirectory, 'cust', '', true)
+      $cordovaFile.writeFile(cordova.file.dataDirectory, 'prov', '', true)
+    };
+
     $state.go('home');
   }
 

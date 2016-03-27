@@ -19,6 +19,8 @@ angular.module('WashOnDemand', [
 	'wod.nav',
 	'ngMap',
   'ion-sticky',
+  'ngCordova',
+  'ngCordova.plugins.file',
   'angular-jwt'
 ])
 
