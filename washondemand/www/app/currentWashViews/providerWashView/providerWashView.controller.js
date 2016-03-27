@@ -1,11 +1,9 @@
 angular.module('wod.provWashInfoCtrl', []).controller('provWashInfoCtrl', provWashInfoCtrl);
 
-function provWashInfoCtrl($stateParams, socket, $window, providerFactory, providerViewFactory, locFactory, $state, $ionicHistory, $cordovaDevice) {
+function provWashInfoCtrl($stateParams, socket, providerFactory, providerViewFactory, locFactory, $state, $ionicHistory) {
   var vm = this;
   vm.jobStarted = false;
   vm.jobComplete = false;
-
-  document.addEventListener("deviceready", vm.onDeviceReady, false);
 
   console.log('inside wash info ctrl');
   providerViewFactory.getAccepted(locFactory.locData)
@@ -42,20 +40,4 @@ function provWashInfoCtrl($stateParams, socket, $window, providerFactory, provid
     var timestamp = moment(time, 'x').format('M/D/YY h:mm a');
     return timestamp;
   };
-
-  vm.onDeviceReady = function() { 
-
-    vm.getDirection = function() {
-      // saddr=Cupertino&
-      var reqLat = vm.request.user_location.lat;
-      var reqLng = vm.request.user_location.lng;
-      if(device.platform === 'iOS') {
-          $window.open('maps://?daddr=' + reqLat + ',' + reqLng + '&dirflg=d&t=h', '_system');
-      }
-      if(device.platform === 'Android') {
-          $window.open('geo://?daddr=' + reqLat + ',' + reqLng + '&dirflg=d&t=h', '_system');
-      }
-      // window.location.href = url;
-    }
-  }       
 };

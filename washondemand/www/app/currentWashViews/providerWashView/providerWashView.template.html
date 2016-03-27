@@ -16,8 +16,7 @@
         <span class="label">Job Accepted:</span> {{provWashInfoCtrl.formatTime(provWashInfoCtrl.request.job_accepted)}}<br>
         <span class="label">Wash Type:</span> {{provWashInfoCtrl.request.wash_type}}<br>
         <span class="label">Vehicle Type:</span> {{provWashInfoCtrl.request.vehicle_type}}<br>
-        <span class="label">Cost:</span> ${{provWashInfoCtrl.request.cost}}<br>
-        <span class="label">Address:</span> <a ng-click="provWashInfoCtrl.getDirection()">{{provWashInfoCtrl.request.address}}</a>
+        <span class="label">Cost:</span> ${{provWashInfoCtrl.request.cost}}
       </ion-item>
     </ion-list>
     <div class="btn-margin" ng-if="provWashInfoCtrl.request && !provWashInfoCtrl.jobComplete">
