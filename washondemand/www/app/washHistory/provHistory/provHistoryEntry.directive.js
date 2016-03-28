@@ -1,12 +1,12 @@
-angular.module('wod.custWashHistCtrl').directive('wodCustHistoryEntry', wodCustHistoryEntry);
+angular.module('wod.provWashHistCtrl').directive('wodProvHistoryEntry', wodProvHistoryEntry);
 
-wodCustHistoryEntry.$inject = ['washHistFactory'];
+wodProvHistoryEntry.$inject = ['washHistFactory'];
 
-function wodCustHistoryEntry(washHistFactory) {
+function wodProvHistoryEntry(washHistFactory) {
   var directive = {
     restrict: 'EA',
     replace: 'true',
-    templateUrl: './app/washHistory/custHistory/custHistoryEntry.template.html',
+    templateUrl: './app/washHistory/provHistory/provHistoryEntry.template.html',
     scope: {
       wash: '='
     },
@@ -27,6 +27,10 @@ function wodCustHistoryEntry(washHistFactory) {
 
     vm.toggleExpand = function(wash) {
       wash.expanded = !wash.expanded;
+    };
+
+    vm.formatFeedback = function(feedback) {
+      return washHistFactory.formatFeedback(feedback);
     };
   }
 
