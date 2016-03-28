@@ -6,7 +6,7 @@ function provWashHistCtrl(washHistFactory) {
   var vm = this;
 
   vm.numEntries = 10;
-  vm.history = [];
+  vm.history;
   vm.total;
   vm.sum;
   vm.ratingAvg;

@@ -9,7 +9,7 @@
         </div>
       </ion-item>
 
-      <ion-item ng-repeat="wash in provWashHistCtrl.history | limitTo:provWashHistCtrl.numEntries">
+      <ion-item ng-repeat="wash in ::provWashHistCtrl.history | limitTo:provWashHistCtrl.numEntries">
         <p>
           <span>
             {{::provWashHistCtrl.formatTime(wash.job_ended)}}
@@ -41,8 +41,8 @@
           </span>
         </p>
         <ul ng-if="wash.expanded">
-          <li ng-repeat="option in wash.wash_info" ng-if="option.active">
-            <p>{{::option.info}}</p>
+          <li ng-repeat="option in ::wash.wash_info" ng-if="::option.active">
+            <p>{{::option.info}} ${{::option.price}}</p>
           </li>
         </ul>
       </ion-item>
