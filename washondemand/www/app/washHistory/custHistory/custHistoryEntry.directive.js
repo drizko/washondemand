@@ -1,12 +1,12 @@
-angular.module('wod.custWashHistCtrl').directive('wodHistoryEntry', wodHistoryEntry);
+angular.module('wod.custWashHistCtrl').directive('wodCustHistoryEntry', wodCustHistoryEntry);
 
-wodHistoryEntry.$inject = ['washHistFactory'];
+wodCustHistoryEntry.$inject = ['washHistFactory'];
 
-function wodHistoryEntry(washHistFactory) {
+function wodCustHistoryEntry(washHistFactory) {
   var directive = {
     restrict: 'EA',
     replace: 'true',
-    templateUrl: './app/washHistory/custHistory/historyEntry.html',
+    templateUrl: './app/washHistory/custHistory/custHistoryEntry.html',
     scope: {
       wash: '='
     },

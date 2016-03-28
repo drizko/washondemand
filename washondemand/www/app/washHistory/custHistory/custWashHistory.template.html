@@ -2,8 +2,8 @@
   <ion-content overflow-scroll="true" class="customer-history">
     <ion-list>
       <ion-item ng-repeat="wash in ::custWashHistCtrl.history | limitTo:custWashHistCtrl.numEntries">
-        <wod-history-entry wash="::wash">
-        </wod-history-entry>
+        <wod-cust-history-entry wash="::wash">
+        </wod-cust-history-entry>
       </ion-item>
     </ion-list>
     <button class="button button-positive button-small button-full" ng-click="custWashHistCtrl.displayMoreEntries()" ng-if="custWashHistCtrl.numEntries < custWashHistCtrl.history.length"> Show More </button>
