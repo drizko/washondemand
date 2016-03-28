@@ -1,9 +1,11 @@
 angular.module('wod.providerCtrl', []).controller('providerCtrl', providerCtrl);
 
-function providerCtrl(socket, providerFactory, $ionicHistory, $state, $ionicLoading) {
+// providerCtrl.$inject['socket', 'providerFactory', '$ionicHistory', '$state', '$ionicLoading'];
+
+function providerCtrl(socket, mainViewFactory, $ionicHistory, $state, $ionicLoading) {
   var vm = this;
   vm.requests = [];
-  vm.locData = providerFactory.locData;
+  vm.locData = mainViewFactory.locData;
 
   $ionicLoading.show({
     template: '<p>Loading...</p><ion-spinner></ion-spinner>'
@@ -33,7 +35,7 @@ function providerCtrl(socket, providerFactory, $ionicHistory, $state, $ionicLoad
     vm.requests.push(data);
   });
 
-  providerFactory.getRequest()
+  mainViewFactory.getRequest()
     .then(function(data) {
       data.forEach(function(item) {
         item.accepted = false;
@@ -44,7 +46,7 @@ function providerCtrl(socket, providerFactory, $ionicHistory, $state, $ionicLoad
 
   vm.acceptWash = function(request) {
     vm.accepted = true;
-    providerFactory.acceptRequest(request)
+    mainViewFactory.acceptRequest(request)
       .then(function() {
         $ionicHistory.nextViewOptions({
           disableBack: true

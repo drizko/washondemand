@@ -1,25 +1,30 @@
 <ion-view title="Current Wash Request">
   <ion-content overflow-scroll="true" class="customer-request-view">
-    <div ng-if="custReqInfoCtrl.currentRequest.providerInfo" class="map-view" data-tap-disabled="true">
-      <ng-map center="[{{custReqInfoCtrl.currentRequest.user_location.lat}}, {{custReqInfoCtrl.currentRequest.user_location.lng}}]" zoom="12" style="height:50%;">
-        <marker position="[{{custReqInfoCtrl.currentRequest.user_location.lat}}, {{custReqInfoCtrl.currentRequest.user_location.lng}}]"></marker>
-        <marker position="[{{custReqInfoCtrl.currentRequest.providerInfo.geolocation.lat}}, {{custReqInfoCtrl.currentRequest.providerInfo.geolocation.lng}}]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
-      </ng-map>
+    <div ng-if="!custReqInfoCtrl.currentRequest.wash_type">
+      You have not requested a wash yet.
     </div>
-    <ion-list>
-      <ion-item>
-        <span class="label">Job Status:</span> {{custReqInfoCtrl.jobStatus}}<br>
-        <span class="label">Wash Type:</span> {{custReqInfoCtrl.currentRequest.wash_type}}<br>
-        <span class="label">Vehicle Type:</span> {{custReqInfoCtrl.currentRequest.vehicle_type}}<br>
-        <span class="label">Cost:</span> ${{custReqInfoCtrl.currentRequest.cost}}<br>
-      </ion-item>
-      <ion-item ng-if="custReqInfoCtrl.currentRequest.providerInfo">
-        <span class="label">Your Provider:</span>  {{custReqInfoCtrl.currentRequest.providerInfo.company_name}}<br>
-        <span class="label">Contact:</span> <a ng-href="tel: {{custReqInfoCtrl.currentRequest.providerInfo.phone_number}}">{{custReqInfoCtrl.currentRequest.providerInfo.phone_number}}</a>
-      </ion-item>       
-    </ion-list>
-    <div class="btn-margin">
-      <button class="button button-block button-positive" ng-disabled="custReqInfoCtrl.currentRequest.job_accepted !== ''" ng-click="custReqInfoCtrl.cancelRequest()">Cancel Request</button>
+    <div ng-if="custReqInfoCtrl.currentRequest.wash_type">
+      <div class="map-view" data-tap-disabled="true">
+        <ng-map center="[{{custReqInfoCtrl.currentRequest.user_location.lat}}, {{custReqInfoCtrl.currentRequest.user_location.lng}}]" zoom="12" style="height:50%;">
+          <marker position="[{{custReqInfoCtrl.currentRequest.user_location.lat}}, {{custReqInfoCtrl.currentRequest.user_location.lng}}]"></marker>
+          <marker position="[{{custReqInfoCtrl.currentRequest.providerInfo.geolocation.lat}}, {{custReqInfoCtrl.currentRequest.providerInfo.geolocation.lng}}]" icon="http://icons.iconarchive.com/icons/icons-land/vista-map-markers/32/Map-Marker-Marker-Outside-Azure-icon.png"></marker>
+        </ng-map>
+      </div>
+      <ion-list>
+        <ion-item>
+          <span class="label">Job Status:</span> {{custReqInfoCtrl.jobStatus}}<br>
+          <span class="label">Wash Type:</span> {{custReqInfoCtrl.currentRequest.wash_type}}<br>
+          <span class="label">Vehicle Type:</span> {{custReqInfoCtrl.currentRequest.vehicle_type}}<br>
+          <span class="label">Cost:</span> ${{custReqInfoCtrl.currentRequest.cost}}<br>
+        </ion-item>
+        <ion-item ng-if="custReqInfoCtrl.currentRequest.providerInfo">
+          <span class="label">Your Provider:</span>  {{custReqInfoCtrl.currentRequest.providerInfo.company_name}}<br>
+          <span class="label">Contact:</span> <a ng-href="tel: {{custReqInfoCtrl.currentRequest.providerInfo.phone_number}}">{{custReqInfoCtrl.currentRequest.providerInfo.phone_number}}</a>
+        </ion-item>
+      </ion-list>
+      <div class="btn-margin">
+        <button class="button button-block button-positive" ng-disabled="custReqInfoCtrl.currentRequest.job_accepted !== ''" ng-click="custReqInfoCtrl.cancelRequest()">Cancel Request</button>
+      </div>
     </div>
   </ion-content>
 </ion-view>

@@ -5,7 +5,8 @@ angular.module('wod.services', [])
 .factory('locFactory', locFactory)
 .factory('requests', requests);
 
-function requests($http, $ionicHistory, $state, customerFactory, socket) {
+requests.$inject = ['$http', '$ionicHistory', '$state', 'mainViewFactory']
+function requests($http, $ionicHistory, $state, mainViewFactory) {
   function getCustRequests() {
     return $http({
       method: 'POST',
@@ -16,7 +17,7 @@ function requests($http, $ionicHistory, $state, customerFactory, socket) {
         $ionicHistory.nextViewOptions({
           disableBack: true
         });
-        customerFactory.showConfirm();
+        mainViewFactory.showConfirm();
       }
       return results;
     });

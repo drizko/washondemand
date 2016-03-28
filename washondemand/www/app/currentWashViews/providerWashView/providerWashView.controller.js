@@ -1,10 +1,20 @@
 angular.module('wod.provWashInfoCtrl', []).controller('provWashInfoCtrl', provWashInfoCtrl);
 
-function provWashInfoCtrl($stateParams, socket, providerFactory, providerViewFactory, locFactory, $state, $ionicHistory) {
+provWashInfoCtrl.$inject = ['socket', 'currentWashFactory', '$ionicHistory', '$ionicLoading'];
+
+function provWashInfoCtrl(socket, currentWashFactory, $ionicHistory, $ionicLoading) {
   var vm = this;
   vm.jobStarted = false;
   vm.jobComplete = false;
+  vm.locData = currentWashFactory.locData;
 
+  $ionicHistory.nextViewOptions({
+    disableBack: true
+  });
+
+  $ionicLoading.show({
+    template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+  });
 
   ionic.Platform.ready(function() {
     var isIOS = ionic.Platform.isIOS();
@@ -12,35 +22,25 @@ function provWashInfoCtrl($stateParams, socket, providerFactory, providerViewFac
     var currentPlatform = ionic.Platform.platform();
   });
 
-  console.log('inside wash info ctrl');
-  providerViewFactory.getAccepted(locFactory.locData)
+  currentWashFactory.getAccepted()
   .then(function(result) {
     vm.request = result;
-    console.log(result);
-    vm.locData = locFactory.locData;
-    console.log(vm.locData);
+    $ionicLoading.hide();
   });
 
   vm.startWash = function() {
-
     socket.emit('startWash', vm.request);
-    providerViewFactory.beginJob(vm.request)
+    currentWashFactory.beginJob(vm.request)
     .then(function() {
       vm.jobStarted = true;
     });
   };
 
   vm.endWash = function() {
-    console.log('This is endWash');
     vm.jobStarted = false;
     vm.jobComplete = true;
-
     socket.emit('endWash', vm.request);
-    providerViewFactory.endJob(vm.request);
-    $ionicHistory.nextViewOptions({
-      disableBack: true
-    });
-    $state.go('providernav.provider', {accepted: false});
+    currentWashFactory.endJob(vm.request);
   };
 
   vm.formatTime = function(time) {
@@ -61,5 +61,5 @@ function provWashInfoCtrl($stateParams, socket, providerFactory, providerViewFac
       $window.open('geo://?daddr=' + reqLat + ',' + reqLng + '&dirflg=d&t=h', '_system');
     };
     // window.location.href = url;
-  };   
+  };
 };

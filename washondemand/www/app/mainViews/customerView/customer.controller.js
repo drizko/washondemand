@@ -1,18 +1,20 @@
 angular.module('wod.customerCtrl', [])
 .controller('customerCtrl', customerCtrl);
 
-function customerCtrl(requests, $ionicHistory, $ionicLoading, customerFactory) {
+// customerCtrl.$inject['requests', '$ionicHistory', '$ionicLoading', 'mainViewFactory'];
+
+function customerCtrl(requests, $ionicHistory, $ionicLoading, mainViewFactory) {
 
   var vm = this;
-  vm.request = customerFactory.request;
+  vm.request = mainViewFactory.request;
   vm.btnMsg = 'Select a vehicle and wash type';
-  vm.locData = customerFactory.locData;
+  vm.locData = mainViewFactory.locData;
 
   $ionicLoading.show({
     template: '<p>Loading...</p><ion-spinner></ion-spinner>'
   });
 
-  customerFactory.getProviders()
+  mainViewFactory.getProviders()
   .then(function(data) {
     vm.washers = data.results;
     $ionicLoading.hide();
@@ -25,19 +27,19 @@ function customerCtrl(requests, $ionicHistory, $ionicLoading, customerFactory) {
   vm.sendRequest = function() {
     requests.getCustRequests()
     .then(function(data) {
-      customerFactory.sendRequest(vm.request);
+      mainViewFactory.sendRequest(vm.request);
     });
   };
 
   vm.selectVehicle = function(vehicle) {
-    vm.request.vehicleType = customerFactory.vehicleOptions[vehicle];
+    vm.request.vehicleType = mainViewFactory.vehicleOptions[vehicle];
   };
 
   vm.selectWash = function(wash) {
     vm.request.washType = wash;
     if (wash !== 'custom') {
-      customerFactory.restoreOptions();
-      var options = customerFactory.washTypeOptions[wash].options;
+      mainViewFactory.restoreOptions();
+      var options = mainViewFactory.washTypeOptions[wash].options;
       for (var i = 0; i < options.length; i++) {
         vm.request.washInfo[options[i]].active = true;
       }
