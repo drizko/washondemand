@@ -130,13 +130,12 @@ module.exports = {
     var user = jwt.decode(token, config.tokenSecret);
 
     Request.where({user_email: user.email})
-      .then(function(item){
-        console.log("INSIDE getCurrent: ", item);
-        res.json(item);
+      .then(function(item) {
+        res.json(item[0]);
       })
       .catch(function(err) {
         console.error(err);
-      })
+      });
   },
 
   getAccepted: function(req, res, next) {
@@ -216,6 +215,7 @@ module.exports = {
       .remove({user_email: user.email})
       .then(function(){
         console.log("Removed request from table...");
+        res.status(200).send();
       })
       .catch(function(err) {
         console.error(err);
