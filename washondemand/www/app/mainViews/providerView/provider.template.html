@@ -9,7 +9,7 @@
         There are currently no wash<br>request in your area.
       </ion-item>
     </div>
-    <ion-list ng-if="providerCtrl.locData.found" ng-init="providerCtrl.getRequests()">
+    <ion-list ng-if="providerCtrl.requests.length>0" ng-init="providerCtrl.getRequests()">
       <ion-item class="item request-list" ng-if="!request.display" ng-repeat="request in providerCtrl.requests">
         <div class="req-map-view" data-tap-disabled="false">
           <ng-map center="[{{providerCtrl.locData.lat}}, {{providerCtrl.locData.lng}}]" zoom="12" style="height:550px;">

@@ -1,7 +1,11 @@
-angular.module('wod.customerFactory', [])
+angular.module('wod.mainViewFactory', [])
+.factory('providerFactory', providerFactory)
 .factory('customerFactory', customerFactory);
 
-function customerFactory($http, $window, $location, locFactory) {
+function customerFactory($http, $window, $location, locFactory, jwtDecoder, locFactory, $state, $ionicPopup, socket, $ionicHistory) {
+
+  var user = jwtDecoder.decoder($window.localStorage['com.wod']);
+  var locData = locFactory.locData;
 
   var vehicleOptions = {
     car: {name: 'car', price: 1},
@@ -44,6 +48,13 @@ function customerFactory($http, $window, $location, locFactory) {
     ]},
   };
 
+  var request = {
+    vehicleType: {name: 'Please Pick a Vehicle Type', price: 0},
+    washType: '',
+    price: 0,
+    washInfo: washOptions
+  };
+
   function restoreOptions() {
     for (var k in washOptions) {
       washOptions[k].active = false;
@@ -51,7 +62,6 @@ function customerFactory($http, $window, $location, locFactory) {
   }
 
   function sendRequest(details) {
-    console.log('From customerFactory!!!!!!!!!!!!!');
     return $http({
       method: 'POST',
       url: masterURL + '/api/request/create-request',
@@ -61,11 +71,17 @@ function customerFactory($http, $window, $location, locFactory) {
       }
     })
     .then(function(results) {
-      return results.data.data;
+      socket.emit('requested', results.data.data);
+      $ionicHistory.nextViewOptions({
+        disableBack: true
+      });
+      $state.go('customernav.customerRequestView');
     });
   };
 
   function getProviders() {
+    locFactory.getLoc('customer', user.email).then(locFactory.sendLocToServer);
+
     return $http({
       method: 'POST',
       url: masterURL + '/api/provider/get-providers',
@@ -76,12 +92,75 @@ function customerFactory($http, $window, $location, locFactory) {
     });
   };
 
+  function showConfirm() {
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Request Pending',
+      template: 'You already have a request pending\nWould you like to go to that page?'
+    });
+
+    confirmPopup.then(function(res) {
+      if(res) {
+        $state.go("customernav.customerRequestView")
+      }
+    });
+  };
+
   return {
+    showConfirm: showConfirm,
     sendRequest: sendRequest,
     getProviders: getProviders,
     restoreOptions: restoreOptions,
     vehicleOptions: vehicleOptions,
     washOptions: washOptions,
-    washTypeOptions: washTypeOptions
+    washTypeOptions: washTypeOptions,
+    request: request,
+    locData, locData
   };
-}
+};
+
+function providerFactory($http, $window, $location, locFactory, jwtDecoder, socket, GeoAlert) {
+
+  var provider = jwtDecoder.decoder($window.localStorage['com.wod']);
+  var locData = locFactory.locData;
+
+  function getRequest() {
+    locFactory.getLoc('provider', provider.email).then(locFactory.sendLocToServer);
+    return $http({
+      method: 'POST',
+      url: masterURL + '/api/request/get-requests',
+      data: locData
+    })
+    .then(function(results) {
+      return results.data.results;
+    });
+  };
+
+  function acceptRequest(request) {
+    request.provider = provider;
+    request.job_accepted = new Date();
+    socket.emit('accepted', request);
+    return $http({
+      method: 'POST',
+      url: masterURL + '/api/request/accept-request',
+      data: request
+    })
+    .then(function() {
+      GeoAlert.begin(request.user_location.lat, request.user_location.lng, function() {
+        GeoAlert.end();
+        navigator.notification.confirm(
+          'You are near your customer!',
+          onConfirm,
+          'Target!',
+          ['Cancel','View']
+        );
+      });
+
+    });
+  };
+
+  return {
+    getRequest: getRequest,
+    acceptRequest: acceptRequest,
+    locData: locData
+  };
+};

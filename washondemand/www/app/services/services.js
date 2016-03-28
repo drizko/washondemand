@@ -2,7 +2,30 @@ angular.module('wod.services', [])
 .factory('jwtDecoder', jwtDecoder)
 .factory('GeoAlert', GeoAlert)
 .factory('socket', socket)
-.factory('locFactory', locFactory);
+.factory('locFactory', locFactory)
+.factory('requests', requests);
+
+function requests($http, $ionicHistory, $state, customerFactory, socket) {
+  function getCustRequests() {
+    return $http({
+      method: 'POST',
+      url: masterURL + '/api/request/get-current'
+    })
+    .then(function(results) {
+      if (results.data[0] !== undefined) {
+        $ionicHistory.nextViewOptions({
+          disableBack: true
+        });
+        customerFactory.showConfirm();
+      }
+      return results;
+    });
+  };
+
+  return {
+    getCustRequests: getCustRequests,
+  };
+};
 
 jwtDecoder.$inject = ['jwtHelper'];
 
@@ -22,7 +45,8 @@ function GeoAlert(locFactory, jwtDecoder, $window) {
   console.log('GeoAlert service instantiated');
   var interval;
   var duration = 6000;
-  var long, lat;
+  var long;
+  var lat;
   var processing = false;
   var callback;
   var minDistance = 1;
@@ -31,36 +55,38 @@ function GeoAlert(locFactory, jwtDecoder, $window) {
   function getDistanceInMi(userLat, userLng, washLat, washLng) {
     var p = 0.017453292519943295;    // Math.PI / 180
     var c = Math.cos;
-    var a = 0.5 - c((washLat - userLat) * p)/2 +
+    var a = 0.5 - c((washLat - userLat) * p) / 2 +
       c(userLat * p) * c(washLat * p) *
-      (1 - c((washLng - userLng) * p))/2;
+      (1 - c((washLng - userLng) * p)) / 2;
     // returns distance in miles
-    return Math.round(12742 * Math.asin(Math.sqrt(a))/1.60932*10)/10;
+    return Math.round(12742 * Math.asin(Math.sqrt(a)) / 1.60932 * 10) / 10;
   };
 
   function hb() {
-     var user = jwtDecoder.decoder($window.localStorage['com.wod']);
-     console.log('hb running');
-     if (processing) {return;}
-     processing = true;
-     navigator.geolocation.getCurrentPosition(function(position) {
-       console.log('From geoAlert: ', user);
-       var data = {
-         email: user.email,
-         lat: position.coords.latitude,
-         lng: position.coords.longitude
-       };
-       locFactory.sendLocToServer(data);
-       processing = false;
-       console.log(lat, long);
-       console.log(position.coords.latitude, position.coords.longitude);
-       var dist = getDistanceInMi(lat, long, position.coords.latitude, position.coords.longitude);
-       console.log('dist in km is ' + dist);
-       if (dist <= minDistance) callback();
-     });
-   };
+    var user = jwtDecoder.decoder($window.localStorage['com.wod']);
+    console.log('hb running');
+    if (processing) {return;}
+    processing = true;
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log('From geoAlert: ', user);
+      var data = {
+        email: user.email,
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      locFactory.sendLocToServer(data);
+      processing = false;
+      console.log(lat, long);
+      console.log(position.coords.latitude, position.coords.longitude);
+      var dist = getDistanceInMi(lat, long, position.coords.latitude, position.coords.longitude);
+      console.log('dist in km is ' + dist);
+      if (dist <= minDistance) {
+        callback();
+      }
+    });
+  };
 
-   return {
+  return {
      begin: function(userLat, userLng, cb) {
        long = userLng;
        lat = userLat;
