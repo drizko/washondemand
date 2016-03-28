@@ -1,6 +1,6 @@
 angular.module('wod.custSI', []).controller('custSICtrl', custSICtrl);
 
-custSICtrl.$injesct = ['authFactory', '$scope', '$cordovaFile', '$cordovaDevice', 'locFactory', '$window', '$state'];
+custSICtrl.$inject = ['authFactory', '$scope', '$cordovaFile', '$cordovaDevice', 'locFactory', '$window', '$state'];
 
 function custSICtrl(authFactory, $scope, $cordovaFile, $cordovaDevice, locFactory, $window, $state) {
   var vm = this;
@@ -27,7 +27,7 @@ function custSICtrl(authFactory, $scope, $cordovaFile, $cordovaDevice, locFactor
   }
 
   vm.signin = function() {
-    
+
     var emailCopy = vm.customer.email;
     authFactory.handleAuth(vm.customer, 'customer', 'signin');
     locFactory.getLoc('customer', emailCopy).then(locFactory.sendLocToServer);

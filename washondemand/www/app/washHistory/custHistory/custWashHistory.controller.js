@@ -26,12 +26,9 @@ function custWashHistCtrl(washHistFactory) {
     }
   };
 
-  var init = function() {
-    washHistFactory.getHistory()
-    .then(function(history) {
-      vm.history = history;
-    });
-  };
-  init();
+  washHistFactory.getHistory()
+  .then(function(history) {
+    vm.history = history;
+  });
 
 };

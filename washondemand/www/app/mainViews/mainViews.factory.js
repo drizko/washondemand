@@ -1,8 +1,9 @@
 angular.module('wod.mainViewFactory', [])
-.factory('providerFactory', providerFactory)
-.factory('customerFactory', customerFactory);
+.factory('mainViewFactory', mainViewFactory);
 
-function customerFactory($http, $window, $location, locFactory, jwtDecoder, locFactory, $state, $ionicPopup, socket, $ionicHistory) {
+mainViewFactory.$inject['$http', '$window', '$location', 'locFactory', 'jwtDecoder', '$state', '$ionicPopup', '$ionicHistory', 'socket', 'GeoAlert'];
+
+function mainViewFactory($http, $window, $location, locFactory, jwtDecoder, $state, $ionicPopup, $ionicHistory, socket, GeoAlert) {
 
   var user = jwtDecoder.decoder($window.localStorage['com.wod']);
   var locData = locFactory.locData;
@@ -105,26 +106,8 @@ function customerFactory($http, $window, $location, locFactory, jwtDecoder, locF
     });
   };
 
-  return {
-    showConfirm: showConfirm,
-    sendRequest: sendRequest,
-    getProviders: getProviders,
-    restoreOptions: restoreOptions,
-    vehicleOptions: vehicleOptions,
-    washOptions: washOptions,
-    washTypeOptions: washTypeOptions,
-    request: request,
-    locData, locData
-  };
-};
-
-function providerFactory($http, $window, $location, locFactory, jwtDecoder, socket, GeoAlert) {
-
-  var provider = jwtDecoder.decoder($window.localStorage['com.wod']);
-  var locData = locFactory.locData;
-
   function getRequest() {
-    locFactory.getLoc('provider', provider.email).then(locFactory.sendLocToServer);
+    locFactory.getLoc('provider', user.email).then(locFactory.sendLocToServer);
     return $http({
       method: 'POST',
       url: masterURL + '/api/request/get-requests',
@@ -136,7 +119,7 @@ function providerFactory($http, $window, $location, locFactory, jwtDecoder, sock
   };
 
   function acceptRequest(request) {
-    request.provider = provider;
+    request.provider = user;
     request.job_accepted = new Date();
     socket.emit('accepted', request);
     return $http({
@@ -159,6 +142,14 @@ function providerFactory($http, $window, $location, locFactory, jwtDecoder, sock
   };
 
   return {
+    showConfirm: showConfirm,
+    sendRequest: sendRequest,
+    getProviders: getProviders,
+    restoreOptions: restoreOptions,
+    vehicleOptions: vehicleOptions,
+    washOptions: washOptions,
+    washTypeOptions: washTypeOptions,
+    request: request,
     getRequest: getRequest,
     acceptRequest: acceptRequest,
     locData: locData

@@ -20,11 +20,10 @@
     <!-- cordova script (this will be a 404 during development) -->
 
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-    <!-- <script src="lib/socket.io-client/socket.io.js"></script> -->
-    <!-- <script src="lib/angular-jwt/dist/angular-jwt.min.js"></script> -->
+
     <script type="text/javascript" src="https://cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js"></script>
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
-    <script src="cordova.js"></script>
+    <script src="lib/cordova/cordova.js"></script>
   </head>
 
   <body ng-app="WashOnDemand" animation="slide-left-right-ios7">
@@ -55,9 +54,10 @@
     <script src="./app/washHistory/custHistory/custWashHistory.controller.js"></script>
     <script src="./app/washHistory/provHistory/provWashHistory.controller.js"></script>
     <script src="./app/washHistory/washHistory.factory.js"></script>
+    <script src="./app/currentWashViews/currentWashViews.factory.js"></script>
     <script src="./app/currentWashViews/providerWashView/providerWashView.controller.js"></script>
-    <script src="./app/currentWashViews/providerWashView/providerWashView.factory.js"></script>
-    <script src="./app/currentWashViews/customerRequestView/customerRequestView.factory.js"></script>
+    <!-- <script src="./app/currentWashViews/providerWashView/providerWashView.factory.js"></script> -->
+    <!-- <script src="./app/currentWashViews/customerRequestView/customerRequestView.factory.js"></script> -->
     <script src="./app/currentWashViews/customerRequestView/customerRequestView.controller.js"></script>
     <script src="./app/nav/nav.controller.js"></script>
     <script src="./app/home/home.controller.js"></script>
