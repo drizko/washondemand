@@ -10,22 +10,6 @@ function custSICtrl(authFactory, $scope, $cordovaFile, $cordovaDevice, locFactor
     error: ''
   };
 
-  // if (ionic.Platform.isIOS()) {
-  //   $cordovaFile.readAsText(cordova.file.dataDirectory, 'cust')
-  //     .then( function(result) {
-  //       if(result === 'true'){
-  //         $cordovaFile.readAsText(cordova.file.dataDirectory, 'com.wod')
-  //           .then(function(result){
-  //             $window.localStorage['com.wod'] = result;
-  //             console.log("It worked!: ", result);
-  //             $state.go('customernav.customer');
-  //           })
-  //       } else {
-  //         $state.go('customerSignin');
-  //       }
-  //     });
-  // }
-
   vm.signin = function() {
 
     var emailCopy = vm.customer.email;
