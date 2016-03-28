@@ -14,7 +14,12 @@ function provSICtrl(authFactory, $cordovaFile, locFactory, $window, $state) {
     $cordovaFile.readAsText(cordova.file.dataDirectory, 'prov')
       .then( function(result) {
         if(result === 'true'){
-          $state.go('providernav.provider');
+          $cordovaFile.readAsText(cordova.file.dataDirectory, 'com.wod')
+            .then(function(result){
+              $window.localStorage['com.wod'] = result;
+              console.log("It worked!: ", result);
+              $state.go('providernav.provider');
+            })
         } else {
           $state.go('providerSignin');
         }
@@ -22,13 +27,6 @@ function provSICtrl(authFactory, $cordovaFile, locFactory, $window, $state) {
   }
 
   vm.signin = function() {
-
-    if (ionic.Platform.isIOS()) {
-      $cordovaFile.writeFile(cordova.file.dataDirectory, 'prov', 'true', true)
-        .then( function(result) {
-          console.log("Wrote file");
-        });
-    };
 
     var emailCopy = vm.provider.email;
     authFactory.handleAuth(vm.provider, 'provider', 'signin');

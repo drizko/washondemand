@@ -32,6 +32,17 @@ function authFactory($http, $window, $state, $cordovaFile, locFactory) {
       $window.localStorage.setItem('com.wod', token);
       if (ionic.Platform.isIOS()) {
         $cordovaFile.writeFile(cordova.file.dataDirectory, 'com.wod', token, true)
+        if(userType === 'provider'){
+          $cordovaFile.writeFile(cordova.file.dataDirectory, 'prov', 'true', true)
+            .then( function(result) {
+              console.log("Wrote file");
+            });
+        } else {
+          $cordovaFile.writeFile(cordova.file.dataDirectory, 'cust', 'true', true)
+            .then( function(result) {
+              console.log("Wrote file");
+            });
+        }
       };
       $state.go(userType + 'nav.' + userType);
     })
