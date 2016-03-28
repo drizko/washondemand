@@ -14,7 +14,12 @@ function custSICtrl(authFactory, $scope, $cordovaFile, $cordovaDevice, locFactor
     $cordovaFile.readAsText(cordova.file.dataDirectory, 'cust')
       .then( function(result) {
         if(result === 'true'){
-          $state.go('customernav.customer');
+          $cordovaFile.readAsText(cordova.file.dataDirectory, 'com.wod')
+            .then(function(result){
+              $window.localStorage['com.wod'] = result;
+              console.log("It worked!: ", result);
+              $state.go('customernav.customer');
+            })
         } else {
           $state.go('customerSignin');
         }
@@ -22,13 +27,7 @@ function custSICtrl(authFactory, $scope, $cordovaFile, $cordovaDevice, locFactor
   }
 
   vm.signin = function() {
-    if (ionic.Platform.isIOS()) {
-      $cordovaFile.writeFile(cordova.file.dataDirectory, 'cust', 'true', true)
-        .then( function(result) {
-          console.log("Wrote file");
-        });
-    };
-
+    
     var emailCopy = vm.customer.email;
     authFactory.handleAuth(vm.customer, 'customer', 'signin');
     locFactory.getLoc('customer', emailCopy).then(locFactory.sendLocToServer);
