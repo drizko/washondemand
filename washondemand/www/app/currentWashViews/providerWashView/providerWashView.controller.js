@@ -4,20 +4,12 @@ function provWashInfoCtrl($stateParams, socket, providerFactory, providerViewFac
   var vm = this;
   vm.jobStarted = false;
   vm.jobComplete = false;
-  vm.deviceOS;
 
 
-  $ionicPlatform.ready(function() {
-    $cordovaDevice.getDevice().then(function(device) {
-      if(device.platform === 'iOS') {
-        vm.deviceOS = 'iOS';
-      }
-      if(device.platform === 'Android') {
-        vm.deviceOS = 'Android';
-      }
-    }, function(error) {
-      console.log(error);
-    })
+  ionic.Platform.ready(function() {
+    var isIOS = ionic.Platform.isIOS();
+    var isAndroid = ionic.Platform.isAndroid();
+    var currentPlatform = ionic.Platform.platform();
   });
 
   console.log('inside wash info ctrl');
@@ -61,11 +53,11 @@ function provWashInfoCtrl($stateParams, socket, providerFactory, providerViewFac
     var reqLng = vm.request.user_location.lng;
     // saddr=Cupertino&
 
-    if(vm.deviceOS === 'iOS') {
+    if(isIOS) {
       $window.open('maps://?daddr=' + reqLat + ',' + reqLng + '&dirflg=d&t=h', '_system');
     };
 
-    if(vm.deviceOS === 'Android') {
+    if(isAndroid) {
       $window.open('geo://?daddr=' + reqLat + ',' + reqLng + '&dirflg=d&t=h', '_system');
     };
     // window.location.href = url;
