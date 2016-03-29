@@ -1,4 +1,5 @@
 <div>
+
   <p>
     <span>
       {{::ctrl.formatTime(ctrl.wash.job_ended)}}
@@ -7,6 +8,7 @@
       {{::ctrl.wash.provider}}
     </span>
   </p>
+
   <p>
     <span>
       Price: ${{::ctrl.wash.cost}}
@@ -15,6 +17,7 @@
       Your Rating: <span ng-bind-html="::ctrl.formatRating(ctrl.wash.provider_rating)"></span>
     </span>
   </p>
+
   <p>
     <span>
       Vehicle Type: {{::ctrl.wash.vehicle_type}}
@@ -23,15 +26,8 @@
       Wash Type: {{::ctrl.wash.wash_type}}
     </span>
   </p>
-  <p>
-    <span class="cust-history-expand" ng-click="ctrl.toggleExpand(ctrl.wash)">
-      <span ng-if="!ctrl.wash.expanded">More</span>
-      <span ng-if="ctrl.wash.expanded">Less</span>
-    </span>
-  </p>
-  <ul ng-if="ctrl.wash.expanded">
-    <li ng-repeat="option in ::ctrl.wash.wash_info" ng-if="::option.active">
-      <p>{{::option.info}} ${{::option.price}}</p>
-    </li>
-  </ul>
+
+  <wod-history-entry-expand wash-options="::ctrl.wash.wash_info">
+  </wod-history-entry-expand>
+
 </div>
