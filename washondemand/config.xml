@@ -17,13 +17,15 @@
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
-
   <!-- iOS persistent file storage -->
   <plugin name="File" value="org.apache.cordova.FileUtils" />
   <plugin name="FileTransfer" value="org.apache.cordova.FileTransfer" />
   <!-- iOS permissions for File -->
   <plugin name="File" value="CDVFile" />
   <plugin name="FileTransfer" value="CDVFileTransfer" />
+
+<!-- MAY NOT NEED THIS ASK DANNY ABOUT IT HE WILL TELL YOU TO ASK BOBBY TO TRY ON HIS ANDROID :) -->
+  <preference name="AndroidPersistentFileLocation" value="Compatibility" />
 
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>

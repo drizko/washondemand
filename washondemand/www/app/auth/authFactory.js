@@ -102,9 +102,12 @@ function authFactory($http, $window, $state, $cordovaFile, $cordovaDevice, locFa
     $window.localStorage.removeItem('com.wod');
 
     if (ionic.Platform.isIOS() || ionic.Platform.isAndroid()) {
-      $cordovaFile.writeFile(cordova.file.dataDirectory, 'com.wod', '', true);
-      $cordovaFile.writeFile(cordova.file.dataDirectory, 'cust', '', true);
-      $cordovaFile.writeFile(cordova.file.dataDirectory, 'prov', '', true);
+      $cordovaFile.removeRecursively(cordova.file.dataDirectory, "")
+        .then(function (success) {
+          console.log("Success we removed the files: ", success);
+        }, function (error) {
+          console.log("Files not removed: ", error);
+        });
     };
 
     $state.go('home');
