@@ -30,4 +30,6 @@
   </feature>
   <access origin="tel:*" launch-external="yes" />
   <allow-intent href="tel:*" />
+  <allow-navigation href="maps:*" launch-external="yes" />
+  <allow-navigation href="geo:*" launch-external="yes" />
 </widget>
