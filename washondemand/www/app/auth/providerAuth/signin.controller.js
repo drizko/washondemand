@@ -1,8 +1,8 @@
 angular.module('wod.provSI', []).controller('provSICtrl', provSICtrl);
 
-provSICtrl.$inject = ['authFactory', '$cordovaFile', 'locFactory', '$window', '$state'];
+provSICtrl.$inject = ['authFactory', 'locFactory'];
 
-function provSICtrl(authFactory, $cordovaFile, locFactory, $window, $state) {
+function provSICtrl(authFactory, locFactory) {
   var vm = this;
   vm.provider = {
     email: '',

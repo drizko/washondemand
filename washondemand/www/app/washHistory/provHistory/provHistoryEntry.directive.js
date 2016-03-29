@@ -25,10 +25,6 @@ function wodProvHistoryEntry(washHistFactory) {
       return washHistFactory.formatRating(rating);
     };
 
-    vm.toggleExpand = function(wash) {
-      wash.expanded = !wash.expanded;
-    };
-
     vm.formatFeedback = function(feedback) {
       return washHistFactory.formatFeedback(feedback);
     };

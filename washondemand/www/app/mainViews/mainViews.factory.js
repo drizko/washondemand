@@ -1,9 +1,9 @@
 angular.module('wod.mainViewFactory', [])
 .factory('mainViewFactory', mainViewFactory);
 
-mainViewFactory.$inject['$http', '$window', '$location', 'locFactory', 'jwtDecoder', '$state', '$ionicPopup', '$ionicHistory', 'socket', 'GeoAlert'];
+mainViewFactory.$inject = ['$http', '$window', 'locFactory', 'jwtDecoder', '$state', '$ionicPopup', '$ionicHistory', 'socket', 'GeoAlert'];
 
-function mainViewFactory($http, $window, $location, locFactory, jwtDecoder, $state, $ionicPopup, $ionicHistory, socket, GeoAlert) {
+function mainViewFactory($http, $window, locFactory, jwtDecoder, $state, $ionicPopup, $ionicHistory, socket, GeoAlert) {
 
   var user = jwtDecoder.decoder($window.localStorage['com.wod']);
   var locData = locFactory.locData;

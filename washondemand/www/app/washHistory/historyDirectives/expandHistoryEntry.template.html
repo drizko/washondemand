@@ -1,0 +1,13 @@
+<div>
+  <p>
+    <span class="cust-history-expand" ng-click="ctrl.toggleExpand()">
+      <span ng-if="!ctrl.expanded">More</span>
+      <span ng-if="ctrl.expanded">Less</span>
+    </span>
+  </p>
+  <ul ng-if="ctrl.expanded">
+    <li ng-repeat="option in ::ctrl.washOptions" ng-if="::option.active">
+      <p>{{::option.info}} ${{::option.price}}</p>
+    </li>
+  </ul>
+</div>

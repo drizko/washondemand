@@ -24,10 +24,7 @@ function wodCustHistoryEntry(washHistFactory) {
     vm.formatRating = function(rating) {
       return washHistFactory.formatRating(rating);
     };
-
-    vm.toggleExpand = function(wash) {
-      wash.expanded = !wash.expanded;
-    };
+    
   }
 
   function ctrl() {
