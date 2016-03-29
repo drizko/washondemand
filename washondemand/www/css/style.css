@@ -70,3 +70,18 @@ ng-map {
   min-height: 100px;
   resize: none;
 }
+
+.signin {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+label {
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+}
+
+.question {
+  text-align: center;
+}

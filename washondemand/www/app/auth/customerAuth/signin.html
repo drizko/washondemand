@@ -5,16 +5,18 @@
     <h1 class="title">Customer Sign In</h1>
   </div>
   <ion-content class="has-header">
-    <form class="list list-inset" ng-submit='csi.signin()'>
-      <label class="item item-input">
-        <input type='email' placeholder="email" ng-model='csi.customer.email'>
+    <form class="signin list" ng-submit='csi.signin()'>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Email</span>
+        <input type='email' placeholder="Email" ng-model='csi.customer.email'>
       </label>
-      <label class="item item-input">
-        <input type="password" placeholder="password" ng-model='csi.customer.password'>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Password</span>
+        <input type="password" placeholder="Password" ng-model='csi.customer.password'>
       </label>
       <p ng-if='csi.customer.error'>{{csi.customer.error}}</p>
-      <button class="button button-full button-positive">Sign In</button>
+      <button class="button button-block button-positive">Sign In</button>
     </form>
-    <p>Need an account?  <a href="#/customerSignup">Create one here!</a></p>
+    <p class="question">Need an account?  <a href="#/customerSignup">Create one here!</a></p>
   </ion-content>
 </ion-view>

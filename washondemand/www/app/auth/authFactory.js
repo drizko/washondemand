@@ -104,7 +104,7 @@ function authFactory($http, $window, $state, $cordovaFile, $cordovaDevice, locFa
     if (ionic.Platform.isIOS() || ionic.Platform.isAndroid()) {
       $cordovaFile.removeFile(cordova.file.dataDirectory, 'com.wod')
         .then(function (success) {
-          console.log("Success we removed the files: ", success);
+          console.log("Success we removed com.wod: ", success);
         }, function (error) {
           console.log("Files not removed: ", error);
         });

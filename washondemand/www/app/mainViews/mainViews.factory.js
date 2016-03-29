@@ -9,43 +9,37 @@ function mainViewFactory($http, $window, locFactory, jwtDecoder, $state, $ionicP
   var locData = locFactory.locData;
 
   var vehicleOptions = {
-    car: {name: 'car', price: 1},
-    suv: {name: 'suv', price: 2},
-    motorcycle: {name: 'motorcycle', price: 3}
+    Car: {name: 'Car', price: 5},
+    SUV: {name: 'SUV', price: 10},
+    Motorcycle: {name: 'Motorcycle', price: 5}
   };
 
   var washOptions = {
-    1: {info: '100% hand wash exterior & wheels', price: 5, active: false},
-    2: {info: 'Towel dry', price: 5, active: false},
-    3: {info: 'Windows cleaned', price: 5, active: false},
-    4: {info: 'Seats & carpets vaccuumed', price: 5, active: false},
-    5: {info: 'Dash wipedown', price: 5, active: false},
-    6: {info: 'Tire dressing', price: 5, active: false},
-    7: {info: 'Carnauba wax', price: 5, active: false},
-    8: {info: 'Door jambs cleaned', price: 5, active: false},
-    9: {info: 'Interior surface cleaned', price: 5, active: false},
-    10: {info: 'Choice of air freshener', price: 5, active: false},
-    11: {info: 'Meguiar\'s\xAE interior protectant', price: 5, active: false},
-    12: {info: 'Rain-X\xAE windshield treatment', price: 5, active: false},
-    13: {info: 'Pet hair removal', price: 5, active: false},
-    14: {info: 'High pressure air blowout of vents', price: 5, active: false},
-    15: {info: 'Exterior plastic dressing', price: 5, active: false},
-    16: {info: 'Upholstery vaccuumed & shampooed', price: 5, active: false},
-    17: {info: 'Meguiar\'s\xAE leather protectant', price: 5, active: false},
-    18: {info: 'extra virgin olive oil', price: 5, active: false},
-    19: {info: 'balsamic vinegar', price: 5, active: false},
-    20: {info: 'baguette bread', price: 5, active: false},
+    1: {info: '100% Hand Wash Exterior and Wheels', price: 10, active: false},
+    2: {info: 'Seats and Carpets Vaccuumed', price: 5, active: false},
+    3: {info: 'Full interior wipedown', price: 5, active: false},
+    4: {info: 'Tire dressing', price: 5, active: false},
+    5: {info: 'Door jambs cleaned', price: 5, active: false},
+    6: {info: 'Choice of air freshener', price: 5, active: false},
+    7: {info: 'Interior protectant', price: 5, active: false},
+    8: {info: 'Windshield Treatment', price: 3, active: false},
+    9: {info: 'Pet hair removal', price: 5, active: false},
+    10: {info: 'High Pressure Air Blowout of Vents', price: 5, active: false},
+    11: {info: 'Exterior plastic dressing', price: 5, active: false},
+    12: {info: 'Leather Protectant', price: 10, active: false},
+    13: {info: 'Upholstery Shampooed', price: 20, active: false},
+    14: {info: 'Wax', price: 40, active: false}
   };
 
   var washTypeOptions = {
     basic: {name: 'basic', options: [
-      1, 2, 3, 4, 5, 6
+      1, 2, 3
     ]},
     deluxe: {name: 'deluxe', options: [
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+      1, 2, 3, 4, 5, 6, 7
     ]},
     premium: {name: 'premium', options: [
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
     ]},
   };
 
