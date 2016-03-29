@@ -30,17 +30,17 @@ function authFactory($http, $window, $state, $cordovaFile, locFactory) {
       clearForm(accountInfo);
       //set jwt
       $window.localStorage.setItem('com.wod', token);
-      if (ionic.Platform.isIOS()) {
-        $cordovaFile.writeFile(cordova.file.dataDirectory, 'com.wod', token, true)
-        if(userType === 'provider'){
+      if (ionic.Platform.isIOS() || ionic.Platform.isAndroid()) {
+        $cordovaFile.writeFile(cordova.file.dataDirectory, 'com.wod', token, true);
+        if (userType === 'provider') {
           $cordovaFile.writeFile(cordova.file.dataDirectory, 'prov', 'true', true)
-            .then( function(result) {
-              console.log("Wrote file");
+            .then(function(result) {
+              console.log('Wrote file');
             });
         } else {
           $cordovaFile.writeFile(cordova.file.dataDirectory, 'cust', 'true', true)
-            .then( function(result) {
-              console.log("Wrote file");
+            .then(function(result) {
+              console.log('Wrote file');
             });
         }
       };
@@ -49,11 +49,9 @@ function authFactory($http, $window, $state, $cordovaFile, locFactory) {
     .catch(function(error) {
       if (method === 'signup') {
         accountInfo.error = 'user already exists';
-      }
-      else if (method === 'signin') {
+      } else if (method === 'signin') {
         accountInfo.error = 'incorrect email/password';
-      }
-      else {
+      }  else {
         accountInfo.error = 'some other error';
         console.error(error);
       }
@@ -104,9 +102,9 @@ function authFactory($http, $window, $state, $cordovaFile, locFactory) {
     $window.localStorage.removeItem('com.wod');
 
     if (ionic.Platform.isIOS()) {
-      $cordovaFile.writeFile(cordova.file.dataDirectory, 'com.wod', '', true)
-      $cordovaFile.writeFile(cordova.file.dataDirectory, 'cust', '', true)
-      $cordovaFile.writeFile(cordova.file.dataDirectory, 'prov', '', true)
+      $cordovaFile.writeFile(cordova.file.dataDirectory, 'com.wod', '', true);
+      $cordovaFile.writeFile(cordova.file.dataDirectory, 'cust', '', true);
+      $cordovaFile.writeFile(cordova.file.dataDirectory, 'prov', '', true);
     };
 
     $state.go('home');

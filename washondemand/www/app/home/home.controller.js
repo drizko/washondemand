@@ -5,12 +5,14 @@ homeCtrl.$inject = ['authFactory', '$cordovaDevice', '$cordovaFile', '$state', '
 function homeCtrl(authFactory, $cordovaDevice, $cordovaFile, $state, $window) {
   var vm = this;
 
-  function init(){
-    document.addEventListener("deviceready", onDeviceReady, false);
-  }
-
-  function onDeviceReady(){
+  // function init(){
+  //   document.addEventListener("deviceready", onDeviceReady, false);
+  // }
+  console.log('inside home controller')
+  ionic.Platform.ready(function(){
+    console.log('inside ondeviceready')
     if (ionic.Platform.isIOS() || ionic.Platform.isAndroid()) {
+      console.log('inside if statement in home controller')
       $cordovaFile.checkFile(cordova.file.dataDirectory, 'cust')
         .then(function(result){
           console.log("Inside somewhere", result);
@@ -49,9 +51,9 @@ function homeCtrl(authFactory, $cordovaDevice, $cordovaFile, $state, $window) {
           console.log("Error!!!!!!!!!!!!", error);
         });
     }
-  }
+  })
 
-  init();
+  // init();
 
 
   vm.logoutTest = function() {
