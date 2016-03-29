@@ -1,0 +1,37 @@
+<div>
+  <p>
+    <span>
+      {{::ctrl.formatTime(ctrl.wash.job_ended)}}
+    </span>
+    <span class="float-right">
+      Rating: <span ng-bind-html="::ctrl.formatRating(ctrl.wash.provider_rating)"></span>
+    </span>
+  </p>
+  <p>
+    <span>
+      Price: ${{::ctrl.wash.cost}}
+    </span>
+    <span class="float-right">
+      {{::ctrl.formatFeedback(ctrl.wash.provider_feedback)}}
+    </span>
+  </p>
+  <p>
+    <span>
+      Vehicle Type: {{::ctrl.wash.vehicle_type}}
+    </span>
+    <span class="float-right">
+      Wash Type: {{::ctrl.wash.wash_type}}
+    </span>
+  </p>
+  <p>
+    <span class="prov-history-expand" ng-click="ctrl.toggleExpand(ctrl.wash)">
+      <span ng-if="!ctrl.wash.expanded">More</span>
+      <span ng-if="ctrl.wash.expanded">Less</span>
+    </span>
+  </p>
+  <ul ng-if="ctrl.wash.expanded">
+    <li ng-repeat="option in ::ctrl.wash.wash_info" ng-if="::option.active">
+      <p>{{::option.info}} ${{::option.price}}</p>
+    </li>
+  </ul>
+</div>
