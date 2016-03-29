@@ -1,7 +1,7 @@
 <ion-view title="Customer Wash History">
   <ion-content overflow-scroll="true" class="customer-history">
     <ion-list>
-      <ion-item ng-repeat="wash in ::custWashHistCtrl.history | limitTo:custWashHistCtrl.numEntries">
+      <ion-item ng-repeat="wash in custWashHistCtrl.history | limitTo:custWashHistCtrl.numEntries">
         <wod-cust-history-entry wash="::wash">
         </wod-cust-history-entry>
       </ion-item>

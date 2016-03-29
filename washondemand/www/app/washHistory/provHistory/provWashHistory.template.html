@@ -9,11 +9,11 @@
         </div>
       </ion-item>
 
-      <ion-item ng-repeat="wash in ::provWashHistCtrl.history | limitTo:provWashHistCtrl.numEntries">
+      <ion-item ng-repeat="wash in provWashHistCtrl.history | limitTo:provWashHistCtrl.numEntries">
         <wod-prov-history-entry wash="::wash">
         </wod-prov-history-entry>
       </ion-item>
-      
+
     </ion-list>
     <button class="button button-balanced button-small button-full" ng-click="provWashHistCtrl.displayMoreEntries()" ng-if="provWashHistCtrl.numEntries < provWashHistCtrl.history.length"> Show More </button>
   </ion-content>
