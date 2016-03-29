@@ -101,7 +101,7 @@ function authFactory($http, $window, $state, $cordovaFile, locFactory) {
     locFactory.resetLocData();
     $window.localStorage.removeItem('com.wod');
 
-    if (ionic.Platform.isIOS()) {
+    if (ionic.Platform.isIOS() || ionic.Platform.isAndroid()) {
       $cordovaFile.writeFile(cordova.file.dataDirectory, 'com.wod', '', true);
       $cordovaFile.writeFile(cordova.file.dataDirectory, 'cust', '', true);
       $cordovaFile.writeFile(cordova.file.dataDirectory, 'prov', '', true);
