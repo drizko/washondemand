@@ -18,7 +18,8 @@ angular.module('wod.routes', [])
       url: '/nav2',
       templateUrl: 'app/nav/providernav.template.html',
       controller: 'navCtrl as navCtrl',
-      // abstract: true,
+      abstract: true,
+      cache: false
     })
     .state('customernav.customer', {
       url: '/customerProfile',

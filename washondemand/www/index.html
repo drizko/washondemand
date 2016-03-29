@@ -11,30 +11,21 @@
     <!-- Libraries - ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/ion-sticky/ion-sticky.js"></script>
-    <!-- <script src="lib/angular/angular.min.js"></script> -->
-    <!-- <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script> -->
     <script src="http://maps.google.com/maps/api/js"></script>
     <script src="lib/ngmap/build/scripts/ng-map.min.js"></script>
     <script src="lib/moment/min/moment.min.js"></script>
-
-    <!-- cordova script (this will be a 404 during development) -->
-
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-
     <script type="text/javascript" src="https://cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js"></script>
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
-    <script src="lib/cordova/cordova.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
   </head>
 
   <body ng-app="WashOnDemand" animation="slide-left-right-ios7">
     <div>
-      <!-- <ion-nav-bar class="bar-stable">
-        <ion-nav-back-button class="button-icon icon ion-ios-arrow-back color1fill">Back</ion-nav-back-button>
-      </ion-nav-bar> -->
       <ion-nav-view></ion-nav-view>
     </div>
-
-
 
 
     <!-- your app's js -->
@@ -48,8 +39,6 @@
     <script src="./app/auth/authMaster.js"></script>
     <script src="./app/mainViews/customerView/customer.controller.js"></script>
     <script src="./app/mainViews/providerView/provider.controller.js"></script>
-    <!-- <script src="./app/mainViews/customerView/customer.factory.js"></script> -->
-    <!-- <script src="./app/mainViews/providerView/provider.factory.js"></script> -->
     <script src="./app/mainViews/mainViews.factory.js"></script>
     <script src="./app/washHistory/custHistory/custWashHistory.controller.js"></script>
     <script src="./app/washHistory/custHistory/custHistoryEntry.directive.js"></script>
@@ -58,8 +47,6 @@
     <script src="./app/washHistory/washHistory.factory.js"></script>
     <script src="./app/currentWashViews/currentWashViews.factory.js"></script>
     <script src="./app/currentWashViews/providerWashView/providerWashView.controller.js"></script>
-    <!-- <script src="./app/currentWashViews/providerWashView/providerWashView.factory.js"></script> -->
-    <!-- <script src="./app/currentWashViews/customerRequestView/customerRequestView.factory.js"></script> -->
     <script src="./app/currentWashViews/customerRequestView/customerRequestView.controller.js"></script>
     <script src="./app/nav/nav.controller.js"></script>
     <script src="./app/home/home.controller.js"></script>

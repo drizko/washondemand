@@ -1,8 +1,8 @@
 angular.module('wod.authFactory', []).factory('authFactory', authFactory);
 
-authFactory.$inject = ['$http', '$window', '$state', '$cordovaFile', 'locFactory'];
+authFactory.$inject = ['$http', '$window', '$state', '$cordovaFile', '$cordovaDevice', 'locFactory'];
 
-function authFactory($http, $window, $state, $cordovaFile, locFactory) {
+function authFactory($http, $window, $state, $cordovaFile, $cordovaDevice, locFactory) {
 
   var emailRegex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
   var currentUserEmail = '';
@@ -30,17 +30,17 @@ function authFactory($http, $window, $state, $cordovaFile, locFactory) {
       clearForm(accountInfo);
       //set jwt
       $window.localStorage.setItem('com.wod', token);
-      if (ionic.Platform.isIOS()) {
-        $cordovaFile.writeFile(cordova.file.dataDirectory, 'com.wod', token, true)
-        if(userType === 'provider'){
+      if (ionic.Platform.isIOS() || ionic.Platform.isAndroid()) {
+        $cordovaFile.writeFile(cordova.file.dataDirectory, 'com.wod', token, true);
+        if (userType === 'provider') {
           $cordovaFile.writeFile(cordova.file.dataDirectory, 'prov', 'true', true)
-            .then( function(result) {
-              console.log("Wrote file");
+            .then(function(result) {
+              console.log('Wrote file');
             });
         } else {
           $cordovaFile.writeFile(cordova.file.dataDirectory, 'cust', 'true', true)
-            .then( function(result) {
-              console.log("Wrote file");
+            .then(function(result) {
+              console.log('Wrote file');
             });
         }
       };
@@ -49,11 +49,9 @@ function authFactory($http, $window, $state, $cordovaFile, locFactory) {
     .catch(function(error) {
       if (method === 'signup') {
         accountInfo.error = 'user already exists';
-      }
-      else if (method === 'signin') {
+      } else if (method === 'signin') {
         accountInfo.error = 'incorrect email/password';
-      }
-      else {
+      }  else {
         accountInfo.error = 'some other error';
         console.error(error);
       }
@@ -103,10 +101,10 @@ function authFactory($http, $window, $state, $cordovaFile, locFactory) {
     locFactory.resetLocData();
     $window.localStorage.removeItem('com.wod');
 
-    if (ionic.Platform.isIOS()) {
-      $cordovaFile.writeFile(cordova.file.dataDirectory, 'com.wod', '', true)
-      $cordovaFile.writeFile(cordova.file.dataDirectory, 'cust', '', true)
-      $cordovaFile.writeFile(cordova.file.dataDirectory, 'prov', '', true)
+    if (ionic.Platform.isIOS() || ionic.Platform.isAndroid()) {
+      $cordovaFile.writeFile(cordova.file.dataDirectory, 'com.wod', '', true);
+      $cordovaFile.writeFile(cordova.file.dataDirectory, 'cust', '', true);
+      $cordovaFile.writeFile(cordova.file.dataDirectory, 'prov', '', true);
     };
 
     $state.go('home');
