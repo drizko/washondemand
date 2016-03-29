@@ -16,6 +16,7 @@ function custReqInfoCtrl($ionicHistory, $ionicLoading, currentWashFactory, socke
   currentWashFactory.getRequest()
     .then(function(request) {
       vm.currentRequest = request;
+      console.log(vm.currentRequest);
       vm.jobStatus = 'Not Accepted';
       $ionicLoading.hide();
     });
@@ -36,6 +37,7 @@ function custReqInfoCtrl($ionicHistory, $ionicLoading, currentWashFactory, socke
 
   vm.cancelRequest = function() {
     socket.emit('canceled', vm.currentRequest);
+    console.log('inside cancel controller')
     currentWashFactory.cancelRequest();
   };
 };

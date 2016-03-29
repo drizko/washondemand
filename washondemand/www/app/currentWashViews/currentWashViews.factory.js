@@ -12,6 +12,7 @@ function currentWashFactory($http, locFactory, $state, $ionicHistory, $ionicPopu
   };
 
   function cancelRequest() {
+    console.log('inside cancelrequest factory')
     return $http({
       method: 'POST',
       url: masterURL + '/api/request/cancel-request'
@@ -31,7 +32,8 @@ function currentWashFactory($http, locFactory, $state, $ionicHistory, $ionicPopu
       url: masterURL + '/api/request/get-current'
     })
     .then(function(results) {
-      return results.data[0];
+      console.log(results.data)
+      return results.data;
     });
   };
 
