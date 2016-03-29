@@ -31,7 +31,7 @@ function currentWashFactory($http, locFactory, $state, $ionicHistory, $ionicPopu
       url: masterURL + '/api/request/get-current'
     })
     .then(function(results) {
-      return results.data;
+      return results.data[0];
     });
   };
 
