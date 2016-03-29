@@ -1,8 +1,8 @@
 angular.module('wod.custSI', []).controller('custSICtrl', custSICtrl);
 
-custSICtrl.$inject = ['authFactory', '$scope', '$cordovaFile', '$cordovaDevice', 'locFactory', '$window', '$state'];
+custSICtrl.$inject = ['authFactory', 'locFactory'];
 
-function custSICtrl(authFactory, $scope, $cordovaFile, $cordovaDevice, locFactory, $window, $state) {
+function custSICtrl(authFactory, locFactory) {
   var vm = this;
   vm.customer = {
     email: '',

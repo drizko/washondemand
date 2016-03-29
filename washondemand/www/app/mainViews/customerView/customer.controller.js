@@ -1,9 +1,9 @@
 angular.module('wod.customerCtrl', [])
 .controller('customerCtrl', customerCtrl);
 
-// customerCtrl.$inject['requests', '$ionicHistory', '$ionicLoading', 'mainViewFactory'];
+customerCtrl.$inject = ['requests', '$ionicLoading', 'mainViewFactory'];
 
-function customerCtrl(requests, $ionicHistory, $ionicLoading, mainViewFactory) {
+function customerCtrl(requests, $ionicLoading, mainViewFactory) {
 
   var vm = this;
   vm.request = mainViewFactory.request;
