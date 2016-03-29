@@ -5,16 +5,18 @@
     <h1 class="title">Provider Sign In</h1>
   </div>
   <ion-content class="has-header">
-    <form class="list list-inset" ng-submit='psi.signin()'>
-      <label class="item item-input">
-        <input type='email' placeholder="email" ng-model='psi.provider.email'>
+    <form class="signin list" ng-submit='psi.signin()'>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Email</span>
+        <input type='email' placeholder="Email" ng-model='psi.provider.email'>
       </label>
-      <label class="item item-input">
-        <input type="password" placeholder="password" ng-model='psi.provider.password'>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Password</span>
+        <input type="password" placeholder="Password" ng-model='psi.provider.password'>
       </label>
       <p ng-if='psi.provider.error'>{{psi.provider.error}}</p>
-      <button class="button button-full button-balanced">Sign In</button>
+      <button class="button button-block button-balanced">Sign In</button>
     </form>
-    <p>Need an account?  <a href="#/providerSignup">Create one here!</a></p>
+    <p class="question">Need an account?  <a href="#/providerSignup">Create one here!</a></p>
   </ion-content>
 </ion-view>

@@ -5,25 +5,30 @@
     <h1 class="title">Provider Sign Up</h1>
   </div>
   <ion-content class="has-header">
-    <form class="list list-inset" ng-submit='psu.signup()'>
-      <label class="item item-input">
-        <input type='text' placeholder="company name" ng-model='psu.provider.companyName'>
+    <form class="signin list" ng-submit='psu.signup()'>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Company Name</span>
+        <input type='text' placeholder="Company Name" ng-model='psu.provider.companyName'>
       </label>
-      <label class="item item-input">
-        <input type='email' placeholder="email" ng-model='psu.provider.email'>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Email</span>
+        <input type='email' placeholder="Email" ng-model='psu.provider.email'>
       </label>
-      <label class="item item-input">
-        <input type='tel' placeholder="phone" ng-model='psu.provider.phone'>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Phone</span>
+        <input type='tel' placeholder="Phone" ng-model='psu.provider.phone'>
       </label>
-      <label class="item item-input">
-        <input type="password" placeholder="password" ng-model='psu.provider.password'>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Password</span>
+        <input type="password" placeholder="Password" ng-model='psu.provider.password'>
       </label>
-      <label class="item item-input">
-        <input type="password" placeholder="confirm password" ng-model='psu.provider.confirmPassword'>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Confirm Password</span>
+        <input type="password" placeholder="Confirm Password" ng-model='psu.provider.confirmPassword'>
       </label>
       <p ng-if='psu.provider.error'>{{psu.provider.error}}</p>
-      <button class="button button-full button-balanced">Sign Up</button>
+      <button class="button button-block button-balanced">Sign Up</button>
     </form>
-    <p>Already have an account?  <a href="#/providerSignin">Sign in here!</a></p>
+    <p class="question">Already have an account?  <a href="#/providerSignin">Sign in here!</a></p>
   </ion-content>
 </ion-view>

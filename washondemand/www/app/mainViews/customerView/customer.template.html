@@ -7,25 +7,25 @@
       </ng-map>
     </div>
 
-    <p ng-if="!customerCtrl.locData.found">grabbing your location.  please wait</p>
+    <p ng-if="!customerCtrl.locData.found">Grabbing Your Location. Please Wait</p>
 
     <form class="request" ng-if="customerCtrl.locData.found">
       <div class="btn-margin">
         <span>Select Vehicle Type:</span>
         <div class="button-bar">
-          <button class="button button-outline button-positive" ng-click="customerCtrl.selectVehicle('car');" ng-class="{'active': customerCtrl.request.vehicleType.name === 'car'}">Car</button>
-          <button class="button button-outline button-positive" ng-click="customerCtrl.selectVehicle('suv');" ng-class="{'active': customerCtrl.request.vehicleType.name === 'suv'}">Suv/Van</button>
-          <button class="button button-outline button-positive" ng-click="customerCtrl.selectVehicle('motorcycle');"ng-class="{'active': customerCtrl.request.vehicleType.name === 'motorcycle'}">Motorcycle</button>
+          <button class="button button-outline button-positive" ng-click="customerCtrl.selectVehicle('Car');" ng-class="{'active': customerCtrl.request.vehicleType.name === 'Car'}">Car</button>
+          <button class="button button-outline button-positive" ng-click="customerCtrl.selectVehicle('SUV');" ng-class="{'active': customerCtrl.request.vehicleType.name === 'SUV'}">SUV/Van</button>
+          <button class="button button-outline button-positive" ng-click="customerCtrl.selectVehicle('Motorcycle');"ng-class="{'active': customerCtrl.request.vehicleType.name === 'Motorcycle'}">Motorcycle</button>
         </div>
       </div>
 
       <div class="btn-margin">
         <span>Select Wash Type:</span>
         <div class="button-bar">
-            <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('basic')" ng-class="{'active': customerCtrl.request.washType === 'basic'}">Basic</button>
-            <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('deluxe')" ng-class="{'active': customerCtrl.request.washType === 'deluxe'}">Deluxe</button>
-            <button id="premium-btn" class="button button-outline button-positive" ng-click="customerCtrl.selectWash('premium')" ng-class="{'active': customerCtrl.request.washType === 'premium'}">Premium</button>
-            <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('custom')" ng-class="{'active': customerCtrl.request.washType === 'custom'}">Custom</button>
+            <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('Basix')" ng-class="{'active': customerCtrl.request.washType === 'Basic'}">Basic</button>
+            <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('Deluxe')" ng-class="{'active': customerCtrl.request.washType === 'Deluxe'}">Deluxe</button>
+            <button id="premium-btn" class="button button-outline button-positive" ng-click="customerCtrl.selectWash('Premium')" ng-class="{'active': customerCtrl.request.washType === 'Premium'}">Premium</button>
+            <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('Custom')" ng-class="{'active': customerCtrl.request.washType === 'Custom'}">Custom</button>
         </div>
       </div>
 
@@ -35,9 +35,7 @@
         </div>
         <div class="row">
           <div class="col">
-            Vehicle:
-            <br>
-            {{customerCtrl.request.vehicleType.name}}: {{customerCtrl.request.vehicleType.price}}$
+            Vehicle: {{customerCtrl.request.vehicleType.name}} ${{customerCtrl.request.vehicleType.price}}
           </div>
         </div>
         <div class="row">
@@ -45,7 +43,7 @@
             What's included:
             <br>
             <ion-list>
-              <ion-checkbox ng-repeat="detail in customerCtrl.request.washInfo" ng-checked="detail.active" ng-class="{'inactiveOption': !detail.active}" ng-click="customerCtrl.toggleOption(detail)">{{detail.info}}: {{detail.price}}$</ion-checkbox>
+              <ion-checkbox ng-repeat="detail in customerCtrl.request.washInfo" ng-checked="detail.active" ng-class="{'inactiveOption': !detail.active}" ng-click="customerCtrl.toggleOption(detail)">{{detail.info}}: ${{detail.price}}</ion-checkbox>
             </ion-list>
           </div>
         </div>
