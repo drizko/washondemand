@@ -1,6 +1,6 @@
 angular.module('wod.providerCtrl', []).controller('providerCtrl', providerCtrl);
 
-providerCtrl.$inject = ['socket', 'providerFactory', '$ionicHistory', '$state', '$ionicLoading'];
+providerCtrl.$inject = ['socket', 'mainViewFactory', '$ionicHistory', '$state', '$ionicLoading'];
 
 function providerCtrl(socket, mainViewFactory, $ionicHistory, $state, $ionicLoading) {
   var vm = this;

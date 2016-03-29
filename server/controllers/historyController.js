@@ -79,7 +79,7 @@ module.exports = {
     var query = {
       '_id': requestId
     };
-
+    console.log(req.body);
     var update = {
       'provider_rating': rating,
       'provider_feedback': feedback

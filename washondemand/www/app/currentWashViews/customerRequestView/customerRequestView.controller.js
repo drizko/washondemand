@@ -1,8 +1,8 @@
 angular.module('wod.custReqInfoCtrl', []).controller('custReqInfoCtrl', custReqInfoCtrl);
 
-custReqInfoCtrl.$inject = ['$ionicHistory', '$ionicLoading', 'currentWashFactory', 'socket'];
+custReqInfoCtrl.$inject = ['$scope', '$ionicHistory', '$ionicLoading', 'currentWashFactory', 'socket'];
 
-function custReqInfoCtrl($ionicHistory, $ionicLoading, currentWashFactory, socket) {
+function custReqInfoCtrl($scope, $ionicHistory, $ionicLoading, currentWashFactory, socket) {
   var vm = this;
 
   $ionicHistory.nextViewOptions({
@@ -30,7 +30,8 @@ function custReqInfoCtrl($ionicHistory, $ionicLoading, currentWashFactory, socke
 
   socket.on('getRating', function(request){
     if (vm.currentRequest._id === request._id) {
-      currentWashFactory.popUp(vm.currentRequest);
+      $scope.feedback;
+      currentWashFactory.popUp($scope, vm.currentRequest);
     }
   });
 

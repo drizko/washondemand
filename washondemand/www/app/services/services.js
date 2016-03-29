@@ -101,7 +101,8 @@ function GeoAlert(locFactory, jwtDecoder, $window) {
      setTarget: function(lg, lt) {
        long = lg;
        lat = lt;
-     }
+     },
+     getDistanceInMi: getDistanceInMi
    };
 };
 
