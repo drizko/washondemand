@@ -17,9 +17,9 @@ function provWashInfoCtrl(socket, currentWashFactory, $ionicHistory, $ionicLoadi
   });
 
   ionic.Platform.ready(function() {
-    var isIOS = ionic.Platform.isIOS();
-    var isAndroid = ionic.Platform.isAndroid();
-    var currentPlatform = ionic.Platform.platform();
+    vm.isIOS = ionic.Platform.isIOS();
+    vm.isAndroid = ionic.Platform.isAndroid();
+    vm.currentPlatform = ionic.Platform.platform();
   });
 
   currentWashFactory.getAccepted()
@@ -51,15 +51,17 @@ function provWashInfoCtrl(socket, currentWashFactory, $ionicHistory, $ionicLoadi
   vm.getDirection = function() {
     var reqLat = vm.request.user_location.lat;
     var reqLng = vm.request.user_location.lng;
+    var url;
     // saddr=Cupertino&
-
-    if(isIOS) {
-      $window.open('maps://?daddr=' + reqLat + ',' + reqLng + '&dirflg=d&t=h', '_system');
+    console.log("INSIDE GETDIRRRRRRRRR");
+    if(vm.isIOS) {
+      url = 'maps://?daddr=' + reqLat + ',' + reqLng + '&dirflg=d&t=m';
     };
 
-    if(isAndroid) {
-      $window.open('geo://?daddr=' + reqLat + ',' + reqLng + '&dirflg=d&t=h', '_system');
+    if(vm.isAndroid) {
+      url = 'geo://?daddr=' + reqLat + ',' + reqLng + '&dirflg=d&t=m';
     };
-    // window.location.href = url;
-  };
+    
+    window.location.href = url;
+  };   
 };
