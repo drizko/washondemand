@@ -55,8 +55,6 @@ module.exports = {
         }
         create(newRequest)
         .then(function(data) {
-          console.log('newRequest');
-          console.log(data);
           Customer.findOneAndUpdate({email: user.email}, {'locked': true}, options, function() {
           });
           res.json({data: data});
@@ -83,11 +81,9 @@ module.exports = {
         _.each(requests, function(request) {
           request.distance = helpers.distance(providerLocation, request.user_location);
           if (request.distance < 5) {
-            console.log(request);
             results.push(request);
           }
         });
-        console.log('line 81 request', requests)
         res.json({results: results});
       })
       .catch(function(err) {
@@ -214,7 +210,6 @@ module.exports = {
     Request
       .remove({user_email: user.email})
       .then(function(){
-        console.log("Removed request from table...");
         res.status(200).send();
       })
       .catch(function(err) {

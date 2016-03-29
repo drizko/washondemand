@@ -72,6 +72,9 @@ function mainViewFactory($http, $window, locFactory, jwtDecoder, $state, $ionicP
       }
     })
     .then(function(results) {
+      var userLoc = results.data.data.user_location;
+
+      results.data.data.distance = GeoAlert.getDistanceInMi(userLoc.lat, userLoc.lng, locData.lat, locData.lng);
       socket.emit('requested', results.data.data);
       $ionicHistory.nextViewOptions({
         disableBack: true
@@ -79,6 +82,16 @@ function mainViewFactory($http, $window, locFactory, jwtDecoder, $state, $ionicP
       $state.go('customernav.customerRequestView');
     });
   };
+
+  function distance(userLocation, washerLocation) {
+    var p = 0.017453292519943295;    // Math.PI / 180
+    var c = Math.cos;
+    var a = 0.5 - c((washerLocation.lat - userLocation.lat) * p)/2 +
+    c(userLocation.lat * p) * c(washerLocation.lat * p) *
+    (1 - c((washerLocation.lng - userLocation.lng) * p))/2;
+    // returns distance in miles
+    return Math.round(12742 * Math.asin(Math.sqrt(a))/1.60932*10)/10;
+  }
 
   function getProviders() {
     locFactory.getLoc('customer', user.email).then(locFactory.sendLocToServer);

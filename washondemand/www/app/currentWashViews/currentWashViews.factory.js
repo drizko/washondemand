@@ -3,22 +3,21 @@ angular.module('wod.currentWashFactory', [])
 
 currentWashFactory.$inject = ['$http', 'locFactory', '$state', '$ionicHistory', '$ionicPopup'];
 
-function currentWashFactory($http, locFactory, $state, $ionicHistory, $ionicPopup) {
+function currentWashFactory($http, locFactory, $state, $ionicHistory, $ionicPopup, $scope) {
 
   var request;
   var locData = locFactory.locData;
   var currentRequest = {
     request: {}
   };
+  var feedback = {};
 
   function cancelRequest() {
-    console.log('inside cancelrequest factory')
     return $http({
       method: 'POST',
       url: masterURL + '/api/request/cancel-request'
     })
     .then(function(data) {
-      console.log('inside cancelrequest factory .then');
       $ionicHistory.nextViewOptions({
         disableBack: true
       });
@@ -32,24 +31,24 @@ function currentWashFactory($http, locFactory, $state, $ionicHistory, $ionicPopu
       url: masterURL + '/api/request/get-current'
     })
     .then(function(results) {
-      console.log(results.data)
       return results.data;
     });
   };
 
-  function popUp(currentRequest) {
-    var feedback = {};
+  function popUp(scope, currentRequest) {
+    scope.feedback = {};
     $ionicPopup.show({
       title: 'Rate Your Wash!',
       template: '<textarea ng-model=feedback.provider_feedback class="feedback-text" maxlength="100" style="font-family:sans-serif;font-size:1.2em;"></textarea>',
-      // scope: $scope,
+      scope: scope,
       buttons: [
         {text: '<i class="icon ion-ios-star"></i>',
         onTap: function(e) {
             if (e) {
-              feedback._id = currentRequest._id;
-              feedback.provider_rating = 1;
-              sendFeedback(feedback);
+              scope.feedback._id = currentRequest._id;
+              scope.feedback.provider_rating = 1;
+              console.log(scope.feedback);
+              sendFeedback(scope.feedback);
               $ionicHistory.nextViewOptions({
                 disableBack: true
               });
@@ -60,9 +59,9 @@ function currentWashFactory($http, locFactory, $state, $ionicHistory, $ionicPopu
         {text: '<i class="icon ion-ios-star"></i>',
         onTap: function(e) {
             if (e) {
-              feedback._id = currentRequest._id;
-              feedback.provider_rating = 2;
-              sendFeedback(feedback);
+              scope.feedback._id = currentRequest._id;
+              scope.feedback.provider_rating = 2;
+              sendFeedback(scope.feedback);
               $ionicHistory.nextViewOptions({
                 disableBack: true
               });
@@ -73,9 +72,9 @@ function currentWashFactory($http, locFactory, $state, $ionicHistory, $ionicPopu
         {text: '<i class="icon ion-ios-star"></i>',
         onTap: function(e) {
             if (e) {
-              feedback._id = currentRequest._id;
-              feedback.provider_rating = 3;
-              sendFeedback(feedback);
+              scope.feedback._id = currentRequest._id;
+              scope.feedback.provider_rating = 3;
+              sendFeedback(scope.feedback);
               $ionicHistory.nextViewOptions({
                 disableBack: true
               });
@@ -86,9 +85,9 @@ function currentWashFactory($http, locFactory, $state, $ionicHistory, $ionicPopu
         {text: '<i class="icon ion-ios-star"></i>',
         onTap: function(e) {
             if (e) {
-              feedback._id = currentRequest._id;
-              feedback.provider_rating = 4;
-              sendFeedback(feedback);
+              scope.feedback._id = currentRequest._id;
+              scope.feedback.provider_rating = 4;
+              sendFeedback(scope.feedback);
               $ionicHistory.nextViewOptions({
                 disableBack: true
               });
@@ -99,9 +98,9 @@ function currentWashFactory($http, locFactory, $state, $ionicHistory, $ionicPopu
         {text: '<i class="icon ion-ios-star"></i>',
         onTap: function(e) {
             if (e) {
-              feedback._id = currentRequest._id;
-              feedback.provider_rating = 5;
-              sendFeedback(feedback);
+              scope.feedback._id = currentRequest._id;
+              scope.feedback.provider_rating = 5;
+              sendFeedback(scope.feedback);
               $ionicHistory.nextViewOptions({
                 disableBack: true
               });
@@ -162,6 +161,7 @@ function currentWashFactory($http, locFactory, $state, $ionicHistory, $ionicPopu
     beginJob: beginJob,
     endJob: endJob,
     getAccepted: getAccepted,
-    locData: locData
+    locData: locData,
+    feedback: feedback
   };
 };

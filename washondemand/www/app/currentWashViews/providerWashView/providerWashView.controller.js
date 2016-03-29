@@ -63,5 +63,5 @@ function provWashInfoCtrl(socket, currentWashFactory, $ionicHistory, $ionicLoadi
     };
 
     window.location.href = url;
-  };   
+  };
 };
