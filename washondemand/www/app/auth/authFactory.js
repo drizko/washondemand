@@ -1,8 +1,8 @@
 angular.module('wod.authFactory', []).factory('authFactory', authFactory);
 
-authFactory.$inject = ['$http', '$window', '$state', '$cordovaFile', 'locFactory'];
+authFactory.$inject = ['$http', '$window', '$state', '$cordovaFile', '$cordovaDevice', 'locFactory'];
 
-function authFactory($http, $window, $state, $cordovaFile, locFactory) {
+function authFactory($http, $window, $state, $cordovaFile, $cordovaDevice, locFactory) {
 
   var emailRegex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
   var currentUserEmail = '';
