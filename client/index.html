@@ -8,45 +8,30 @@
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="styles/styles.css"/>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" />
+
+    <script type="text/javascript" src="/node_modules/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js" ></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
 
   </head>
   <body>
-    <!-- <p>Index.html</p>
-    <a href="#/customerSignin">customer signin</a>
-    <a href="#/customerSignup">customer signup</a>
-    <a href="#/providerSignin">provider signin</a>
-    <a href="#/providerSignup">provider signup</a>
-    <a href="#/customerProfile">customer profile</a>
-    <a href="#/providerProfile">provider profile</a>
 
-    <br>
-    <br> -->
-
+    home
     <div ui-view></div>
 
 
-    <!-- Libraries -->
-    <script type="text/javascript" src="/node_modules/angular/angular.min.js"></script>
-    <script type="text/javascript" src="/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="http://maps.google.com/maps/api/js"></script>
-    <script type="text/javascript" src="/node_modules/ngmap/build/scripts/ng-map.min.js"></script>
-
     <!-- App Code -->
     <script src="./app/services/services.js"></script>
-    <script src="./app/auth/customerAuth/signin.js"></script>
-    <script src="./app/auth/customerAuth/signup.js"></script>
-    <script src="./app/auth/providerAuth/signin.js"></script>
-    <script src="./app/auth/providerAuth/signup.js"></script>
-    <script src="./app/auth/authFactory.js"></script>
-    <script src="./app/auth/authMaster.js"></script>
-    <script src="./app/customer/customerController.js"></script>
-    <script src="./app/provider/providerController.js"></script>
-    <script src="./app/customer/customerFactory.js"></script>
-    <script src="./app/nav/navController.js"></script>
-    <script src="./app/home/home.js"></script>
+    <script src="./app/nav/nav.controller.js"></script>
+    <script src="./app/home/home.controller.js"></script>
     <script src="./app/app.js"></script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAISXYCtV_256uLLE9wd_cjiFkvSI9yteI&callback=initMap" async defer></script> -->
-
 
   </body>
 </html>
