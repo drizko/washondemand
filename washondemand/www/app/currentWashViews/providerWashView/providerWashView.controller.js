@@ -52,16 +52,16 @@ function provWashInfoCtrl(socket, currentWashFactory, $ionicHistory, $ionicLoadi
     var reqLat = vm.request.user_location.lat;
     var reqLng = vm.request.user_location.lng;
     var url;
-    // saddr=Cupertino&
+ 
     console.log("INSIDE GETDIRRRRRRRRR");
     if(vm.isIOS) {
       url = 'maps://?daddr=' + reqLat + ',' + reqLng + '&dirflg=d&t=m';
     };
 
     if(vm.isAndroid) {
-      url = 'geo://?daddr=' + reqLat + ',' + reqLng + '&dirflg=d&t=m';
+      url = 'geo://?q=' + reqLat + ',' + reqLng + '&mode=d';
     };
-    
+
     window.location.href = url;
   };   
 };

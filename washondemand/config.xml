@@ -34,4 +34,6 @@
   <allow-intent href="tel:*" />
   <allow-navigation href="maps:*" launch-external="yes" />
   <allow-navigation href="geo:*" launch-external="yes" />
+  <allow-navigation href="comgooglemaps:*" launch-external="yes" />
+  <allow-navigation href="google.navigation:*" launch-external="yes" />
 </widget>
