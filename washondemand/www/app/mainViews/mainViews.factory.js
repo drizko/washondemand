@@ -32,13 +32,13 @@ function mainViewFactory($http, $window, locFactory, jwtDecoder, $state, $ionicP
   };
 
   var washTypeOptions = {
-    basic: {name: 'basic', options: [
+    Basic: {name: 'Basic', options: [
       1, 2, 3
     ]},
-    deluxe: {name: 'deluxe', options: [
+    Deluxe: {name: 'Deluxe', options: [
       1, 2, 3, 4, 5, 6, 7
     ]},
-    premium: {name: 'premium', options: [
+    Premium: {name: 'Premium', options: [
       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
     ]},
   };
@@ -74,6 +74,9 @@ function mainViewFactory($http, $window, locFactory, jwtDecoder, $state, $ionicP
         disableBack: true
       });
       $state.go('customernav.customerRequestView');
+    })
+    .catch(function(error){
+      showConfirm();
     });
   };
 
