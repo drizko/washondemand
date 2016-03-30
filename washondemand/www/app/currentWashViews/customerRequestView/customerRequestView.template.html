@@ -16,6 +16,8 @@
           <span class="label">Wash Type:</span> {{custReqInfoCtrl.currentRequest.wash_type}}<br>
           <span class="label">Vehicle Type:</span> {{custReqInfoCtrl.currentRequest.vehicle_type}}<br>
           <span class="label">Cost:</span> ${{custReqInfoCtrl.currentRequest.cost}}<br>
+          <wod-history-entry-expand wash-options="::custReqInfoCtrl.currentRequest.wash_info">
+          </wod-history-entry-expand>
         </ion-item>
         <ion-item ng-if="custReqInfoCtrl.currentRequest.providerInfo">
           <span class="label">Your Provider:</span>  {{custReqInfoCtrl.currentRequest.providerInfo.company_name}}<br>
