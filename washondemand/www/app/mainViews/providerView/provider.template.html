@@ -27,6 +27,8 @@
             <span class="label">Distance: </span>{{request.distance}} miles
           </div>
         </div>
+        <wod-history-entry-expand wash-options="::request.wash_info">
+        </wod-history-entry-expand>
         <div style="">
           <button class="button button-block button-positive" ng-disabled="request.accepted" ng-disabled="providerCtrl.accepted" ng-click="providerCtrl.acceptWash(request)">Accept Wash</button>
         </div>

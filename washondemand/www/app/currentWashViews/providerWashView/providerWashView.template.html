@@ -18,6 +18,8 @@
         <span class="label">Vehicle Type:</span> {{provWashInfoCtrl.request.vehicle_type}}<br>
         <span class="label">Cost:</span> ${{provWashInfoCtrl.request.cost}}<br>
         <span class="label">Address:</span> <a ng-click="provWashInfoCtrl.getDirection()">{{provWashInfoCtrl.request.address}}</a>
+        <wod-history-entry-expand wash-options="::provWashInfoCtrl.request.wash_info">
+        </wod-history-entry-expand>
       </ion-item>
     </ion-list>
     <div class="btn-margin" ng-if="provWashInfoCtrl.request && !provWashInfoCtrl.jobComplete">
