@@ -22,7 +22,7 @@
       <div class="btn-margin">
         <span>Select Wash Type:</span>
         <div class="button-bar">
-            <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('Basix')" ng-class="{'active': customerCtrl.request.washType === 'Basic'}">Basic</button>
+            <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('Basic')" ng-class="{'active': customerCtrl.request.washType === 'Basic'}">Basic</button>
             <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('Deluxe')" ng-class="{'active': customerCtrl.request.washType === 'Deluxe'}">Deluxe</button>
             <button id="premium-btn" class="button button-outline button-positive" ng-click="customerCtrl.selectWash('Premium')" ng-class="{'active': customerCtrl.request.washType === 'Premium'}">Premium</button>
             <button class="button button-outline button-positive" ng-click="customerCtrl.selectWash('Custom')" ng-class="{'active': customerCtrl.request.washType === 'Custom'}">Custom</button>
@@ -49,8 +49,8 @@
         </div>
       </div>
       <div class="btn-margin">
-        <button class="button button-block button-positive" ng-if="customerCtrl.showRequestButton()" ng-click="customerCtrl.sendRequest()">Request A Wash</button>
-        <button class="button button-block button-stable disabled" ng-if="!customerCtrl.showRequestButton()">{{customerCtrl.btnMsg}}</button>
+        <button class="request-button button button-block button-positive" ng-if="customerCtrl.showRequestButton()" ng-click="customerCtrl.sendRequest()">Request A Wash</button>
+        <button class="request-button button button-block button-stable disabled" ng-if="!customerCtrl.showRequestButton()">{{customerCtrl.btnMsg}}</button>
       </div>
     </form>
   </ion-content>

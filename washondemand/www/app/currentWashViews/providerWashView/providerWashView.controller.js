@@ -13,7 +13,7 @@ function provWashInfoCtrl(socket, currentWashFactory, $ionicHistory, $ionicLoadi
   });
 
   $ionicLoading.show({
-    template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+    template: '<ion-spinner class="spinner-energized" icon="ripple"></ion-spinner>'
   });
 
   ionic.Platform.ready(function() {
@@ -52,7 +52,7 @@ function provWashInfoCtrl(socket, currentWashFactory, $ionicHistory, $ionicLoadi
     var reqLat = vm.request.user_location.lat;
     var reqLng = vm.request.user_location.lng;
     var url;
- 
+
     console.log("INSIDE GETDIRRRRRRRRR");
     if(vm.isIOS) {
       url = 'maps://?daddr=' + reqLat + ',' + reqLng + '&dirflg=d&t=m';

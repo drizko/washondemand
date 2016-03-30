@@ -10,7 +10,7 @@ function custReqInfoCtrl($scope, $ionicHistory, $ionicLoading, currentWashFactor
   });
 
   $ionicLoading.show({
-    template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+    template: '<ion-spinner class="spinner-energized" icon="ripple"></ion-spinner>'
   });
 
   currentWashFactory.getRequest()
