@@ -11,7 +11,7 @@ function customerCtrl(requests, $ionicLoading, mainViewFactory) {
   vm.locData = mainViewFactory.locData;
 
   $ionicLoading.show({
-    template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+    template: '<ion-spinner class="spinner-energized" icon="ripple"></ion-spinner>'
   });
 
   mainViewFactory.getProviders()

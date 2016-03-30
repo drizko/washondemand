@@ -76,12 +76,61 @@ ng-map {
   margin-right: 20px;
 }
 
-label {
-  border-left: none !important;
-  border-right: none !important;
-  border-top: none !important;
-}
-
 .question {
   text-align: center;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  width: 250px;
+  height: 250px;
+}
+
+.button.button-balanced {
+  background-color: #122A3E;
+}
+
+.button.button-balanced.button-outline {
+  border-color: #122A3E;
+  color: #122A3E;
+}
+
+.button.button-balanced.button-outline.activated {
+  background-color: #0e426e;
+  color: white;
+}
+
+.button.button-balanced.activated, .button.button-balanced.active{
+  border-color: #122A3E;
+  color: #122A3E;
+}
+
+.button.button-balanced.activated {
+  background-color: #0e426e;
+  color: #FFFFFF;
+}
+
+.item-input {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
+
+.customer-view {
+  margin-bottom: 20px;
+}
+
+.loading-container .loading{
+  background-color: transparent;
+}
+
+.spinner svg {
+  width: 100px;
+  height: 100px;
+}
+
+.spinner.spinner-energized {
+  stroke: #0e426e;
 }
