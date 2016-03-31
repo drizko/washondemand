@@ -5,6 +5,8 @@ customerCtrl.$inject = ['requests', '$ionicLoading', 'mainViewFactory'];
 
 function customerCtrl(requests, $ionicLoading, mainViewFactory) {
 
+  console.log('test');
+
   var vm = this;
   vm.request = mainViewFactory.request;
   vm.btnMsg = 'Select a vehicle and wash type';
