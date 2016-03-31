@@ -3,7 +3,7 @@
     <div ng-if="!custReqInfoCtrl.currentRequest.wash_type">
       You have not requested a wash yet.
     </div>
-    <div ng-if="custReqInfoCtrl.currentRequest.wash_type">
+    <div class="page" ng-if="custReqInfoCtrl.currentRequest.wash_type">
       <div class="map-view" data-tap-disabled="true">
         <ng-map center="[{{custReqInfoCtrl.currentRequest.user_location.lat}}, {{custReqInfoCtrl.currentRequest.user_location.lng}}]" zoom="12" style="height:50%;">
           <marker position="[{{custReqInfoCtrl.currentRequest.user_location.lat}}, {{custReqInfoCtrl.currentRequest.user_location.lng}}]"></marker>

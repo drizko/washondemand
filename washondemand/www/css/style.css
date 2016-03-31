@@ -118,10 +118,6 @@ ng-map {
   border-top: none;
 }
 
-.customer-view {
-  margin-bottom: 20px;
-}
-
 .loading-container .loading{
   background-color: transparent;
 }
@@ -133,4 +129,8 @@ ng-map {
 
 .spinner.spinner-energized {
   stroke: #0e426e;
+}
+
+.page {
+  padding-bottom: 2px;
 }

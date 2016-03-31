@@ -1,8 +1,8 @@
 angular.module('wod.provWashHistCtrl', []).controller('provWashHistCtrl', provWashHistCtrl);
 
-provWashHistCtrl.$inject = ['washHistFactory'];
+provWashHistCtrl.$inject = ['washHistFactory', '$ionicLoading'];
 
-function provWashHistCtrl(washHistFactory) {
+function provWashHistCtrl(washHistFactory, $ionicLoading) {
   var vm = this;
 
   vm.numEntries = 10;
@@ -10,6 +10,10 @@ function provWashHistCtrl(washHistFactory) {
   vm.total;
   vm.sum;
   vm.ratingAvg;
+
+  $ionicLoading.show({
+    template: '<ion-spinner class="spinner-energized" icon="ripple"></ion-spinner>'
+  });
 
   vm.displayMoreEntries = function() {
     if (vm.numEntries < vm.history.length) {
@@ -27,8 +31,10 @@ function provWashHistCtrl(washHistFactory) {
       vm.sum = stats.sum;
       vm.ratingAvg = stats.avg;
       vm.history = history;
+      $ionicLoading.hide();
     });
   };
+
   init();
 
 };
