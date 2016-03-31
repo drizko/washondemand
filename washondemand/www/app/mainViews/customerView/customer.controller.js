@@ -37,7 +37,7 @@ function customerCtrl(requests, $ionicLoading, mainViewFactory) {
 
   vm.selectWash = function(wash) {
     vm.request.washType = wash;
-    if (wash !== 'custom') {
+    if (wash !== 'Custom') {
       mainViewFactory.restoreOptions();
       var options = mainViewFactory.washTypeOptions[wash].options;
       for (var i = 0; i < options.length; i++) {
@@ -58,8 +58,8 @@ function customerCtrl(requests, $ionicLoading, mainViewFactory) {
   };
 
   vm.toggleOption = function(detail) {
-    if (vm.request.washType !== 'custom') {
-      vm.selectWash('custom');
+    if (vm.request.washType !== 'Custom') {
+      vm.selectWash('Custom');
     }
     detail.active = !detail.active;
   };

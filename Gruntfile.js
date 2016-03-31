@@ -33,10 +33,21 @@ module.exports = function(grunt) {
           ]
         }
       }
-    }
+    },
+
+    watch: {
+      scripts: {
+        files: ['**/*.js'],
+        tasks: ['uglify'],
+        options: {
+          spawn: true,
+        },
+      },
+    },
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // grunt.registerTask('default', ['jshint']);
 
