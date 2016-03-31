@@ -44,10 +44,22 @@ module.exports = function(grunt) {
         },
       },
     },
+
+    removelogging: {
+      dist: {
+        src: "washondemand/www/wod.min.js",
+        dest: "washondemand/www/wod.min.clean.js",
+        options: {}
+      }
+    }
+
   });
 
+
+  grunt.loadNpmTasks( 'grunt-remove-logging' );
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.registerTask( "build", ["uglify", "removelogging"] );
 
   // grunt.registerTask('default', ['jshint']);
 
