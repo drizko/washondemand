@@ -20,8 +20,12 @@ ng-map {
   margin-right: 5px;
 }
 
-#premium-btn {
-  text-overflow: clip;
+.clip-text {
+  text-overflow: clip !important;
+}
+
+.overflow-text {
+  white-space: normal;
 }
 
 .label {
