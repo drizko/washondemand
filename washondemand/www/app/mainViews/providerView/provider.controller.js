@@ -35,15 +35,6 @@ function providerCtrl(socket, mainViewFactory, $ionicHistory, $state, $ionicLoad
     vm.requests.push(data);
   });
 
-  mainViewFactory.getRequest()
-    .then(function(data) {
-      data.forEach(function(item) {
-        item.accepted = false;
-      });
-      vm.requests = data;
-      $ionicLoading.hide();
-    });
-
   vm.acceptWash = function(request) {
     vm.accepted = true;
     mainViewFactory.acceptRequest(request)
@@ -55,4 +46,16 @@ function providerCtrl(socket, mainViewFactory, $ionicHistory, $state, $ionicLoad
       });
   };
 
+  function init(){
+    mainViewFactory.getRequest()
+      .then(function(data) {
+        data.forEach(function(item) {
+          item.accepted = false;
+        });
+        vm.requests = data;
+        $ionicLoading.hide();
+      });
+  }
+
+  init();
 };

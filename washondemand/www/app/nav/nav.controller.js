@@ -17,7 +17,7 @@ function navCtrl($state, authFactory, locFactory) {
   };
   vm.customerLogout = function() {
     authFactory.signout();
-    $state.go('customerSignin');
+    $state.go('home');
   };
 
   var init = function() {
