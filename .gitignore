@@ -5,6 +5,9 @@ server/config.js
 deploy.sh
 .DS_Store
 washondemand/www/lib
+washondemand/www/wod.min.js
+washondemand/www/wod.min.clean.js
+washondemand/www/lib
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
