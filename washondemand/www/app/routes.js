@@ -1,6 +1,12 @@
 angular.module('wod.routes', [])
 
-.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+.config(routesConfigFunc)
+.factory('AttachTokens', AttachTokens)
+.run(wodRoutesRunFunc);
+
+routesConfigFunc.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider'];
+
+function routesConfigFunc($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
 		.state('home', {
       url: '/',
@@ -12,18 +18,21 @@ angular.module('wod.routes', [])
 			url: '/nav1',
 			templateUrl: 'app/nav/customernav.template.html',
 			controller: 'navCtrl as navCtrl',
-      abstract: true
+      authenticate: true,
+      abstract: true,
+      cache: false
 		})
     .state('providernav', {
       url: '/nav2',
       templateUrl: 'app/nav/providernav.template.html',
       controller: 'navCtrl as navCtrl',
+      authenticate: true,
       abstract: true,
       cache: false
     })
     .state('customernav.customer', {
       url: '/customerProfile',
-      // authenticate: false, // for now
+      authenticate: true,
       cache: false,
       views: {
         'nav-view': {
@@ -34,7 +43,7 @@ angular.module('wod.routes', [])
     })
     .state('providernav.provider', {
       url: '/providerProfile',
-      // authenticate: false // for now
+      authenticate: true,
       cache: false,
       views: {
         'nav-view': {
@@ -45,6 +54,7 @@ angular.module('wod.routes', [])
     })
     .state('customernav.customerWashes', {
       url: '/customerWashes',
+      authenticate: true,
       cache: false,
       views: {
         'nav-view': {
@@ -58,6 +68,7 @@ angular.module('wod.routes', [])
       params: {
         request: null
       },
+      authenticate: true,
       cache: false,
       views: {
         'nav-view': {
@@ -68,6 +79,7 @@ angular.module('wod.routes', [])
     })
     .state('providernav.providerWashes', {
       url: '/providerWashes',
+      authenticate: true,
       cache: false,
       views: {
         'nav-view': {
@@ -81,6 +93,7 @@ angular.module('wod.routes', [])
       params: {
         request: null
       },
+      authenticate: true,
       cache: false,
       views: {
         'nav-view': {
@@ -116,9 +129,11 @@ angular.module('wod.routes', [])
 
   $urlRouterProvider.otherwise('/');
   $httpProvider.interceptors.push('AttachTokens');
-})
+}
 
-.factory('AttachTokens', function($window) {
+AttachTokens.$inject = ['$window'];
+
+function AttachTokens($window) {
 
   var attach = {
     request: function(object) {
@@ -131,9 +146,13 @@ angular.module('wod.routes', [])
     }
   };
   return attach;
-})
+}
 
-.run(function($rootScope, $state, authFactory, $window, jwtDecoder) {
+
+
+wodRoutesRunFunc.$inject = ['$rootScope', '$state', 'authFactory', '$window', 'jwtDecoder'];
+
+function wodRoutesRunFunc($rootScope, $state, authFactory, $window, jwtDecoder) {
 
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
     if (toState.authenticate && !authFactory.isAuth()) {
@@ -142,4 +161,4 @@ angular.module('wod.routes', [])
       event.preventDefault();
     }
   });
-});
+}

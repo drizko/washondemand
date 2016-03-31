@@ -13,6 +13,7 @@
     "socket.io": "^1.4.5",
     "cordova": "^3.4.0",
     "angular-jwt": "^0.0.9",
-    "ngCordova": "^0.1.24-alpha"
+    "ngCordova": "^0.1.24-alpha",
+    "socket.io-client": "^1.4.5"
   }
 }
