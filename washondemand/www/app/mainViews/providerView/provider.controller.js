@@ -18,7 +18,9 @@ function providerCtrl(socket, mainViewFactory, $ionicHistory, $state, $ionicLoad
   socket.on('removeList', function(data) {
     for (var i = 0; i < vm.requests.length; i++) {
       if (vm.requests[i]._id === data._id) {
-        vm.requests[i].display = true;
+        // vm.requests[i].display = true;
+        vm.requests.splice(i, 1);
+        i--;
       }
     }
   });
