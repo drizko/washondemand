@@ -20,7 +20,11 @@ angular.module('WashOnDemand', [
   'angular-jwt'
 ])
 
-.run(function($ionicPlatform) {
+.run(wodAppRunFunc);
+
+wodAppRunFunc.$inject = ['$ionicPlatform'];
+
+function wodAppRunFunc($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -33,4 +37,4 @@ angular.module('WashOnDemand', [
       StatusBar.styleDefault();
     }
   });
-});
+}

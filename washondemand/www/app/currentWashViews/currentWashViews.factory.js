@@ -3,7 +3,7 @@ angular.module('wod.currentWashFactory', [])
 
 currentWashFactory.$inject = ['$http', 'locFactory', '$state', '$ionicHistory', '$ionicPopup'];
 
-function currentWashFactory($http, locFactory, $state, $ionicHistory, $ionicPopup, $scope) {
+function currentWashFactory($http, locFactory, $state, $ionicHistory, $ionicPopup) {
 
   var request;
   var locData = locFactory.locData;

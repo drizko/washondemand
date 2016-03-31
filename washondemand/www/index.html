@@ -6,14 +6,15 @@
     <title></title>
     <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+
     <!-- Libraries - ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ionic/js/ionic.bundle.min.js"></script>
     <script src="lib/ion-sticky/ion-sticky.js"></script>
     <script src="http://maps.google.com/maps/api/js"></script>
     <script src="lib/ngmap/build/scripts/ng-map.min.js"></script>
     <script src="lib/moment/min/moment.min.js"></script>
-    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-    <script type="text/javascript" src="https://cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js"></script>
+    <script src="lib/socket.io-client/socket.io.js"></script>
+    <script src="lib/angular-jwt/dist/angular-jwt.min.js"></script>
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
@@ -27,30 +28,6 @@
 
 
     <!-- your app's js -->
-    <script src="./app/config.js"></script>
-    <script src="./app/services/services.js"></script>
-    <script src="./app/auth/customerAuth/signin.controller.js"></script>
-    <script src="./app/auth/customerAuth/signup.controller.js"></script>
-    <script src="./app/auth/providerAuth/signin.controller.js"></script>
-    <script src="./app/auth/providerAuth/signup.controller.js"></script>
-    <script src="./app/auth/authFactory.js"></script>
-    <script src="./app/auth/authMaster.js"></script>
-    <script src="./app/mainViews/customerView/customer.controller.js"></script>
-    <script src="./app/mainViews/providerView/provider.controller.js"></script>
-    <script src="./app/mainViews/mainViews.factory.js"></script>
-    <script src="./app/washHistory/custHistory/custWashHistory.controller.js"></script>
-    <script src="./app/washHistory/custHistory/custHistoryEntry.directive.js"></script>
-    <script src="./app/washHistory/provHistory/provWashHistory.controller.js"></script>
-    <script src="./app/washHistory/provHistory/provHistoryEntry.directive.js"></script>
-    <script src="./app/washHistory/washHistory.factory.js"></script>
-    <script src="./app/washHistory/washHistoryMaster.js"></script>
-    <script src="./app/washHistory/historyDirectives/expandHistoryEntry.directive.js"></script>
-    <script src="./app/currentWashViews/currentWashViews.factory.js"></script>
-    <script src="./app/currentWashViews/providerWashView/providerWashView.controller.js"></script>
-    <script src="./app/currentWashViews/customerRequestView/customerRequestView.controller.js"></script>
-    <script src="./app/home/home.controller.js"></script>
-    <script src="./app/nav/nav.controller.js"></script>
-    <script src="./app/routes.js"></script>
-    <script src="./app/app.js"></script>
+    <script src="./wod.min.js"></script>
   </body>
 </html>
