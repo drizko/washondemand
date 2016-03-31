@@ -2,10 +2,10 @@ Node version: v5.3.0
 
 Cordova version: 6.0.0
 
-Config.xml file: 
+Config.xml file:
 
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.lunchline151949" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.ionicframework.washondemand" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>washondemand</name>
   <description>
         An Ionic Framework and Cordova project.
@@ -31,4 +31,3 @@ iOS platform:
 
 Xcode 7.2.1
 Build version 7C1002
-
