@@ -1,0 +1,346 @@
+* {
+	margin: 0;
+}
+html, body {
+	height: 100%;
+}
+
+.wrapper {
+	min-height: 100%;
+}
+
+.navbar {
+  margin-bottom: 0px;
+}
+
+.navbar-brand {
+  padding: 5px 0px 0px 5px;
+}
+
+.navbar-brand-text {
+  font-size: 18px;
+  text-shadow: 0 1px 0 rgba(255,255,255,.25);
+  font-weight: 400;
+  padding: 15px 0px 0px 15px;
+}
+
+.container-fluid {
+  background-color: #122a3e;
+  color: #fff;
+}
+
+.navbar-nav {
+  margin: 0px -15px 0px -15px;
+}
+
+.navbar-nav>li>a {
+  color: #fff !important;
+  font-size: 20px;
+}
+.navbar-nav>li {
+  border: none;
+}
+
+.navbar-toggle:hover {
+  background-color: #387EF5 !important;
+}
+
+.jumbotron {
+    background: url('/images/corvette_wash.jpg') no-repeat center center;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    background-size: 100%;
+    height: 600px;
+    padding: 0;
+    background-color: #fff;
+}
+.jumbo-div {
+  width: 50%;
+  display: block;
+  margin: 165px auto;
+  text-align: center;
+}
+.jumbo-text {
+  font-size: 78px;
+  color: #fff;
+  font-weight: bold;
+  line-height: 1;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.card-image {
+  display: inline-block;
+  width: 80%;
+  height: 250px;
+  border-radius: 5px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+  margin: 25px auto 15px auto;
+}
+
+.pic1 {
+  background-image: url('/images/waterless-car-washing.jpg');
+}
+
+.pic2 {
+  background-image: url('/images/clean-interior.jpg');
+}
+
+.pic3 {
+  background-image: url('/images/clean-wheel.jpg');
+}
+
+md-card {
+  box-shadow: none;
+  text-align: center;
+}
+
+.card-text {
+  width: 80%;
+  margin: 25px auto;
+  text-align: center;
+}
+
+.card-msg {
+  font-size: 18px;
+}
+
+.card-title {
+  font-size: 24px;
+}
+
+.demo {
+  min-height: 150px;
+  background-color: #d4d4d4;
+}
+
+.demo-img>img {
+  display: block;
+  width: 50%;
+  margin: 25px auto;
+}
+
+.demo-desc {
+  width: 80%;
+  margin-top: 140px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.demo-desc>p {
+  font-size: 28px;
+}
+
+.cust-info>li{
+  font-size: 24px;
+  margin: 10px;
+}
+
+.footer, .push {
+	height: 75px;
+  color: #fff;
+  background-color: #777;
+  text-align: center;
+}
+
+.footer>span {
+  margin-top: 45px;
+  margin-right: 10px;
+  vertical-align: bottom;
+}
+
+.team-title {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.team-title>image {
+  width: 20%;
+}
+
+.team-logo {
+  display: inline-block;
+  background-image: url('/images/logo.jpg');
+  width: 250px;
+  height: 250px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.team-image {
+  display: inline-block;
+  width: 250px;;
+  height: 250px;
+  border-radius: 125px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+  margin: 25px auto 15px auto;
+}
+
+.team1 {
+  background-image: url('/images/bobby.jpg');
+}
+
+.team2 {
+  background-image: url('/images/danny.jpg');
+}
+
+.team3 {
+  background-image: url('/images/kyle.jpg');
+}
+
+.team4 {
+  background-image: url('/images/kaz.jpg');
+}
+
+.team-card > p {
+  font-size: 18px;
+  width: 80%;
+  margin: auto;
+}
+
+.name {
+  font-weight: 800;
+}
+
+.social img{
+  width: 50px;
+  display: inline;
+}
+@media(max-width: 1260px) {
+  .demo-desc {
+    margin-top: 100px;
+    margin-bottom: 25px;
+  }
+}
+@media(max-width: 1080px) {
+  .jumbotron {
+    height:510px;
+  }
+  .jumbo-div {
+    margin: 125px auto;
+  }
+  .jumbo-text {
+    font-size: 55px;
+  }
+  .demo-desc {
+    margin-top: 50px;
+    margin-bottom: 25px;
+  }
+}
+@media(max-width: 900px) {
+  .jumbotron {
+    height:432px;
+  }
+  .jumbo-div {
+    margin: 125px auto;
+  }
+  .jumbo-text {
+    font-size: 47px;
+  }
+  .card-image {
+    height: 175px;
+  }
+  .demo-desc {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+}
+@media(max-width: 768px) {
+  .navbar-nav>li>a {
+    font-size: 16px;
+  }
+  .navbar-nav>li {
+    border: 1px solid #777;
+  }
+  .jumbotron {
+    height:290px;
+  }
+  .jumbo-div {
+    margin: 80px auto;
+  }
+  .jumbo-text {
+    font-size: 40px;
+  }
+  .card-image {
+    height: 175px;
+  }
+  .demo-desc {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+  .demo-desc > p {
+    font-size: 24px;
+  }
+  .cust-info>li {
+    font-size: 18px;
+  }
+}
+@media(max-width: 500px) {
+  .navbar-nav>li>a {
+    font-size: 16px;
+  }
+  .navbar-nav>li {
+    border: 1px solid #777;
+  }
+  .jumbotron {
+    height:202px;
+  }
+  .jumbo-div {
+    margin: 45px auto;
+  }
+  .jumbo-text {
+    font-size: 24px;
+  }
+  .card-image {
+    height: 175px;
+  }
+  .demo-desc {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+  .demo-desc > p {
+    font-size: 24px;
+  }
+  .cust-info>li {
+    font-size: 18px;
+  }
+}
+
+@media(max-width: 320px) {
+  .navbar-nav>li>a {
+    font-size: 16px;
+  }
+  .navbar-nav>li {
+    border: 1px solid #777;
+  }
+  .jumbotron {
+    height:180px;
+  }
+  .jumbo-div {
+    margin: 45px auto;
+  }
+  .jumbo-text {
+    font-size: 24px;
+  }
+  .card-image {
+    height: 175px;
+  }
+  .demo-desc {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+  .demo-desc > p {
+    font-size: 24px;
+  }
+  .cust-info>li {
+    font-size: 18px;
+  }
+}

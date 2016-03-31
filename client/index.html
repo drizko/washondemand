@@ -2,19 +2,26 @@
 <html ng-app='WashOnDemand'>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
       Wash On Demand
     </title>
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="styles/styles.css"/>
+    <link rel="stylesheet" type="text/css" href="/node_modules/angular-material/angular-material.layouts.min.css"/>
+      <link rel="stylesheet" type="text/css" href="/node_modules/angular-material/angular-material.min.css"/>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" type="text/css" href="styles/styles.css"/>
 
     <script type="text/javascript" src="/node_modules/angular/angular.min.js"></script>
     <script type="text/javascript" src="/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="/node_modules/angular-animate/angular-animate.min.js"></script>
+    <script type="text/javascript" src="/node_modules/angular-aria/angular-aria.min.js"></script>
+    <script type="text/javascript" src="/node_modules/angular-messages/angular-messages.min.js"></script>
+    <script type="text/javascript" src="/node_modules/angular-material/angular-material.min.js"></script>
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js" ></script>
@@ -22,11 +29,15 @@
 
   </head>
   <body>
+    <div  class="wrapper">
 
-
-    <div ui-view></div>
-
-
+      <div ui-view></div>
+    </div>
+    <div class="footer">
+      <div>
+        <span class="company">WashOnDemand.net 2016</span>
+      </div>
+    </div>
     <!-- App Code -->
     <script src="./app/services/services.js"></script>
     <script src="./app/nav/nav.controller.js"></script>
