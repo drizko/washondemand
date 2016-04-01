@@ -8,21 +8,21 @@ angular.module('WashOnDemand', [
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
 		.state('nav', {
-			url:'/nav',
+			url:'/',
 			templateUrl: 'app/nav/nav.template.html',
 			controller: 'navCtrl',
 			abstract: true
 		})
 		.state('nav.home', {
-			url: '/home',
+			url: '',
       templateUrl: 'app/home/home.template.html',
 			controller: 'homeCtrl'
 		})
 		.state('nav.team', {
-			url: '/team',
+			url: 'team',
       templateUrl: 'app/team/team.template.html',
 			controller: 'teamCtrl'
 		});
 
-  // $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/');
 });
