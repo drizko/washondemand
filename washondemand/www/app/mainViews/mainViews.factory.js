@@ -75,7 +75,7 @@ function mainViewFactory($http, $window, locFactory, jwtDecoder, $state, $ionicP
       });
       $state.go('customernav.customerRequestView');
     })
-    .catch(function(error){
+    .catch(function(error) {
       showConfirm();
     });
   };
@@ -83,11 +83,11 @@ function mainViewFactory($http, $window, locFactory, jwtDecoder, $state, $ionicP
   function distance(userLocation, washerLocation) {
     var p = 0.017453292519943295;    // Math.PI / 180
     var c = Math.cos;
-    var a = 0.5 - c((washerLocation.lat - userLocation.lat) * p)/2 +
+    var a = 0.5 - c((washerLocation.lat - userLocation.lat) * p) / 2 +
     c(userLocation.lat * p) * c(washerLocation.lat * p) *
-    (1 - c((washerLocation.lng - userLocation.lng) * p))/2;
+    (1 - c((washerLocation.lng - userLocation.lng) * p)) / 2;
     // returns distance in miles
-    return Math.round(12742 * Math.asin(Math.sqrt(a))/1.60932*10)/10;
+    return Math.round(12742 * Math.asin(Math.sqrt(a)) / 1.60932 * 10) / 10;
   }
 
   function getProviders() {
@@ -110,8 +110,8 @@ function mainViewFactory($http, $window, locFactory, jwtDecoder, $state, $ionicP
     });
 
     confirmPopup.then(function(res) {
-      if(res) {
-        $state.go("customernav.customerRequestView")
+      if (res) {
+        $state.go('customernav.customerRequestView');
       }
     });
   };

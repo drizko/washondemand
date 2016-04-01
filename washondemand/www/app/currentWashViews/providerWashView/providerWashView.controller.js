@@ -53,12 +53,12 @@ function provWashInfoCtrl(socket, currentWashFactory, $ionicHistory, $ionicLoadi
     var reqLng = vm.request.user_location.lng;
     var url;
 
-    console.log("INSIDE GETDIRRRRRRRRR");
-    if(vm.isIOS) {
+    console.log('Inside getDirection');
+    if (vm.isIOS) {
       url = 'maps://?daddr=' + reqLat + ',' + reqLng + '&dirflg=d&t=m';
     };
 
-    if(vm.isAndroid) {
+    if (vm.isAndroid) {
       url = 'geo://?q=' + reqLat + ',' + reqLng + '&mode=d';
     };
 

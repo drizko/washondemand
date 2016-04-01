@@ -6,14 +6,13 @@ function homeCtrl(authFactory, $cordovaDevice, $cordovaFile, $state, $window) {
   var vm = this;
 
   function init() {
-    document.addEventListener("deviceready", onDeviceReady, false);
+    document.addEventListener('deviceready', onDeviceReady, false);
   }
 
-  function onDeviceReady(){
-    console.log("In device ready");
+  function onDeviceReady() {
+    console.log('In device ready');
     console.log(ionic.Platform.isIOS());
     if (ionic.Platform.isIOS() || ionic.Platform.isAndroid()) {
-      console.log("Hi :)");
       $cordovaFile.checkFile(cordova.file.dataDirectory, 'cust')
       .then(function(result) {
         console.log('Inside somewhere', result);
@@ -22,7 +21,7 @@ function homeCtrl(authFactory, $cordovaDevice, $cordovaFile, $state, $window) {
           if (result === 'true') {
             $cordovaFile.readAsText(cordova.file.dataDirectory, 'com.wod')
             .then(function(result) {
-              console.log("token", result);
+              console.log('token', result);
               $window.localStorage['com.wod'] = result;
               $state.go('customernav.customer');
             });
@@ -42,7 +41,7 @@ function homeCtrl(authFactory, $cordovaDevice, $cordovaFile, $state, $window) {
           if (result === 'true') {
             $cordovaFile.readAsText(cordova.file.dataDirectory, 'com.wod')
             .then(function(result) {
-              console.log("token", result);
+              console.log('token', result);
               $window.localStorage['com.wod'] = result;
               $state.go('providernav.provider');
             });

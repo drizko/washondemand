@@ -15,7 +15,7 @@ function routesConfigFunc($stateProvider, $urlRouterProvider, $httpProvider) {
 			authenticate: false
 		})
 		.state('customernav', {
-			url: '/nav1',
+      url: '/nav1',
 			templateUrl: 'app/nav/customernav.template.html',
 			controller: 'navCtrl as navCtrl',
       authenticate: true,
@@ -147,8 +147,6 @@ function AttachTokens($window) {
   };
   return attach;
 }
-
-
 
 wodRoutesRunFunc.$inject = ['$rootScope', '$state', 'authFactory', '$window', 'jwtDecoder'];
 

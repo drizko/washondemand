@@ -5,7 +5,8 @@ angular.module('wod.services', [])
 .factory('locFactory', locFactory)
 .factory('requests', requests);
 
-requests.$inject = ['$http', '$ionicHistory', 'mainViewFactory']
+requests.$inject = ['$http', '$ionicHistory', 'mainViewFactory'];
+
 function requests($http, $ionicHistory, mainViewFactory) {
   function getCustRequests() {
     return $http({

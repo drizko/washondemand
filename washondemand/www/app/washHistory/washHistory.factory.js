@@ -24,8 +24,7 @@ function washHistFactory($http) {
       for (i = 1; i <= 5; i++) {
         if (i <= rating) {
           stars += '<i class="icon ion-ios-star"></i>';
-        }
-        else {
+        } else {
           stars += '<i class="icon ion-ios-star-outline"></i>';
         }
       }

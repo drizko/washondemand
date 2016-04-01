@@ -28,7 +28,7 @@ function custReqInfoCtrl($scope, $ionicHistory, $ionicLoading, currentWashFactor
     }
   });
 
-  socket.on('getRating', function(request){
+  socket.on('getRating', function(request) {
     if (vm.currentRequest._id === request._id) {
       $scope.feedback;
       currentWashFactory.popUp($scope, vm.currentRequest);
