@@ -48,7 +48,7 @@ function providerCtrl(socket, mainViewFactory, $ionicHistory, $state, $ionicLoad
       });
   };
 
-  function init(){
+  function init() {
     mainViewFactory.getRequest()
       .then(function(data) {
         data.forEach(function(item) {

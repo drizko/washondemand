@@ -103,22 +103,22 @@ function authFactory($http, $window, $state, $cordovaFile, $cordovaDevice, locFa
 
     if (ionic.Platform.isIOS() || ionic.Platform.isAndroid()) {
       $cordovaFile.removeFile(cordova.file.dataDirectory, 'com.wod')
-        .then(function (success) {
-          console.log("Success we removed com.wod: ", success);
-        }, function (error) {
-          console.log("Files not removed: ", error);
+        .then(function(success) {
+          console.log('Success we removed com.wod: ', success);
+        }, function(error) {
+          console.log('Files not removed: ', error);
         });
       $cordovaFile.removeFile(cordova.file.dataDirectory, 'cust')
-        .then(function (success) {
-          console.log("Success we removed cust: ", success);
-        }, function (error) {
-          console.log("File cust not removed: ", error);
+        .then(function(success) {
+          console.log('Success we removed cust: ', success);
+        }, function(error) {
+          console.log('File cust not removed: ', error);
         });
       $cordovaFile.removeFile(cordova.file.dataDirectory, 'prov')
-        .then(function (success) {
-          console.log("Success we removed prov: ", success);
-        }, function (error) {
-          console.log("File prov not removed: ", error);
+        .then(function(success) {
+          console.log('Success we removed prov: ', success);
+        }, function(error) {
+          console.log('File prov not removed: ', error);
         });
     };
 
