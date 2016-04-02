@@ -26,11 +26,13 @@ html, body {
 }
 
 .navbar-brand {
-  padding: 5px 0px 0px 5px;
+  padding: 17px 0px 0px 17px;
+  font-size: 28px;
+  color: #fff !important;
 }
 
 .navbar-brand-text {
-  font-size: 18px;
+
   text-shadow: 0 1px 0 rgba(255,255,255,.25);
   font-weight: 400;
   padding: 15px 0px 0px 15px;
@@ -102,6 +104,13 @@ html, body {
   font-size: 24px;
   margin: 10px;
 }
+.jumbo-content {
+  background-image: url('/images/opaq-logo.png');
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 65%;
+}
 
 .card-image {
   display: inline-block;
@@ -163,10 +172,11 @@ md-card {
   text-align: center;
 }
 
-.footer>span {
+.footer > div {
+  float: left;
+  width: 100%;
+  text-align: center;
   margin-top: 45px;
-  margin-right: 10px;
-  vertical-align: bottom;
 }
 
 #team {
@@ -469,9 +479,6 @@ md-card {
   .navbar-nav>li>a {
     font-size: 16px;
   }
-  .navbar-nav>li {
-    border: 1px solid #777;
-  }
   .jumbotron {
     height:379px;
   }
@@ -503,10 +510,6 @@ md-card {
 		width: 90%;
 		padding: 0px 10px
 	}
-}
-
-@media(max-width: 650px) {
-
 }
 
 @media(max-width: 480px) {
@@ -557,7 +560,7 @@ md-card {
     border: 1px solid #777;
   }
   .jumbotron {
-    height:400px;
+    height:490px;
   }
   .google {
     width: 30%;
