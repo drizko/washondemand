@@ -14,6 +14,16 @@ html, body {
   border: none;
 }
 
+.fixed-nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 50px;
+  background-color: #00a087;
+}
+
 .navbar-brand {
   padding: 5px 0px 0px 5px;
 }
@@ -46,28 +56,49 @@ html, body {
   background-color: #387EF5 !important;
 }
 
-.jumbotron {
-    background: url('/images/corvette_wash.jpg') no-repeat center center;
-    -webkit-background-size: 100% 100%;
-    -moz-background-size: 100% 100%;
-    -o-background-size: 100% 100%;
-    background-size: 100%;
-    height: 600px;
-    padding: 0;
-    background-color: #fff;
+.wrapper > div {
+  height: 100%;
 }
-.jumbo-div {
-  width: 50%;
-  display: block;
-  margin: 165px auto;
+
+.jumbotron {
+  height: 550px;
+  margin-top:15px;
+  margin-bottom: 0px;
+}
+
+.jumbo-img-mob {
   text-align: center;
 }
+.jumbo-img > img {
+  height: 450px;
+}
+
+.jumbo-img {
+  text-align: center;
+}
+
+.jumbo-content {
+  text-align: center;
+}
+
 .jumbo-text {
-  font-size: 78px;
-  color: #fff;
-  font-weight: bold;
-  line-height: 1;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  text-align: left;
+  width: 80%;
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 35px;
+  padding-left: 25px;
+}
+
+.jumbo-text > p {
+  font-size: 28px;
+}
+
+.jumbo-info > li{
+
+  font-size: 24px;
+  margin: 10px;
 }
 
 .card-image {
@@ -95,7 +126,7 @@ html, body {
 }
 
 md-card {
-  box-shadow: none;
+  /*box-shadow: none;*/
   text-align: center;
 }
 
@@ -122,22 +153,6 @@ md-card {
   display: block;
   width: 50%;
   margin: 25px auto;
-}
-
-.demo-desc {
-  width: 80%;
-  margin-top: 140px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.demo-desc>p {
-  font-size: 28px;
-}
-
-.cust-info>li{
-  font-size: 24px;
-  margin: 10px;
 }
 
 .footer, .push {
@@ -214,44 +229,29 @@ md-card {
 .social img{
   width: 50px;
   display: inline;
+  margin: 10px;
 }
-@media(max-width: 1260px) {
-  .demo-desc {
-    margin-top: 100px;
-    margin-bottom: 25px;
-  }
-}
-@media(max-width: 1080px) {
+@media(max-width: 1200px) {
   .jumbotron {
-    height:510px;
+    height:500px;
   }
-  .jumbo-div {
-    margin: 125px auto;
-  }
-  .jumbo-text {
-    font-size: 55px;
-  }
-  .demo-desc {
-    margin-top: 50px;
-    margin-bottom: 25px;
+  .jumbo-img > img {
+    height: 400px;
   }
 }
-@media(max-width: 900px) {
+@media(max-width: 992px) {
   .jumbotron {
-    height:432px;
+    height:445px;
   }
-  .jumbo-div {
-    margin: 125px auto;
+  .jumbo-img > img {
+    height: 350px;
   }
-  .jumbo-text {
-    font-size: 47px;
-  }
+  .jumbo-info > li {
+    font-size: 18px;
+    margin: 10px;
+}
   .card-image {
     height: 175px;
-  }
-  .demo-desc {
-    margin-top: 25px;
-    margin-bottom: 25px;
   }
 }
 @media(max-width: 768px) {
@@ -262,29 +262,36 @@ md-card {
     border: 1px solid #777;
   }
   .jumbotron {
-    height:290px;
+    height:379px;
   }
-  .jumbo-div {
-    margin: 80px auto;
+  .jumbo-img > img {
+    margin-top: 25px;
+    height: 288px;
   }
-  .jumbo-text {
-    font-size: 40px;
+  .market-links > a > img {
+    height: 45px;
   }
   .card-image {
     height: 175px;
   }
-  .demo-desc {
-    margin-top: 25px;
-    margin-bottom: 25px;
+  .jumbo-text > p {
+    font-size: 22px;
   }
-  .demo-desc > p {
-    font-size: 24px;
+  .jumbo-text {
+    margin-bottom: 15px;
+  }
+  .jumbo-info > li {
+    font-size: 18px;
+    margin: 5px;
   }
   .cust-info>li {
     font-size: 18px;
   }
 }
-@media(max-width: 500px) {
+@media(max-width: 650px) {
+
+}
+@media(max-width: 480px) {
   .navbar-nav>li>a {
     font-size: 16px;
   }
@@ -292,13 +299,17 @@ md-card {
     border: 1px solid #777;
   }
   .jumbotron {
-    height:202px;
+    height:400px;
+    padding-top: 50px;
   }
-  .jumbo-div {
-    margin: 45px auto;
+  .jumbo-img > img {
+    height: 220px;
   }
-  .jumbo-text {
-    font-size: 24px;
+  .google {
+    width: 30%;
+  }
+  .ios {
+    width: 30%;
   }
   .card-image {
     height: 175px;
@@ -323,14 +334,15 @@ md-card {
     border: 1px solid #777;
   }
   .jumbotron {
-    height:180px;
+    height:400px;
   }
-  .jumbo-div {
-    margin: 45px auto;
+  .google {
+    width: 30%;
   }
-  .jumbo-text {
-    font-size: 24px;
+  .ios {
+    width: 30%;
   }
+
   .card-image {
     height: 175px;
   }

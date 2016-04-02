@@ -1,27 +1,21 @@
 angular.module('WashOnDemand', [
 	'ui.router',
 	'wod.home',
-	'wod.nav',
-	'wod.team'
+	'wod.nav'
 ])
 
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
 		.state('nav', {
-			url:'/',
+			url: '/',
 			templateUrl: 'app/nav/nav.template.html',
-			controller: 'navCtrl',
+			controller: 'navCtrl as navCtrl',
 			abstract: true
 		})
 		.state('nav.home', {
 			url: '',
       templateUrl: 'app/home/home.template.html',
-			controller: 'homeCtrl'
-		})
-		.state('nav.team', {
-			url: 'team',
-      templateUrl: 'app/team/team.template.html',
-			controller: 'teamCtrl'
+			controller: 'homeCtrl as homeCtrl'
 		});
 
   $urlRouterProvider.otherwise('/');
