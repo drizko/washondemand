@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" role="banner">
+<nav class="navbar navbar-default fixed-nav-bar" role="banner">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -12,7 +12,7 @@
     <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1" role="navigation">
       <ul class="nav navbar-nav">
         <li><a ui-sref="nav.home">Home</a></li>
-        <li><a ui-sref="nav.team">Team</a></li>
+        <li><a ng-click="navCtrl.scrollTo('team')">Team</a></li>
       </ul>
     </div>
   </div>
