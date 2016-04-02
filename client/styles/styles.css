@@ -22,7 +22,7 @@ html, body {
   z-index: 9999;
   width: 100%;
   height: 50px;
-  background-color: #00a087;
+  background-color: #fff;
 }
 
 .navbar-brand {
@@ -37,7 +37,7 @@ html, body {
 }
 
 .container-fluid {
-  background-color: #122a3e;
+  background-color: #009bf5;
   color: #fff;
 }
 
@@ -65,6 +65,7 @@ html, body {
   height: 550px;
   margin-top:15px;
   margin-bottom: 0px;
+  background-color: #f9f9f9;
 }
 
 .jumbo-img-mob {
@@ -127,7 +128,6 @@ html, body {
 }
 
 md-card {
-  /*box-shadow: none;*/
   text-align: center;
 }
 
@@ -167,6 +167,10 @@ md-card {
   margin-top: 45px;
   margin-right: 10px;
   vertical-align: bottom;
+}
+
+#team {
+  margin-bottom: 50px;
 }
 
 .team-title {
@@ -232,142 +236,32 @@ md-card {
   display: inline;
   margin: 10px;
 }
-@media(max-width: 1200px) {
-  .jumbotron {
-    height:500px;
-  }
-  .jumbo-img > img {
-    height: 400px;
-  }
-}
-@media(max-width: 992px) {
-  .jumbotron {
-    height:445px;
-  }
-  .jumbo-img > img {
-    height: 350px;
-  }
-  .jumbo-info > li {
-    font-size: 18px;
-    margin: 10px;
-}
-  .card-image {
-    height: 175px;
-  }
-}
-@media(max-width: 768px) {
-  .navbar-nav>li>a {
-    font-size: 16px;
-  }
-  .navbar-nav>li {
-    border: 1px solid #777;
-  }
-  .jumbotron {
-    height:379px;
-  }
-  .jumbo-img > img {
-    margin-top: 25px;
-    height: 288px;
-  }
-  .market-links > a > img {
-    height: 45px;
-  }
-  .card-image {
-    height: 175px;
-  }
-  .jumbo-text > p {
-    font-size: 22px;
-  }
-  .jumbo-text {
-    margin-bottom: 15px;
-  }
-  .jumbo-info > li {
-    font-size: 18px;
-    margin: 5px;
-  }
-  .cust-info>li {
-    font-size: 18px;
-  }
-}
-@media(max-width: 650px) {
 
-}
-@media(max-width: 480px) {
-  .navbar-nav>li>a {
-    font-size: 16px;
-  }
-  .navbar-nav>li {
-    border: 1px solid #777;
-  }
-  .jumbotron {
-    height:400px;
-    padding-top: 50px;
-  }
-  .jumbo-img > img {
-    height: 220px;
-  }
-  .google {
-    width: 30%;
-  }
-  .ios {
-    width: 30%;
-  }
-  .card-image {
-    height: 175px;
-  }
-  .demo-desc {
-    margin-top: 25px;
-    margin-bottom: 25px;
-  }
-  .demo-desc > p {
-    font-size: 24px;
-  }
-  .cust-info>li {
-    font-size: 18px;
-  }
+.about-us > p {
+  font-size: 20px;
+  margin: 20px;
 }
 
-@media(max-width: 320px) {
-  .navbar-nav>li>a {
-    font-size: 16px;
-  }
-  .navbar-nav>li {
-    border: 1px solid #777;
-  }
-  .jumbotron {
-    height:400px;
-  }
-  .google {
-    width: 30%;
-  }
-  .ios {
-    width: 30%;
-  }
-
-  .card-image {
-    height: 175px;
-  }
-  .demo-desc {
-    margin-top: 25px;
-    margin-bottom: 25px;
-  }
-  .demo-desc > p {
-    font-size: 24px;
-  }
-  .cust-info>li {
-    font-size: 18px;
-  }
+.plan-card {
+  border: none;
+  box-shadow: none;
+  margin: auto;
 }
 
+#pricing {
+  width: 100%;
+  background-color: #f9f9f9;
+  padding-bottom: 25px;
+}
 
 #pricing-table {
-	margin: 100px auto;
+	margin: 50px auto;
 	text-align: center;
-	width: 892px; /* total computed width = 222 x 3 + 226 */
+	width: 75%; /* total computed width = 222 x 3 + 226 */
 }
 
 #pricing-table .plan {
-	font: 12px 'Lucida Sans', 'trebuchet MS', Arial, Helvetica;
+	font: 12px 'Raleway', 'Lucida Sans', 'trebuchet MS', Arial, Helvetica;
 	text-shadow: 0 1px rgba(255,255,255,.8);
 	background: #fff;
 	border: 1px solid #ddd;
@@ -376,6 +270,7 @@ md-card {
 	width: 250px; /* plan width = 180 + 20 + 20 + 1 + 1 = 222px */
 	float: left;
 	position: relative;
+  margin: 0px auto;
 }
 
 #pricing-table #most-popular {
@@ -537,5 +432,156 @@ md-card {
 }
 
 .about-us {
-	padding: 0px 100px
+	padding: 0px 100px;
+	width: 80%;
+	margin: auto;
+}
+
+@media(max-width: 1200px) {
+  .jumbotron {
+    height:500px;
+  }
+  .jumbo-img > img {
+    height: 400px;
+  }
+
+	.about-us {
+		width: 80%;
+		padding: 0px 10px;
+	}
+}
+@media(max-width: 992px) {
+  .jumbotron {
+    height:445px;
+  }
+  .jumbo-img > img {
+    height: 350px;
+  }
+  .jumbo-info > li {
+    font-size: 18px;
+    margin: 10px;
+}
+  .card-image {
+    height: 175px;
+  }
+}
+@media(max-width: 768px) {
+  .navbar-nav>li>a {
+    font-size: 16px;
+  }
+  .navbar-nav>li {
+    border: 1px solid #777;
+  }
+  .jumbotron {
+    height:379px;
+  }
+  .jumbo-img > img {
+    margin-top: 25px;
+    height: 288px;
+  }
+  .market-links > a > img {
+    height: 45px;
+  }
+  .card-image {
+    height: 175px;
+  }
+  .jumbo-text > p {
+    font-size: 22px;
+  }
+  .jumbo-text {
+    margin-bottom: 15px;
+  }
+  .jumbo-info > li {
+    font-size: 18px;
+    margin: 5px;
+  }
+  .cust-info>li {
+    font-size: 18px;
+  }
+
+	.about-us {
+		width: 90%;
+		padding: 0px 10px
+	}
+}
+
+@media(max-width: 650px) {
+
+}
+
+@media(max-width: 480px) {
+  .navbar-nav>li>a {
+    font-size: 16px;
+  }
+  .navbar-nav>li {
+    border: 1px solid #777;
+  }
+  .jumbotron {
+    height:400px;
+    padding-top: 50px;
+  }
+  .jumbo-img > img {
+    height: 220px;
+  }
+  .google {
+    width: 30%;
+  }
+  .ios {
+    width: 30%;
+  }
+  .card-image {
+    height: 175px;
+  }
+  .demo-desc {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+  .demo-desc > p {
+    font-size: 24px;
+  }
+  .cust-info>li {
+    font-size: 18px;
+  }
+
+	.about-us {
+		width: 100%;
+		padding: 0px 10px
+	}
+}
+
+@media(max-width: 320px) {
+  .navbar-nav>li>a {
+    font-size: 16px;
+  }
+  .navbar-nav>li {
+    border: 1px solid #777;
+  }
+  .jumbotron {
+    height:400px;
+  }
+  .google {
+    width: 30%;
+  }
+  .ios {
+    width: 30%;
+  }
+
+  .card-image {
+    height: 175px;
+  }
+  .demo-desc {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+  .demo-desc > p {
+    font-size: 24px;
+  }
+  .cust-info>li {
+    font-size: 18px;
+  }
+
+	.about-us {
+		width: 100%;
+		padding: 0px 10px
+	}
 }
