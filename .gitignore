@@ -6,7 +6,7 @@ deploy.sh
 .DS_Store
 washondemand/www/lib
 washondemand/www/wod.min.js
-washondemand/www/wod.min.clean.js
+washondemand/www/wod.min.clean.ugly.js
 washondemand/www/lib
 
 # Elastic Beanstalk Files
